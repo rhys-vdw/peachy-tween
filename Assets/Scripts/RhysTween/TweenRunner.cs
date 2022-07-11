@@ -55,6 +55,12 @@ namespace RhysTween {
   }
 
 #endregion
+#region Internal
+
+    internal ref Time GetTime() =>
+      ref _world.GetPool<Time>().Get(_timeFilter.First());
+
+#endregion
 #region Private
 
     ProgressSystem<T> CreateProgressSystem<T>(Lerp<T> lerp) {
@@ -65,15 +71,16 @@ namespace RhysTween {
     ProgressSystem<T> CreateProgressSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
       new (filter, lerp);
 
-  bool Entity(Tween tween, out int entity) {
-    if (!tween._entity.Unpack(_world, out entity)) {
-      Debug.LogWarning($"Tween is no longer active");
-      return false;
+    bool Entity(Tween tween, out int entity) {
+      if (!tween._entity.Unpack(_world, out entity)) {
+        Debug.LogWarning($"Tween is no longer active");
+        return false;
+      }
+      return true;
     }
-    return true;
-  }
 
 #endregion
+#region Unity lifecycle
 #pragma warning disable IDE0051
 
     void Awake() {
@@ -104,8 +111,6 @@ namespace RhysTween {
     }
 
 #pragma warning restore IDE0051
-
-    internal ref Time GetTime() =>
-      ref _world.GetPool<Time>().Get(_timeFilter.First());
+#endregion
   }
 }
