@@ -57,6 +57,14 @@ namespace RhysTween {
 #endregion
 #region Private
 
+    ProgressSystem<T> CreateProgressSystem<T>(Lerp<T> lerp) {
+      var filter = _world.Filter<TweenState<T>>().End();
+      return CreateProgressSystem(filter, lerp);
+    }
+
+    ProgressSystem<T> CreateProgressSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
+      new (filter, lerp);
+
   bool Entity(Tween tween, out int entity) {
     if (!tween._entity.Unpack(_world, out entity)) {
       Debug.LogWarning($"Tween is no longer active");
@@ -72,7 +80,10 @@ namespace RhysTween {
       _world = new ();
       _systems = new (_world, this);
       _systems
-        .Add(new ProgressSystem())
+        .Add(CreateProgressSystem<float>(Mathf.Lerp))
+        .Add(CreateProgressSystem<Vector2>(Vector2.Lerp))
+        .Add(CreateProgressSystem<Vector3>(Vector3.Lerp))
+        .Add(CreateProgressSystem<Quaternion>(Quaternion.Lerp))
         .Add(new CompleteSystem())
         .Init();
 

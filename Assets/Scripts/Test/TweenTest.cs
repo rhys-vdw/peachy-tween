@@ -1,5 +1,4 @@
 using UnityEngine;
-using RhysTween;
 
 namespace RhysTween.Test {
   public class TweenTest : MonoBehaviour {
