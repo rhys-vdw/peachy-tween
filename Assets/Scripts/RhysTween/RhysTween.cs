@@ -32,6 +32,24 @@ namespace RhysTween {
     }
 
 #endregion
+#region Update
+
+    public static Tween SetUpdate(this Tween tween) {
+      Runner.SetUpdate<Update>(tween);
+      return tween;
+    }
+
+    public static Tween SetFixedUpdate(this Tween tween) {
+      Runner.SetUpdate<FixedUpdate>(tween);
+      return tween;
+    }
+
+    public static Tween SetManualUpdate(this Tween tween) {
+      Runner.SetUpdate<ManualUpdate>(tween);
+      return tween;
+    }
+
+#endregion
 #region Loop
 
     public static Tween Loop(this Tween tween, int count) {

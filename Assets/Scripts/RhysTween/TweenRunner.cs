@@ -13,7 +13,9 @@ namespace RhysTween {
 
   internal class TweenRunner : MonoBehaviour {
     EcsWorld _world;
-    EcsSystems _systems;
+    EcsSystems _updateSystems;
+    EcsSystems _fixedUpdateSystems;
+    EcsSystems _manualUpdateSystems;
     EcsFilter _timeFilter;
 
 #region Singleton
@@ -38,6 +40,7 @@ namespace RhysTween {
     var entity = _world.NewEntity();
     _world.AddComponent(entity, new TweenConfig<T>(from, to, onChange));
     _world.AddComponent(entity, new TweenState(duration));
+    _world.AddComponent<Update>(entity);
     return new Tween(_world.PackEntity(entity));
   }
 
@@ -55,6 +58,24 @@ namespace RhysTween {
     }
   }
 
+  public void SetUpdate<TUpdate>(Tween tween) where TUpdate : struct {
+    if (Entity(tween, out var entity)) {
+      _world.DelComponent<Update>(entity);
+      _world.DelComponent<FixedUpdate>(entity);
+      _world.DelComponent<ManualUpdate>(entity);
+      _world.AddComponent<TUpdate>(entity);
+    }
+  }
+
+#endregion
+#region Control
+
+    public void ManualUpdate(float deltaTime) {
+      ref var time = ref GetTime();
+      time.DeltaTime = deltaTime;
+      _manualUpdateSystems.Run();
+    }
+
 #endregion
 #region Internal
 
@@ -64,12 +85,15 @@ namespace RhysTween {
 #endregion
 #region Private
 
-    ChangeSystem<T> CreateChangeSystem<T>(Lerp<T> lerp) {
-      var filter = _world.Filter<TweenConfig<T>>().End();
+    static ChangeSystem<TValue> CreateChangeSystem<TValue, TUpdate>(
+      EcsWorld world,
+      Lerp<TValue> lerp
+    ) where TUpdate : struct {
+      var filter = world.Filter<TweenConfig<TValue>>().Inc<TUpdate>().End();
       return CreateChangeSystem(filter, lerp);
     }
 
-    ChangeSystem<T> CreateChangeSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
+    static ChangeSystem<T> CreateChangeSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
       new (filter, lerp);
 
     bool Entity(Tween tween, out int entity) {
@@ -84,18 +108,25 @@ namespace RhysTween {
 #region Unity lifecycle
 #pragma warning disable IDE0051
 
-    void Awake() {
-      _world = new ();
-      _systems = new (_world, this);
-      _systems
-        .Add(new ProgressSystem())
-        .Add(CreateChangeSystem<float>(Mathf.Lerp))
-        .Add(CreateChangeSystem<Vector2>(Vector2.Lerp))
-        .Add(CreateChangeSystem<Vector3>(Vector3.Lerp))
-        .Add(CreateChangeSystem<Quaternion>(Quaternion.Lerp))
+    EcsSystems CreateSystems<TUpdate>(EcsWorld world) where TUpdate : struct{
+      var systems = new EcsSystems(world, this);
+      systems
+        .Add(new ProgressSystem<TUpdate>())
+        .Add(CreateChangeSystem<float, TUpdate>(world, Mathf.LerpUnclamped))
+        .Add(CreateChangeSystem<Vector2, TUpdate>(world, Vector2.LerpUnclamped))
+        .Add(CreateChangeSystem<Vector3, TUpdate>(world, Vector3.LerpUnclamped))
+        .Add(CreateChangeSystem<Quaternion, TUpdate>(world, Quaternion.LerpUnclamped))
         .Add(new LoopSystem())
         .Add(new CompleteSystem())
         .Init();
+      return systems;
+    }
+
+    void Awake() {
+      _world = new ();
+      _updateSystems = CreateSystems<Update>(_world);
+      _fixedUpdateSystems = CreateSystems<FixedUpdate>(_world);
+      _manualUpdateSystems = CreateSystems<ManualUpdate>(_world);
 
       _timeFilter = _world.Filter<Time>().End();
 
@@ -106,7 +137,13 @@ namespace RhysTween {
     void Update() {
       ref var time = ref GetTime();
       time.DeltaTime = UnityEngine.Time.deltaTime;
-      _systems.Run();
+      _updateSystems.Run();
+    }
+
+    void FixedUpdate() {
+      ref var time = ref GetTime();
+      time.DeltaTime = UnityEngine.Time.deltaTime;
+      _fixedUpdateSystems.Run();
     }
 
     void OnDestroy() {

@@ -3,7 +3,12 @@ using UnityEngine;
 
 namespace RhysTween {
 
-  internal class ProgressSystem : IEcsSystem, IEcsInitSystem, IEcsRunSystem {
+  internal class ProgressSystem<TUpdate>
+    : IEcsSystem
+    , IEcsInitSystem
+    , IEcsRunSystem
+    where TUpdate : struct
+  {
     EcsWorld _world;
     TweenRunner _runner;
     EcsFilter _filter;
@@ -11,7 +16,7 @@ namespace RhysTween {
     public void Init(EcsSystems systems) {
       _world = systems.GetWorld();
       _runner = systems.GetShared<TweenRunner>();
-      _filter = _world.Filter<TweenState>().End();
+      _filter = _world.Filter<TUpdate>().End();
     }
 
     public void Run(EcsSystems systems) {

@@ -10,6 +10,7 @@ namespace RhysTween.Test {
       transform
         .TPosition(To.position, Duration)
         .LoopForever()
+        .SetFixedUpdate()
         .OnComplete(() => Debug.Log("Done!"));
       transform
         .TRotation(new Vector3(90, 90, 90), Duration)

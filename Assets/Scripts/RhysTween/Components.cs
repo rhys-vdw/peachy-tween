@@ -1,6 +1,10 @@
 using System;
 
 namespace RhysTween {
+  internal struct Update { }
+  internal struct FixedUpdate { }
+  internal struct ManualUpdate { }
+
   internal struct TweenConfig<T> {
     public T From;
     public T To;
