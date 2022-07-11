@@ -16,7 +16,7 @@ namespace RhysTween {
     public void Init(EcsSystems systems) {
       _world = systems.GetWorld();
       _runner = systems.GetShared<TweenRunner>();
-      _filter = _world.Filter<TUpdate>().End();
+      _filter = _world.Filter<TUpdate>().Exc<Paused>().End();
     }
 
     public void Run(EcsSystems systems) {

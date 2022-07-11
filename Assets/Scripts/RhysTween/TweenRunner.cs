@@ -67,6 +67,24 @@ namespace RhysTween {
     }
   }
 
+  public bool IsPaused(Tween tween) =>
+    Entity(tween, out var entity) && IsPaused(entity);
+
+  public void Pause(Tween tween) {
+    if (
+      Entity(tween, out var entity) &&
+      !IsPaused(entity)
+    ) {
+      _world.AddComponent<Paused>(entity);
+    }
+  }
+
+  public void Resume(Tween tween) {
+    if (Entity(tween, out var entity)) {
+      _world.DelComponent<Paused>(entity);
+    }
+  }
+
 #endregion
 #region Control
 
@@ -85,11 +103,13 @@ namespace RhysTween {
 #endregion
 #region Private
 
+    bool IsPaused(int entity) => _world.HasComponent<Paused>(entity);
+
     static ChangeSystem<TValue> CreateChangeSystem<TValue, TUpdate>(
       EcsWorld world,
       Lerp<TValue> lerp
     ) where TUpdate : struct {
-      var filter = world.Filter<TweenConfig<TValue>>().Inc<TUpdate>().End();
+      var filter = world.Filter<TweenConfig<TValue>>().Inc<TUpdate>().Exc<Paused>().End();
       return CreateChangeSystem(filter, lerp);
     }
 

@@ -32,6 +32,21 @@ namespace RhysTween {
     }
 
 #endregion
+#region Pause
+
+    public static bool IsPaused(this Tween tween) => Runner.IsPaused(tween);
+
+    public static Tween Pause(this Tween tween) {
+      Runner.Pause(tween);
+      return tween;
+    }
+
+    public static Tween Resume(this Tween tween) {
+      Runner.Resume(tween);
+      return tween;
+    }
+
+#endregion
 #region Update
 
     public static Tween SetUpdate(this Tween tween) {

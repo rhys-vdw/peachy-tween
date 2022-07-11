@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace RhysTween.Test {
@@ -5,6 +6,7 @@ namespace RhysTween.Test {
     public Transform From;
     public Transform To;
     public float Duration = 5f;
+    Tween _tween;
 
     public void Start() {
       transform
@@ -12,10 +14,21 @@ namespace RhysTween.Test {
         .LoopForever()
         .SetFixedUpdate()
         .OnComplete(() => Debug.Log("Done!"));
-      transform
+      _tween = transform
         .TRotation(new Vector3(90, 90, 90), Duration)
-        .Loop(2)
+        .LoopForever()
         .OnComplete(() => Debug.Log("Done!"));
+
+      StartCoroutine(Coroutine());
+    }
+
+    IEnumerator Coroutine() {
+      while (true) {
+        _tween.Pause();
+        yield return new WaitForSeconds(0.4f);
+        _tween.Resume();
+        yield return new WaitForSeconds(0.4f);
+      }
     }
   }
 }

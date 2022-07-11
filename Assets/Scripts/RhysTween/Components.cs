@@ -1,6 +1,8 @@
 using System;
 
 namespace RhysTween {
+  internal struct Paused { }
+
   internal struct Update { }
   internal struct FixedUpdate { }
   internal struct ManualUpdate { }

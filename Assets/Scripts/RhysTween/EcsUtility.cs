@@ -2,6 +2,9 @@ using Leopotam.EcsLite;
 
 namespace RhysTween {
   internal static class EcsUtility {
+    public static bool HasComponent<T>(this EcsWorld world, int entity) where T : struct =>
+      world.GetPool<T>().Has(entity);
+
     public static void DelComponent<T>(this EcsWorld world, int entity) where T : struct =>
       world.GetPool<T>().Del(entity);
 
