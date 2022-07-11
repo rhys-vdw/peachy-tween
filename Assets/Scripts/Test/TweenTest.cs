@@ -9,9 +9,11 @@ namespace RhysTween.Test {
     public void Start() {
       transform
         .TPosition(To.position, Duration)
+        .LoopForever()
         .OnComplete(() => Debug.Log("Done!"));
       transform
         .TRotation(new Vector3(90, 90, 90), Duration)
+        .Loop(2)
         .OnComplete(() => Debug.Log("Done!"));
     }
   }

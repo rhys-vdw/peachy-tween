@@ -2,10 +2,14 @@ using Leopotam.EcsLite;
 
 namespace RhysTween {
   internal static class EcsUtility {
-    public static ref T AddComponent<T>(this EcsWorld world, int entity) where T : struct {
-      var pool = world.GetPool<T>();
-      return ref pool.Add(entity);
-    }
+    public static void DelComponent<T>(this EcsWorld world, int entity) where T : struct =>
+      world.GetPool<T>().Del(entity);
+
+    public static ref T GetComponent<T>(this EcsWorld world, int entity) where T : struct =>
+      ref world.GetPool<T>().Get(entity);
+
+    public static ref T AddComponent<T>(this EcsWorld world, int entity) where T : struct =>
+      ref world.GetPool<T>().Add(entity);
 
     public static ref T AddComponent<T>(this EcsWorld world, int entity, in T component) where T : struct {
       ref var c = ref AddComponent<T>(world, entity);

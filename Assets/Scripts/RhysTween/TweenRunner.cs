@@ -34,9 +34,13 @@ namespace RhysTween {
 #endregion
 #region Tweens
 
-  public Tween CreateTween<T>(TweenState<T> state) {
+  public Tween CreateTween<T>(T from, Action<T> onChange, T to, float duration) {
     var entity = _world.NewEntity();
-    _world.AddComponent(entity, state);
+    _world.AddComponent(entity, new TweenConfig<T>(from, to, onChange));
+    _world.AddComponent(entity, new TweenState(
+      UnityEngine.Time.timeAsDouble,
+      duration
+    ));
     return new Tween(_world.PackEntity(entity));
   }
 
@@ -44,6 +48,13 @@ namespace RhysTween {
     if (Entity(tween, out var entity)) {
       ref var c = ref _world.EnsureComponent<OnComplete>(entity);
       c.Callback = onComplete;
+    }
+  }
+
+  public void SetLooping(Tween tween, int remaining = -1) {
+    if (Entity(tween, out var entity)) {
+      ref var loop = ref _world.EnsureComponent<Loop>(entity);
+      loop.Remaining = remaining;
     }
   }
 
@@ -57,7 +68,7 @@ namespace RhysTween {
 #region Private
 
     ProgressSystem<T> CreateProgressSystem<T>(Lerp<T> lerp) {
-      var filter = _world.Filter<TweenState<T>>().End();
+      var filter = _world.Filter<TweenConfig<T>>().End();
       return CreateProgressSystem(filter, lerp);
     }
 
@@ -84,6 +95,7 @@ namespace RhysTween {
         .Add(CreateProgressSystem<Vector2>(Vector2.Lerp))
         .Add(CreateProgressSystem<Vector3>(Vector3.Lerp))
         .Add(CreateProgressSystem<Quaternion>(Quaternion.Lerp))
+        .Add(new LoopSystem())
         .Add(new CompleteSystem())
         .Init();
 

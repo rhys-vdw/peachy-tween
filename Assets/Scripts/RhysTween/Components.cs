@@ -1,26 +1,34 @@
 using System;
 
 namespace RhysTween {
-  internal struct TweenState<T> {
+  internal struct TweenConfig<T> {
     public T From;
     public T To;
     public Action<T> OnChange;
-    public float Duration;
-    public double StartTime;
-    public float NormalizedTime;
 
-    public TweenState(T from, T to, Action<T> onChange, float duration) {
+    public TweenConfig(T from, T to, Action<T> onChange) {
       From = from;
       To = to;
-      StartTime = UnityEngine.Time.timeAsDouble;
-      NormalizedTime = 0;
-      Duration = duration;
       OnChange = onChange;
+    }
+  }
+
+  internal struct TweenState {
+    public double StartTime;
+    public float Duration;
+
+    public TweenState(double startTime, float duration) {
+      StartTime = startTime;
+      Duration = duration;
     }
   }
 
   internal struct Time {
     public double Current;
+  }
+
+  internal struct Loop {
+    public int Remaining;
   }
 
   internal struct Complete { }

@@ -5,6 +5,8 @@ namespace RhysTween {
   public static class RhysTween {
     static TweenRunner Runner => TweenRunner.Instance;
 
+#region Tween factories
+
     public static Tween TRotation(this Transform transform, Quaternion endValue, float duration) =>
       Tween(transform.rotation, v => transform.rotation = v, endValue, duration);
 
@@ -25,13 +27,36 @@ namespace RhysTween {
 
     public static Tween Tween<T>(T from, Action<T> onChange, T to, float duration) {
       var runner = Runner;
-      var tween = runner.CreateTween(new TweenState<T>(from, to, onChange, duration));
+      var tween = runner.CreateTween(from, onChange, to, duration);
       return tween;
     }
+
+#endregion
+#region Loop
+
+    public static Tween Loop(this Tween tween, int count) {
+      if (count < 0) {
+        throw new ArgumentOutOfRangeException(nameof(count), count, "Must not be negative");
+      }
+      if (count > 0) {
+        Runner.SetLooping(tween, count);
+      }
+      return tween;
+    }
+
+    public static Tween LoopForever(this Tween tween) {
+      Runner.SetLooping(tween, -1);
+      return tween;
+    }
+
+#endregion
+#region Callbacks
 
     public static Tween OnComplete(this Tween tween, Action onComplete) {
       Runner.SetOnComplete(tween, onComplete);
       return tween;
     }
+
+#endregion
   }
 }
