@@ -23,7 +23,6 @@ namespace RhysTween {
     public void Run(EcsSystems systems) {
       ref var time = ref _runner.GetTime();
       var statePool = _world.GetPool<TweenState<T>>();
-      var onChangePool = _world.GetPool<OnChange<T>>();
       foreach (var entity in _filter) {
         ref var state = ref statePool.Get(entity);
 
@@ -34,11 +33,8 @@ namespace RhysTween {
         }
 
         // Trigger change events.
-        if (onChangePool.Has(entity)) {
-          var value = _lerp(state.From, state.To, state.NormalizedTime);
-          ref var onChange = ref onChangePool.Get(entity);
-          onChange.Callback(value);
-        }
+        var value = _lerp(state.From, state.To, state.NormalizedTime);
+        state.OnChange(value);
 
         // Complete handler.
         if (state.NormalizedTime == 1) {

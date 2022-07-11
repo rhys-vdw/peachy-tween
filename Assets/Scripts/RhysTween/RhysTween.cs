@@ -23,15 +23,9 @@ namespace RhysTween {
     public static Tween TLocalPosition(this Transform transform, Vector3 endValue, float duration) =>
       Tween(transform.localPosition, v => transform.localPosition = v, endValue, duration);
 
-    public static Tween Tween<T>(T from, Action<T> setter, T endValue, float duration) =>
-      Tween(from, endValue, duration, setter);
-
-    public static Tween Tween<T>(T from, T to, float duration, Action<T> onChange = null) {
+    public static Tween Tween<T>(T from, Action<T> onChange, T to, float duration) {
       var runner = Runner;
-      var tween = runner.CreateTween(new TweenState<T>(from, to, duration));
-      if (onChange != null) {
-        runner.SetOnChange(tween, onChange);
-      }
+      var tween = runner.CreateTween(new TweenState<T>(from, to, onChange, duration));
       return tween;
     }
 

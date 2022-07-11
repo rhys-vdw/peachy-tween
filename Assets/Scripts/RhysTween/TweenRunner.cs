@@ -40,13 +40,6 @@ namespace RhysTween {
     return new Tween(_world.PackEntity(entity));
   }
 
-  public void SetOnChange<T>(Tween tween, Action<T> onChange) {
-    if (Entity(tween, out var entity)) {
-      ref var c = ref _world.EnsureComponent<OnChange<T>>(entity);
-      c.Callback = onChange;
-    }
-  }
-
   public void SetOnComplete(Tween tween, Action onComplete) {
     if (Entity(tween, out var entity)) {
       ref var c = ref _world.EnsureComponent<OnComplete>(entity);
