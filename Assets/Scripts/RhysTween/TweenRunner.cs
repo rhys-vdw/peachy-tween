@@ -37,10 +37,7 @@ namespace RhysTween {
   public Tween CreateTween<T>(T from, Action<T> onChange, T to, float duration) {
     var entity = _world.NewEntity();
     _world.AddComponent(entity, new TweenConfig<T>(from, to, onChange));
-    _world.AddComponent(entity, new TweenState(
-      UnityEngine.Time.timeAsDouble,
-      duration
-    ));
+    _world.AddComponent(entity, new TweenState(duration));
     return new Tween(_world.PackEntity(entity));
   }
 
@@ -67,12 +64,12 @@ namespace RhysTween {
 #endregion
 #region Private
 
-    ProgressSystem<T> CreateProgressSystem<T>(Lerp<T> lerp) {
+    ChangeSystem<T> CreateChangeSystem<T>(Lerp<T> lerp) {
       var filter = _world.Filter<TweenConfig<T>>().End();
-      return CreateProgressSystem(filter, lerp);
+      return CreateChangeSystem(filter, lerp);
     }
 
-    ProgressSystem<T> CreateProgressSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
+    ChangeSystem<T> CreateChangeSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
       new (filter, lerp);
 
     bool Entity(Tween tween, out int entity) {
@@ -91,10 +88,11 @@ namespace RhysTween {
       _world = new ();
       _systems = new (_world, this);
       _systems
-        .Add(CreateProgressSystem<float>(Mathf.Lerp))
-        .Add(CreateProgressSystem<Vector2>(Vector2.Lerp))
-        .Add(CreateProgressSystem<Vector3>(Vector3.Lerp))
-        .Add(CreateProgressSystem<Quaternion>(Quaternion.Lerp))
+        .Add(new ProgressSystem())
+        .Add(CreateChangeSystem<float>(Mathf.Lerp))
+        .Add(CreateChangeSystem<Vector2>(Vector2.Lerp))
+        .Add(CreateChangeSystem<Vector3>(Vector3.Lerp))
+        .Add(CreateChangeSystem<Quaternion>(Quaternion.Lerp))
         .Add(new LoopSystem())
         .Add(new CompleteSystem())
         .Init();
@@ -107,7 +105,7 @@ namespace RhysTween {
 
     void Update() {
       ref var time = ref GetTime();
-      time.Current = UnityEngine.Time.timeAsDouble;
+      time.DeltaTime = UnityEngine.Time.deltaTime;
       _systems.Run();
     }
 

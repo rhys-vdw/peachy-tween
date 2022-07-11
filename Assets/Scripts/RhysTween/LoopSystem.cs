@@ -31,7 +31,7 @@ namespace RhysTween {
         // Remove completion.
         _world.DelComponent<Complete>(entity);
         ref var state = ref _world.GetComponent<TweenState>(entity);
-        state.StartTime = UnityEngine.Time.timeAsDouble;
+        state.Elapsed = 0;
       }
     }
   }

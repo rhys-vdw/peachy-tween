@@ -14,17 +14,18 @@ namespace RhysTween {
   }
 
   internal struct TweenState {
-    public double StartTime;
+    public float Elapsed;
     public float Duration;
+    public float Progress => Elapsed / Duration;
 
-    public TweenState(double startTime, float duration) {
-      StartTime = startTime;
+    public TweenState(float duration) {
+      Elapsed = 0;
       Duration = duration;
     }
   }
 
   internal struct Time {
-    public double Current;
+    public float DeltaTime;
   }
 
   internal struct Loop {
