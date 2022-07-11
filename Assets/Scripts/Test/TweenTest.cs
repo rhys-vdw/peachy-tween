@@ -1,4 +1,5 @@
 using UnityEngine;
+using RhysTween;
 
 namespace RhysTween.Test {
   public class TweenTest : MonoBehaviour {
@@ -7,8 +8,11 @@ namespace RhysTween.Test {
     public float Duration = 5f;
 
     public void Start() {
-      RhysTween
-        .Tween(From.position, To.position, Duration, v => transform.position = v)
+      transform
+        .TPosition(To.position, Duration)
+        .OnComplete(() => Debug.Log("Done!"));
+      transform
+        .TRotation(new Vector3(90, 90, 90), Duration)
         .OnComplete(() => Debug.Log("Done!"));
     }
   }
