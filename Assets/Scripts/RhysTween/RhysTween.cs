@@ -38,8 +38,13 @@ namespace RhysTween {
     public static Tween TLocalPosition(this Transform transform, Vector3 endValue, float duration) =>
       Tween(transform.localPosition, v => transform.localPosition = v, endValue, duration);
 
-    public static Tween Tween<T>(T from, Action<T> onChange, T to, float duration) =>
-      CreateTween(from, onChange, to, duration);
+    public static Tween Tween<T>(T from, Action<T> onChange, T to, float duration) {
+      var entity = _world.NewEntity();
+      _world.AddComponent(entity, new TweenConfig<T>(from, to, onChange));
+      _world.AddComponent(entity, new TweenState(duration));
+      _world.AddComponent<Update>(entity);
+      return new Tween(_world.PackEntity(entity));
+    }
 
 #endregion
 #region Pause
@@ -172,17 +177,6 @@ namespace RhysTween {
 #pragma warning restore IDE0051
 
     internal static void Destroy() => _world.Destroy();
-
-#endregion
-#region Tweens
-
-  static Tween CreateTween<T>(T from, Action<T> onChange, T to, float duration) {
-    var entity = _world.NewEntity();
-    _world.AddComponent(entity, new TweenConfig<T>(from, to, onChange));
-    _world.AddComponent(entity, new TweenState(duration));
-    _world.AddComponent<Update>(entity);
-    return new Tween(_world.PackEntity(entity));
-  }
 
 #endregion
 #region Run
