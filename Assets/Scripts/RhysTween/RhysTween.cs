@@ -5,8 +5,21 @@ using System.Collections.Generic;
 
 namespace RhysTween {
   internal class RunState {
-    public float DeltaTime;
-    public EcsFilter GroupFilter;
+    public float DeltaTime { get; private set; }
+    public EcsFilter GroupFilter { get; private set; }
+    public int? Entity { get; private set; }
+
+    public void Set(EcsFilter groupFilter, float deltaTime) {
+      DeltaTime = deltaTime;
+      GroupFilter = groupFilter;
+      Entity = null;
+    }
+
+    public void Set(int entity, float deltaTime) {
+      DeltaTime = deltaTime;
+      GroupFilter = null;
+      Entity = entity;
+    }
   }
 
   public struct Tween {
@@ -211,10 +224,16 @@ namespace RhysTween {
 #endregion
 #region Run
 
-    public static void Run<TGroup>(float deltaTime) where TGroup : struct{
+    public static void Run<TGroup>(float deltaTime) where TGroup : struct {
       if (_groupFilters.TryGetValue(typeof(TGroup), out var filter)) {
-        _runState.DeltaTime = deltaTime;
-        _runState.GroupFilter = filter;
+        _runState.Set(filter, deltaTime);
+        _systems.Run();
+      }
+    }
+
+    public static void ManualUpdate(this Tween tween, float deltaTime) {
+      if (Entity(tween, out var entity)) {
+        _runState.Set(entity, deltaTime);
         _systems.Run();
       }
     }

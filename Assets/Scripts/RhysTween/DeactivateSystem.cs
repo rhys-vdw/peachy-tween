@@ -13,8 +13,13 @@ namespace RhysTween {
 
     public void Run(EcsSystems systems) {
       var activePool = _world.GetPool<Active>();
-      foreach (var entity in _runState.GroupFilter) {
-        activePool.Del(entity);
+      if (_runState.GroupFilter != null) {
+        foreach (var entity in _runState.GroupFilter) {
+          activePool.Del(entity);
+        }
+      }
+      if (_runState.Entity is int single) {
+        activePool.Del(single);
       }
     }
   }
