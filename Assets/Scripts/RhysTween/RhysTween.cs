@@ -146,6 +146,7 @@ namespace RhysTween {
         .Add(CreateChangeSystem<float>(Mathf.LerpUnclamped))
         .Add(CreateChangeSystem<Vector2>(Vector2.LerpUnclamped))
         .Add(CreateChangeSystem<Vector3>(Vector3.LerpUnclamped))
+        .Add(CreateChangeSystem<Color>(Color.LerpUnclamped))
         .Add(CreateChangeSystem<Quaternion>(Quaternion.LerpUnclamped))
         .Add(new DeactivateGroupSystem())
         .Add(new LoopSystem())
