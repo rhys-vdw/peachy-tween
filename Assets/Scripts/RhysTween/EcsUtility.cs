@@ -1,3 +1,4 @@
+using System;
 using Leopotam.EcsLite;
 
 namespace RhysTween {
@@ -7,6 +8,9 @@ namespace RhysTween {
 
     public static void DelComponent<T>(this EcsWorld world, int entity) where T : struct =>
       world.GetPool<T>().Del(entity);
+
+    public static void DelComponent(this EcsWorld world, Type type, int entity) =>
+      world.GetPoolByType(type).Del(entity);
 
     public static ref T GetComponent<T>(this EcsWorld world, int entity) where T : struct =>
       ref world.GetPool<T>().Get(entity);

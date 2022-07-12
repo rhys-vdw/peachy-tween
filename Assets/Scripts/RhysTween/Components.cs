@@ -10,7 +10,6 @@ namespace RhysTween {
   internal struct Update { }
   internal struct LateUpdate { }
   internal struct FixedUpdate { }
-  internal struct ManualUpdate { }
   internal struct Slerp { }
 
   // Tween

@@ -42,7 +42,7 @@ namespace RhysTween {
       var entity = _world.NewEntity();
       _world.AddComponent(entity, new TweenConfig<T>(from, to, onChange));
       _world.AddComponent(entity, new TweenState(duration));
-      _world.AddComponent<Update>(entity);
+      SetGroup<Update>(entity);
       return new Tween(_world.PackEntity(entity));
     }
 
@@ -71,27 +71,7 @@ namespace RhysTween {
       _world.HasComponent<Paused>(entity);
 
 #endregion
-#region Group
-
-    public static Tween SetUpdate(this Tween tween) => tween.SetGroup<Update>();
-
-    public static Tween SetFixedUpdate(this Tween tween) => tween.SetGroup<FixedUpdate>();
-
-    public static Tween SetLateUpdate(this Tween tween) => tween.SetGroup<LateUpdate>();
-
-    public static Tween SetManualUpdate(this Tween tween) => tween.SetGroup<ManualUpdate>();
-
-    public static Tween SetGroup<TUpdate>(this Tween tween) where TUpdate : struct {
-      if (Entity(tween, out var entity)) {
-        // TODO: Make dynamic.
-        _world.DelComponent<Update>(entity);
-        _world.DelComponent<LateUpdate>(entity);
-        _world.DelComponent<FixedUpdate>(entity);
-        _world.DelComponent<ManualUpdate>(entity);
-        _world.AddComponent<TUpdate>(entity);
-      }
-      return tween;
-    }
+#region Slerp
 
     public static Tween Slerp(this Tween tween) {
       if (Entity(tween, out var entity)) {
@@ -99,6 +79,56 @@ namespace RhysTween {
       }
       return tween;
     }
+
+#endregion
+#region Group
+
+    static readonly Dictionary<Type, EcsFilter> _groupFilters = new();
+
+    public static Tween SetUpdate(this Tween tween) => tween.SetGroup<Update>();
+
+    public static Tween SetFixedUpdate(this Tween tween) => tween.SetGroup<FixedUpdate>();
+
+    public static Tween SetLateUpdate(this Tween tween) => tween.SetGroup<LateUpdate>();
+
+    public static Tween SetManualUpdate(this Tween tween) => tween.ClearGroup();
+
+    public static Tween ClearGroup(this Tween tween) {
+      if (Entity(tween, out var entity)) {
+        ClearGroup(entity);
+      }
+      return tween;
+    }
+
+    public static Tween SetGroup<TGroup>(this Tween tween) where TGroup : struct {
+      if (Entity(tween, out var entity)) {
+        SetGroup<TGroup>(entity);
+      }
+      return tween;
+    }
+
+    static void SetGroup<TGroup>(int entity) where TGroup : struct {
+      // Remove existing group.
+      ClearGroup(entity);
+
+      // Create a filter for this group if it doesn't exist.
+      if (!_groupFilters.ContainsKey(typeof(TGroup))) {
+        _groupFilters.Add(
+          typeof(TGroup),
+          _world.Filter<TGroup>().End()
+        );
+      }
+
+      // Tag entity.
+      _world.AddComponent<TGroup>(entity);
+    }
+
+    static void ClearGroup(int entity) {
+      foreach (var (key, _) in _groupFilters) {
+        _world.DelComponent(key, entity);
+      }
+    }
+
 
 #endregion
 #region Loop
@@ -181,20 +211,12 @@ namespace RhysTween {
 #endregion
 #region Run
 
-    static readonly Dictionary<Type, EcsFilter> _groupFilters = new();
-
-    static EcsFilter GroupFilter<TGroup>() where TGroup : struct {
-      if (!_groupFilters.TryGetValue(typeof(TGroup), out var filter)) {
-        filter = _world.Filter<TGroup>().End();
-        _groupFilters.Add(typeof(TGroup), filter);
-      }
-      return filter;
-    }
-
     public static void Run<TGroup>(float deltaTime) where TGroup : struct{
-      _runState.DeltaTime = deltaTime;
-      _runState.GroupFilter = GroupFilter<TGroup>();
-      _systems.Run();
+      if (_groupFilters.TryGetValue(typeof(TGroup), out var filter)) {
+        _runState.DeltaTime = deltaTime;
+        _runState.GroupFilter = filter;
+        _systems.Run();
+      }
     }
 
 #endregion
