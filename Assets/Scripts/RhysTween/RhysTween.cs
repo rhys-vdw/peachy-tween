@@ -84,6 +84,56 @@ namespace RhysTween {
       _world.HasComponent<Paused>(entity);
 
 #endregion
+#region Control
+
+    public static Tween Rewind(this Tween tween) => tween.GoTo(0);
+
+    public static Tween GoTo(this Tween tween, float elapsed) {
+      if (Entity(tween, out var entity)) {
+        ref var tweenState = ref _world.GetComponent<TweenState>(entity);
+        tweenState.Elapsed = elapsed;
+      }
+      return tween;
+    }
+
+    public static void Complete(this Tween tween) {
+      if (Entity(tween, out var entity)) {
+        Complete(entity);
+      }
+    }
+
+    public static void Kill(this Tween tween, bool complete = false) {
+      if (Entity(tween, out var entity)) {
+        // Cancel any loops.
+        _world.DelComponent<Loop>(entity);
+
+        // Cache the callback.
+        var callback = _world.TryGetComponent<OnKill>(entity, out var onKill)
+          ? onKill.Callback
+          : null;
+
+        // Optionally complete tween (destroying it).
+        if (complete) {
+          Complete(entity);
+        }
+
+        // Run its kill callback.
+        callback?.Invoke();
+
+        // If we haven't completed the tween then it will still exist. Clean it up.
+        if (!complete) {
+          _world.DelEntity(entity);
+        }
+      }
+    }
+
+    static void Complete(int entity) {
+      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
+      tweenState.Elapsed = tweenState.Duration;
+      ManualUpdate(entity, 0);
+    }
+
+#endregion
 #region Slerp
 
     public static Tween Slerp(this Tween tween) {
@@ -178,6 +228,14 @@ namespace RhysTween {
 #endregion
 #region Callbacks
 
+    public static Tween OnKill(this Tween tween, Action onComplete) {
+      if (Entity(tween, out var entity)) {
+        ref var c = ref _world.EnsureComponent<OnKill>(entity);
+        c.Callback = onComplete;
+      }
+      return tween;
+    }
+
     public static Tween OnComplete(this Tween tween, Action onComplete) {
       if (Entity(tween, out var entity)) {
         ref var c = ref _world.EnsureComponent<OnComplete>(entity);
@@ -233,9 +291,13 @@ namespace RhysTween {
 
     public static void ManualUpdate(this Tween tween, float deltaTime) {
       if (Entity(tween, out var entity)) {
-        _runState.Set(entity, deltaTime);
-        _systems.Run();
+        ManualUpdate(entity, deltaTime);
       }
+    }
+
+    static void ManualUpdate(int entity, float deltaTime) {
+      _runState.Set(entity, deltaTime);
+      _systems.Run();
     }
 
 #endregion

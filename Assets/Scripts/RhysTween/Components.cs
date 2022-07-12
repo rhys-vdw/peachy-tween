@@ -40,7 +40,12 @@ namespace RhysTween {
     public int Remaining;
   }
 
+  // Callbacks
   internal struct OnComplete {
+    public Action Callback;
+  }
+
+  internal struct OnKill {
     public Action Callback;
   }
 }

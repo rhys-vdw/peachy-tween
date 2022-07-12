@@ -15,6 +15,16 @@ namespace RhysTween {
     public static ref T GetComponent<T>(this EcsWorld world, int entity) where T : struct =>
       ref world.GetPool<T>().Get(entity);
 
+    public static bool TryGetComponent<T>(this EcsWorld world, int entity, out T component) where T : struct {
+      var pool = world.GetPool<T>();
+      if (pool.Has(entity)) {
+        component = pool.Get(entity);
+        return true;
+      }
+      component = default;
+      return false;
+    }
+
     public static ref T AddComponent<T>(this EcsWorld world, int entity) where T : struct =>
       ref world.GetPool<T>().Add(entity);
 
