@@ -128,7 +128,7 @@ namespace RhysTween {
 #region Unity lifecycle
 #pragma warning disable IDE0051
 
-    EcsSystems CreateSystems<TUpdate>(EcsWorld world) where TUpdate : struct{
+    EcsSystems CreateSystems<TUpdate>(EcsWorld world) where TUpdate : struct {
       var systems = new EcsSystems(world, this);
       systems
         .Add(new ProgressSystem<TUpdate>())
