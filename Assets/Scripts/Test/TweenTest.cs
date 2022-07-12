@@ -11,15 +11,16 @@ namespace RhysTween.Test {
     public void Start() {
       transform
         .TPosition(To.position, Duration)
-        .LoopForever()
+        // .LoopForever()
         .SetFixedUpdate()
         .OnComplete(() => Debug.Log("Done!"));
       _tween = transform
         .TRotation(new Vector3(90, 90, 90), Duration)
+        .Slerp()
         .LoopForever()
         .OnComplete(() => Debug.Log("Done!"));
 
-      StartCoroutine(Coroutine());
+      // StartCoroutine(Coroutine());
     }
 
     IEnumerator Coroutine() {

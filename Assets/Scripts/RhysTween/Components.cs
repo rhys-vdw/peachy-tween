@@ -11,6 +11,7 @@ namespace RhysTween {
   internal struct LateUpdate { }
   internal struct FixedUpdate { }
   internal struct ManualUpdate { }
+  internal struct Slerp { }
 
   // Tween
   internal struct TweenConfig<T> {

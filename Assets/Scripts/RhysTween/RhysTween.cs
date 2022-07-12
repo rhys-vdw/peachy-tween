@@ -27,7 +27,7 @@ namespace RhysTween {
       Tween(transform.eulerAngles, v => transform.eulerAngles = v, endValue, duration);
 
     public static Tween TLocalRotation(this Transform transform, Quaternion endValue, float duration) =>
-      Tween(transform.localRotation, v => transform.rotation = v, endValue, duration);
+      Tween(transform.localRotation, v => transform.localRotation = v, endValue, duration);
 
     public static Tween TLocalRotation(this Transform transform, Vector3 endValue, float duration) =>
       Tween(transform.localEulerAngles, v => transform.localEulerAngles = v, endValue, duration);
@@ -72,15 +72,25 @@ namespace RhysTween {
 
     public static Tween SetFixedUpdate(this Tween tween) => tween.SetGroup<FixedUpdate>();
 
+    public static Tween SetLateUpdate(this Tween tween) => tween.SetGroup<LateUpdate>();
+
     public static Tween SetManualUpdate(this Tween tween) => tween.SetGroup<ManualUpdate>();
 
     public static Tween SetGroup<TUpdate>(this Tween tween) where TUpdate : struct {
       if (Entity(tween, out var entity)) {
         // TODO: Make dynamic.
         _world.DelComponent<Update>(entity);
+        _world.DelComponent<LateUpdate>(entity);
         _world.DelComponent<FixedUpdate>(entity);
         _world.DelComponent<ManualUpdate>(entity);
         _world.AddComponent<TUpdate>(entity);
+      }
+      return tween;
+    }
+
+    public static Tween Slerp(this Tween tween) {
+      if (Entity(tween, out var entity)) {
+        _world.EnsureComponent<Slerp>(entity);
       }
       return tween;
     }
@@ -145,9 +155,11 @@ namespace RhysTween {
         .Add(new ProgressSystem())
         .Add(CreateChangeSystem<float>(Mathf.LerpUnclamped))
         .Add(CreateChangeSystem<Vector2>(Vector2.LerpUnclamped))
-        .Add(CreateChangeSystem<Vector3>(Vector3.LerpUnclamped))
+        .Add(CreateNonSlerpChangeSystem<Vector3>(Vector3.LerpUnclamped))
+        .Add(CreateSlerpChangeSystem<Vector3>(Vector3.SlerpUnclamped))
+        .Add(CreateNonSlerpChangeSystem<Quaternion>(Quaternion.LerpUnclamped))
+        .Add(CreateSlerpChangeSystem<Quaternion>(Quaternion.SlerpUnclamped))
         .Add(CreateChangeSystem<Color>(Color.LerpUnclamped))
-        .Add(CreateChangeSystem<Quaternion>(Quaternion.LerpUnclamped))
         .Add(new DeactivateGroupSystem())
         .Add(new LoopSystem())
         .Add(new CompleteSystem());
@@ -194,10 +206,17 @@ namespace RhysTween {
 #endregion
 #region Private
 
-    static ChangeSystem<TValue> CreateChangeSystem<TValue>(Lerp<TValue> lerp) {
-      var filter = _world.Filter<TweenConfig<TValue>>().Inc<Active>().Exc<Paused>().End();
-      return CreateChangeSystem(filter, lerp);
-    }
+    static EcsWorld.Mask FilterChange<TValue>() =>
+      _world.Filter<TweenConfig<TValue>>().Inc<Active>().Exc<Paused>();
+
+    static ChangeSystem<TValue> CreateNonSlerpChangeSystem<TValue>(Lerp<TValue> lerp) =>
+      CreateChangeSystem(FilterChange<TValue>().Exc<Slerp>().End(), lerp);
+
+    static ChangeSystem<TValue> CreateSlerpChangeSystem<TValue>(Lerp<TValue> lerp) =>
+      CreateChangeSystem(FilterChange<TValue>().Inc<Slerp>().End(), lerp);
+
+    static ChangeSystem<TValue> CreateChangeSystem<TValue>(Lerp<TValue> lerp) =>
+      CreateChangeSystem(FilterChange<TValue>().End(), lerp);
 
     static ChangeSystem<T> CreateChangeSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
       new (filter, lerp);
