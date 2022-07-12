@@ -2,7 +2,7 @@ using Leopotam.EcsLite;
 
 namespace RhysTween {
 
-  internal class ProgressSystem : IEcsSystem , IEcsInitSystem , IEcsRunSystem {
+  internal class ProgressSystem : IEcsSystem, IEcsInitSystem, IEcsRunSystem {
     EcsWorld _world;
     EcsFilter _filter;
     RunState _runState;
