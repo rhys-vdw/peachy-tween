@@ -36,7 +36,9 @@ namespace RhysTween.Test {
       yield return new WaitForSeconds(Duration * 0.5f);
       _tween.Complete();
       yield return new WaitForSeconds(Duration * 1.4f);
-      _tween.Kill(complete: true);
+      _tween.Pause();
+      yield return new WaitForSeconds(Duration * 1.4f);
+      _tween.GoTo(0.8f * Duration).Resume();
         // yield return new WaitForSeconds(1f);
         // Debug.Log("Goto 2.5");
         // _tween.GoTo(2.5f);
