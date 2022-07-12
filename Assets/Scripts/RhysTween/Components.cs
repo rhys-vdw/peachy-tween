@@ -1,12 +1,18 @@
 using System;
 
 namespace RhysTween {
+  // State
+  internal struct Active { }
   internal struct Paused { }
+  internal struct Complete { }
 
+  // Groups
   internal struct Update { }
+  internal struct LateUpdate { }
   internal struct FixedUpdate { }
   internal struct ManualUpdate { }
 
+  // Tween
   internal struct TweenConfig<T> {
     public T From;
     public T To;
@@ -30,15 +36,9 @@ namespace RhysTween {
     }
   }
 
-  internal struct Time {
-    public float DeltaTime;
-  }
-
   internal struct Loop {
     public int Remaining;
   }
-
-  internal struct Complete { }
 
   internal struct OnComplete {
     public Action Callback;

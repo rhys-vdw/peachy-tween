@@ -50,17 +50,17 @@ namespace RhysTween {
 #region Update
 
     public static Tween SetUpdate(this Tween tween) {
-      Runner.SetUpdate<Update>(tween);
+      Runner.SetGroup<Update>(tween);
       return tween;
     }
 
     public static Tween SetFixedUpdate(this Tween tween) {
-      Runner.SetUpdate<FixedUpdate>(tween);
+      Runner.SetGroup<FixedUpdate>(tween);
       return tween;
     }
 
     public static Tween SetManualUpdate(this Tween tween) {
-      Runner.SetUpdate<ManualUpdate>(tween);
+      Runner.SetGroup<ManualUpdate>(tween);
       return tween;
     }
 
