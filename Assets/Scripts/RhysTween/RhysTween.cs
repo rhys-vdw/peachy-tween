@@ -84,52 +84,74 @@ namespace RhysTween {
       _world.HasComponent<Paused>(entity);
 
 #endregion
+#region Preserve
+
+    public static Tween Preserve(this Tween tween) {
+      if (Entity(tween, out var entity)) {
+        _world.EnsureComponent<Preserve>(entity);
+      }
+      return tween;
+    }
+
+    public static Tween ClearPreserve(this Tween tween) {
+      if (Entity(tween, out var entity)) {
+        _world.DelComponent<Preserve>(entity);
+      }
+      return tween;
+    }
+
+#endregion
 #region Control
 
     public static Tween Rewind(this Tween tween) => tween.GoTo(0);
 
     public static Tween GoTo(this Tween tween, float elapsed) {
       if (Entity(tween, out var entity)) {
-        ref var tweenState = ref _world.GetComponent<TweenState>(entity);
-        tweenState.Elapsed = elapsed;
+        GoTo(entity, elapsed);
       }
       return tween;
     }
 
-    public static void Complete(this Tween tween) {
+    public static Tween Complete(this Tween tween) {
       if (Entity(tween, out var entity)) {
         Complete(entity);
       }
+      return tween;
     }
 
+    public static bool IsComplete(this Tween tween) =>
+      Entity(tween, out var entity) &&
+      IsComplete(entity);
+
+    static bool IsComplete(int entity) => _world.HasComponent<Complete>(entity);
+
     public static void Kill(this Tween tween, bool complete = false) {
-      if (Entity(tween, out var entity)) {
-        // Cancel any loops.
-        _world.DelComponent<Loop>(entity);
+      if (EntityNoWarn(tween, out var entity)) {
+        if (complete && !IsComplete(entity)) {
+          // Cancel any loops.
+          _world.DelComponent<Loop>(entity);
 
-        // Cache the callback.
-        var callback = _world.TryGetComponent<OnKill>(entity, out var onKill)
-          ? onKill.Callback
-          : null;
+          // Cancel preserve.
+          _world.DelComponent<Preserve>(entity);
 
-        // Optionally complete tween (destroying it).
-        if (complete) {
+          // This kills the tween.
           Complete(entity);
-        }
-
-        // Run its kill callback.
-        callback?.Invoke();
-
-        // If we haven't completed the tween then it will still exist. Clean it up.
-        if (!complete) {
-          _world.DelEntity(entity);
+        } else {
+          // Immediately kill the tween.
+          _world.KillTween(entity);
         }
       }
     }
 
     static void Complete(int entity) {
       ref var tweenState = ref _world.GetComponent<TweenState>(entity);
-      tweenState.Elapsed = tweenState.Duration;
+      GoTo(entity, tweenState.Duration);
+    }
+
+    static void GoTo(int entity, float elapsed) {
+      _world.DelComponent<Complete>(entity);
+      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
+      tweenState.Elapsed = elapsed;
       ManualUpdate(entity, 0);
     }
 
@@ -178,7 +200,8 @@ namespace RhysTween {
       if (!_groupFilters.ContainsKey(typeof(TGroup))) {
         _groupFilters.Add(
           typeof(TGroup),
-          _world.Filter<TGroup>().End()
+          // NOTE: Exclude complete at this level so that no callbacks are called.
+          _world.Filter<TGroup>().Exc<Complete>().End()
         );
       }
 
@@ -266,9 +289,10 @@ namespace RhysTween {
         .Add(CreateNonSlerpChangeSystem<Quaternion>(Quaternion.LerpUnclamped))
         .Add(CreateSlerpChangeSystem<Quaternion>(Quaternion.SlerpUnclamped))
         .Add(CreateChangeSystem<Color>(Color.LerpUnclamped))
-        .Add(new DeactivateGroupSystem())
+        .Add(new OnCompleteSystem())
         .Add(new LoopSystem())
-        .Add(new CompleteSystem());
+        .Add(new AutoKillSystem())
+        .Add(new DeactivateSystem());
       _systems.Init();
 
       var go = new GameObject("RhysTween_UnityLifecycle");
@@ -319,12 +343,15 @@ namespace RhysTween {
       new (filter, lerp);
 
     static bool Entity(Tween tween, out int entity) {
-      if (!tween._entity.Unpack(_world, out entity)) {
+      if (!EntityNoWarn(tween, out entity)) {
         Debug.LogWarning($"Tween is no longer active");
         return false;
       }
       return true;
     }
+
+    static bool EntityNoWarn(Tween tween, out int entity) =>
+      tween._entity.Unpack(_world, out entity);
 
 #endregion
   }

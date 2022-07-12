@@ -1,14 +1,13 @@
 using Leopotam.EcsLite;
-using UnityEngine;
 
 namespace RhysTween {
-  internal class CompleteSystem : IEcsSystem, IEcsInitSystem, IEcsRunSystem {
+  internal class OnCompleteSystem : IEcsSystem, IEcsInitSystem, IEcsRunSystem {
     EcsWorld _world;
     EcsFilter _completeFilter;
 
     public void Init(EcsSystems systems) {
       _world = systems.GetWorld();
-      _completeFilter = _world.Filter<Complete>().End();
+      _completeFilter = _world.Filter<Active>().Inc<Complete>().End();
     }
 
     public void Run(EcsSystems systems) {
@@ -17,7 +16,6 @@ namespace RhysTween {
         if (callbackPool.Has(entity)) {
           callbackPool.Get(entity).Callback();
         }
-        _world.DelEntity(entity);
       }
     }
   }

@@ -5,6 +5,7 @@ namespace RhysTween {
   internal struct Active { }
   internal struct Paused { }
   internal struct Complete { }
+  internal struct Preserve { }
 
   // Groups
   internal struct Update { }

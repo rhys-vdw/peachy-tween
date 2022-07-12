@@ -2,19 +2,18 @@ using Leopotam.EcsLite;
 
 namespace RhysTween {
 
-  internal class DeactivateSystem : IEcsSystem , IEcsPreInitSystem , IEcsRunSystem {
+  internal class AutoKillSystem : IEcsSystem , IEcsPreInitSystem , IEcsRunSystem {
     EcsWorld _world;
     EcsFilter _filter;
 
     public void PreInit(EcsSystems systems) {
       _world = systems.GetWorld();
-      _filter = _world.Filter<Active>().End();
+      _filter = _world.Filter<Active>().Inc<Complete>().Exc<Preserve>().End();
     }
 
     public void Run(EcsSystems systems) {
-      var activePool = _world.GetPool<Active>();
       foreach (var entity in _filter) {
-        activePool.Del(entity);
+        _world.KillTween(entity);
       }
     }
   }
