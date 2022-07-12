@@ -6,30 +6,47 @@ namespace RhysTween.Test {
     public Transform From;
     public Transform To;
     public float Duration = 5f;
+    public bool IsManuallyUpdating = false;
     Tween _tween;
 
     public void Start() {
-      transform
-        .TPosition(To.position, Duration)
-        // .LoopForever()
-        .SetFixedUpdate()
-        .OnComplete(() => Debug.Log("Done!"));
       _tween = transform
-        .TRotation(new Vector3(90, 90, 90), Duration)
-        .Slerp()
+        .TPosition(To.position, Duration)
+        .Loop(2)
+        .Preserve()
         .LoopForever()
+        .OnKill(() => Debug.Log("Kill!"))
         .OnComplete(() => Debug.Log("Done!"));
+      // transform
+      //   .TRotation(new Vector3(90, 90, 90), Duration)
+      //   .Slerp()
+      //   .LoopForever()
+      //   .OnComplete(() => Debug.Log("Done!"));
 
-      // StartCoroutine(Coroutine());
+      StartCoroutine(Coroutine());
     }
 
+    // void Update() {
+    //   if (IsManuallyUpdating) {
+    //     _tween.ManualUpdate(Time.deltaTime);
+    //   }
+    // }
+
     IEnumerator Coroutine() {
-      while (true) {
-        _tween.Pause();
-        yield return new WaitForSeconds(0.4f);
-        _tween.Resume();
-        yield return new WaitForSeconds(0.4f);
-      }
+      yield return new WaitForSeconds(Duration * 0.5f);
+      _tween.Complete();
+      yield return new WaitForSeconds(Duration * 1.4f);
+      _tween.Kill(complete: true);
+        // yield return new WaitForSeconds(1f);
+        // Debug.Log("Goto 2.5");
+        // _tween.GoTo(2.5f);
+        // yield return new WaitForSeconds(1f);
+        // Debug.Log("Rewind");
+        // _tween.Rewind();
+        // yield return new WaitForSeconds(1f);
+        // Debug.Log("Complete");
+        // _tween.Complete();
+      // }
     }
   }
 }
