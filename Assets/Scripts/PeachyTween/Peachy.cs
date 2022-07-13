@@ -174,16 +174,13 @@ namespace PeachyTween {
 #endregion
 #region Rotation
 
-    public static Tween Slerp(this Tween tween) {
-      if (Entity(tween, out var entity)) {
-        _world.EnsureComponent<Slerp>(entity);
-      }
-      return tween;
-    }
+    public static Tween Angle(this Tween tween) => tween.Rotate();
 
-    public static Tween Angle(this Tween tween) {
+    public static Tween Slerp(this Tween tween) => tween.Rotate();
+
+    public static Tween Rotate(this Tween tween) {
       if (Entity(tween, out var entity)) {
-        _world.EnsureComponent<Angle>(entity);
+        _world.EnsureComponent<Rotate>(entity);
       }
       return tween;
     }
@@ -336,14 +333,14 @@ namespace PeachyTween {
         .Add(new ProgressSystem())
         .Add(new ReverseSystem())
         .Add(new EaseSystem())
-        .Add(ChangeSystemExc<float, Angle>(Mathf.LerpUnclamped))
-        .Add(ChangeSystemInc<float, Angle>(Mathf.LerpAngle))
+        .Add(ChangeSystemExc<float, Rotate>(Mathf.LerpUnclamped))
+        .Add(ChangeSystemInc<float, Rotate>(Mathf.LerpAngle))
         .Add(ChangeSystem<Vector2>(Vector2.LerpUnclamped))
-        .Add(ChangeSystemExc<Vector3, Slerp>(Vector3.LerpUnclamped))
-        .Add(ChangeSystemInc<Vector3, Slerp>(Vector3.SlerpUnclamped))
+        .Add(ChangeSystemExc<Vector3, Rotate>(Vector3.LerpUnclamped))
+        .Add(ChangeSystemInc<Vector3, Rotate>(Vector3.SlerpUnclamped))
         .Add(ChangeSystem<Vector4>(Vector4.LerpUnclamped))
-        .Add(ChangeSystemExc<Quaternion, Slerp>(Quaternion.LerpUnclamped))
-        .Add(ChangeSystemInc<Quaternion, Slerp>(Quaternion.SlerpUnclamped))
+        .Add(ChangeSystemExc<Quaternion, Rotate>(Quaternion.LerpUnclamped))
+        .Add(ChangeSystemInc<Quaternion, Rotate>(Quaternion.SlerpUnclamped))
         .Add(ChangeSystem<Color>(Color.LerpUnclamped))
         .Add(new CallbackSystem<OnLoop>(FilterComplete().Inc<Loop>().End()))
         .Add(new PingPongSystem())
