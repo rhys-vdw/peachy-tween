@@ -182,8 +182,7 @@ namespace PeachyTween {
       if (!_groupFilters.ContainsKey(typeof(TGroup))) {
         _groupFilters.Add(
           typeof(TGroup),
-          // NOTE: Exclude complete at this level so that no callbacks are called.
-          _world.Filter<TGroup>().Exc<Complete>().End()
+          _world.Filter<TGroup>().Exc<Complete>().Exc<Paused>().End()
         );
       }
 
@@ -314,7 +313,7 @@ namespace PeachyTween {
       _world.Filter<Complete>();
 
     static EcsWorld.Mask FilterActive<TValue>() =>
-      _world.Filter<TweenConfig<TValue>>().Inc<Active>().Exc<Paused>();
+      _world.Filter<TweenConfig<TValue>>().Inc<Active>();
 
     static ChangeSystem<TValue> CreateNonSlerpChangeSystem<TValue>(Lerp<TValue> lerp) =>
       CreateChangeSystem(FilterActive<TValue>().Exc<Slerp>().End(), lerp);
