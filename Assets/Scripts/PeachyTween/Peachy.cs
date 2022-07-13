@@ -182,8 +182,7 @@ namespace PeachyTween {
       if (!_groupFilters.ContainsKey(typeof(TGroup))) {
         _groupFilters.Add(
           typeof(TGroup),
-          // NOTE: Exclude complete at this level so that no callbacks are called.
-          _world.Filter<TGroup>().Exc<Complete>().End()
+          _world.Filter<TGroup>().Exc<Complete>().Exc<Paused>().End()
         );
       }
 
@@ -231,6 +230,24 @@ namespace PeachyTween {
     }
 
 #endregion
+#region Easing
+
+    public static Tween ClearEase(this Tween tween) {
+      if (Entity(tween, out var entity)) {
+        _world.DelComponent<Ease>(entity);
+      }
+      return tween;
+    }
+
+    public static Tween Ease(this Tween tween, EaseFunc easeFunc) {
+      if (Entity(tween, out var entity)) {
+        ref var ease = ref _world.EnsureComponent<Ease>(entity);
+        ease.Func = easeFunc;
+      }
+      return tween;
+    }
+
+#endregion
 #region Callbacks
 
     public static Tween OnLoop(this Tween tween, Action onComplete) =>
@@ -264,6 +281,7 @@ namespace PeachyTween {
       _systems = new EcsSystems(_world, _runState)
         .Add(new ActivateGroupSystem())
         .Add(new ProgressSystem())
+        .Add(new EaseSystem())
         .Add(CreateChangeSystem<float>(Mathf.LerpUnclamped))
         .Add(CreateChangeSystem<Vector2>(Vector2.LerpUnclamped))
         .Add(CreateNonSlerpChangeSystem<Vector3>(Vector3.LerpUnclamped))
@@ -314,7 +332,7 @@ namespace PeachyTween {
       _world.Filter<Complete>();
 
     static EcsWorld.Mask FilterActive<TValue>() =>
-      _world.Filter<TweenConfig<TValue>>().Inc<Active>().Exc<Paused>();
+      _world.Filter<TweenConfig<TValue>>().Inc<Active>();
 
     static ChangeSystem<TValue> CreateNonSlerpChangeSystem<TValue>(Lerp<TValue> lerp) =>
       CreateChangeSystem(FilterActive<TValue>().Exc<Slerp>().End(), lerp);
