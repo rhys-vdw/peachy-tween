@@ -333,6 +333,7 @@ namespace PeachyTween {
         .Add(CreateChangeSystem<Vector2>(Vector2.LerpUnclamped))
         .Add(CreateNonSlerpChangeSystem<Vector3>(Vector3.LerpUnclamped))
         .Add(CreateSlerpChangeSystem<Vector3>(Vector3.SlerpUnclamped))
+        .Add(CreateChangeSystem<Vector4>(Vector4.LerpUnclamped))
         .Add(CreateNonSlerpChangeSystem<Quaternion>(Quaternion.LerpUnclamped))
         .Add(CreateSlerpChangeSystem<Quaternion>(Quaternion.SlerpUnclamped))
         .Add(CreateChangeSystem<Color>(Color.LerpUnclamped))
