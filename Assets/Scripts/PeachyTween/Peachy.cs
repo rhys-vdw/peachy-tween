@@ -129,6 +129,23 @@ namespace PeachyTween {
     static bool IsComplete(int entity) => _world.HasComponent<Complete>(entity);
 
 #endregion
+#region Ping-pong
+
+    public static Tween PingPong(this Tween tween) {
+      if (Entity(tween, out int entity)) {
+        _world.EnsureComponent<PingPong>(entity);
+      }
+      return tween;
+    }
+
+    public static Tween ClearPingPong(this Tween tween) {
+      if (Entity(tween, out int entity)) {
+        _world.DelComponent<PingPong>(entity);
+      }
+      return tween;
+    }
+
+#endregion
 #region Kill
 
     public static void Kill(this Tween tween, bool complete = false) {
@@ -320,6 +337,7 @@ namespace PeachyTween {
         .Add(CreateSlerpChangeSystem<Quaternion>(Quaternion.SlerpUnclamped))
         .Add(CreateChangeSystem<Color>(Color.LerpUnclamped))
         .Add(new CallbackSystem<OnLoop>(FilterComplete().Inc<Loop>().End()))
+        .Add(new PingPongSystem())
         .Add(new LoopSystem())
         .Add(new CallbackSystem<OnComplete>(FilterComplete().End()))
         .Add(new AutoKillSystem())

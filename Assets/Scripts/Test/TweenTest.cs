@@ -15,6 +15,7 @@ namespace PeachyTween.Test {
       _tween = transform
         .TPosition(To.position, Duration)
         .LoopForever()
+        .PingPong()
         .OnLoop(() => Debug.Log("Loop!"))
         .Ease(Ease)
         // .Preserve()
