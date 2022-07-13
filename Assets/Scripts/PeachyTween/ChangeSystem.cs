@@ -1,6 +1,6 @@
 using Leopotam.EcsLite;
 
-namespace RhysTween {
+namespace PeachyTween {
   internal class ChangeSystem<T> : IEcsSystem, IEcsInitSystem, IEcsRunSystem {
     EcsWorld _world;
     readonly EcsFilter _filter;

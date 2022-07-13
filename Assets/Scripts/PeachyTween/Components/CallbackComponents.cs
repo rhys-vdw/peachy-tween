@@ -1,7 +1,7 @@
 using System;
 using Leopotam.EcsLite;
 
-namespace RhysTween {
+namespace PeachyTween {
   internal interface ICallback {
     Action Callback { get; set; }
   }

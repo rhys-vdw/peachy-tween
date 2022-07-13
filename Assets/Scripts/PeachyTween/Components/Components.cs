@@ -1,7 +1,7 @@
 using System;
 using Leopotam.EcsLite;
 
-namespace RhysTween {
+namespace PeachyTween {
   // State
   internal struct Active { }
   internal struct Paused { }

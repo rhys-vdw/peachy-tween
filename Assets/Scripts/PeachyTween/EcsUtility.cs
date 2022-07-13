@@ -1,7 +1,7 @@
 using System;
 using Leopotam.EcsLite;
 
-namespace RhysTween {
+namespace PeachyTween {
   internal static class EcsUtility {
     public static bool HasComponent<T>(this EcsWorld world, int entity) where T : struct =>
       world.GetPool<T>().Has(entity);

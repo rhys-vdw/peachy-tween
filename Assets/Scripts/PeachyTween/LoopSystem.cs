@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using UnityEngine;
 
-namespace RhysTween {
+namespace PeachyTween {
   internal class LoopSystem : IEcsSystem, IEcsInitSystem, IEcsRunSystem {
     EcsWorld _world;
     EcsFilter _loopFilter;

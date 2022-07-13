@@ -1,6 +1,6 @@
 using Leopotam.EcsLite;
 
-namespace RhysTween {
+namespace PeachyTween {
 
   internal class DeactivateSystem : IEcsSystem , IEcsPreInitSystem , IEcsRunSystem {
     EcsWorld _world;

@@ -3,7 +3,7 @@ using UnityEngine;
 using Leopotam.EcsLite;
 using System.Collections.Generic;
 
-namespace RhysTween {
+namespace PeachyTween {
   internal class RunState {
     public float DeltaTime { get; private set; }
     public EcsFilter GroupFilter { get; private set; }
@@ -30,7 +30,7 @@ namespace RhysTween {
     }
   }
 
-  public static class RhysTween {
+  public static class Peachy {
 #region Tween factory
 
     public static Tween Tween<T>(T from, Action<T> onChange, T to, float duration) {
@@ -278,7 +278,7 @@ namespace RhysTween {
         .Add(new DeactivateSystem());
       _systems.Init();
 
-      var go = new GameObject("RhysTween_UnityLifecycle");
+      var go = new GameObject($"{nameof(PeachyTween)}::{nameof(UnityLifecycle)}");
       _lifecycle = go.AddComponent<UnityLifecycle>();
       UnityEngine.Object.DontDestroyOnLoad(_lifecycle);
     }
