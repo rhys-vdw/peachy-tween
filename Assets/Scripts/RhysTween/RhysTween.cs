@@ -251,11 +251,14 @@ namespace RhysTween {
 #endregion
 #region Callbacks
 
-    public static Tween OnKill(this Tween tween, Action onKill) =>
-      tween.AddHandler<OnKill>(onKill);
+    public static Tween OnLoop(this Tween tween, Action onComplete) =>
+      tween.AddHandler<OnLoop>(onComplete);
 
     public static Tween OnComplete(this Tween tween, Action onComplete) =>
       tween.AddHandler<OnComplete>(onComplete);
+
+    public static Tween OnKill(this Tween tween, Action onKill) =>
+      tween.AddHandler<OnKill>(onKill);
 
     static Tween AddHandler<T>(this Tween tween, Action handler) where T : struct, ICallback {
       if (Entity(tween, out var entity)) {
@@ -286,8 +289,9 @@ namespace RhysTween {
         .Add(CreateNonSlerpChangeSystem<Quaternion>(Quaternion.LerpUnclamped))
         .Add(CreateSlerpChangeSystem<Quaternion>(Quaternion.SlerpUnclamped))
         .Add(CreateChangeSystem<Color>(Color.LerpUnclamped))
+        .Add(new CallbackSystem<OnLoop>(FilterComplete().Inc<Loop>().End()))
         .Add(new LoopSystem())
-        .Add(new CallbackSystem<OnComplete>(_world.Filter<Complete>().End()))
+        .Add(new CallbackSystem<OnComplete>(FilterComplete().End()))
         .Add(new AutoKillSystem())
         .Add(new DeactivateSystem());
       _systems.Init();
@@ -323,6 +327,9 @@ namespace RhysTween {
 
 #endregion
 #region Private
+
+    static EcsWorld.Mask FilterComplete() =>
+      _world.Filter<Complete>();
 
     static EcsWorld.Mask FilterActive<TValue>() =>
       _world.Filter<TweenConfig<TValue>>().Inc<Active>().Exc<Paused>();

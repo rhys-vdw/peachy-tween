@@ -6,6 +6,10 @@ namespace RhysTween {
     Action Callback { get; set; }
   }
 
+  internal struct OnLoop : ICallback {
+    public Action Callback { get; set; }
+  }
+
   internal struct OnComplete : ICallback {
     public Action Callback { get; set; }
   }
