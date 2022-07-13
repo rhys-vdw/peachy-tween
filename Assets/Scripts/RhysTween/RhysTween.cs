@@ -327,17 +327,17 @@ namespace RhysTween {
 #endregion
 #region Private
 
-    static EcsWorld.Mask FilterChange<TValue>() =>
+    static EcsWorld.Mask FilterActive<TValue>() =>
       _world.Filter<TweenConfig<TValue>>().Inc<Active>().Exc<Paused>();
 
     static ChangeSystem<TValue> CreateNonSlerpChangeSystem<TValue>(Lerp<TValue> lerp) =>
-      CreateChangeSystem(FilterChange<TValue>().Exc<Slerp>().End(), lerp);
+      CreateChangeSystem(FilterActive<TValue>().Exc<Slerp>().End(), lerp);
 
     static ChangeSystem<TValue> CreateSlerpChangeSystem<TValue>(Lerp<TValue> lerp) =>
-      CreateChangeSystem(FilterChange<TValue>().Inc<Slerp>().End(), lerp);
+      CreateChangeSystem(FilterActive<TValue>().Inc<Slerp>().End(), lerp);
 
     static ChangeSystem<TValue> CreateChangeSystem<TValue>(Lerp<TValue> lerp) =>
-      CreateChangeSystem(FilterChange<TValue>().End(), lerp);
+      CreateChangeSystem(FilterActive<TValue>().End(), lerp);
 
     static ChangeSystem<T> CreateChangeSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
       new (filter, lerp);
