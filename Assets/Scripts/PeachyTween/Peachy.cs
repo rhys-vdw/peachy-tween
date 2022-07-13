@@ -25,7 +25,7 @@ namespace PeachyTween {
   public struct Tween {
     readonly internal EcsPackedEntity _entity;
 
-    public Tween(EcsPackedEntity entity) {
+    internal Tween(EcsPackedEntity entity) {
       _entity = entity;
     }
   }
@@ -165,6 +165,9 @@ namespace PeachyTween {
         }
       }
     }
+
+    public static void IsValid(this Tween tween) =>
+      Entity(tween, out _);
 
     internal static void KillTween(this EcsWorld world, int entity) {
       world.Invoke<OnKill>(entity);
@@ -402,7 +405,7 @@ namespace PeachyTween {
 
     static bool Entity(Tween tween, out int entity) {
       if (!EntityNoWarn(tween, out entity)) {
-        Debug.LogWarning($"Tween is no longer active");
+        Debug.LogWarning($"Tween is invalid");
         return false;
       }
       return true;
