@@ -105,6 +105,15 @@ namespace PeachyTween {
       Entity(tween, out var entity) &&
       IsComplete(entity);
 
+    public static Tween Reverse(this Tween tween) {
+      if (Entity(tween, out var entity)) {
+        _world.ToggleComponent<Reverse>(entity);
+        ref var state = ref _world.GetComponent<TweenState>(entity);
+        state.Elapsed = state.Duration - state.Elapsed;
+      }
+      return tween;
+    }
+
     static void GoTo(int entity, float elapsed) {
       _world.DelComponent<Complete>(entity);
       ref var tweenState = ref _world.GetComponent<TweenState>(entity);
@@ -301,6 +310,7 @@ namespace PeachyTween {
       _systems = new EcsSystems(_world, _runState)
         .Add(new ActivateGroupSystem())
         .Add(new ProgressSystem())
+        .Add(new ReverseSystem())
         .Add(new EaseSystem())
         .Add(CreateChangeSystem<float>(Mathf.LerpUnclamped))
         .Add(CreateChangeSystem<Vector2>(Vector2.LerpUnclamped))

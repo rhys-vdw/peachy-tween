@@ -6,6 +6,7 @@ namespace PeachyTween {
   internal struct Paused { }
   internal struct Complete { }
   internal struct Preserve { }
+  internal struct Reverse { }
 
   // Groups
   internal struct Update { }

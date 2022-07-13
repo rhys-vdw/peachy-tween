@@ -16,7 +16,7 @@ namespace PeachyTween.Test {
         .TPosition(To.position, Duration)
         .LoopForever()
         .OnLoop(() => Debug.Log("Loop!"))
-        .Ease(Curve)
+        .Ease(Ease)
         // .Preserve()
         .OnKill(() => Debug.Log("Kill!"));
         // .OnComplete(() => {
@@ -32,7 +32,7 @@ namespace PeachyTween.Test {
 
     void Update() {
       if (Input.GetKeyDown(KeyCode.Space)) {
-        _tween.Ease(Ease);
+        _tween.Reverse();
       }
     }
 
