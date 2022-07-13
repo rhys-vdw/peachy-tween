@@ -172,11 +172,18 @@ namespace PeachyTween {
     }
 
 #endregion
-#region Slerp
+#region Rotation
 
     public static Tween Slerp(this Tween tween) {
       if (Entity(tween, out var entity)) {
         _world.EnsureComponent<Slerp>(entity);
+      }
+      return tween;
+    }
+
+    public static Tween Angle(this Tween tween) {
+      if (Entity(tween, out var entity)) {
+        _world.EnsureComponent<Angle>(entity);
       }
       return tween;
     }
@@ -329,7 +336,8 @@ namespace PeachyTween {
         .Add(new ProgressSystem())
         .Add(new ReverseSystem())
         .Add(new EaseSystem())
-        .Add(ChangeSystem<float>(Mathf.LerpUnclamped))
+        .Add(ChangeSystemExc<float, Angle>(Mathf.LerpUnclamped))
+        .Add(ChangeSystemInc<float, Angle>(Mathf.LerpAngle))
         .Add(ChangeSystem<Vector2>(Vector2.LerpUnclamped))
         .Add(ChangeSystemExc<Vector3, Slerp>(Vector3.LerpUnclamped))
         .Add(ChangeSystemInc<Vector3, Slerp>(Vector3.SlerpUnclamped))

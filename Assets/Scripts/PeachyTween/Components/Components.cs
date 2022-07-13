@@ -13,7 +13,10 @@ namespace PeachyTween {
   internal struct Update { }
   internal struct LateUpdate { }
   internal struct FixedUpdate { }
+
+  // Lerp filter
   internal struct Slerp { }
+  internal struct Angle { }
 
   // Tween
   internal struct TweenConfig<T> {
