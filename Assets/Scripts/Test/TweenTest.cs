@@ -14,13 +14,13 @@ namespace PeachyTween.Test {
         .TPosition(To.position, Duration)
         .LoopForever()
         .OnLoop(() => Debug.Log("Loop!"))
+        .Ease(Easing.EaseOutElastic)
         // .Preserve()
-        .OnKill(() => Debug.Log("Kill!"))
-        .OnKill(() => Debug.Log("KILL KILL!"))
-        .OnComplete(() => {
-          Debug.Log("Done!");
-          StartCoroutine(Coroutine());
-        });
+        .OnKill(() => Debug.Log("Kill!"));
+        // .OnComplete(() => {
+        //   Debug.Log("Done!");
+        //   // StartCoroutine(Coroutine());
+        // });
       // transform
       //   .TRotation(new Vector3(90, 90, 90), Duration)
       //   .Slerp()
