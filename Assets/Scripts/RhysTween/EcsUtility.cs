@@ -45,7 +45,7 @@ namespace RhysTween {
       if (TryGetFirst(filter, out var entity)) {
         return entity;
       }
-      throw new System.ArgumentException($"Filter is empty");
+      throw new ArgumentException($"Filter is empty");
     }
 
     public static bool TryGetFirst(this EcsFilter filter, out int entity) {
