@@ -329,14 +329,14 @@ namespace PeachyTween {
         .Add(new ProgressSystem())
         .Add(new ReverseSystem())
         .Add(new EaseSystem())
-        .Add(CreateChangeSystem<float>(Mathf.LerpUnclamped))
-        .Add(CreateChangeSystem<Vector2>(Vector2.LerpUnclamped))
-        .Add(CreateNonSlerpChangeSystem<Vector3>(Vector3.LerpUnclamped))
-        .Add(CreateSlerpChangeSystem<Vector3>(Vector3.SlerpUnclamped))
-        .Add(CreateChangeSystem<Vector4>(Vector4.LerpUnclamped))
-        .Add(CreateNonSlerpChangeSystem<Quaternion>(Quaternion.LerpUnclamped))
-        .Add(CreateSlerpChangeSystem<Quaternion>(Quaternion.SlerpUnclamped))
-        .Add(CreateChangeSystem<Color>(Color.LerpUnclamped))
+        .Add(ChangeSystem<float>(Mathf.LerpUnclamped))
+        .Add(ChangeSystem<Vector2>(Vector2.LerpUnclamped))
+        .Add(ChangeSystemExc<Vector3, Slerp>(Vector3.LerpUnclamped))
+        .Add(ChangeSystemInc<Vector3, Slerp>(Vector3.SlerpUnclamped))
+        .Add(ChangeSystem<Vector4>(Vector4.LerpUnclamped))
+        .Add(ChangeSystemExc<Quaternion, Slerp>(Quaternion.LerpUnclamped))
+        .Add(ChangeSystemInc<Quaternion, Slerp>(Quaternion.SlerpUnclamped))
+        .Add(ChangeSystem<Color>(Color.LerpUnclamped))
         .Add(new CallbackSystem<OnLoop>(FilterComplete().Inc<Loop>().End()))
         .Add(new PingPongSystem())
         .Add(new LoopSystem())
@@ -383,16 +383,16 @@ namespace PeachyTween {
     static EcsWorld.Mask FilterActive<TValue>() =>
       _world.Filter<TweenConfig<TValue>>().Inc<Active>();
 
-    static ChangeSystem<TValue> CreateNonSlerpChangeSystem<TValue>(Lerp<TValue> lerp) =>
-      CreateChangeSystem(FilterActive<TValue>().Exc<Slerp>().End(), lerp);
+    static ChangeSystem<TValue> ChangeSystemExc<TValue, TExc>(Lerp<TValue> lerp) where TExc : struct =>
+      ChangeSystem(FilterActive<TValue>().Exc<TExc>().End(), lerp);
 
-    static ChangeSystem<TValue> CreateSlerpChangeSystem<TValue>(Lerp<TValue> lerp) =>
-      CreateChangeSystem(FilterActive<TValue>().Inc<Slerp>().End(), lerp);
+    static ChangeSystem<TValue> ChangeSystemInc<TValue, TInc>(Lerp<TValue> lerp) where TInc : struct =>
+      ChangeSystem(FilterActive<TValue>().Inc<TInc>().End(), lerp);
 
-    static ChangeSystem<TValue> CreateChangeSystem<TValue>(Lerp<TValue> lerp) =>
-      CreateChangeSystem(FilterActive<TValue>().End(), lerp);
+    static ChangeSystem<TValue> ChangeSystem<TValue>(Lerp<TValue> lerp) =>
+      ChangeSystem(FilterActive<TValue>().End(), lerp);
 
-    static ChangeSystem<T> CreateChangeSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
+    static ChangeSystem<T> ChangeSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
       new (filter, lerp);
 
     static bool Entity(Tween tween, out int entity) {
