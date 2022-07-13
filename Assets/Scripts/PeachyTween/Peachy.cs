@@ -85,7 +85,7 @@ namespace PeachyTween {
 #endregion
 #region Control
 
-    public static Tween Rewind(this Tween tween) => tween.GoTo(0);
+    public static Tween Restart(this Tween tween) => tween.GoTo(0);
 
     public static Tween GoTo(this Tween tween, float elapsed) {
       if (Entity(tween, out var entity)) {
