@@ -58,9 +58,7 @@ namespace RhysTween {
     }
 
     public static void KillTween(this EcsWorld world, int entity) {
-      if (world.TryGetComponent<OnKill>(entity, out var onKill)) {
-        onKill.Callback();
-      }
+      world.Invoke<OnKill>(entity);
       world.DelEntity(entity);
     }
   }

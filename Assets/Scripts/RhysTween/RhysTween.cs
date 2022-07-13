@@ -251,18 +251,15 @@ namespace RhysTween {
 #endregion
 #region Callbacks
 
-    public static Tween OnKill(this Tween tween, Action onComplete) {
-      if (Entity(tween, out var entity)) {
-        ref var c = ref _world.EnsureComponent<OnKill>(entity);
-        c.Callback = onComplete;
-      }
-      return tween;
-    }
+    public static Tween OnKill(this Tween tween, Action onKill) =>
+      tween.AddHandler<OnKill>(onKill);
 
-    public static Tween OnComplete(this Tween tween, Action onComplete) {
+    public static Tween OnComplete(this Tween tween, Action onComplete) =>
+      tween.AddHandler<OnComplete>(onComplete);
+
+    static Tween AddHandler<T>(this Tween tween, Action handler) where T : struct, ICallback {
       if (Entity(tween, out var entity)) {
-        ref var c = ref _world.EnsureComponent<OnComplete>(entity);
-        c.Callback = onComplete;
+        _world.AddHandler<T>(entity, handler);
       }
       return tween;
     }
@@ -289,8 +286,8 @@ namespace RhysTween {
         .Add(CreateNonSlerpChangeSystem<Quaternion>(Quaternion.LerpUnclamped))
         .Add(CreateSlerpChangeSystem<Quaternion>(Quaternion.SlerpUnclamped))
         .Add(CreateChangeSystem<Color>(Color.LerpUnclamped))
-        .Add(new OnCompleteSystem())
         .Add(new LoopSystem())
+        .Add(new CallbackSystem<OnComplete>(_world.Filter<Complete>().End()))
         .Add(new AutoKillSystem())
         .Add(new DeactivateSystem());
       _systems.Init();
