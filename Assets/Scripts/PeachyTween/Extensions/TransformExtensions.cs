@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace PeachyTween {
-  public static class TransformUtility {
+  public static class TransformExtensions {
     public static Tween TRotation(this Transform transform, Quaternion endValue, float duration) =>
       Peachy.Tween(transform.rotation, endValue, v => transform.rotation = v, duration);
 
