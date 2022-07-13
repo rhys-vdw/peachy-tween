@@ -234,14 +234,14 @@ namespace PeachyTween {
 
     public static Tween ClearEase(this Tween tween) {
       if (Entity(tween, out var entity)) {
-        _world.DelComponent<Ease>(entity);
+        _world.DelComponent<Eased>(entity);
       }
       return tween;
     }
 
     public static Tween Ease(this Tween tween, EaseFunc easeFunc) {
       if (Entity(tween, out var entity)) {
-        ref var ease = ref _world.EnsureComponent<Ease>(entity);
+        ref var ease = ref _world.EnsureComponent<Eased>(entity);
         ease.Func = easeFunc;
       }
       return tween;

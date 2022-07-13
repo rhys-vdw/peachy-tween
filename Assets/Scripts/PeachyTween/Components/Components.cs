@@ -42,7 +42,7 @@ namespace PeachyTween {
     public int Remaining;
   }
 
-  internal struct Ease {
+  internal struct Eased {
     public EaseFunc Func;
   }
 }

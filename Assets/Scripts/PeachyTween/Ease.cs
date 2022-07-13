@@ -5,7 +5,7 @@ using static UnityEngine.Mathf;
 namespace PeachyTween {
   public delegate float EaseFunc(float t);
 
-  public static class Easing {
+  public static class EaseFuncs {
     const float c1 = 1.70158f;
     const float c2 = c1 * 1.525f;
     const float c3 = c1 + 1;
@@ -15,58 +15,58 @@ namespace PeachyTween {
     public static float Linear(float t) =>
       t;
 
-    public static float EaseInQuad(float t) =>
+    public static float QuadIn(float t) =>
       t * t;
 
-    public static float EaseOutQuad(float t) =>
+    public static float QuadOut(float t) =>
       1 - (1 - t) * (1 - t);
 
-    public static float EaseInOutQuad(float t) =>
+    public static float QuadInOut(float t) =>
       t < 0.5f ? 2 * t * t : 1 - Pow(-2 * t + 2, 2) / 2;
 
-    public static float EaseInCubic(float t) =>
+    public static float CubicIn(float t) =>
       t * t * t;
 
-    public static float EaseOutCubic(float t) =>
+    public static float CubicOut(float t) =>
       1 - Pow(1 - t, 3);
 
-    public static float EaseInOutCubic(float t) =>
+    public static float CubicInOut(float t) =>
       t < 0.5f ? 4 * t * t * t : 1 - Pow(-2 * t + 2, 3) / 2;
 
-    public static float EaseInQuart(float t) =>
+    public static float QuartIn(float t) =>
       t * t * t * t;
 
-    public static float EaseOutQuart(float t) =>
+    public static float QuartOut(float t) =>
       1 - Pow(1 - t, 4);
 
-    public static float EaseInOutQuart(float t) =>
+    public static float QuartInOut(float t) =>
       t < 0.5f ? 8 * t * t * t * t : 1 - Pow(-2 * t + 2, 4) / 2;
 
-    public static float EaseInQuint(float t) =>
+    public static float QuintIn(float t) =>
       t * t * t * t * t;
 
-    public static float EaseOutQuint(float t) =>
+    public static float QuintOut(float t) =>
       1 - Pow(1 - t, 5);
 
-    public static float EaseInOutQuint(float t) =>
+    public static float QuintInOut(float t) =>
       t < 0.5f ? 16 * t * t * t * t * t : 1 - Pow(-2 * t + 2, 5) / 2;
 
-    public static float EaseInSine(float t) =>
+    public static float SineIn(float t) =>
       1 - Cos(t * PI / 2);
 
-    public static float EaseOutSine(float t) =>
+    public static float SineOut(float t) =>
       Sin(t * PI / 2);
 
-    public static float EaseInOutSine(float t) =>
+    public static float SineInOut(float t) =>
       -(Cos(PI * t) - 1) / 2;
 
-    public static float EaseInExpo(float t) =>
+    public static float ExpoIn(float t) =>
       t == 0 ? 0 : Pow(2, 10 * t - 10);
 
-    public static float EaseOutExpo(float t) =>
+    public static float ExpoOut(float t) =>
       t == 1 ? 1 : 1 - Pow(2, -10 * t);
 
-    public static float EaseInOutExpo(float t) =>
+    public static float ExpoInOut(float t) =>
       t == 0
         ? 0
         : t == 1
@@ -75,43 +75,43 @@ namespace PeachyTween {
         ? Pow(2, 20 * t - 10) / 2
         : (2 - Pow(2, -20 * t + 10)) / 2;
 
-    public static float EaseInCirc(float t) =>
+    public static float CircIn(float t) =>
       1 - Sqrt(1 - Pow(t, 2));
 
-    public static float EaseOutCirc(float t) =>
+    public static float CircOut(float t) =>
       Sqrt(1 - Pow(t - 1, 2));
 
-    public static float EaseInOutCirc(float t) =>
+    public static float CircInOut(float t) =>
       t < 0.5f
         ? (1 - Sqrt(1 - Pow(2 * t, 2))) / 2
         : (Sqrt(1 - Pow(-2 * t + 2, 2)) + 1) / 2;
 
-    public static float EaseInBack(float t) =>
+    public static float BackIn(float t) =>
       c3 * t * t * t - c1 * t * t;
 
-    public static float EaseOutBack(float t) =>
+    public static float BackOut(float t) =>
       1 + c3 * Pow(t - 1, 3) + c1 * Pow(t - 1, 2);
 
-    public static float EaseInOutBack(float t) =>
+    public static float BackInOut(float t) =>
       t < 0.5f
         ? Pow(2 * t, 2) * ((c2 + 1) * 2 * t - c2) / 2
         : (Pow(2 * t - 2, 2) * ((c2 + 1) * (t * 2 - 2) + c2) + 2) / 2;
 
-    public static float EaseInElastic(float t) =>
+    public static float ElasticIn(float t) =>
       t == 0
         ? 0
         : t == 1
         ? 1
         : -Pow(2, 10 * t - 10) * Sin((t * 10 - 10.75f) * c4);
 
-    public static float EaseOutElastic(float t) =>
+    public static float ElasticOut(float t) =>
       t == 0
         ? 0
         : t == 1
         ? 1
         : Pow(2, -10 * t) * Sin((t * 10 - 0.75f) * c4) + 1;
 
-    public static float EaseInOutElastic(float t) =>
+    public static float ElasticInOut(float t) =>
       t == 0
         ? 0
         : t == 1
@@ -120,10 +120,10 @@ namespace PeachyTween {
         ? -(Pow(2, 20 * t - 10) * Sin((20 * t - 11.125f) * c5)) / 2
         : Pow(2, -20 * t + 10) * Sin((20 * t - 11.125f) * c5) / 2 + 1;
 
-    public static float EaseInBounce(float t) =>
-      1 - EaseOutBounce(1 - t);
+    public static float BounceIn(float t) =>
+      1 - BounceOut(1 - t);
 
-    public static float EaseOutBounce(float t) {
+    public static float BounceOut(float t) {
       const float n1 = 7.5625f;
       const float d1 = 2.75f;
 
@@ -138,10 +138,10 @@ namespace PeachyTween {
       }
     }
 
-    public static float EaseInOutBounce(float t) {
+    public static float BounceInOut(float t) {
       return t < 0.5f
-        ? (1 - EaseOutBounce(1 - 2 * t)) / 2
-        : (1 + EaseOutBounce(2 * t - 1)) / 2;
+        ? (1 - BounceOut(1 - 2 * t)) / 2
+        : (1 + BounceOut(2 * t - 1)) / 2;
     }
   }
 }

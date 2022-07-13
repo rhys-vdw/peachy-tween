@@ -7,12 +7,12 @@ namespace PeachyTween {
 
     public void Init(EcsSystems systems) {
       _world = systems.GetWorld();
-      _filter = _world.Filter<Active>().Inc<Ease>().End();
+      _filter = _world.Filter<Active>().Inc<Eased>().End();
     }
 
     public void Run(EcsSystems systems) {
       foreach (var entity in _filter) {
-        ref var ease = ref _world.GetComponent<Ease>(entity);
+        ref var ease = ref _world.GetComponent<Eased>(entity);
         ref var state = ref _world.GetComponent<TweenState>(entity);
         state.Progress = ease.Func(state.Progress);
       }

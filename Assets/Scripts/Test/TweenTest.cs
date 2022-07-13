@@ -14,7 +14,7 @@ namespace PeachyTween.Test {
         .TPosition(To.position, Duration)
         .LoopForever()
         .OnLoop(() => Debug.Log("Loop!"))
-        .Ease(Easing.EaseOutElastic)
+        .Ease(EaseFuncs.ElasticOut)
         // .Preserve()
         .OnKill(() => Debug.Log("Kill!"));
         // .OnComplete(() => {
