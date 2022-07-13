@@ -105,7 +105,48 @@ namespace PeachyTween {
       Entity(tween, out var entity) &&
       IsComplete(entity);
 
+    public static Tween Reverse(this Tween tween) {
+      if (Entity(tween, out var entity)) {
+        _world.ToggleComponent<Reverse>(entity);
+        ref var state = ref _world.GetComponent<TweenState>(entity);
+        state.Elapsed = state.Duration - state.Elapsed;
+      }
+      return tween;
+    }
+
+    static void GoTo(int entity, float elapsed) {
+      _world.DelComponent<Complete>(entity);
+      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
+      tweenState.Elapsed = elapsed;
+      ManualUpdate(entity, 0);
+    }
+
+    static void Complete(int entity) {
+      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
+      GoTo(entity, tweenState.Duration);
+    }
+
     static bool IsComplete(int entity) => _world.HasComponent<Complete>(entity);
+
+#endregion
+#region Ping-pong
+
+    public static Tween PingPong(this Tween tween) {
+      if (Entity(tween, out int entity)) {
+        _world.EnsureComponent<PingPong>(entity);
+      }
+      return tween;
+    }
+
+    public static Tween ClearPingPong(this Tween tween) {
+      if (Entity(tween, out int entity)) {
+        _world.DelComponent<PingPong>(entity);
+      }
+      return tween;
+    }
+
+#endregion
+#region Kill
 
     public static void Kill(this Tween tween, bool complete = false) {
       if (EntityNoWarn(tween, out var entity)) {
@@ -125,16 +166,9 @@ namespace PeachyTween {
       }
     }
 
-    static void Complete(int entity) {
-      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
-      GoTo(entity, tweenState.Duration);
-    }
-
-    static void GoTo(int entity, float elapsed) {
-      _world.DelComponent<Complete>(entity);
-      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
-      tweenState.Elapsed = elapsed;
-      ManualUpdate(entity, 0);
+    internal static void KillTween(this EcsWorld world, int entity) {
+      world.Invoke<OnKill>(entity);
+      world.DelEntity(entity);
     }
 
 #endregion
@@ -293,6 +327,7 @@ namespace PeachyTween {
       _systems = new EcsSystems(_world, _runState)
         .Add(new ActivateGroupSystem())
         .Add(new ProgressSystem())
+        .Add(new ReverseSystem())
         .Add(new EaseSystem())
         .Add(CreateChangeSystem<float>(Mathf.LerpUnclamped))
         .Add(CreateChangeSystem<Vector2>(Vector2.LerpUnclamped))
@@ -302,6 +337,7 @@ namespace PeachyTween {
         .Add(CreateSlerpChangeSystem<Quaternion>(Quaternion.SlerpUnclamped))
         .Add(CreateChangeSystem<Color>(Color.LerpUnclamped))
         .Add(new CallbackSystem<OnLoop>(FilterComplete().Inc<Loop>().End()))
+        .Add(new PingPongSystem())
         .Add(new LoopSystem())
         .Add(new CallbackSystem<OnComplete>(FilterComplete().End()))
         .Add(new AutoKillSystem())

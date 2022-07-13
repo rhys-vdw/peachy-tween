@@ -41,25 +41,13 @@ namespace PeachyTween {
         : ref pool.Add(entity);
     }
 
-    public static int First(this EcsFilter filter) {
-      if (TryGetFirst(filter, out var entity)) {
-        return entity;
+    public static void ToggleComponent<T>(this EcsWorld world, int entity) where T : struct {
+      var pool = world.GetPool<T>();
+      if (pool.Has(entity)) {
+        pool.Del(entity);
+      } else {
+        pool.Add(entity);
       }
-      throw new ArgumentException($"Filter is empty");
-    }
-
-    public static bool TryGetFirst(this EcsFilter filter, out int entity) {
-      foreach (var e in filter) {
-        entity = e;
-        return true;
-      }
-      entity = -1;
-      return false;
-    }
-
-    public static void KillTween(this EcsWorld world, int entity) {
-      world.Invoke<OnKill>(entity);
-      world.DelEntity(entity);
     }
   }
 }
