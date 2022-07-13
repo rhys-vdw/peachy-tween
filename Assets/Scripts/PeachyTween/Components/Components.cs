@@ -1,5 +1,4 @@
 using System;
-using Leopotam.EcsLite;
 
 namespace PeachyTween {
   // State
@@ -30,15 +29,20 @@ namespace PeachyTween {
   internal struct TweenState {
     public float Elapsed;
     public float Duration;
-    public float Progress => Elapsed / Duration;
+    public float Progress;
 
     public TweenState(float duration) {
       Elapsed = 0;
       Duration = duration;
+      Progress = 0;
     }
   }
 
   internal struct Loop {
     public int Remaining;
+  }
+
+  internal struct Ease {
+    public EaseFunc Func;
   }
 }
