@@ -105,7 +105,22 @@ namespace PeachyTween {
       Entity(tween, out var entity) &&
       IsComplete(entity);
 
+    static void GoTo(int entity, float elapsed) {
+      _world.DelComponent<Complete>(entity);
+      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
+      tweenState.Elapsed = elapsed;
+      ManualUpdate(entity, 0);
+    }
+
+    static void Complete(int entity) {
+      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
+      GoTo(entity, tweenState.Duration);
+    }
+
     static bool IsComplete(int entity) => _world.HasComponent<Complete>(entity);
+
+#endregion
+#region Kill
 
     public static void Kill(this Tween tween, bool complete = false) {
       if (EntityNoWarn(tween, out var entity)) {
@@ -128,18 +143,6 @@ namespace PeachyTween {
     internal static void KillTween(this EcsWorld world, int entity) {
       world.Invoke<OnKill>(entity);
       world.DelEntity(entity);
-    }
-
-    static void Complete(int entity) {
-      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
-      GoTo(entity, tweenState.Duration);
-    }
-
-    static void GoTo(int entity, float elapsed) {
-      _world.DelComponent<Complete>(entity);
-      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
-      tweenState.Elapsed = elapsed;
-      ManualUpdate(entity, 0);
     }
 
 #endregion
