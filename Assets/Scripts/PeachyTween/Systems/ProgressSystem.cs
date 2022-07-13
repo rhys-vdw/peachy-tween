@@ -8,7 +8,7 @@ namespace PeachyTween {
 
     public void Init(EcsSystems systems) {
       _world = systems.GetWorld();
-      _filter = _world.Filter<Active>().Exc<Paused>().End();
+      _filter = _world.Filter<Active>().End();
       _runState = systems.GetShared<RunState>();
     }
 
