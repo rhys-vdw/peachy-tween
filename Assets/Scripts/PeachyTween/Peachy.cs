@@ -239,6 +239,11 @@ namespace PeachyTween {
       return tween;
     }
 
+    public static Tween Ease(this Tween tween, Ease ease) =>
+      ease == PeachyTween.Ease.Linear
+        ? ClearEase(tween)
+        : Ease(tween, ease.ToFunc());
+
     public static Tween Ease(this Tween tween, EaseFunc easeFunc) {
       if (Entity(tween, out var entity)) {
         ref var ease = ref _world.EnsureComponent<Eased>(entity);

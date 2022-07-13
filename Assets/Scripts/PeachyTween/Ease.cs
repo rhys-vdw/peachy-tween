@@ -1,9 +1,81 @@
 // Adapted from https://github.com/ai/easings.net/blob/b303c19e52a01f8f3c1c799a1eae3bfec54e2a1c/src/easings/easingsFunctions.ts
 
+using System;
 using static UnityEngine.Mathf;
 
 namespace PeachyTween {
   public delegate float EaseFunc(float t);
+
+  public enum Ease {
+    Linear,
+    QuadIn,
+    QuadOut,
+    QuadInOut,
+    CubicIn,
+    CubicOut,
+    CubicInOut,
+    QuartIn,
+    QuartOut,
+    QuartInOut,
+    QuintIn,
+    QuintOut,
+    QuintInOut,
+    SineIn,
+    SineOut,
+    SineInOut,
+    ExpoIn,
+    ExpoOut,
+    ExpoInOut,
+    CircIn,
+    CircOut,
+    CircInOut,
+    BackIn,
+    BackOut,
+    BackInOut,
+    ElasticIn,
+    ElasticOut,
+    ElasticInOut,
+    BounceIn,
+    BounceOut,
+    BounceInOut
+  }
+
+  public static class EaseUtility {
+    public static EaseFunc ToFunc(this Ease ease) => ease switch {
+      Ease.Linear => EaseFuncs.Linear,
+      Ease.QuadIn => EaseFuncs.QuadIn,
+      Ease.QuadOut => EaseFuncs.QuadOut,
+      Ease.QuadInOut => EaseFuncs.QuadInOut,
+      Ease.CubicIn => EaseFuncs.CubicIn,
+      Ease.CubicOut => EaseFuncs.CubicOut,
+      Ease.CubicInOut => EaseFuncs.CubicInOut,
+      Ease.QuartIn => EaseFuncs.QuartIn,
+      Ease.QuartOut => EaseFuncs.QuartOut,
+      Ease.QuartInOut => EaseFuncs.QuartInOut,
+      Ease.QuintIn => EaseFuncs.QuintIn,
+      Ease.QuintOut => EaseFuncs.QuintOut,
+      Ease.QuintInOut => EaseFuncs.QuintInOut,
+      Ease.SineIn => EaseFuncs.SineIn,
+      Ease.SineOut => EaseFuncs.SineOut,
+      Ease.SineInOut => EaseFuncs.SineInOut,
+      Ease.ExpoIn => EaseFuncs.ExpoIn,
+      Ease.ExpoOut => EaseFuncs.ExpoOut,
+      Ease.ExpoInOut => EaseFuncs.ExpoInOut,
+      Ease.CircIn => EaseFuncs.CircIn,
+      Ease.CircOut => EaseFuncs.CircOut,
+      Ease.CircInOut => EaseFuncs.CircInOut,
+      Ease.BackIn => EaseFuncs.BackIn,
+      Ease.BackOut => EaseFuncs.BackOut,
+      Ease.BackInOut => EaseFuncs.BackInOut,
+      Ease.ElasticIn => EaseFuncs.ElasticIn,
+      Ease.ElasticOut => EaseFuncs.ElasticOut,
+      Ease.ElasticInOut => EaseFuncs.ElasticInOut,
+      Ease.BounceIn => EaseFuncs.BounceIn,
+      Ease.BounceOut => EaseFuncs.BounceOut,
+      Ease.BounceInOut => EaseFuncs.BounceInOut,
+      _ => throw new ArgumentException($"Unrecognized {nameof(Ease)}: {ease}"),
+    };
+  }
 
   public static class EaseFuncs {
     const float c1 = 1.70158f;

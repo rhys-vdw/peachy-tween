@@ -7,6 +7,7 @@ namespace PeachyTween.Test {
     public Transform To;
     public float Duration = 5f;
     public bool IsManuallyUpdating = false;
+    public Ease Ease = Ease.Linear;
     Tween _tween;
 
     public void Start() {
@@ -14,7 +15,7 @@ namespace PeachyTween.Test {
         .TPosition(To.position, Duration)
         .LoopForever()
         .OnLoop(() => Debug.Log("Loop!"))
-        .Ease(EaseFuncs.ElasticOut)
+        .Ease(Ease)
         // .Preserve()
         .OnKill(() => Debug.Log("Kill!"));
         // .OnComplete(() => {
@@ -28,11 +29,11 @@ namespace PeachyTween.Test {
       //   .OnComplete(() => Debug.Log("Done!"));
     }
 
-    // void Update() {
-    //   if (IsManuallyUpdating) {
-    //     _tween.ManualUpdate(Time.deltaTime);
-    //   }
-    // }
+    void Update() {
+      if (Input.GetKeyDown(KeyCode.Space)) {
+        _tween.Ease(Ease);
+      }
+    }
 
     IEnumerator Coroutine() {
       yield return new WaitForSeconds(0.5f);
