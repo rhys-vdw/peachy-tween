@@ -40,21 +40,5 @@ namespace PeachyTween {
         ? ref pool.Get(entity)
         : ref pool.Add(entity);
     }
-
-    public static int First(this EcsFilter filter) {
-      if (TryGetFirst(filter, out var entity)) {
-        return entity;
-      }
-      throw new ArgumentException($"Filter is empty");
-    }
-
-    public static bool TryGetFirst(this EcsFilter filter, out int entity) {
-      foreach (var e in filter) {
-        entity = e;
-        return true;
-      }
-      entity = -1;
-      return false;
-    }
   }
 }
