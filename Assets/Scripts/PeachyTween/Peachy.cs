@@ -125,6 +125,11 @@ namespace PeachyTween {
       }
     }
 
+    internal static void KillTween(this EcsWorld world, int entity) {
+      world.Invoke<OnKill>(entity);
+      world.DelEntity(entity);
+    }
+
     static void Complete(int entity) {
       ref var tweenState = ref _world.GetComponent<TweenState>(entity);
       GoTo(entity, tweenState.Duration);

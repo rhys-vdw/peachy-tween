@@ -56,10 +56,5 @@ namespace PeachyTween {
       entity = -1;
       return false;
     }
-
-    public static void KillTween(this EcsWorld world, int entity) {
-      world.Invoke<OnKill>(entity);
-      world.DelEntity(entity);
-    }
   }
 }
