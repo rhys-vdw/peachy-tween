@@ -239,6 +239,13 @@ namespace PeachyTween {
       return tween;
     }
 
+    public static Tween Ease(this Tween tween, AnimationCurve animationCurve) {
+      if (animationCurve == null) {
+        throw new ArgumentNullException(nameof(animationCurve));
+      }
+      return Ease(tween, animationCurve.Evaluate);
+    }
+
     public static Tween Ease(this Tween tween, Ease ease) =>
       ease == PeachyTween.Ease.Linear
         ? ClearEase(tween)

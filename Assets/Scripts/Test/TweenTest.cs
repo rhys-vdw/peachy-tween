@@ -8,6 +8,7 @@ namespace PeachyTween.Test {
     public float Duration = 5f;
     public bool IsManuallyUpdating = false;
     public Ease Ease = Ease.Linear;
+    public AnimationCurve Curve = AnimationCurve.Linear(0, 1, 0, 1);
     Tween _tween;
 
     public void Start() {
@@ -15,7 +16,7 @@ namespace PeachyTween.Test {
         .TPosition(To.position, Duration)
         .LoopForever()
         .OnLoop(() => Debug.Log("Loop!"))
-        .Ease(Ease)
+        .Ease(Curve)
         // .Preserve()
         .OnKill(() => Debug.Log("Kill!"));
         // .OnComplete(() => {
