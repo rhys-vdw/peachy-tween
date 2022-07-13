@@ -230,6 +230,24 @@ namespace PeachyTween {
     }
 
 #endregion
+#region Easing
+
+    public static Tween ClearEase(this Tween tween) {
+      if (Entity(tween, out var entity)) {
+        _world.DelComponent<Ease>(entity);
+      }
+      return tween;
+    }
+
+    public static Tween Ease(this Tween tween, EaseFunc easeFunc) {
+      if (Entity(tween, out var entity)) {
+        ref var ease = ref _world.EnsureComponent<Ease>(entity);
+        ease.Func = easeFunc;
+      }
+      return tween;
+    }
+
+#endregion
 #region Callbacks
 
     public static Tween OnLoop(this Tween tween, Action onComplete) =>
@@ -263,6 +281,7 @@ namespace PeachyTween {
       _systems = new EcsSystems(_world, _runState)
         .Add(new ActivateGroupSystem())
         .Add(new ProgressSystem())
+        .Add(new EaseSystem())
         .Add(CreateChangeSystem<float>(Mathf.LerpUnclamped))
         .Add(CreateChangeSystem<Vector2>(Vector2.LerpUnclamped))
         .Add(CreateNonSlerpChangeSystem<Vector3>(Vector3.LerpUnclamped))
