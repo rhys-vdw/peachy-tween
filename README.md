@@ -48,7 +48,7 @@ public class PeachyExample : MonoBehaviour
 
 _Contributions will be welcome after release._
 
-Follow progress in the [GitHub development project](projects/1).
+Follow progress in the [development project](https://github.com/rhys-vdw/peachy-tween/projects/1).
 
 ## License
 
