@@ -22,7 +22,7 @@ _Not yet available to install._
 using UnityEngine;
 using PeachyTween;
 
-public class PeachyExample
+public class PeachyExample : MonoBehaviour
 {
   void Start()
   {
