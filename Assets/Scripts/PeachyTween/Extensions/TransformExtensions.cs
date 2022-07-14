@@ -10,6 +10,12 @@ namespace PeachyTween {
     public static Tween TweenRotation(this Transform transform, Vector3 endValue, float duration) =>
       Peachy.Tween(transform.rotation, Quaternion.Euler(endValue), v => transform.rotation = v, duration);
 
+    public static Tween TweenLookAt(this Transform transform, Vector3 forward, float duration) =>
+      TweenLookAt(transform, forward, duration, Vector3.up);
+
+    public static Tween TweenLookAt(this Transform transform, Vector3 forward, float duration, Vector3 up) =>
+      Peachy.Tween(transform.rotation, Quaternion.LookRotation(forward, up), v => transform.rotation = v, duration);
+
 #endregion
 #region Local rotation
 
