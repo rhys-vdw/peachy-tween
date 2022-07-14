@@ -33,7 +33,25 @@ namespace PeachyTween {
   public static class Peachy {
 #region Tween factory
 
-    public static Tween Tween<T>(T from, T to, Action<T> onChange, float duration) {
+    public static Tween Tween(float from, float to, float duration, Action<float> onChange) =>
+      CreateTween(from, to, duration, onChange);
+
+    public static Tween Tween(Vector2 from, Vector2 to, float duration, Action<Vector2> onChange) =>
+      CreateTween(from, to, duration, onChange);
+
+    public static Tween Tween(Vector3 from, Vector3 to, float duration, Action<Vector3> onChange) =>
+      CreateTween(from, to, duration, onChange);
+
+    public static Tween Tween(Vector4 from, Vector4 to, float duration, Action<Vector4> onChange) =>
+      CreateTween(from, to, duration, onChange);
+
+    public static Tween Tween(Quaternion from, Quaternion to, float duration, Action<Quaternion> onChange) =>
+      CreateTween(from, to, duration, onChange);
+
+    public static Tween Tween(Color from, Color to, float duration, Action<Color> onChange) =>
+      CreateTween(from, to, duration, onChange);
+
+    static Tween CreateTween<T>(T from, T to, float duration, Action<T> onChange) {
       var entity = _world.NewEntity();
       _world.AddComponent(entity, new TweenConfig<T>(from, to, onChange));
       _world.AddComponent(entity, new TweenState(duration));
