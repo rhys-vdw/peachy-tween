@@ -86,5 +86,35 @@ namespace PeachyTween {
       );
 
 #endregion
+#region Scale
+
+    public static Tween TweenScale(this Transform transform, Vector3 endValue, float duration) =>
+      Peachy.Tween(transform.localScale, endValue, v => transform.localScale = v, duration);
+
+    public static Tween TweenScaleX(this Transform transform, float endValue, float duration) =>
+      Peachy.Tween(
+        transform.localScale.x,
+        endValue,
+        v => transform.localScale = transform.localScale.WithX(v),
+        duration
+      );
+
+    public static Tween TweenScaleY(this Transform transform, float endValue, float duration) =>
+      Peachy.Tween(
+        transform.localScale.y,
+        endValue,
+        v => transform.localScale = transform.localScale.WithY(v),
+        duration
+      );
+
+    public static Tween TweenScaleZ(this Transform transform, float endValue, float duration) =>
+      Peachy.Tween(
+        transform.localScale.z,
+        endValue,
+        v => transform.localScale = transform.localScale.WithZ(v),
+        duration
+      );
+
+#endregion
   }
 }
