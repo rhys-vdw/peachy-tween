@@ -116,7 +116,7 @@ namespace PeachyTween {
       _world.DelComponent<Complete>(entity);
       ref var tweenState = ref _world.GetComponent<TweenState>(entity);
       tweenState.Elapsed = elapsed;
-      ManualUpdate(entity, 0);
+      Apply(entity);
     }
 
     static void Complete(int entity) {
@@ -385,6 +385,8 @@ namespace PeachyTween {
       _runState.Set(entity, deltaTime);
       _systems.Run();
     }
+
+    static void Apply(int entity) => ManualUpdate(entity, 0);
 
 #endregion
 #region Private
