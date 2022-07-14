@@ -112,6 +112,16 @@ namespace PeachyTween {
       return tween;
     }
 
+    /// <summary>
+    /// Run this tween from end to start.
+    /// </summary>
+    public static Tween From(this Tween tween) {
+      if (Entity(tween, out var entity)) {
+        _world.ToggleComponent<Reverse>(entity);
+      }
+      return tween;
+    }
+
     static void GoTo(int entity, float elapsed) {
       _world.DelComponent<Complete>(entity);
       ref var tweenState = ref _world.GetComponent<TweenState>(entity);
