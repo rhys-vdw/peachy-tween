@@ -27,8 +27,8 @@ public class PeachyExample : MonoBehaviour
   void Start()
   {
     Peachy.Tween(
-      from: 0,
-      to: 5,
+      from: 0f,
+      to: 5f,
       onChange: v => Debug.Log($"value = {v}"),
       duration: 4f
     );
