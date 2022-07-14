@@ -13,7 +13,7 @@ namespace PeachyTween.Test {
 
     public void Start() {
       _tween = transform
-        .TPosition(To.position, Duration)
+        .TweenPosition(To.position, Duration)
         .From()
         .LoopForever()
         .PingPong()
@@ -25,7 +25,7 @@ namespace PeachyTween.Test {
         //   // StartCoroutine(Coroutine());
         // });
       transform
-        .TRotation(new Vector3(90, 90, 90), Duration)
+        .TweenRotation(new Vector3(90, 90, 90), Duration)
         .Slerp()
         .LoopForever()
         .OnComplete(() => Debug.Log("Done!"));
