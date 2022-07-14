@@ -32,26 +32,26 @@ namespace PeachyTween.Test {
       Peachy.Tween(
         Vector2.left,
         Vector2.right,
+        1f,
         v => {
           Debug.DrawRay(
             Vector3.zero,
             v,
             Color.red
           );
-        },
-        1f
+        }
       ).LoopForever();
       Peachy.Tween(
         Vector2.left,
         Vector2.right,
+        1f,
         v => {
           Debug.DrawRay(
             Vector3.zero,
             v,
             Color.green
           );
-        },
-        1f
+        }
       ).Rotate().LoopForever();
     }
 

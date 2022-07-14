@@ -29,8 +29,8 @@ public class PeachyExample : MonoBehaviour
     Peachy.Tween(
       from: 0f,
       to: 5f,
-      onChange: v => Debug.Log($"value = {v}"),
-      duration: 4f
+      duration: 4f,
+      onChange: v => Debug.Log($"value = {v}")
     );
 
     transform

@@ -33,7 +33,7 @@ namespace PeachyTween {
   public static class Peachy {
 #region Tween factory
 
-    public static Tween Tween<T>(T from, T to, Action<T> onChange, float duration) {
+    public static Tween Tween<T>(T from, T to, float duration, Action<T> onChange) {
       var entity = _world.NewEntity();
       _world.AddComponent(entity, new TweenConfig<T>(from, to, onChange));
       _world.AddComponent(entity, new TweenState(duration));
