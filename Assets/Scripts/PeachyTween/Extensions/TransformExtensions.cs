@@ -55,6 +55,30 @@ namespace PeachyTween {
     public static Tween TweenLocalPosition(this Transform transform, Vector3 endValue, float duration) =>
       Peachy.Tween(transform.localPosition, endValue, v => transform.localPosition = v, duration);
 
+    public static Tween TweenLocalPositionX(this Transform transform, float endValue, float duration) =>
+      Peachy.Tween(
+        transform.localPosition.x,
+        endValue,
+        v => transform.localPosition = transform.localPosition.WithX(v),
+        duration
+      );
+
+    public static Tween TweenLocalPositionY(this Transform transform, float endValue, float duration) =>
+      Peachy.Tween(
+        transform.localPosition.y,
+        endValue,
+        v => transform.localPosition = transform.localPosition.WithY(v),
+        duration
+      );
+
+    public static Tween TweenLocalPositionZ(this Transform transform, float endValue, float duration) =>
+      Peachy.Tween(
+        transform.localPosition.z,
+        endValue,
+        v => transform.localPosition = transform.localPosition.WithZ(v),
+        duration
+      );
+
 #endregion
   }
 }
