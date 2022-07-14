@@ -107,9 +107,17 @@ namespace PeachyTween {
 
     public static Tween Reverse(this Tween tween) {
       if (Entity(tween, out var entity)) {
+        Reverse(entity);
+      }
+      return tween;
+    }
+
+    /// <summary>
+    /// Run this tween from end to start.
+    /// </summary>
+    public static Tween From(this Tween tween) {
+      if (Entity(tween, out var entity)) {
         _world.ToggleComponent<Reverse>(entity);
-        ref var state = ref _world.GetComponent<TweenState>(entity);
-        state.Elapsed = state.Duration - state.Elapsed;
       }
       return tween;
     }
@@ -118,7 +126,7 @@ namespace PeachyTween {
       _world.DelComponent<Complete>(entity);
       ref var tweenState = ref _world.GetComponent<TweenState>(entity);
       tweenState.Elapsed = elapsed;
-      ManualUpdate(entity, 0);
+      Apply(entity);
     }
 
     static void Complete(int entity) {
@@ -127,6 +135,12 @@ namespace PeachyTween {
     }
 
     static bool IsComplete(int entity) => _world.HasComponent<Complete>(entity);
+
+    public static void Reverse(int entity) {
+      _world.ToggleComponent<Reverse>(entity);
+      ref var state = ref _world.GetComponent<TweenState>(entity);
+      state.Elapsed = state.Duration - state.Elapsed;
+    }
 
 #endregion
 #region Ping-pong
@@ -149,7 +163,7 @@ namespace PeachyTween {
 #region Kill
 
     public static void Kill(this Tween tween, bool complete = false) {
-      if (EntityNoWarn(tween, out var entity)) {
+      if (TryEntity(tween, out var entity)) {
         if (complete && !IsComplete(entity)) {
           // Cancel any loops.
           _world.DelComponent<Loop>(entity);
@@ -167,7 +181,7 @@ namespace PeachyTween {
     }
 
     public static void IsValid(this Tween tween) =>
-      Entity(tween, out _);
+      TryEntity(tween, out _);
 
     internal static void KillTween(this EcsWorld world, int entity) {
       world.Invoke<OnKill>(entity);
@@ -382,6 +396,8 @@ namespace PeachyTween {
       _systems.Run();
     }
 
+    static void Apply(int entity) => ManualUpdate(entity, 0);
+
 #endregion
 #region Private
 
@@ -404,14 +420,14 @@ namespace PeachyTween {
       new (filter, lerp);
 
     static bool Entity(Tween tween, out int entity) {
-      if (!EntityNoWarn(tween, out entity)) {
+      if (!TryEntity(tween, out entity)) {
         Debug.LogWarning($"Tween is invalid");
         return false;
       }
       return true;
     }
 
-    static bool EntityNoWarn(Tween tween, out int entity) =>
+    static bool TryEntity(Tween tween, out int entity) =>
       tween._entity.Unpack(_world, out entity);
 
 #endregion
