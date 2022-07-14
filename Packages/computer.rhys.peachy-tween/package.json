@@ -1,0 +1,19 @@
+{
+  "name": "computer.rhys.peachy-tween",
+  "version": "0.0.1",
+  "displayName": "PeachyTween",
+  "description": "A tweening for Unity designed to be simple to use and extend.",
+  "unity": "2021.3",
+  "unityRelease": "2f1",
+  "documentationUrl": "https://github.com/rhys-vdw/peachy-tween",
+  "licensesUrl": "https://choosealicense.com/licenses/mit/",
+  "dependencies": {},
+  "devDependencies": {},
+  "samples": [],
+  "author": {
+    "name": "Rhys van der Waerden",
+    "email": "rhys.vdw@gmail.com",
+    "url": "https://rhys.computer"
+  },
+  "type": "library"
+}
