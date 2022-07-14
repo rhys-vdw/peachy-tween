@@ -107,9 +107,7 @@ namespace PeachyTween {
 
     public static Tween Reverse(this Tween tween) {
       if (Entity(tween, out var entity)) {
-        _world.ToggleComponent<Reverse>(entity);
-        ref var state = ref _world.GetComponent<TweenState>(entity);
-        state.Elapsed = state.Duration - state.Elapsed;
+        Reverse(entity);
       }
       return tween;
     }
@@ -127,6 +125,12 @@ namespace PeachyTween {
     }
 
     static bool IsComplete(int entity) => _world.HasComponent<Complete>(entity);
+
+    public static void Reverse(int entity) {
+      _world.ToggleComponent<Reverse>(entity);
+      ref var state = ref _world.GetComponent<TweenState>(entity);
+      state.Elapsed = state.Duration - state.Elapsed;
+    }
 
 #endregion
 #region Ping-pong
