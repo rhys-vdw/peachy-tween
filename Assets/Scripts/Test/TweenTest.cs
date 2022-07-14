@@ -14,6 +14,7 @@ namespace PeachyTween.Test {
     public void Start() {
       _tween = transform
         .TPosition(To.position, Duration)
+        .From()
         .LoopForever()
         .PingPong()
         .Ease(Ease)
@@ -23,42 +24,35 @@ namespace PeachyTween.Test {
         //   Debug.Log("Done!");
         //   // StartCoroutine(Coroutine());
         // });
-      // transform
-      //   .TRotation(new Vector3(90, 90, 90), Duration)
-      //   .Slerp()
-      //   .LoopForever()
-      //   .OnComplete(() => Debug.Log("Done!"));
+      transform
+        .TRotation(new Vector3(90, 90, 90), Duration)
+        .Slerp()
+        .LoopForever()
+        .OnComplete(() => Debug.Log("Done!"));
       Peachy.Tween(
-        -91f,
-        90f,
+        Vector2.left,
+        Vector2.right,
         v => {
-          var dir = Quaternion.AngleAxis(v, Vector3.forward) * Vector3.up;
           Debug.DrawRay(
             Vector3.zero,
-            dir,
+            v,
             Color.red
           );
         },
         1f
-      )
-      .OnLoop(() => Debug.Log("Loop!"))
-      .LoopForever();
+      ).LoopForever();
       Peachy.Tween(
-        -91f,
-        90f,
+        Vector2.left,
+        Vector2.right,
         v => {
-          var dir = Quaternion.AngleAxis(v, Vector3.forward) * Vector3.up;
           Debug.DrawRay(
             Vector3.zero,
-            dir,
+            v,
             Color.green
           );
         },
         1f
-      )
-      .OnLoop(() => Debug.Log("Loop!"))
-      .Angle()
-      .LoopForever();
+      ).Rotate().LoopForever();
     }
 
     void Update() {
