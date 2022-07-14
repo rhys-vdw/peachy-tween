@@ -6,13 +6,13 @@ namespace PeachyTween {
       Peachy.Tween(transform.rotation, endValue, v => transform.rotation = v, duration);
 
     public static Tween TweenRotation(this Transform transform, Vector3 endValue, float duration) =>
-      Peachy.Tween(transform.eulerAngles, endValue, v => transform.eulerAngles = v, duration);
+      Peachy.Tween(transform.rotation, Quaternion.Euler(endValue), v => transform.rotation = v, duration);
 
     public static Tween TweenLocalRotation(this Transform transform, Quaternion endValue, float duration) =>
       Peachy.Tween(transform.localRotation, endValue, v => transform.localRotation = v, duration);
 
     public static Tween TweenLocalRotation(this Transform transform, Vector3 endValue, float duration) =>
-      Peachy.Tween(transform.localEulerAngles, endValue, v => transform.localEulerAngles = v, duration);
+      Peachy.Tween(transform.localRotation, Quaternion.Euler(endValue), v => transform.localRotation = v, duration);
 
     public static Tween TweenPosition(this Transform transform, Vector3 endValue, float duration) =>
       Peachy.Tween(transform.position, endValue, v => transform.position = v, duration);
