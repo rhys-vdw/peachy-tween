@@ -50,4 +50,8 @@ namespace PeachyTween {
   internal struct Eased {
     public EaseFunc Func;
   }
+
+  internal struct Target {
+    public object Object;
+  }
 }

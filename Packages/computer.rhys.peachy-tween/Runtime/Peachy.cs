@@ -160,6 +160,36 @@ namespace PeachyTween {
     }
 
 #endregion
+#region Target
+
+    /// <summary>
+    /// Set the associated target of a <c cref="Tween">Tween</c> for killing by
+    /// target.
+    ///
+    /// This does not change which object the Tween is currently acting on, its
+    /// purpose is to link this tween to an object so that it will be killed
+    /// when the target object is passed to <c cref="Kill">Peachy.Kill</c>.
+    ///
+    /// This will replace any previously set target.
+    ///
+    /// This method is called by provided extension methods (e.g.
+    /// <c cref="TrasnformExtensions.TweenPosition">TweenPosition</c>), and
+    /// should be called by any custom extension methods.
+    /// </summary>
+    /// <param name="tween">The tween.</param>
+    /// <param name="target">Any instance of a reference type to become the target of this tween.</param>
+    public static Tween SetTarget<T>(this Tween tween, T target) where T : class {
+      if (target == null) {
+        throw new ArgumentNullException(nameof(target));
+      }
+      if (Entity(tween, out int entity)) {
+        ref var t = ref _world.EnsureComponent<Target>(entity);
+        t.Object = target;
+      }
+      return tween;
+    }
+
+#endregion
 #region Ping-pong
 
     public static Tween PingPong(this Tween tween) {
