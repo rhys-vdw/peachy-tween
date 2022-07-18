@@ -30,7 +30,7 @@ namespace PeachyTween {
           // Rewind.
           _world.DelComponent<Complete>(entity);
           ref var state = ref _world.GetComponent<TweenState>(entity);
-          state.Elapsed = 0;
+          state.Elapsed %= state.Duration;
         }
       }
     }
