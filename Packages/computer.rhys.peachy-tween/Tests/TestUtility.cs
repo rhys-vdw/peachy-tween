@@ -13,7 +13,6 @@ namespace PeachyTween.Tests {
       InvokePeachyStaticMethod(nameof(Destroy));
 
     static void InvokePeachyStaticMethod(string methodName) {
-      Debug.Log("Invoking: " + methodName);
       var method = typeof(Peachy).GetMethod(
         methodName,
         BindingFlags.Static | BindingFlags.NonPublic
