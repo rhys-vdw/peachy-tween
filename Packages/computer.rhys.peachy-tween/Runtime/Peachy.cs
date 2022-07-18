@@ -144,7 +144,6 @@ namespace PeachyTween {
       _world.DelComponent<Complete>(entity);
       ref var tweenState = ref _world.GetComponent<TweenState>(entity);
       tweenState.Elapsed = elapsed;
-      Apply(entity);
     }
 
     static void Complete(int entity) {
@@ -180,7 +179,7 @@ namespace PeachyTween {
 #endregion
 #region Kill
 
-    public static void Kill(this Tween tween, bool complete = false) {
+    public static Tween Kill(this Tween tween, bool complete = false) {
       if (TryEntity(tween, out var entity)) {
         if (complete && !IsComplete(entity)) {
           // Cancel any loops.
@@ -189,22 +188,18 @@ namespace PeachyTween {
           // Cancel preserve.
           _world.DelComponent<Preserve>(entity);
 
-          // This kills the tween.
+          // The complete system will kill this entity.
           Complete(entity);
         } else {
-          // Immediately kill the tween.
-          _world.KillTween(entity);
+          // Kill the tween.
+          _world.EnsureComponent<Kill>(entity);
         }
       }
+      return tween;
     }
 
-    public static void IsValid(this Tween tween) =>
+    public static bool IsValid(this Tween tween) =>
       TryEntity(tween, out _);
-
-    internal static void KillTween(this EcsWorld world, int entity) {
-      world.Invoke<OnKill>(entity);
-      world.DelEntity(entity);
-    }
 
 #endregion
 #region Rotation
@@ -386,11 +381,13 @@ namespace PeachyTween {
         .Add(ChangeSystemExc<Quaternion, Rotate>(Quaternion.LerpUnclamped))
         .Add(ChangeSystemInc<Quaternion, Rotate>(Quaternion.SlerpUnclamped))
         .Add(ChangeSystem<Color>(Color.LerpUnclamped))
-        .Add(new CallbackSystem<OnLoop>(FilterComplete().Inc<Loop>().End()))
+        .Add(new CallbackSystem<OnLoop>(FilterActive().Inc<Complete>().Inc<Loop>().End()))
         .Add(new PingPongSystem())
         .Add(new LoopSystem())
-        .Add(new CallbackSystem<OnComplete>(FilterComplete().End()))
-        .Add(new AutoKillSystem())
+        .Add(new CallbackSystem<OnComplete>(FilterActive().Inc<Complete>().End()))
+        .Add(new CompleteSystem())
+        .Add(new CallbackSystem<OnKill>(FilterActive().Inc<Kill>().End()))
+        .Add(new KillSystem())
         .Add(new DeactivateSystem());
       _systems.Init();
     }
@@ -427,25 +424,32 @@ namespace PeachyTween {
       _systems.Run();
     }
 
-    static void Apply(int entity) => ManualUpdate(entity, 0);
+    public static Tween Sync(this Tween tween) {
+      if (Entity(tween, out var entity)) {
+        Sync(entity);
+      }
+      return tween;
+    }
+
+    static void Sync(int entity) => ManualUpdate(entity, 0);
 
 #endregion
 #region Private
 
-    static EcsWorld.Mask FilterComplete() =>
-      _world.Filter<Complete>();
+    static EcsWorld.Mask FilterActive() =>
+      _world.Filter<Active>();
 
-    static EcsWorld.Mask FilterActive<TValue>() =>
-      _world.Filter<TweenConfig<TValue>>().Inc<Active>();
+    static EcsWorld.Mask FilterActiveByType<TValue>() =>
+      _world.Filter<TweenConfig<TValue>>().Inc<Active>().Exc<Kill>();
 
     static ChangeSystem<TValue> ChangeSystemExc<TValue, TExc>(Lerp<TValue> lerp) where TExc : struct =>
-      ChangeSystem(FilterActive<TValue>().Exc<TExc>().End(), lerp);
+      ChangeSystem(FilterActiveByType<TValue>().Exc<TExc>().End(), lerp);
 
     static ChangeSystem<TValue> ChangeSystemInc<TValue, TInc>(Lerp<TValue> lerp) where TInc : struct =>
-      ChangeSystem(FilterActive<TValue>().Inc<TInc>().End(), lerp);
+      ChangeSystem(FilterActiveByType<TValue>().Inc<TInc>().End(), lerp);
 
     static ChangeSystem<TValue> ChangeSystem<TValue>(Lerp<TValue> lerp) =>
-      ChangeSystem(FilterActive<TValue>().End(), lerp);
+      ChangeSystem(FilterActiveByType<TValue>().End(), lerp);
 
     static ChangeSystem<T> ChangeSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
       new (filter, lerp);
