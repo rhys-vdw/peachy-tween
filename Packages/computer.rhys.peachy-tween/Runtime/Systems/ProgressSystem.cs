@@ -13,9 +13,11 @@ namespace PeachyTween {
 
     public void Run(EcsSystems systems) {
       var statePool = _world.GetPool<TweenState>();
+      var activePool = _world.GetPool<Active>();
       foreach (var entity in _filter) {
         ref var state = ref statePool.Get(entity);
-        state.Progress = Mathf.Min(state.Elapsed / state.Duration, 1f);
+        ref var active = ref activePool.Get(entity);
+        active.Progress = Mathf.Min(state.Elapsed / state.Duration, 1f);
       }
     }
   }
