@@ -1,8 +1,5 @@
 using UnityEngine;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
 namespace PeachyTween.Tests {
   public class GroupTest {
@@ -10,16 +7,10 @@ namespace PeachyTween.Tests {
     struct TestGroupB { }
 
     [SetUp]
-    public void SetUp() {
-      var method = typeof(Peachy).GetMethod(
-        "InitializeEcs",
-        BindingFlags.Static | BindingFlags.NonPublic
-      );
-      method.Invoke(null, null);
-    }
+    public void SetUp() => TestUtility.InitializeEcs();
 
     [TearDown]
-    public void TearDown() => Peachy.Destroy();
+    public void TearDown() => TestUtility.Destroy();
 
     [Test]
     public void CustomGroupTest() {

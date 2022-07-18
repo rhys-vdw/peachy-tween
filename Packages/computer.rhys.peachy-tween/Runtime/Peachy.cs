@@ -367,6 +367,8 @@ namespace PeachyTween {
     }
 #pragma warning restore IDE0051
 
+    public static bool IsInitialized() => _world != null;
+
     static void InitializeEcs() {
       _world = new ();
       _systems = new EcsSystems(_world, _runState)
@@ -399,7 +401,10 @@ namespace PeachyTween {
       UnityEngine.Object.DontDestroyOnLoad(_lifecycle);
     }
 
-    internal static void Destroy() => _world.Destroy();
+    internal static void Destroy() {
+      _world.Destroy();
+      _groupFilters.Clear();
+    }
 
 #endregion
 #region Run
