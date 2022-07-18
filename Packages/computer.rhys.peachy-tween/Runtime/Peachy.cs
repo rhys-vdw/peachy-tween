@@ -189,6 +189,25 @@ namespace PeachyTween {
       return tween;
     }
 
+    /// <summary>
+    /// Get the associated target of a <c cref="Tween">Tween</c>.
+    /// </summary>
+    /// <seealso cref="SetTarget"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="target">The previously set target.</param>
+    /// <returns><c>true</c> if a target has been set; otherwise, <c>false</c>.</returns>
+    public static bool TryGetTarget(this Tween tween, out object target) {
+      if (
+        Entity(tween, out var entity) &&
+        _world.TryGetComponent<Target>(entity, out var t)
+      ) {
+        target = t.Object;
+        return true;
+      }
+      target = default;
+      return false;
+    }
+
 #endregion
 #region Ping-pong
 
