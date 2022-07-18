@@ -2,6 +2,7 @@ using UnityEngine;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace PeachyTween.Tests {
   public class GroupTest {
@@ -9,7 +10,13 @@ namespace PeachyTween.Tests {
     struct TestGroupB { }
 
     [SetUp]
-    public void SetUp() => Peachy.Initialize();
+    public void SetUp() {
+      var method = typeof(Peachy).GetMethod(
+        "InitializeEcs",
+        BindingFlags.Static | BindingFlags.NonPublic
+      );
+      method.Invoke(null, null);
+    }
 
     [TearDown]
     public void TearDown() => Peachy.Destroy();
