@@ -15,7 +15,7 @@ namespace PeachyTween.Tests {
       var tween = Peachy.Tween(0f, 1f, 1f, v => {}).SetTarget(expected);
 
       Assert.True(tween.TryGetTarget(out var actual), "Target was set");
-      Assert.AreEqual(actual, expected, "Target was set correctly");
+      Assert.AreEqual(expected, actual, "Target was set correctly");
     }
 
     [Test]
