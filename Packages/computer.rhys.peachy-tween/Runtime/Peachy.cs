@@ -361,7 +361,7 @@ namespace PeachyTween {
 
 #pragma warning disable IDE0051
     [RuntimeInitializeOnLoadMethod]
-    static void Initialize() {
+    public static void Initialize() {
       _world = new ();
       _systems = new EcsSystems(_world, _runState)
         .Add(new ActivateGroupSystem())
@@ -386,13 +386,15 @@ namespace PeachyTween {
         .Add(new DeactivateSystem());
       _systems.Init();
 
-      var go = new GameObject($"{nameof(PeachyTween)}::{nameof(UnityLifecycle)}");
-      _lifecycle = go.AddComponent<UnityLifecycle>();
-      UnityEngine.Object.DontDestroyOnLoad(_lifecycle);
+      if (Application.isPlaying) {
+        var go = new GameObject($"{nameof(PeachyTween)}::{nameof(UnityLifecycle)}");
+        _lifecycle = go.AddComponent<UnityLifecycle>();
+        UnityEngine.Object.DontDestroyOnLoad(_lifecycle);
+      }
     }
 #pragma warning restore IDE0051
 
-    internal static void Destroy() => _world.Destroy();
+    public static void Destroy() => _world.Destroy();
 
 #endregion
 #region Run
