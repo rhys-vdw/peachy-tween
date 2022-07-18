@@ -8,6 +8,7 @@ namespace PeachyTween {
   internal struct Preserve { }
   internal struct Reverse { }
   internal struct PingPong { }
+  internal struct Kill { }
 
   // Groups
   internal struct Update { }

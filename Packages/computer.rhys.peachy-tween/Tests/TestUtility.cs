@@ -1,7 +1,5 @@
 using UnityEngine;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace PeachyTween.Tests {
