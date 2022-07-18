@@ -44,7 +44,7 @@ namespace PeachyTween.Tests {
         .OnComplete(() => onComplete = true)
         .OnKill(() => onKill = true)
         .Kill()
-        .Apply();
+        .Sync();
 
       Assert.False(onComplete, $"Called OnComplete");
       Assert.False(onChange, $"Called OnChange");
@@ -63,7 +63,7 @@ namespace PeachyTween.Tests {
         .OnComplete(() => onComplete = true)
         .OnKill(() => onKill = true)
         .Kill(complete: true)
-        .Apply();
+        .Sync();
 
       Assert.True(onComplete, $"Called OnComplete");
       Assert.True(onChange, $"Called OnChange");

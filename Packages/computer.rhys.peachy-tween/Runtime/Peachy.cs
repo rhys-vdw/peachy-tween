@@ -424,14 +424,14 @@ namespace PeachyTween {
       _systems.Run();
     }
 
-    public static Tween Apply(this Tween tween) {
+    public static Tween Sync(this Tween tween) {
       if (Entity(tween, out var entity)) {
-        Apply(entity);
+        Sync(entity);
       }
       return tween;
     }
 
-    static void Apply(int entity) => ManualUpdate(entity, 0);
+    static void Sync(int entity) => ManualUpdate(entity, 0);
 
 #endregion
 #region Private
