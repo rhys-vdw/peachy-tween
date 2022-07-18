@@ -519,6 +519,7 @@ namespace PeachyTween {
     internal static void Destroy() {
       _world.Destroy();
       _groupFilters.Clear();
+      _targetFilter = null;
     }
 
 #endregion
