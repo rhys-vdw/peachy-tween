@@ -2,27 +2,27 @@ using System;
 
 namespace PeachyTween {
   // State
-  internal struct Active {
+  struct Active {
     public float Progress;
   }
 
-  internal struct Paused { }
-  internal struct Complete { }
-  internal struct Preserve { }
-  internal struct Reverse { }
-  internal struct PingPong { }
-  internal struct Kill { }
+  struct Paused { }
+  struct Complete { }
+  struct Preserve { }
+  struct Reverse { }
+  struct PingPong { }
+  struct Kill { }
 
   // Groups
-  internal struct Update { }
-  internal struct LateUpdate { }
-  internal struct FixedUpdate { }
+  struct Update { }
+  struct LateUpdate { }
+  struct FixedUpdate { }
 
   // Lerp filter
-  internal struct Rotate { }
+  struct Rotate { }
 
   // Tween
-  internal struct TweenConfig<T> {
+  struct TweenConfig<T> {
     public T From;
     public T To;
     public Action<T> OnChange;
@@ -34,7 +34,7 @@ namespace PeachyTween {
     }
   }
 
-  internal struct TweenState {
+  struct TweenState {
     public float Elapsed;
     public float Duration;
 
@@ -44,15 +44,15 @@ namespace PeachyTween {
     }
   }
 
-  internal struct Loop {
+  struct Loop {
     public int Remaining;
   }
 
-  internal struct Eased {
+  struct Eased {
     public EaseFunc Func;
   }
 
-  internal struct Target {
+  struct Target {
     public object Object;
   }
 }
