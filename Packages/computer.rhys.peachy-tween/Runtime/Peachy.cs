@@ -485,6 +485,10 @@ namespace PeachyTween {
       _world = new ();
       _systems = new EcsSystems(_world, _runState)
         .Add(new ActivateGroupSystem())
+        .Add(new ElapsedSystem())
+        .Add(new PingPongSystem())
+        .Add(new CallbackSystem<OnLoop>(FilterActive().Inc<Complete>().Inc<Loop>().End()))
+        .Add(new LoopSystem())
         .Add(new ProgressSystem())
         .Add(new ReverseSystem())
         .Add(new EaseSystem())
@@ -498,9 +502,6 @@ namespace PeachyTween {
         .Add(ChangeSystemExc<Quaternion, Rotate>(Quaternion.LerpUnclamped))
         .Add(ChangeSystemInc<Quaternion, Rotate>(Quaternion.SlerpUnclamped))
         .Add(ChangeSystem<Color>(Color.LerpUnclamped))
-        .Add(new CallbackSystem<OnLoop>(FilterActive().Inc<Complete>().Inc<Loop>().End()))
-        .Add(new PingPongSystem())
-        .Add(new LoopSystem())
         .Add(new CallbackSystem<OnComplete>(FilterActive().Inc<Complete>().End()))
         .Add(new CompleteSystem())
         .Add(new CallbackSystem<OnKill>(FilterActive().Inc<Kill>().End()))
@@ -518,6 +519,7 @@ namespace PeachyTween {
     internal static void Destroy() {
       _world.Destroy();
       _groupFilters.Clear();
+      _targetFilter = null;
     }
 
 #endregion

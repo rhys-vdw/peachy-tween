@@ -12,8 +12,8 @@ namespace PeachyTween {
 
     public void Run(EcsSystems systems) {
       foreach (var entity in _filter) {
-        ref var state = ref _world.GetComponent<TweenState>(entity);
-        state.Progress = 1 - state.Progress;
+        ref var active = ref _world.GetComponent<Active>(entity);
+        active.Progress = 1 - active.Progress;
       }
     }
   }

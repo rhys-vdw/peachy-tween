@@ -2,7 +2,10 @@ using System;
 
 namespace PeachyTween {
   // State
-  internal struct Active { }
+  internal struct Active {
+    public float Progress;
+  }
+
   internal struct Paused { }
   internal struct Complete { }
   internal struct Preserve { }
@@ -34,12 +37,10 @@ namespace PeachyTween {
   internal struct TweenState {
     public float Elapsed;
     public float Duration;
-    public float Progress;
 
     public TweenState(float duration) {
       Elapsed = 0;
       Duration = duration;
-      Progress = 0;
     }
   }
 

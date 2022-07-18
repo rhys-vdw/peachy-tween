@@ -17,11 +17,11 @@ namespace PeachyTween {
 
     public void Run(EcsSystems systems) {
       var configPool = _world.GetPool<TweenConfig<T>>();
-      var statePool = _world.GetPool<TweenState>();
+      var activePool = _world.GetPool<Active>();
       foreach (var entity in _filter) {
         ref var config = ref configPool.Get(entity);
-        ref var state = ref statePool.Get(entity);
-        var value = _lerp(config.From, config.To, state.Progress);
+        ref var active = ref activePool.Get(entity);
+        var value = _lerp(config.From, config.To, active.Progress);
         config.OnChange(value);
       }
     }

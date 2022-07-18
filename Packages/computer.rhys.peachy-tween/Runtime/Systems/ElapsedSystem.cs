@@ -1,23 +1,26 @@
 using Leopotam.EcsLite;
-using UnityEngine;
 
 namespace PeachyTween {
-  internal class ProgressSystem : IEcsSystem, IEcsInitSystem, IEcsRunSystem {
+  internal class ElapsedSystem : IEcsSystem, IEcsInitSystem, IEcsRunSystem {
     EcsWorld _world;
     EcsFilter _filter;
+    RunState _runState;
 
     public void Init(EcsSystems systems) {
       _world = systems.GetWorld();
       _filter = _world.Filter<Active>().End();
+      _runState = systems.GetShared<RunState>();
     }
 
     public void Run(EcsSystems systems) {
+      var deltaTime = _runState.DeltaTime;
       var statePool = _world.GetPool<TweenState>();
-      var activePool = _world.GetPool<Active>();
       foreach (var entity in _filter) {
         ref var state = ref statePool.Get(entity);
-        ref var active = ref activePool.Get(entity);
-        active.Progress = Mathf.Min(state.Elapsed / state.Duration, 1f);
+        state.Elapsed += deltaTime;
+        if (state.Elapsed >= state.Duration) {
+          _world.AddComponent<Complete>(entity);
+        }
       }
     }
   }
