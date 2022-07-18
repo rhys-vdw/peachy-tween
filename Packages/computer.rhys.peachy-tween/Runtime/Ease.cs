@@ -215,5 +215,10 @@ namespace PeachyTween {
         ? (1 - BounceOut(1 - 2 * t)) / 2
         : (1 + BounceOut(2 * t - 1)) / 2;
     }
+
+    public static EaseFunc Punch(int peakCount, EaseFunc scaleEase) {
+      var r = Log(peakCount, 2) + 1;
+      return t => (1 - scaleEase(t)) * -Sin(2 * PI * Pow(2, r - 1 - t * r));
+    }
   }
 }

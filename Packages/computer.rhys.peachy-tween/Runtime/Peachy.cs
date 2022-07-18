@@ -417,6 +417,25 @@ namespace PeachyTween {
     }
 
 #endregion
+#region Punch
+
+    /// <summary>
+    /// Sets the ease to a "punch" effect.
+    /// </summary>
+    public static Tween Punch(
+      this Tween tween,
+      int bounceCount,
+      Ease scaleEase = PeachyTween.Ease.ExpoOut
+    ) => Punch(tween, bounceCount, scaleEase.ToFunc());
+
+    public static Tween Punch(this Tween tween, int bounceCount, EaseFunc scaleEase) {
+      if (Entity(tween, out var entity)) {
+        tween.Ease(EaseFuncs.Punch(bounceCount, scaleEase));
+      }
+      return tween;
+    }
+
+#endregion
 #region Callbacks
 
     public static Tween OnLoop(this Tween tween, Action onComplete) =>
