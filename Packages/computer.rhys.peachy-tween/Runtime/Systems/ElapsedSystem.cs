@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 
 namespace PeachyTween {
-  internal class ProgressSystem : IEcsSystem, IEcsInitSystem, IEcsRunSystem {
+  internal class ElapsedSystem : IEcsSystem, IEcsInitSystem, IEcsRunSystem {
     EcsWorld _world;
     EcsFilter _filter;
     RunState _runState;
@@ -20,7 +20,6 @@ namespace PeachyTween {
         state.Elapsed += deltaTime;
         state.Progress = state.Elapsed / state.Duration;
         if (state.Elapsed >= state.Duration) {
-          state.Elapsed = state.Duration;
           state.Progress = 1f;
           _world.AddComponent<Complete>(entity);
         }
