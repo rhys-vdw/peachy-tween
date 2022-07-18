@@ -4,14 +4,28 @@ namespace PeachyTween {
   public static class TransformExtensions {
 #region Rotation
 
-    public static Tween TweenRotation(this Transform transform, Quaternion endValue, float duration) =>
+    /// <summary>
+    /// Rotate a Transform in world space.
+    /// </summary>
+    /// <param name="transform">The transform.</param>
+    /// <param name="endValue">The end world rotation.</param>
+    /// <param name="duration">Length of tween in seconds.</param>
+     public static Tween TweenRotation(this Transform transform, Quaternion endValue, float duration) =>
       Peachy
         .Tween(transform.rotation, endValue, duration, v => transform.rotation = v)
         .SetTarget(transform);
 
+    /// <summary>
+    /// Rotate a Transform in world space.
+    ///
+    /// This supports rotating beyond 360 degrees.
+    /// </summary>
+    /// <param name="transform">The transform.</param>
+    /// <param name="endValue">The end world rotation Euler angles in degrees.</param>
+    /// <param name="duration">Length of tween in seconds.</param>
     public static Tween TweenRotation(this Transform transform, Vector3 endValue, float duration) =>
       Peachy
-        .Tween(transform.rotation, Quaternion.Euler(endValue), duration, v => transform.rotation = v)
+        .Tween(transform.eulerAngles, endValue, duration, v => transform.eulerAngles = v)
         .SetTarget(transform);
 
     public static Tween TweenLookAt(this Transform transform, Vector3 forward, float duration) =>
@@ -25,14 +39,28 @@ namespace PeachyTween {
 #endregion
 #region Local rotation
 
+    /// <summary>
+    /// Rotate a Transform in local space.
+    /// </summary>
+    /// <param name="transform">The transform.</param>
+    /// <param name="endValue">The end local rotation.</param>
+    /// <param name="duration">Length of tween in seconds.</param>
     public static Tween TweenLocalRotation(this Transform transform, Quaternion endValue, float duration) =>
       Peachy
         .Tween(transform.localRotation, endValue, duration, v => transform.localRotation = v)
         .SetTarget(transform);
 
+    /// <summary>
+    /// Rotate a Transform in local space.
+    ///
+    /// This supports rotating beyond 360 degrees.
+    /// </summary>
+    /// <param name="transform">The transform.</param>
+    /// <param name="endValue">The end local rotation Euler angles in degrees.</param>
+    /// <param name="duration">Length of tween in seconds.</param>
     public static Tween TweenLocalRotation(this Transform transform, Vector3 endValue, float duration) =>
       Peachy
-        .Tween(transform.localRotation, Quaternion.Euler(endValue), duration, v => transform.localRotation = v)
+        .Tween(transform.localEulerAngles, endValue, duration, v => transform.localEulerAngles = v)
         .SetTarget(transform);
 
 #endregion
