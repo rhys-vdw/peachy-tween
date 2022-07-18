@@ -395,9 +395,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cbf4a777bf010240bf2cb3d2a71dad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  From: {fileID: 437458368}
-  To: {fileID: 751168563}
-  Duration: 5
+  Duration: 1
+  VibrationCount: 4
+  Rotation: 90
 --- !u!135 &1317664103
 SphereCollider:
   m_ObjectHideFlags: 0
