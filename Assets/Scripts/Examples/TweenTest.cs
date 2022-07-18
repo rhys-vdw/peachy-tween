@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 namespace PeachyTween.Test {
-  public class TweenTest : MonoBehaviour {
+  public class TweenExample : MonoBehaviour {
     public Transform From;
     public Transform To;
     public float Duration = 5f;
