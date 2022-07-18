@@ -162,6 +162,8 @@ namespace PeachyTween {
 #endregion
 #region Target
 
+    static EcsFilter _targetFilter;
+
     /// <summary>
     /// Set the associated target of a <c cref="Tween">Tween</c> for killing by
     /// target.
@@ -181,6 +183,9 @@ namespace PeachyTween {
     public static Tween SetTarget<T>(this Tween tween, T target) where T : class {
       if (target == null) {
         throw new ArgumentNullException(nameof(target));
+      }
+      if (_targetFilter == null) {
+        _targetFilter = _world.Filter<Target>().End();
       }
       if (Entity(tween, out int entity)) {
         ref var t = ref _world.EnsureComponent<Target>(entity);
@@ -206,6 +211,25 @@ namespace PeachyTween {
       }
       target = default;
       return false;
+    }
+
+    /// <summary>
+    /// Kill all <c cref="Tween">Tween</c>s targeting an object.
+    /// </summary>
+    /// <seealso cref="SetTarget"/>
+    /// <param name="tween">The object.</param>
+    /// <param name="target">The target object.</param>
+    public static void KillAllWithTarget(object target, bool complete = false) {
+      if (_targetFilter == null) {
+        return;
+      }
+      var targetPool = _world.GetPool<Target>();
+      foreach (var entity in _targetFilter) {
+        ref var t = ref targetPool.Get(entity);
+        if (t.Object == target) {
+          Kill(entity, complete);
+        }
+      }
     }
 
 #endregion
@@ -245,6 +269,22 @@ namespace PeachyTween {
         }
       }
       return tween;
+    }
+
+    static void Kill(int entity, bool complete = false) {
+      if (complete && !IsComplete(entity)) {
+        // Cancel any loops.
+        _world.DelComponent<Loop>(entity);
+
+        // Cancel preserve.
+        _world.DelComponent<Preserve>(entity);
+
+        // The complete system will kill this entity.
+        Complete(entity);
+      } else {
+        // Kill the tween.
+        _world.EnsureComponent<Kill>(entity);
+      }
     }
 
     public static bool IsValid(this Tween tween) =>

@@ -24,6 +24,27 @@ namespace PeachyTween.Tests {
 
       Assert.False(tween.TryGetTarget(out var target), "No target was set");
     }
+
+    [Test]
+    public void KillAllWithTarget() {
+      var target = new Object();
+      var onKill = false;
+
+      var targeting = Peachy
+        .Tween(0f, 1f, 1f, v => {})
+        .OnKill(() => onKill = true)
+        .SetTarget(target);
+      var nonTargeting = Peachy.Tween(0f, 1f, 1f, v => {});
+
+      Peachy.KillAllWithTarget(target);
+
+      targeting.Sync();
+      nonTargeting.Sync();
+
+      Assert.True(nonTargeting.IsValid(), "Did not kill untargeting tween");
+      Assert.True(onKill, "Called OnKill");
+      Assert.False(targeting.IsValid(), "Targeting tween is invalid");
+    }
   }
 }
 
