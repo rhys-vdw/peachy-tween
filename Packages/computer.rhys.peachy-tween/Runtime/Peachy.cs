@@ -417,6 +417,34 @@ namespace PeachyTween {
     }
 
 #endregion
+#region Punch
+
+    /// <summary>
+    /// Sets the ease to a "punch" effect.
+    /// </summary>
+    /// <param name="tween">The tween.</param>
+    /// <param name="vibrationCount">The number of times the tweened value will oscillate back and forth before coming to rest.</param>
+    /// <param name="scaleEase">Easing function by which the value is scaled back to 0.</param>
+    public static Tween Punch(
+      this Tween tween,
+      int vibrationCount,
+      Ease scaleEase = PeachyTween.Ease.ExpoOut
+    ) => Punch(tween, vibrationCount, scaleEase.ToFunc());
+
+    /// <summary>
+    /// Sets the ease to a "punch" effect.
+    /// </summary>
+    /// <param name="tween">The tween.</param>
+    /// <param name="vibrationCount">The number of times the tweened value will oscillate back and forth before coming to rest.</param>
+    /// <param name="scaleEase">Easing function by which the value is scaled back to 0.</param>
+    public static Tween Punch(this Tween tween, int vibrationCount, EaseFunc scaleEase) {
+      if (Entity(tween, out var entity)) {
+        tween.Ease(EaseFuncs.Punch(vibrationCount, scaleEase));
+      }
+      return tween;
+    }
+
+#endregion
 #region Callbacks
 
     public static Tween OnLoop(this Tween tween, Action onComplete) =>

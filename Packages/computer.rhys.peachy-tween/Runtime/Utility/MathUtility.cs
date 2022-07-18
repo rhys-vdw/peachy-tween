@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace PeachyTween {
-  internal static class MathUtility {
+  static class MathUtility {
     public static Vector3 WithX(this in Vector3 v, float x) =>
       new (x, v.y, v.z);
 
