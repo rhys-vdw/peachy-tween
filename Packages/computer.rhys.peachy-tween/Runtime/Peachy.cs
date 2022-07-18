@@ -160,6 +160,79 @@ namespace PeachyTween {
     }
 
 #endregion
+#region Target
+
+    static EcsFilter _targetFilter;
+
+    /// <summary>
+    /// Set the associated target of a <c cref="Tween">Tween</c> for killing by
+    /// target.
+    ///
+    /// This does not change which object the Tween is currently acting on, its
+    /// purpose is to link this tween to an object so that it will be killed
+    /// when the target object is passed to <c cref="Kill">Peachy.Kill</c>.
+    ///
+    /// This will replace any previously set target.
+    ///
+    /// This method is called by provided extension methods (e.g.
+    /// <c cref="TrasnformExtensions.TweenPosition">TweenPosition</c>), and
+    /// should be called by any custom extension methods.
+    /// </summary>
+    /// <param name="tween">The tween.</param>
+    /// <param name="target">Any instance of a reference type to become the target of this tween.</param>
+    public static Tween SetTarget<T>(this Tween tween, T target) where T : class {
+      if (target == null) {
+        throw new ArgumentNullException(nameof(target));
+      }
+      if (_targetFilter == null) {
+        _targetFilter = _world.Filter<Target>().End();
+      }
+      if (Entity(tween, out int entity)) {
+        ref var t = ref _world.EnsureComponent<Target>(entity);
+        t.Object = target;
+      }
+      return tween;
+    }
+
+    /// <summary>
+    /// Get the associated target of a <c cref="Tween">Tween</c>.
+    /// </summary>
+    /// <seealso cref="SetTarget"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="target">The previously set target.</param>
+    /// <returns><c>true</c> if a target has been set; otherwise, <c>false</c>.</returns>
+    public static bool TryGetTarget(this Tween tween, out object target) {
+      if (
+        Entity(tween, out var entity) &&
+        _world.TryGetComponent<Target>(entity, out var t)
+      ) {
+        target = t.Object;
+        return true;
+      }
+      target = default;
+      return false;
+    }
+
+    /// <summary>
+    /// Kill all <c cref="Tween">Tween</c>s targeting an object.
+    /// </summary>
+    /// <seealso cref="SetTarget"/>
+    /// <param name="tween">The object.</param>
+    /// <param name="target">The target object.</param>
+    public static void KillAllWithTarget(object target, bool complete = false) {
+      if (_targetFilter == null) {
+        return;
+      }
+      var targetPool = _world.GetPool<Target>();
+      foreach (var entity in _targetFilter) {
+        ref var t = ref targetPool.Get(entity);
+        if (t.Object == target) {
+          Kill(entity, complete);
+        }
+      }
+    }
+
+#endregion
 #region Ping-pong
 
     public static Tween PingPong(this Tween tween) {
@@ -196,6 +269,22 @@ namespace PeachyTween {
         }
       }
       return tween;
+    }
+
+    static void Kill(int entity, bool complete = false) {
+      if (complete && !IsComplete(entity)) {
+        // Cancel any loops.
+        _world.DelComponent<Loop>(entity);
+
+        // Cancel preserve.
+        _world.DelComponent<Preserve>(entity);
+
+        // The complete system will kill this entity.
+        Complete(entity);
+      } else {
+        // Kill the tween.
+        _world.EnsureComponent<Kill>(entity);
+      }
     }
 
     public static bool IsValid(this Tween tween) =>
