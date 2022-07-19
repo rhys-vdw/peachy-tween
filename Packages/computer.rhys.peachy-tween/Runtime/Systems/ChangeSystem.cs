@@ -4,11 +4,11 @@ namespace PeachyTween {
   internal class ChangeSystem<T> : IEcsSystem, IEcsInitSystem, IEcsRunSystem {
     EcsWorld _world;
     readonly EcsFilter _filter;
-    readonly Lerp<T> _defaultLerp;
+    readonly LerpFunc<T> _defaultLerp;
 
-    public ChangeSystem(EcsFilter filter, Lerp<T> lerp) {
+    public ChangeSystem(EcsFilter filter, LerpFunc<T> defaultLerp) {
       _filter = filter;
-      _defaultLerp = lerp;
+      _defaultLerp = defaultLerp;
     }
 
     public void Init(EcsSystems systems) {

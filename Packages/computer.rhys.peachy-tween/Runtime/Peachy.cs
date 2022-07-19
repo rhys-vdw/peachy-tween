@@ -607,16 +607,16 @@ namespace PeachyTween {
     static EcsWorld.Mask FilterActiveByType<TValue>() =>
       _world.Filter<TweenConfig<TValue>>().Inc<Active>().Exc<Kill>();
 
-    static ChangeSystem<TValue> ChangeSystemExc<TValue, TExc>(Lerp<TValue> lerp) where TExc : struct =>
+    static ChangeSystem<TValue> ChangeSystemExc<TValue, TExc>(LerpFunc<TValue> lerp) where TExc : struct =>
       ChangeSystem(FilterActiveByType<TValue>().Exc<TExc>().End(), lerp);
 
-    static ChangeSystem<TValue> ChangeSystemInc<TValue, TInc>(Lerp<TValue> lerp) where TInc : struct =>
+    static ChangeSystem<TValue> ChangeSystemInc<TValue, TInc>(LerpFunc<TValue> lerp) where TInc : struct =>
       ChangeSystem(FilterActiveByType<TValue>().Inc<TInc>().End(), lerp);
 
-    static ChangeSystem<TValue> ChangeSystem<TValue>(Lerp<TValue> lerp) =>
+    static ChangeSystem<TValue> ChangeSystem<TValue>(LerpFunc<TValue> lerp) =>
       ChangeSystem(FilterActiveByType<TValue>().End(), lerp);
 
-    static ChangeSystem<T> ChangeSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
+    static ChangeSystem<T> ChangeSystem<T>(EcsFilter filter, LerpFunc<T> lerp) =>
       new (filter, lerp);
 
     static bool Entity(Tween tween, out int entity) {

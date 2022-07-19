@@ -13,7 +13,7 @@ namespace PeachyTween {
   struct PingPong { }
   struct Kill { }
   struct OverrideLerp<T> {
-    public Lerp<T> Func;
+    public LerpFunc<T> Func;
   }
 
   // Groups

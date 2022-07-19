@@ -2,10 +2,10 @@ using UnityEngine;
 using static UnityEngine.Mathf;
 
 namespace PeachyTween {
-  public delegate T Lerp<T>(T from, T to, float t);
+  public delegate T LerpFunc<T>(T from, T to, float t);
 
   public static class LerpFuncs {
-    public static Lerp<Vector3> CreateShake(
+    public static LerpFunc<Vector3> CreateShake(
       int oscillationCount,
       float amplitudeDecay = 1f,
       float frequencyDecay = 1f,
