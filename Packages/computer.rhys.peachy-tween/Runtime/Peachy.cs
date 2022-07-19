@@ -23,7 +23,7 @@ namespace PeachyTween {
     public static Tween Tween(Color from, Color to, float duration, Action<Color> onChange) =>
       CreateTween(from, to, duration, onChange);
 
-    public static Tween CreateTween<T>(T from, T to, float duration, Action<T> onChange) =>
+    static Tween CreateTween<T>(T from, T to, float duration, Action<T> onChange) =>
       new (Core.CreateTween(from, to, duration, onChange));
 
 #endregion
