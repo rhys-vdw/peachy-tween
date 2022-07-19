@@ -248,9 +248,7 @@ namespace PeachyTween {
     }
 
     public Tween Ease(AnimationCurve animationCurve) {
-      if (animationCurve == null) {
-        throw new ArgumentNullException(nameof(animationCurve));
-      }
+      _ = animationCurve ?? throw new ArgumentNullException(nameof(animationCurve));
       return Ease(animationCurve.Evaluate);
     }
 
