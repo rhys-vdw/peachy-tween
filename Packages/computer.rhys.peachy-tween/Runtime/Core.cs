@@ -186,7 +186,7 @@ namespace PeachyTween {
 #endregion
 #region Loop
 
-    public static void SetLooping(int entity, int remaining = -1) {
+    public static void SetLooping(int entity, int remaining) {
       if (remaining == 0) {
         _world.DelComponent<Loop>(entity);
       } else {

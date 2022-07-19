@@ -230,7 +230,7 @@ namespace PeachyTween {
     public Tween LoopForever() =>
       SetLooping(-1);
 
-    Tween SetLooping(int remaining = -1) {
+    Tween SetLooping(int remaining) {
       if (Entity(out var entity)) {
         Core.SetLooping(entity, remaining);
       }
