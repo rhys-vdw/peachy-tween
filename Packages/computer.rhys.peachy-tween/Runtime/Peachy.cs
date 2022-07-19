@@ -22,14 +22,6 @@ namespace PeachyTween {
     }
   }
 
-  public struct Tween {
-    readonly internal EcsPackedEntity _entity;
-
-    internal Tween(EcsPackedEntity entity) {
-      _entity = entity;
-    }
-  }
-
   public static class Peachy {
 #region Tween factory
 
@@ -67,98 +59,48 @@ namespace PeachyTween {
 #endregion
 #region Pause
 
-    public static bool IsPaused(this Tween tween) =>
-      Entity(tween, out var entity) && IsPaused(entity);
+    internal static void Pause(int entity) =>
+      _world.EnsureComponent<Paused>(entity);
 
-    public static void Pause(this Tween tween) {
-      if (
-        Entity(tween, out var entity) &&
-        !IsPaused(entity)
-      ) {
-        _world.AddComponent<Paused>(entity);
-      }
-    }
+    internal static void Resume(int entity) =>
+      _world.DelComponent<Paused>(entity);
 
-    public static void Resume(this Tween tween) {
-      if (Entity(tween, out var entity)) {
-        _world.DelComponent<Paused>(entity);
-      }
-    }
-
-    static bool IsPaused(int entity) =>
+    internal static bool IsPaused(int entity) =>
       _world.HasComponent<Paused>(entity);
 
 #endregion
 #region Preserve
 
-    public static Tween Preserve(this Tween tween) {
-      if (Entity(tween, out var entity)) {
-        _world.EnsureComponent<Preserve>(entity);
-      }
-      return tween;
-    }
+    internal static void Preserve(int entity) =>
+      _world.EnsureComponent<Preserve>(entity);
 
-    public static Tween ClearPreserve(this Tween tween) {
-      if (Entity(tween, out var entity)) {
-        _world.DelComponent<Preserve>(entity);
-      }
-      return tween;
-    }
+    public static void ClearPreserve(int entity) =>
+      _world.DelComponent<Preserve>(entity);
 
 #endregion
 #region Control
 
-    public static Tween Restart(this Tween tween) => tween.GoTo(0);
-
-    public static Tween GoTo(this Tween tween, float elapsed) {
-      if (Entity(tween, out var entity)) {
-        GoTo(entity, elapsed);
-      }
-      return tween;
-    }
-
-    public static Tween Complete(this Tween tween) {
-      if (Entity(tween, out var entity)) {
-        Complete(entity);
-      }
-      return tween;
-    }
-
-    public static bool IsComplete(this Tween tween) =>
-      Entity(tween, out var entity) &&
-      IsComplete(entity);
-
-    public static Tween Reverse(this Tween tween) {
-      if (Entity(tween, out var entity)) {
-        Reverse(entity);
-      }
-      return tween;
-    }
-
-    /// <summary>
-    /// Run this tween from end to start.
-    /// </summary>
-    public static Tween From(this Tween tween) {
-      if (Entity(tween, out var entity)) {
-        _world.ToggleComponent<Reverse>(entity);
-      }
-      return tween;
-    }
-
-    static void GoTo(int entity, float elapsed) {
+    internal static void GoTo(int entity, float elapsed) {
       _world.DelComponent<Complete>(entity);
       ref var tweenState = ref _world.GetComponent<TweenState>(entity);
       tweenState.Elapsed = elapsed;
     }
 
-    static void Complete(int entity) {
+    internal static void Complete(int entity) {
       ref var tweenState = ref _world.GetComponent<TweenState>(entity);
       GoTo(entity, tweenState.Duration);
     }
 
-    static bool IsComplete(int entity) => _world.HasComponent<Complete>(entity);
+    internal static bool IsComplete(int entity) =>
+      _world.HasComponent<Complete>(entity);
 
-    public static void Reverse(int entity) {
+    /// <summary>
+    /// Run this tween from end to start.
+    /// </summary>
+    internal static void From(int entity) =>
+      _world.ToggleComponent<Reverse>(entity);
+
+    internal static void Reverse(int entity) {
       _world.ToggleComponent<Reverse>(entity);
       ref var state = ref _world.GetComponent<TweenState>(entity);
       state.Elapsed = state.Duration - state.Elapsed;
@@ -169,48 +111,18 @@ namespace PeachyTween {
 
     static EcsFilter _targetFilter;
 
-    /// <summary>
-    /// Set the associated target of a <c cref="Tween">Tween</c> for killing by
-    /// target.
-    ///
-    /// This does not change which object the Tween is currently acting on, its
-    /// purpose is to link this tween to an object so that it will be killed
-    /// when the target object is passed to <c cref="Kill">Peachy.Kill</c>.
-    ///
-    /// This will replace any previously set target.
-    ///
-    /// This method is called by provided extension methods (e.g.
-    /// <c cref="TrasnformExtensions.TweenPosition">TweenPosition</c>), and
-    /// should be called by any custom extension methods.
-    /// </summary>
-    /// <param name="tween">The tween.</param>
-    /// <param name="target">Any instance of a reference type to become the target of this tween.</param>
-    public static Tween SetTarget<T>(this Tween tween, T target) where T : class {
-      if (target == null) {
-        throw new ArgumentNullException(nameof(target));
-      }
+    internal static void SetTarget<T>(int entity, T target) where T : class {
+      _ = target ?? throw new ArgumentNullException(nameof(target));
+
       if (_targetFilter == null) {
         _targetFilter = _world.Filter<Target>().End();
       }
-      if (Entity(tween, out int entity)) {
-        ref var t = ref _world.EnsureComponent<Target>(entity);
-        t.Object = target;
-      }
-      return tween;
+      ref var t = ref _world.EnsureComponent<Target>(entity);
+      t.Object = target;
     }
 
-    /// <summary>
-    /// Get the associated target of a <c cref="Tween">Tween</c>.
-    /// </summary>
-    /// <seealso cref="SetTarget"/>
-    /// <param name="tween">The tween.</param>
-    /// <param name="target">The previously set target.</param>
-    /// <returns><c>true</c> if a target has been set; otherwise, <c>false</c>.</returns>
-    public static bool TryGetTarget(this Tween tween, out object target) {
-      if (
-        Entity(tween, out var entity) &&
-        _world.TryGetComponent<Target>(entity, out var t)
-      ) {
+    internal static bool TryGetTarget(int entity, out object target) {
+      if (_world.TryGetComponent<Target>(entity, out var t)) {
         target = t.Object;
         return true;
       }
@@ -240,43 +152,17 @@ namespace PeachyTween {
 #endregion
 #region Ping-pong
 
-    public static Tween PingPong(this Tween tween) {
-      if (Entity(tween, out int entity)) {
-        _world.EnsureComponent<PingPong>(entity);
-      }
-      return tween;
+    internal static void PingPong(int entity) {
+      _world.EnsureComponent<PingPong>(entity);
     }
 
-    public static Tween ClearPingPong(this Tween tween) {
-      if (Entity(tween, out int entity)) {
-        _world.DelComponent<PingPong>(entity);
-      }
-      return tween;
-    }
+    internal static void ClearPingPong(int entity) =>
+      _world.DelComponent<PingPong>(entity);
 
 #endregion
 #region Kill
 
-    public static Tween Kill(this Tween tween, bool complete = false) {
-      if (TryEntity(tween, out var entity)) {
-        if (complete && !IsComplete(entity)) {
-          // Cancel any loops.
-          _world.DelComponent<Loop>(entity);
-
-          // Cancel preserve.
-          _world.DelComponent<Preserve>(entity);
-
-          // The complete system will kill this entity.
-          Complete(entity);
-        } else {
-          // Kill the tween.
-          _world.EnsureComponent<Kill>(entity);
-        }
-      }
-      return tween;
-    }
-
-    static void Kill(int entity, bool complete = false) {
+    internal static void Kill(int entity, bool complete) {
       if (complete && !IsComplete(entity)) {
         // Cancel any loops.
         _world.DelComponent<Loop>(entity);
@@ -292,51 +178,18 @@ namespace PeachyTween {
       }
     }
 
-    public static bool IsValid(this Tween tween) =>
-      TryEntity(tween, out _);
-
 #endregion
 #region Rotation
 
-    public static Tween Angle(this Tween tween) => tween.Rotate();
-
-    public static Tween Slerp(this Tween tween) => tween.Rotate();
-
-    public static Tween Rotate(this Tween tween) {
-      if (Entity(tween, out var entity)) {
-        _world.EnsureComponent<Rotate>(entity);
-      }
-      return tween;
-    }
+    internal static void Rotate(int entity) =>
+      _world.EnsureComponent<Rotate>(entity);
 
 #endregion
 #region Group
 
     static readonly Dictionary<Type, EcsFilter> _groupFilters = new();
 
-    public static Tween SetUpdate(this Tween tween) => tween.SetGroup<Update>();
-
-    public static Tween SetFixedUpdate(this Tween tween) => tween.SetGroup<FixedUpdate>();
-
-    public static Tween SetLateUpdate(this Tween tween) => tween.SetGroup<LateUpdate>();
-
-    public static Tween SetManualUpdate(this Tween tween) => tween.ClearGroup();
-
-    public static Tween ClearGroup(this Tween tween) {
-      if (Entity(tween, out var entity)) {
-        ClearGroup(entity);
-      }
-      return tween;
-    }
-
-    public static Tween SetGroup<TGroup>(this Tween tween) where TGroup : struct {
-      if (Entity(tween, out var entity)) {
-        SetGroup<TGroup>(entity);
-      }
-      return tween;
-    }
-
-    static void SetGroup<TGroup>(int entity) where TGroup : struct {
+    internal static void SetGroup<TGroup>(int entity) where TGroup : struct {
       // Remove existing group.
       ClearGroup(entity);
 
@@ -352,287 +205,57 @@ namespace PeachyTween {
       _world.AddComponent<TGroup>(entity);
     }
 
-    static void ClearGroup(int entity) {
+    internal static void ClearGroup(int entity) {
       foreach (var (key, _) in _groupFilters) {
         _world.DelComponent(key, entity);
       }
     }
 
-
 #endregion
 #region Loop
 
-    public static Tween Loop(this Tween tween, int count) {
-      if (count < 0) {
-        throw new ArgumentOutOfRangeException(nameof(count), count, "Must not be negative");
-      }
-      return tween.SetLooping(count);
-    }
-
-    public static Tween StopLoop(this Tween tween) {
-      if (Entity(tween, out var entity)) {
+    internal static void SetLooping(int entity, int remaining = -1) {
+      if (remaining == 0) {
         _world.DelComponent<Loop>(entity);
+      } else {
+        ref var loop = ref _world.EnsureComponent<Loop>(entity);
+        loop.Remaining = remaining;
       }
-      return tween;
-    }
-
-    public static Tween LoopForever(this Tween tween) =>
-      tween.SetLooping(-1);
-
-    static Tween SetLooping(this Tween tween, int remaining = -1) {
-      if (Entity(tween, out var entity)) {
-        if (remaining == 0) {
-          _world.DelComponent<Loop>(entity);
-        } else {
-          ref var loop = ref _world.EnsureComponent<Loop>(entity);
-          loop.Remaining = remaining;
-        }
-      }
-      return tween;
     }
 
 #endregion
 #region Easing
 
-    public static Tween ClearEase(this Tween tween) {
-      if (Entity(tween, out var entity)) {
-        _world.DelComponent<Eased>(entity);
-      }
-      return tween;
-    }
+    public static void ClearEase(int entity) =>
+      _world.DelComponent<Eased>(entity);
 
-    public static Tween Ease(this Tween tween, AnimationCurve animationCurve) {
-      if (animationCurve == null) {
-        throw new ArgumentNullException(nameof(animationCurve));
-      }
-      return Ease(tween, animationCurve.Evaluate);
-    }
-
-    public static Tween Ease(this Tween tween, Ease ease) =>
-      ease == PeachyTween.Ease.Linear
-        ? ClearEase(tween)
-        : Ease(tween, ease.ToFunc());
-
-    public static Tween Ease(this Tween tween, EaseFunc easeFunc) {
-      if (Entity(tween, out var entity)) {
-        ref var ease = ref _world.EnsureComponent<Eased>(entity);
-        ease.Func = easeFunc;
-      }
-      return tween;
+    public static void Ease(int entity, EaseFunc easeFunc) {
+      ref var ease = ref _world.EnsureComponent<Eased>(entity);
+      ease.Func = easeFunc;
     }
 
 #endregion
 #region Lerp
 
-    /// <summary>
-    /// Set the lerp function.
-    ///
-    /// <para>
-    /// Overrides the default lerp function for this tween.
-    /// </para>
-    /// </summary>
-    /// <seealso cref="Punch"/>
-    /// <param name="tween">The tween.</param>
-    /// <param name="lerp">The lerp function for this tween.</param>
-    public static Tween Lerp<T>(
-      this Tween tween,
-      LerpFunc<T> lerp
-    ) {
-      if (Entity(tween, out var entity)) {
-        if (!_world.HasComponent<TweenConfig<T>>(entity)) {
-          throw new ArgumentException($"Tween is not operating on a {typeof(T).Name} value", nameof(tween));
-        }
-        ref var l = ref _world.EnsureComponent<OverrideLerp<T>>(entity);
-        l.Func = lerp;
+    public static void Lerp<T>(int entity, LerpFunc<T> lerp) {
+      if (!_world.HasComponent<TweenConfig<T>>(entity)) {
+        throw new InvalidOperationException($"Tween is not operating on a {typeof(T).Name} value");
       }
-      return tween;
-    }
-
-
-#endregion
-#region Shake
-
-    /// <summary>
-    /// Set the lerp function to shake.
-    ///
-    /// <para>
-    /// <b>Supported by Vector2 tweens only.</b>
-    /// </para>
-    /// <para>
-    /// This overrides the default tween function to shake its values. This
-    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
-    /// on each dimension of the tweened value.
-    /// </para>
-    /// </summary>
-    /// <seealso cref="Punch"/>
-    /// <param name="tween">The tween.</param>
-    /// <param name="oscillationCount">Number of oscillations per axis.</param>
-    /// <param name="decay">Rate at which amplitude and frequency decrease over time.</param>
-    /// <param name="randomness">Maximum percentage change randomly applied to amplitude and frequency per axis.</param>
-    public static Tween Shake2D(
-      this Tween tween,
-      int oscillationCount,
-      float decay,
-      float randomness
-    ) => Shake2D(tween, oscillationCount, decay, decay, randomness, randomness);
-
-    /// <summary>
-    /// Set the lerp function to shake.
-    ///
-    /// <para>
-    /// <b>Supported by Vector2 tweens only.</b>
-    /// </para>
-    /// <para>
-    /// This overrides the default tween function to shake its values. This
-    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
-    /// on each dimension of the tweened value.
-    /// </para>
-    /// </summary>
-    /// <seealso cref="Punch"/>
-    /// <param name="tween">The tween.</param>
-    /// <param name="oscillationCount">Number of oscillations per axis.</param>
-    /// <param name="frequencyDecay">Rate at which frequency decreases over time.</param>
-    /// <param name="amplitudeDecay">Rate at which amplitude decreases over time.</param>
-    /// <param name="frequencyRandomness">Maximum percentage change randomly applied to frequency per axis.</param>
-    /// <param name="amplitudeRandomness">Maximum percentage change randomly applied to amplitude per axis.</param>
-    public static Tween Shake2D(
-      this Tween tween,
-      int oscillationCount,
-      float amplitudeDecay,
-      float frequencyDecay,
-      float amplitudeRandomness,
-      float frequencyRandomness
-    ) => Lerp(tween, LerpFuncs.CreateShake2D(
-      oscillationCount: oscillationCount,
-      amplitudeDecay: amplitudeDecay,
-      frequencyDecay: frequencyDecay,
-      amplitudeRandomness: amplitudeRandomness,
-      frequencyRandomness: frequencyRandomness
-    ));
-
-    /// <summary>
-    /// Set the lerp function to shake.
-    ///
-    /// <para>
-    /// <b>Supported by Vector3 tweens only.</b>
-    /// </para>
-    /// <para>
-    /// This overrides the default tween function to shake its values. This
-    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
-    /// on each dimension of the tweened value.
-    /// </para>
-    /// </summary>
-    /// <seealso cref="Punch"/>
-    /// <param name="tween">The tween.</param>
-    /// <param name="oscillationCount">Number of oscillations per axis.</param>
-    /// <param name="decay">Rate at which amplitude and frequency decrease over time.</param>
-    /// <param name="randomness">Maximum percentage change randomly applied to amplitude and frequency per axis.</param>
-    public static Tween Shake(
-      this Tween tween,
-      int oscillationCount,
-      float decay,
-      float randomness
-    ) => Shake(tween, oscillationCount, decay, decay, randomness, randomness);
-
-    /// <summary>
-    /// Set the lerp function to shake.
-    ///
-    /// <para>
-    /// <b>Supported by Vector3 tweens only.</b>
-    /// </para>
-    /// <para>
-    /// This overrides the default tween function to shake its values. This
-    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
-    /// on each dimension of the tweened value.
-    /// </para>
-    /// </summary>
-    /// <seealso cref="Punch"/>
-    /// <param name="tween">The tween.</param>
-    /// <param name="oscillationCount">Number of oscillations per axis.</param>
-    /// <param name="frequencyDecay">Rate at which frequency decreases over time.</param>
-    /// <param name="amplitudeDecay">Rate at which amplitude decreases over time.</param>
-    /// <param name="frequencyRandomness">Maximum percentage change randomly applied to frequency per axis.</param>
-    /// <param name="amplitudeRandomness">Maximum percentage change randomly applied to amplitude per axis.</param>
-    public static Tween Shake(
-      this Tween tween,
-      int oscillationCount,
-      float amplitudeDecay,
-      float frequencyDecay,
-      float amplitudeRandomness,
-      float frequencyRandomness
-    ) => Lerp(tween, LerpFuncs.CreateShake(
-      oscillationCount: oscillationCount,
-      amplitudeDecay: amplitudeDecay,
-      frequencyDecay: frequencyDecay,
-      amplitudeRandomness: amplitudeRandomness,
-      frequencyRandomness: frequencyRandomness
-    ));
-
-#endregion
-#region Punch
-
-    /// <summary>
-    /// Set the ease to oscillate and fade out.
-    /// </summary>
-    /// <param name="tween">The tween.</param>
-    /// <param name="oscillationCount">
-    /// The number of times the value will oscillation (half the period).
-    ///
-    /// Setting this value to a negative will move it away from the target on
-    /// its first oscillation.
-    /// </param>
-    /// <param name="amplitudeDecay">
-    /// Rate at which amplitude of wave decreases.
-    ///
-    /// <para>
-    /// Higher values cause a more vigorous initial shake.<br/>
-    /// A value of zero will cause amplitude to stay constant.<br/>
-    /// Values below zero cause the amplitude to increase over time, tending towards infinity.<br/>
-    /// </para>
-    /// </param>
-    /// <param name="frequencyDecay">
-    /// Rate at which frequency of wave decreases.
-    ///
-    /// <para>
-    /// Higher values cause a more vigorous initial shake. Values below zero
-    /// cause the shake to increase in speed over time.
-    /// </para>
-    /// </param>
-    public static Tween Punch(
-      this Tween tween,
-      int oscillationCount,
-      float amplitudeDecay = 1f,
-      float frequencyDecay = 1f
-    ) {
-      if (Entity(tween, out var entity)) {
-        tween.Ease(EaseFuncs.CreatePunch(oscillationCount, amplitudeDecay, frequencyDecay));
-      }
-      return tween;
+      ref var l = ref _world.EnsureComponent<OverrideLerp<T>>(entity);
+      l.Func = lerp;
     }
 
 #endregion
 #region Callbacks
 
-    public static Tween OnLoop(this Tween tween, Action onComplete) =>
-      tween.AddHandler<OnLoop>(onComplete);
-
-    public static Tween OnComplete(this Tween tween, Action onComplete) =>
-      tween.AddHandler<OnComplete>(onComplete);
-
-    public static Tween OnKill(this Tween tween, Action onKill) =>
-      tween.AddHandler<OnKill>(onKill);
-
-    static Tween AddHandler<T>(this Tween tween, Action handler) where T : struct, ICallback {
-      if (Entity(tween, out var entity)) {
-        _world.AddHandler<T>(entity, handler);
-      }
-      return tween;
+    static void AddHandler<T>(int entity, Action handler) where T : struct, ICallback {
+      _world.AddHandler<T>(entity, handler);
     }
 
 #endregion
 #region Ecs
 
-    static EcsWorld _world;
+    internal static EcsWorld _world;
     static EcsSystems _systems;
     static readonly RunState _runState = new ();
     static UnityLifecycle _lifecycle;
@@ -661,7 +284,7 @@ namespace PeachyTween {
         .Add(ChangeSystemExc<float, Rotate>(Mathf.LerpUnclamped))
         .Add(ChangeSystemInc<float, Rotate>(Mathf.LerpAngle))
         .Add(ChangeSystemExc<Vector2, Rotate>(Vector2.LerpUnclamped))
-        .Add(ChangeSystemInc<Vector2, Rotate>(MathUtility.SlerpUnclamped))
+        .Add(ChangeSystemInc<Vector2, Rotate>(LerpFuncs.SlerpUnclamped))
         .Add(ChangeSystemExc<Vector3, Rotate>(Vector3.LerpUnclamped))
         .Add(ChangeSystemInc<Vector3, Rotate>(Vector3.SlerpUnclamped))
         .Add(ChangeSystem<Vector4>(Vector4.LerpUnclamped))
@@ -698,25 +321,12 @@ namespace PeachyTween {
       }
     }
 
-    public static void ManualUpdate(this Tween tween, float deltaTime) {
-      if (Entity(tween, out var entity)) {
-        ManualUpdate(entity, deltaTime);
-      }
-    }
-
-    static void ManualUpdate(int entity, float deltaTime) {
+    internal static void ManualUpdate(int entity, float deltaTime) {
       _runState.Set(entity, deltaTime);
       _systems.Run();
     }
 
-    public static Tween Sync(this Tween tween) {
-      if (Entity(tween, out var entity)) {
-        Sync(entity);
-      }
-      return tween;
-    }
-
-    static void Sync(int entity) => ManualUpdate(entity, 0);
+    internal static void Sync(int entity) => ManualUpdate(entity, 0);
 
 #endregion
 #region Private
@@ -739,7 +349,7 @@ namespace PeachyTween {
     static ChangeSystem<T> ChangeSystem<T>(EcsFilter filter, LerpFunc<T> lerp) =>
       new (filter, lerp);
 
-    static bool Entity(Tween tween, out int entity) {
+    internal static bool Entity(Tween tween, out int entity) {
       if (!TryEntity(tween, out entity)) {
         Debug.LogWarning($"Tween is invalid");
         return false;
@@ -747,7 +357,7 @@ namespace PeachyTween {
       return true;
     }
 
-    static bool TryEntity(Tween tween, out int entity) =>
+    internal static bool TryEntity(Tween tween, out int entity) =>
       tween._entity.Unpack(_world, out entity);
 
 #endregion

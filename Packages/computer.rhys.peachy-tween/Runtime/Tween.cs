@@ -1,0 +1,471 @@
+using System;
+using UnityEngine;
+using Leopotam.EcsLite;
+using System.Collections.Generic;
+
+namespace PeachyTween {
+  using static Peachy;
+  public struct Tween {
+    readonly internal EcsPackedEntity _entity;
+
+    internal Tween(EcsPackedEntity entity) {
+      _entity = entity;
+    }
+
+#region Pause
+
+    public Tween Pause() {
+      if (Entity(out var entity)) {
+        Peachy.Pause(entity);
+      }
+      return this;
+    }
+
+    public Tween Resume() {
+      if (Entity(out var entity)) {
+        Peachy.Resume(entity);
+      }
+      return this;
+    }
+
+    public bool IsPaused() =>
+      Entity(out var entity) && Peachy.IsPaused(entity);
+
+#endregion
+#region Preserve
+
+    public Tween Preserve() {
+      if (Entity(out var entity)) {
+        Peachy.Preserve(entity);
+      }
+      return this;
+    }
+
+    public Tween ClearPreserve() {
+      if (Entity(out var entity)) {
+        Peachy.ClearPreserve(entity);
+      }
+      return this;
+    }
+
+#endregion
+#region Control
+
+    public Tween Restart() => GoTo(0);
+
+    public Tween GoTo(float elapsed) {
+      if (Entity(out var entity)) {
+        Peachy.GoTo(entity, elapsed);
+      }
+      return this;
+    }
+
+    public Tween Complete() {
+      if (Entity(out var entity)) {
+        Peachy.Complete(entity);
+      }
+      return this;
+    }
+
+    public bool IsComplete() =>
+      Entity(out var entity) &&
+      Peachy.IsComplete(entity);
+
+    public Tween Reverse() {
+      if (Entity(out var entity)) {
+        Peachy.Reverse(entity);
+      }
+      return this;
+    }
+
+    /// <summary>
+    /// Run this tween from end to start.
+    /// </summary>
+    public Tween From() {
+      if (Entity(out var entity)) {
+        Peachy.From(entity);
+      }
+      return this;
+    }
+
+#endregion
+#region Target
+
+    /// <summary>
+    /// Set the associated target of a <c cref="Tween">Tween</c> for killing by
+    /// target.
+    ///
+    /// This does not change which object the Tween is currently acting on, its
+    /// purpose is to link this tween to an object so that it will be killed
+    /// when the target object is passed to <c cref="Kill">Peachy.Kill</c>.
+    ///
+    /// This will replace any previously set target.
+    ///
+    /// This method is called by provided extension methods (e.g.
+    /// <c cref="TrasnformExtensions.TweenPosition">TweenPosition</c>), and
+    /// should be called by any custom extension methods.
+    /// </summary>
+    /// <param name="tween">The tween.</param>
+    /// <param name="target">Any instance of a reference type to become the target of this tween.</param>
+    public Tween SetTarget<T>(T target) where T : class {
+      if (Entity(out var entity)) {
+        Peachy.SetTarget(entity, target);
+      }
+      return this;
+    }
+
+    /// <summary>
+    /// Get the associated target of a <c cref="Tween">Tween</c>.
+    /// </summary>
+    /// <seealso cref="SetTarget"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="target">The previously set target.</param>
+    /// <returns><c>true</c> if a target has been set; otherwise, <c>false</c>.</returns>
+    public bool TryGetTarget(out object target) {
+      if (Entity(out var entity)) {
+        return Peachy.TryGetTarget(entity, out target);
+      }
+      target = default;
+      return false;
+    }
+
+#endregion
+#region Ping-pong
+
+    public Tween PingPong() {
+      if (Entity(out int entity)) {
+        Peachy.PingPong(entity);
+      }
+      return this;
+    }
+
+    public Tween ClearPingPong() {
+      if (Entity(out int entity)) {
+        Peachy.ClearPingPong(entity);
+      }
+      return this;
+    }
+
+#endregion
+#region Kill
+
+    public Tween Kill(bool complete = false) {
+      if (TryEntity(out var entity)) {
+        Peachy.Kill(entity, complete);
+      }
+      return this;
+    }
+
+    public bool IsValid() =>
+      TryEntity(out _);
+
+#endregion
+#region Rotation
+
+    public Tween Angle() => Rotate();
+
+    public Tween Slerp() => Rotate();
+
+    public Tween Rotate() {
+      if (Entity(out var entity)) {
+        Peachy.Rotate(entity);
+      }
+      return this;
+    }
+
+#endregion
+#region Run
+
+    public void ManualUpdate(float deltaTime) {
+      if (Entity(out var entity)) {
+        Peachy.ManualUpdate(entity, deltaTime);
+      }
+    }
+
+    public Tween Sync() {
+      if (Entity(out var entity)) {
+        Peachy.Sync(entity);
+      }
+      return this;
+    }
+
+#endregion
+#region Group
+
+    public Tween SetUpdate() => SetGroup<Update>();
+
+    public Tween SetFixedUpdate() => SetGroup<FixedUpdate>();
+
+    public Tween SetLateUpdate() => SetGroup<LateUpdate>();
+
+    public Tween SetManualUpdate() => ClearGroup();
+
+    public Tween ClearGroup() {
+      if (Entity(out var entity)) {
+        Peachy.ClearGroup(entity);
+      }
+      return this;
+    }
+
+    public Tween SetGroup<TGroup>() where TGroup : struct {
+      if (Entity(out var entity)) {
+        Peachy.SetGroup<TGroup>(entity);
+      }
+      return this;
+    }
+
+#endregion
+#region Loop
+
+    public Tween Loop(int count) {
+      if (count < 0) {
+        throw new ArgumentOutOfRangeException(nameof(count), count, "Must not be negative");
+      }
+      return SetLooping(count);
+    }
+
+    public Tween StopLoop() =>
+      SetLooping(0);
+
+    public Tween LoopForever() =>
+      SetLooping(-1);
+
+    Tween SetLooping(int remaining = -1) {
+      if (Entity(out var entity)) {
+        Peachy.SetLooping(entity, remaining);
+      }
+      return this;
+    }
+
+#endregion
+#region Easing
+
+    public Tween ClearEase() {
+      if (Entity(out var entity)) {
+        Peachy.ClearEase(entity);
+      }
+      return this;
+    }
+
+    public Tween Ease(AnimationCurve animationCurve) {
+      if (animationCurve == null) {
+        throw new ArgumentNullException(nameof(animationCurve));
+      }
+      return Ease(animationCurve.Evaluate);
+    }
+
+    public Tween Ease(Ease ease) =>
+      ease == PeachyTween.Ease.Linear
+        ? ClearEase()
+        : Ease(ease.ToFunc());
+
+    public Tween Ease(EaseFunc easeFunc) {
+      if (Entity(out var entity)) {
+        Peachy.Ease(entity, easeFunc);
+      }
+      return this;
+    }
+
+#endregion
+#region Lerp
+
+    /// <summary>
+    /// Set the lerp function.
+    ///
+    /// <para>
+    /// Overrides the default lerp function for this tween.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="lerp">The lerp function for this tween.</param>
+    public Tween Lerp<T>(LerpFunc<T> lerp) {
+      if (Entity(out var entity)) {
+        Peachy.Lerp(entity, lerp);
+      }
+      return this;
+    }
+
+
+#endregion
+#region Shake
+
+    /// <summary>
+    /// Set the lerp function to shake.
+    ///
+    /// <para>
+    /// <b>Supported by Vector2 tweens only.</b>
+    /// </para>
+    /// <para>
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// on each dimension of the tweened value.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="decay">Rate at which amplitude and frequency decrease over time.</param>
+    /// <param name="randomness">Maximum percentage change randomly applied to amplitude and frequency per axis.</param>
+    public Tween Shake2D(
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Shake2D(oscillationCount, decay, decay, randomness, randomness);
+
+    /// <summary>
+    /// Set the lerp function to shake.
+    ///
+    /// <para>
+    /// <b>Supported by Vector2 tweens only.</b>
+    /// </para>
+    /// <para>
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// on each dimension of the tweened value.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="frequencyDecay">Rate at which frequency decreases over time.</param>
+    /// <param name="amplitudeDecay">Rate at which amplitude decreases over time.</param>
+    /// <param name="frequencyRandomness">Maximum percentage change randomly applied to frequency per axis.</param>
+    /// <param name="amplitudeRandomness">Maximum percentage change randomly applied to amplitude per axis.</param>
+    public Tween Shake2D(
+      int oscillationCount,
+      float amplitudeDecay,
+      float frequencyDecay,
+      float amplitudeRandomness,
+      float frequencyRandomness
+    ) => Lerp(LerpFuncs.CreateShake2D(
+      oscillationCount: oscillationCount,
+      amplitudeDecay: amplitudeDecay,
+      frequencyDecay: frequencyDecay,
+      amplitudeRandomness: amplitudeRandomness,
+      frequencyRandomness: frequencyRandomness
+    ));
+
+    /// <summary>
+    /// Set the lerp function to shake.
+    ///
+    /// <para>
+    /// <b>Supported by Vector3 tweens only.</b>
+    /// </para>
+    /// <para>
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// on each dimension of the tweened value.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="decay">Rate at which amplitude and frequency decrease over time.</param>
+    /// <param name="randomness">Maximum percentage change randomly applied to amplitude and frequency per axis.</param>
+    public Tween Shake(
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Shake(oscillationCount, decay, decay, randomness, randomness);
+
+    /// <summary>
+    /// Set the lerp function to shake.
+    ///
+    /// <para>
+    /// <b>Supported by Vector3 tweens only.</b>
+    /// </para>
+    /// <para>
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// on each dimension of the tweened value.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="frequencyDecay">Rate at which frequency decreases over time.</param>
+    /// <param name="amplitudeDecay">Rate at which amplitude decreases over time.</param>
+    /// <param name="frequencyRandomness">Maximum percentage change randomly applied to frequency per axis.</param>
+    /// <param name="amplitudeRandomness">Maximum percentage change randomly applied to amplitude per axis.</param>
+    public Tween Shake(
+      int oscillationCount,
+      float amplitudeDecay,
+      float frequencyDecay,
+      float amplitudeRandomness,
+      float frequencyRandomness
+    ) => Lerp(LerpFuncs.CreateShake(
+      oscillationCount: oscillationCount,
+      amplitudeDecay: amplitudeDecay,
+      frequencyDecay: frequencyDecay,
+      amplitudeRandomness: amplitudeRandomness,
+      frequencyRandomness: frequencyRandomness
+    ));
+
+#endregion
+#region Punch
+
+    /// <summary>
+    /// Set the ease to oscillate and fade out.
+    /// </summary>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">
+    /// The number of times the value will oscillation (half the period).
+    ///
+    /// Setting this value to a negative will move it away from the target on
+    /// its first oscillation.
+    /// </param>
+    /// <param name="amplitudeDecay">
+    /// Rate at which amplitude of wave decreases.
+    ///
+    /// <para>
+    /// Higher values cause a more vigorous initial shake.<br/>
+    /// A value of zero will cause amplitude to stay constant.<br/>
+    /// Values below zero cause the amplitude to increase over time, tending towards infinity.<br/>
+    /// </para>
+    /// </param>
+    /// <param name="frequencyDecay">
+    /// Rate at which frequency of wave decreases.
+    ///
+    /// <para>
+    /// Higher values cause a more vigorous initial shake. Values below zero
+    /// cause the shake to increase in speed over time.
+    /// </para>
+    /// </param>
+    public Tween Punch(
+      int oscillationCount,
+      float amplitudeDecay = 1f,
+      float frequencyDecay = 1f
+    ) => Ease(
+      EaseFuncs.CreatePunch(oscillationCount, amplitudeDecay, frequencyDecay)
+    );
+
+#endregion
+#region Callbacks
+
+    public Tween OnLoop(Action onComplete) =>
+      AddHandler<OnLoop>(onComplete);
+
+    public Tween OnComplete(Action onComplete) =>
+      AddHandler<OnComplete>(onComplete);
+
+    public Tween OnKill(Action onKill) =>
+      AddHandler<OnKill>(onKill);
+
+    Tween AddHandler<T>(Action handler) where T : struct, ICallback {
+      if (Entity(out var entity)) {
+        _world.AddHandler<T>(entity, handler);
+      }
+      return this;
+    }
+
+#endregion
+#region Private
+
+    bool Entity(out int entity) => Peachy.Entity(this, out entity);
+
+    bool TryEntity(out int entity) => Peachy.TryEntity(this, out entity);
+
+#endregion
+  }
+}
