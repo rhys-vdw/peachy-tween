@@ -1,17 +1,16 @@
-using UnityEngine;
-using NUnit.Framework;
 using System.Reflection;
+using System;
 
 namespace PeachyTween.Tests {
   public static class TestUtility {
     public static void InitializeEcs() =>
-      InvokePeachyStaticMethod(nameof(InitializeEcs));
+      Core.InitializeEcs();
 
     public static void Destroy() =>
-      InvokePeachyStaticMethod(nameof(Destroy));
+      Core.Destroy();
 
     static void InvokePeachyStaticMethod(string methodName) {
-      var method = typeof(Peachy).GetMethod(
+      var method = Type.GetType("PeachyTween.Core").GetMethod(
         methodName,
         BindingFlags.Static | BindingFlags.NonPublic
       );
