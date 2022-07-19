@@ -420,26 +420,35 @@ namespace PeachyTween {
 #region Punch
 
     /// <summary>
-    /// Sets the ease to a "punch" effect.
+    /// Set the ease to oscillate and fades out.
     /// </summary>
     /// <param name="tween">The tween.</param>
-    /// <param name="vibrationCount">The number of times the tweened value will oscillate back and forth before coming to rest.</param>
-    /// <param name="scaleEase">Easing function by which the value is scaled back to 0.</param>
+    /// <param name="oscillationCount">
+    /// The number of times the value will oscillation (half the period).
+    ///
+    /// Setting this value to a negative will move it away from the target on
+    /// its first oscillation.
+    /// </param>
+    /// <param name="amplitudeDecay">
+    /// Rate at which amplitude of wave decreases. In range [0, infinity].
+    ///
+    /// Higher values cause a more vigorous initial shake. Values below zero
+    /// cause the amplitude to increase over time, tending towards infinity.
+    /// </param>
+    /// <param name="frequencyDecay">
+    /// Rate at which frequency of wave decreases.
+    ///
+    /// Higher values cause a more vigorous initial shake. Values below zero
+    /// cause the shake to increase in speed over time.
+    /// </param>
     public static Tween Punch(
       this Tween tween,
-      int vibrationCount,
-      Ease scaleEase = PeachyTween.Ease.ExpoOut
-    ) => Punch(tween, vibrationCount, scaleEase.ToFunc());
-
-    /// <summary>
-    /// Sets the ease to a "punch" effect.
-    /// </summary>
-    /// <param name="tween">The tween.</param>
-    /// <param name="vibrationCount">The number of times the tweened value will oscillate back and forth before coming to rest.</param>
-    /// <param name="scaleEase">Easing function by which the value is scaled back to 0.</param>
-    public static Tween Punch(this Tween tween, int vibrationCount, EaseFunc scaleEase) {
+      int oscillationCount,
+      float amplitudeDecay = 1f,
+      float frequencyDecay = 1f
+    ) {
       if (Entity(tween, out var entity)) {
-        tween.Ease(EaseFuncs.Punch(vibrationCount, scaleEase));
+        tween.Ease(EaseFuncs.CreatePunch(oscillationCount, amplitudeDecay, frequencyDecay));
       }
       return tween;
     }

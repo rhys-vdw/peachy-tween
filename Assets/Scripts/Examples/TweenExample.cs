@@ -3,19 +3,19 @@ using UnityEngine;
 
 namespace PeachyTween.Test {
   public class TweenExample : MonoBehaviour {
+    public int OscillationCount = 5;
     public float Duration = 1f;
-    public float VibrationCount = 4;
-    public float Rotation = 1080f;
+    public float AmplitudeDecay = 0f;
+    public float FrequencyDecay = 0f;
+    public Transform To;
     Tween _tween;
 
     void Update() {
       if (Input.GetKeyDown(KeyCode.Space)) {
         _tween.Kill(complete: true).Sync();
         _tween = transform
-          .TweenRotation(new Vector3(0, Rotation, 0), Duration)
-          .LoopForever()
-          .PingPong()
-          .OnLoop(() => Debug.Log("Loop!"));
+          .TweenPosition(To.position, Duration)
+          .Punch(OscillationCount, AmplitudeDecay, FrequencyDecay);
           // .Punch(5)
           // .OnComplete(() => Debug.Log("Done!"));
       }
