@@ -216,37 +216,17 @@ namespace PeachyTween {
         : (1 + BounceOut(2 * t - 1)) / 2;
     }
 
-    /// <summary>
-    /// Create a ease function that oscillates and fades out.
-    /// </summary>
-    /// <param name="oscillationCount">
-    /// The number of times the value will oscillation (half the period).
-    ///
-    /// Setting this value to a negative will move it away from the target on
-    /// its first oscillation.
-    /// </param>
-    /// <param name="amplitudeDecay">
-    /// Rate at which amplitude of wave decreases. In range [0, infinity].
-    ///
-    /// Higher values cause a more vigorous initial shake. Values below zero
-    /// cause the amplitude to increase over time, tending towards infinity.
-    /// </param>
-    /// <param name="frequencyDecay">
-    /// Rate at which frequency of wave decreases.
-    ///
-    /// Higher values cause a more vigorous initial shake. Values below zero
-    /// cause the shake to increase in speed over time.
-    /// </param>
     public static EaseFunc CreatePunch(
       int oscillationCount,
       float amplitudeDecay,
-      float frequencyDecay
+      float frequencyDecay,
+      bool alwaysStartPositive = true
     ) {
       // Cache constant.
       var b = PI * oscillationCount;
 
       // If the curve would be going in the negative direction, flip it.
-      if (oscillationCount % 2 == 0) {
+      if (alwaysStartPositive && oscillationCount % 2 == 0) {
         b = -b;
       }
 

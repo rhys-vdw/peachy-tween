@@ -12,6 +12,9 @@ namespace PeachyTween {
   struct Reverse { }
   struct PingPong { }
   struct Kill { }
+  struct OverrideLerp<T> {
+    public Lerp<T> Func;
+  }
 
   // Groups
   struct Update { }

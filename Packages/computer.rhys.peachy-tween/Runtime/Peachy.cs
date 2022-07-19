@@ -52,11 +52,16 @@ namespace PeachyTween {
       CreateTween(from, to, duration, onChange);
 
     static Tween CreateTween<T>(T from, T to, float duration, Action<T> onChange) {
+      var entity = CreateTweenEntity(from, to, duration, onChange);
+      return new Tween(_world.PackEntity(entity));
+    }
+
+    static int CreateTweenEntity<T>(T from, T to, float duration, Action<T> onChange) {
       var entity = _world.NewEntity();
       _world.AddComponent(entity, new TweenConfig<T>(from, to, onChange));
       _world.AddComponent(entity, new TweenState(duration));
       SetGroup<Update>(entity);
-      return new Tween(_world.PackEntity(entity));
+      return entity;
     }
 
 #endregion
@@ -417,6 +422,33 @@ namespace PeachyTween {
     }
 
 #endregion
+#region Shake
+
+    public static Tween Shake(
+      this Tween tween,
+      int oscillationCount,
+      float amplitudeDecay = 1f,
+      float frequencyDecay = 1f,
+      float amplitudeRandomness = 0f,
+      float frequencyRandomness = 0f
+    ) {
+      if (Entity(tween, out var entity)) {
+        if (!_world.HasComponent<TweenConfig<Vector3>>(entity)) {
+          throw new ArgumentException("Tween is not operating on a Vector3 value", nameof(tween));
+        }
+        ref var lerp = ref _world.EnsureComponent<OverrideLerp<Vector3>>(entity);
+        lerp.Func = LerpFuncs.CreateShake(
+          oscillationCount: oscillationCount,
+          amplitudeDecay: amplitudeDecay,
+          frequencyDecay: frequencyDecay,
+          amplitudeRandomness: amplitudeRandomness,
+          frequencyRandomness: frequencyRandomness
+        );
+      }
+      return tween;
+    }
+
+#endregion
 #region Punch
 
     /// <summary>
@@ -432,14 +464,19 @@ namespace PeachyTween {
     /// <param name="amplitudeDecay">
     /// Rate at which amplitude of wave decreases. In range [0, infinity].
     ///
-    /// Higher values cause a more vigorous initial shake. Values below zero
-    /// cause the amplitude to increase over time, tending towards infinity.
+    /// <para>
+    /// Higher values cause a more vigorous initial shake.<br/>
+    /// A value of zero will cause amplitude to stay constant.<br/>
+    /// Values below zero cause the amplitude to increase over time, tending towards infinity.<br/>
+    /// </para>
     /// </param>
     /// <param name="frequencyDecay">
     /// Rate at which frequency of wave decreases.
     ///
+    /// <para>
     /// Higher values cause a more vigorous initial shake. Values below zero
     /// cause the shake to increase in speed over time.
+    /// </para>
     /// </param>
     public static Tween Punch(
       this Tween tween,
