@@ -26,12 +26,12 @@ namespace PeachyTween {
   static class Core {
 #region Tween factory
 
-    public static Tween CreateTween<T>(T from, T to, float duration, Action<T> onChange) {
+    public static EcsPackedEntity CreateTween<T>(T from, T to, float duration, Action<T> onChange) {
       var entity = _world.NewEntity();
       _world.AddComponent(entity, new TweenConfig<T>(from, to, onChange));
       _world.AddComponent(entity, new TweenState(duration));
       SetGroup<Update>(entity);
-      return new Tween(_world.PackEntity(entity));
+      return _world.PackEntity(entity);
     }
 
 #endregion
@@ -321,16 +321,8 @@ namespace PeachyTween {
     static ChangeSystem<T> ChangeSystem<T>(EcsFilter filter, LerpFunc<T> lerp) =>
       new (filter, lerp);
 
-    internal static bool Entity(Tween tween, out int entity) {
-      if (!TryEntity(tween, out entity)) {
-        Debug.LogWarning($"Tween is invalid");
-        return false;
-      }
-      return true;
-    }
-
-    internal static bool TryEntity(Tween tween, out int entity) =>
-      tween._entity.Unpack(_world, out entity);
+    internal static bool TryEntity(EcsPackedEntity packedEntity, out int entity) =>
+      packedEntity.Unpack(_world, out entity);
 
 #endregion
   }

@@ -462,9 +462,15 @@ namespace PeachyTween {
 #endregion
 #region Private
 
-    bool Entity(out int entity) => Core.Entity(this, out entity);
+    bool Entity(out int entity) {
+      if (!TryEntity(out entity)) {
+        Debug.LogWarning($"Tween is invalid");
+        return false;
+      }
+      return true;
+    }
 
-    bool TryEntity(out int entity) => Core.TryEntity(this, out entity);
+    bool TryEntity(out int entity) => Core.TryEntity(_entity, out entity);
 
 #endregion
   }
