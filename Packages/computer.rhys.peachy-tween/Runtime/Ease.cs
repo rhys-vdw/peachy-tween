@@ -216,9 +216,21 @@ namespace PeachyTween {
         : (1 + BounceOut(2 * t - 1)) / 2;
     }
 
-    public static EaseFunc Punch(int peakCount, EaseFunc scaleEase) {
-      var r = Log(peakCount, 2) + 1;
-      return t => (1 - scaleEase(t)) * -Sin(2 * PI * Pow(2, r - 1 - t * r));
+    public static EaseFunc CreatePunch(
+      int oscillationCount,
+      float amplitudeDecay,
+      float frequencyDecay,
+      bool alwaysStartPositive = true
+    ) {
+      // Cache constant.
+      var b = PI * oscillationCount;
+
+      // If the curve would be going in the negative direction, flip it.
+      if (alwaysStartPositive && oscillationCount % 2 == 0) {
+        b = -b;
+      }
+
+      return t => Pow(1 - t, amplitudeDecay) * Sin(Pow(1 - t, frequencyDecay) * b);
     }
   }
 }

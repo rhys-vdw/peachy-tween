@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace PeachyTween {
-  static class MathUtility {
+  public static class MathUtility {
     public static Vector3 WithX(this in Vector3 v, float x) =>
       new (x, v.y, v.z);
 
@@ -35,5 +35,8 @@ namespace PeachyTween {
       }
       return a + delta * t;
     }
+
+    public static float InverseLerpUnclamped(float a, float b, float value) =>
+      a == b ? 0 : (value - a) / (b - a);
   }
 }

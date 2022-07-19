@@ -52,11 +52,16 @@ namespace PeachyTween {
       CreateTween(from, to, duration, onChange);
 
     static Tween CreateTween<T>(T from, T to, float duration, Action<T> onChange) {
+      var entity = CreateTweenEntity(from, to, duration, onChange);
+      return new Tween(_world.PackEntity(entity));
+    }
+
+    static int CreateTweenEntity<T>(T from, T to, float duration, Action<T> onChange) {
       var entity = _world.NewEntity();
       _world.AddComponent(entity, new TweenConfig<T>(from, to, onChange));
       _world.AddComponent(entity, new TweenState(duration));
       SetGroup<Update>(entity);
-      return new Tween(_world.PackEntity(entity));
+      return entity;
     }
 
 #endregion
@@ -417,29 +422,190 @@ namespace PeachyTween {
     }
 
 #endregion
+#region Lerp
+
+    /// <summary>
+    /// Set the lerp function.
+    ///
+    /// <para>
+    /// Overrides the default lerp function for this tween.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="lerp">The lerp function for this tween.</param>
+    public static Tween Lerp<T>(
+      this Tween tween,
+      LerpFunc<T> lerp
+    ) {
+      if (Entity(tween, out var entity)) {
+        if (!_world.HasComponent<TweenConfig<T>>(entity)) {
+          throw new ArgumentException($"Tween is not operating on a {typeof(T).Name} value", nameof(tween));
+        }
+        ref var l = ref _world.EnsureComponent<OverrideLerp<T>>(entity);
+        l.Func = lerp;
+      }
+      return tween;
+    }
+
+
+#endregion
+#region Shake
+
+    /// <summary>
+    /// Set the lerp function to shake.
+    ///
+    /// <para>
+    /// <b>Supported by Vector2 tweens only.</b>
+    /// </para>
+    /// <para>
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// on each dimension of the tweened value.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="decay">Rate at which amplitude and frequency decrease over time.</param>
+    /// <param name="randomness">Maximum percentage change randomly applied to amplitude and frequency per axis.</param>
+    public static Tween Shake2D(
+      this Tween tween,
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Shake2D(tween, oscillationCount, decay, decay, randomness, randomness);
+
+    /// <summary>
+    /// Set the lerp function to shake.
+    ///
+    /// <para>
+    /// <b>Supported by Vector2 tweens only.</b>
+    /// </para>
+    /// <para>
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// on each dimension of the tweened value.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="frequencyDecay">Rate at which frequency decreases over time.</param>
+    /// <param name="amplitudeDecay">Rate at which amplitude decreases over time.</param>
+    /// <param name="frequencyRandomness">Maximum percentage change randomly applied to frequency per axis.</param>
+    /// <param name="amplitudeRandomness">Maximum percentage change randomly applied to amplitude per axis.</param>
+    public static Tween Shake2D(
+      this Tween tween,
+      int oscillationCount,
+      float amplitudeDecay,
+      float frequencyDecay,
+      float amplitudeRandomness,
+      float frequencyRandomness
+    ) => Lerp(tween, LerpFuncs.CreateShake2D(
+      oscillationCount: oscillationCount,
+      amplitudeDecay: amplitudeDecay,
+      frequencyDecay: frequencyDecay,
+      amplitudeRandomness: amplitudeRandomness,
+      frequencyRandomness: frequencyRandomness
+    ));
+
+    /// <summary>
+    /// Set the lerp function to shake.
+    ///
+    /// <para>
+    /// <b>Supported by Vector3 tweens only.</b>
+    /// </para>
+    /// <para>
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// on each dimension of the tweened value.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="decay">Rate at which amplitude and frequency decrease over time.</param>
+    /// <param name="randomness">Maximum percentage change randomly applied to amplitude and frequency per axis.</param>
+    public static Tween Shake(
+      this Tween tween,
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Shake(tween, oscillationCount, decay, decay, randomness, randomness);
+
+    /// <summary>
+    /// Set the lerp function to shake.
+    ///
+    /// <para>
+    /// <b>Supported by Vector3 tweens only.</b>
+    /// </para>
+    /// <para>
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// on each dimension of the tweened value.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="frequencyDecay">Rate at which frequency decreases over time.</param>
+    /// <param name="amplitudeDecay">Rate at which amplitude decreases over time.</param>
+    /// <param name="frequencyRandomness">Maximum percentage change randomly applied to frequency per axis.</param>
+    /// <param name="amplitudeRandomness">Maximum percentage change randomly applied to amplitude per axis.</param>
+    public static Tween Shake(
+      this Tween tween,
+      int oscillationCount,
+      float amplitudeDecay,
+      float frequencyDecay,
+      float amplitudeRandomness,
+      float frequencyRandomness
+    ) => Lerp(tween, LerpFuncs.CreateShake(
+      oscillationCount: oscillationCount,
+      amplitudeDecay: amplitudeDecay,
+      frequencyDecay: frequencyDecay,
+      amplitudeRandomness: amplitudeRandomness,
+      frequencyRandomness: frequencyRandomness
+    ));
+
+#endregion
 #region Punch
 
     /// <summary>
-    /// Sets the ease to a "punch" effect.
+    /// Set the ease to oscillate and fade out.
     /// </summary>
     /// <param name="tween">The tween.</param>
-    /// <param name="vibrationCount">The number of times the tweened value will oscillate back and forth before coming to rest.</param>
-    /// <param name="scaleEase">Easing function by which the value is scaled back to 0.</param>
+    /// <param name="oscillationCount">
+    /// The number of times the value will oscillation (half the period).
+    ///
+    /// Setting this value to a negative will move it away from the target on
+    /// its first oscillation.
+    /// </param>
+    /// <param name="amplitudeDecay">
+    /// Rate at which amplitude of wave decreases.
+    ///
+    /// <para>
+    /// Higher values cause a more vigorous initial shake.<br/>
+    /// A value of zero will cause amplitude to stay constant.<br/>
+    /// Values below zero cause the amplitude to increase over time, tending towards infinity.<br/>
+    /// </para>
+    /// </param>
+    /// <param name="frequencyDecay">
+    /// Rate at which frequency of wave decreases.
+    ///
+    /// <para>
+    /// Higher values cause a more vigorous initial shake. Values below zero
+    /// cause the shake to increase in speed over time.
+    /// </para>
+    /// </param>
     public static Tween Punch(
       this Tween tween,
-      int vibrationCount,
-      Ease scaleEase = PeachyTween.Ease.ExpoOut
-    ) => Punch(tween, vibrationCount, scaleEase.ToFunc());
-
-    /// <summary>
-    /// Sets the ease to a "punch" effect.
-    /// </summary>
-    /// <param name="tween">The tween.</param>
-    /// <param name="vibrationCount">The number of times the tweened value will oscillate back and forth before coming to rest.</param>
-    /// <param name="scaleEase">Easing function by which the value is scaled back to 0.</param>
-    public static Tween Punch(this Tween tween, int vibrationCount, EaseFunc scaleEase) {
+      int oscillationCount,
+      float amplitudeDecay = 1f,
+      float frequencyDecay = 1f
+    ) {
       if (Entity(tween, out var entity)) {
-        tween.Ease(EaseFuncs.Punch(vibrationCount, scaleEase));
+        tween.Ease(EaseFuncs.CreatePunch(oscillationCount, amplitudeDecay, frequencyDecay));
       }
       return tween;
     }
@@ -561,16 +727,16 @@ namespace PeachyTween {
     static EcsWorld.Mask FilterActiveByType<TValue>() =>
       _world.Filter<TweenConfig<TValue>>().Inc<Active>().Exc<Kill>();
 
-    static ChangeSystem<TValue> ChangeSystemExc<TValue, TExc>(Lerp<TValue> lerp) where TExc : struct =>
+    static ChangeSystem<TValue> ChangeSystemExc<TValue, TExc>(LerpFunc<TValue> lerp) where TExc : struct =>
       ChangeSystem(FilterActiveByType<TValue>().Exc<TExc>().End(), lerp);
 
-    static ChangeSystem<TValue> ChangeSystemInc<TValue, TInc>(Lerp<TValue> lerp) where TInc : struct =>
+    static ChangeSystem<TValue> ChangeSystemInc<TValue, TInc>(LerpFunc<TValue> lerp) where TInc : struct =>
       ChangeSystem(FilterActiveByType<TValue>().Inc<TInc>().End(), lerp);
 
-    static ChangeSystem<TValue> ChangeSystem<TValue>(Lerp<TValue> lerp) =>
+    static ChangeSystem<TValue> ChangeSystem<TValue>(LerpFunc<TValue> lerp) =>
       ChangeSystem(FilterActiveByType<TValue>().End(), lerp);
 
-    static ChangeSystem<T> ChangeSystem<T>(EcsFilter filter, Lerp<T> lerp) =>
+    static ChangeSystem<T> ChangeSystem<T>(EcsFilter filter, LerpFunc<T> lerp) =>
       new (filter, lerp);
 
     static bool Entity(Tween tween, out int entity) {
