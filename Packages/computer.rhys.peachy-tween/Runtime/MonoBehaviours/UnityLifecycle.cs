@@ -4,13 +4,13 @@ namespace PeachyTween {
   internal class UnityLifecycle : MonoBehaviour {
 #pragma warning disable IDE0051
 
-    void Update() => Peachy.Run<Update>(Time.deltaTime);
+    void Update() => Core.Run<Update>(Time.deltaTime);
 
-    void LateUpdate() => Peachy.Run<LateUpdate>(Time.deltaTime);
+    void LateUpdate() => Core.Run<LateUpdate>(Time.deltaTime);
 
-    void FixedUpdate() => Peachy.Run<FixedUpdate>(Time.deltaTime);
+    void FixedUpdate() => Core.Run<FixedUpdate>(Time.deltaTime);
 
-    void OnDestroy() => Peachy.Destroy();
+    void OnDestroy() => Core.Destroy();
 
 #pragma warning restore IDE0051
   }

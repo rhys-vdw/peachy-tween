@@ -16,34 +16,34 @@ namespace PeachyTween {
 
     public Tween Pause() {
       if (Entity(out var entity)) {
-        Peachy.Pause(entity);
+        Core.Pause(entity);
       }
       return this;
     }
 
     public Tween Resume() {
       if (Entity(out var entity)) {
-        Peachy.Resume(entity);
+        Core.Resume(entity);
       }
       return this;
     }
 
     public bool IsPaused() =>
-      Entity(out var entity) && Peachy.IsPaused(entity);
+      Entity(out var entity) && Core.IsPaused(entity);
 
 #endregion
 #region Preserve
 
     public Tween Preserve() {
       if (Entity(out var entity)) {
-        Peachy.Preserve(entity);
+        Core.Preserve(entity);
       }
       return this;
     }
 
     public Tween ClearPreserve() {
       if (Entity(out var entity)) {
-        Peachy.ClearPreserve(entity);
+        Core.ClearPreserve(entity);
       }
       return this;
     }
@@ -55,25 +55,25 @@ namespace PeachyTween {
 
     public Tween GoTo(float elapsed) {
       if (Entity(out var entity)) {
-        Peachy.GoTo(entity, elapsed);
+        Core.GoTo(entity, elapsed);
       }
       return this;
     }
 
     public Tween Complete() {
       if (Entity(out var entity)) {
-        Peachy.Complete(entity);
+        Core.Complete(entity);
       }
       return this;
     }
 
     public bool IsComplete() =>
       Entity(out var entity) &&
-      Peachy.IsComplete(entity);
+      Core.IsComplete(entity);
 
     public Tween Reverse() {
       if (Entity(out var entity)) {
-        Peachy.Reverse(entity);
+        Core.Reverse(entity);
       }
       return this;
     }
@@ -83,7 +83,7 @@ namespace PeachyTween {
     /// </summary>
     public Tween From() {
       if (Entity(out var entity)) {
-        Peachy.From(entity);
+        Core.From(entity);
       }
       return this;
     }
@@ -97,7 +97,7 @@ namespace PeachyTween {
     ///
     /// This does not change which object the Tween is currently acting on, its
     /// purpose is to link this tween to an object so that it will be killed
-    /// when the target object is passed to <c cref="Kill">Peachy.Kill</c>.
+    /// when the target object is passed to <c cref="Kill">Core.Kill</c>.
     ///
     /// This will replace any previously set target.
     ///
@@ -109,7 +109,7 @@ namespace PeachyTween {
     /// <param name="target">Any instance of a reference type to become the target of this tween.</param>
     public Tween SetTarget<T>(T target) where T : class {
       if (Entity(out var entity)) {
-        Peachy.SetTarget(entity, target);
+        Core.SetTarget(entity, target);
       }
       return this;
     }
@@ -123,7 +123,7 @@ namespace PeachyTween {
     /// <returns><c>true</c> if a target has been set; otherwise, <c>false</c>.</returns>
     public bool TryGetTarget(out object target) {
       if (Entity(out var entity)) {
-        return Peachy.TryGetTarget(entity, out target);
+        return Core.TryGetTarget(entity, out target);
       }
       target = default;
       return false;
@@ -134,14 +134,14 @@ namespace PeachyTween {
 
     public Tween PingPong() {
       if (Entity(out int entity)) {
-        Peachy.PingPong(entity);
+        Core.PingPong(entity);
       }
       return this;
     }
 
     public Tween ClearPingPong() {
       if (Entity(out int entity)) {
-        Peachy.ClearPingPong(entity);
+        Core.ClearPingPong(entity);
       }
       return this;
     }
@@ -151,7 +151,7 @@ namespace PeachyTween {
 
     public Tween Kill(bool complete = false) {
       if (TryEntity(out var entity)) {
-        Peachy.Kill(entity, complete);
+        Core.Kill(entity, complete);
       }
       return this;
     }
@@ -168,7 +168,7 @@ namespace PeachyTween {
 
     public Tween Rotate() {
       if (Entity(out var entity)) {
-        Peachy.Rotate(entity);
+        Core.Rotate(entity);
       }
       return this;
     }
@@ -178,13 +178,13 @@ namespace PeachyTween {
 
     public void ManualUpdate(float deltaTime) {
       if (Entity(out var entity)) {
-        Peachy.ManualUpdate(entity, deltaTime);
+        Core.ManualUpdate(entity, deltaTime);
       }
     }
 
     public Tween Sync() {
       if (Entity(out var entity)) {
-        Peachy.Sync(entity);
+        Core.Sync(entity);
       }
       return this;
     }
@@ -202,14 +202,14 @@ namespace PeachyTween {
 
     public Tween ClearGroup() {
       if (Entity(out var entity)) {
-        Peachy.ClearGroup(entity);
+        Core.ClearGroup(entity);
       }
       return this;
     }
 
     public Tween SetGroup<TGroup>() where TGroup : struct {
       if (Entity(out var entity)) {
-        Peachy.SetGroup<TGroup>(entity);
+        Core.SetGroup<TGroup>(entity);
       }
       return this;
     }
@@ -232,7 +232,7 @@ namespace PeachyTween {
 
     Tween SetLooping(int remaining = -1) {
       if (Entity(out var entity)) {
-        Peachy.SetLooping(entity, remaining);
+        Core.SetLooping(entity, remaining);
       }
       return this;
     }
@@ -242,7 +242,7 @@ namespace PeachyTween {
 
     public Tween ClearEase() {
       if (Entity(out var entity)) {
-        Peachy.ClearEase(entity);
+        Core.ClearEase(entity);
       }
       return this;
     }
@@ -261,7 +261,7 @@ namespace PeachyTween {
 
     public Tween Ease(EaseFunc easeFunc) {
       if (Entity(out var entity)) {
-        Peachy.Ease(entity, easeFunc);
+        Core.Ease(entity, easeFunc);
       }
       return this;
     }
@@ -281,7 +281,7 @@ namespace PeachyTween {
     /// <param name="lerp">The lerp function for this tween.</param>
     public Tween Lerp<T>(LerpFunc<T> lerp) {
       if (Entity(out var entity)) {
-        Peachy.Lerp(entity, lerp);
+        Core.Lerp(entity, lerp);
       }
       return this;
     }
@@ -454,7 +454,7 @@ namespace PeachyTween {
 
     Tween AddHandler<T>(Action handler) where T : struct, ICallback {
       if (Entity(out var entity)) {
-        _world.AddHandler<T>(entity, handler);
+        Core.AddHandler<T>(entity, handler);
       }
       return this;
     }
@@ -462,9 +462,9 @@ namespace PeachyTween {
 #endregion
 #region Private
 
-    bool Entity(out int entity) => Peachy.Entity(this, out entity);
+    bool Entity(out int entity) => Core.Entity(this, out entity);
 
-    bool TryEntity(out int entity) => Peachy.TryEntity(this, out entity);
+    bool TryEntity(out int entity) => Core.TryEntity(this, out entity);
 
 #endregion
   }
