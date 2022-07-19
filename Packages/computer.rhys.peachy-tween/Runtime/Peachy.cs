@@ -424,13 +424,56 @@ namespace PeachyTween {
 #endregion
 #region Shake
 
+    /// <summary>
+    /// Set the lerp function to shake.
+    ///
+    /// <para>
+    /// <b>Supported by Vector3 tweens only.</b>
+    /// </para>
+    /// <para>
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// on each dimension of the tweened value.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="decay">Rate at which amplitude and frequency decrease over time.</param>
+    /// <param name="randomness">Maximum percentage change randomly applied to amplitude and frequency per axis.</param>
     public static Tween Shake(
       this Tween tween,
       int oscillationCount,
-      float amplitudeDecay = 1f,
-      float frequencyDecay = 1f,
-      float amplitudeRandomness = 0f,
-      float frequencyRandomness = 0f
+      float decay,
+      float randomness
+    ) => Shake(tween, oscillationCount, decay, decay, randomness, randomness);
+
+    /// <summary>
+    /// Set the lerp function to shake.
+    ///
+    /// <para>
+    /// <b>Supported by Vector3 tweens only.</b>
+    /// </para>
+    /// <para>
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// on each dimension of the tweened value.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="frequencyDecay">Rate at which frequency decreases over time.</param>
+    /// <param name="amplitudeDecay">Rate at which amplitude decreases over time.</param>
+    /// <param name="frequencyRandomness">Maximum percentage change randomly applied to frequency per axis.</param>
+    /// <param name="amplitudeRandomness">Maximum percentage change randomly applied to amplitude per axis.</param>
+    public static Tween Shake(
+      this Tween tween,
+      int oscillationCount,
+      float amplitudeDecay,
+      float frequencyDecay,
+      float amplitudeRandomness,
+      float frequencyRandomness
     ) {
       if (Entity(tween, out var entity)) {
         if (!_world.HasComponent<TweenConfig<Vector3>>(entity)) {
@@ -452,7 +495,7 @@ namespace PeachyTween {
 #region Punch
 
     /// <summary>
-    /// Set the ease to oscillate and fades out.
+    /// Set the ease to oscillate and fade out.
     /// </summary>
     /// <param name="tween">The tween.</param>
     /// <param name="oscillationCount">
@@ -462,7 +505,7 @@ namespace PeachyTween {
     /// its first oscillation.
     /// </param>
     /// <param name="amplitudeDecay">
-    /// Rate at which amplitude of wave decreases. In range [0, infinity].
+    /// Rate at which amplitude of wave decreases.
     ///
     /// <para>
     /// Higher values cause a more vigorous initial shake.<br/>
