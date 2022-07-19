@@ -428,6 +428,73 @@ namespace PeachyTween {
     /// Set the lerp function to shake.
     ///
     /// <para>
+    /// <b>Supported by Vector2 tweens only.</b>
+    /// </para>
+    /// <para>
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// on each dimension of the tweened value.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="decay">Rate at which amplitude and frequency decrease over time.</param>
+    /// <param name="randomness">Maximum percentage change randomly applied to amplitude and frequency per axis.</param>
+    public static Tween Shake2D(
+      this Tween tween,
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Shake2D(tween, oscillationCount, decay, decay, randomness, randomness);
+
+    /// <summary>
+    /// Set the lerp function to shake.
+    ///
+    /// <para>
+    /// <b>Supported by Vector2 tweens only.</b>
+    /// </para>
+    /// <para>
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// on each dimension of the tweened value.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="frequencyDecay">Rate at which frequency decreases over time.</param>
+    /// <param name="amplitudeDecay">Rate at which amplitude decreases over time.</param>
+    /// <param name="frequencyRandomness">Maximum percentage change randomly applied to frequency per axis.</param>
+    /// <param name="amplitudeRandomness">Maximum percentage change randomly applied to amplitude per axis.</param>
+    public static Tween Shake2D(
+      this Tween tween,
+      int oscillationCount,
+      float amplitudeDecay,
+      float frequencyDecay,
+      float amplitudeRandomness,
+      float frequencyRandomness
+    ) {
+      if (Entity(tween, out var entity)) {
+        if (!_world.HasComponent<TweenConfig<Vector2>>(entity)) {
+          throw new ArgumentException($"Tween is not operating on a {nameof(Vector2)} value", nameof(tween));
+        }
+        ref var lerp = ref _world.EnsureComponent<OverrideLerp<Vector2>>(entity);
+        lerp.Func = LerpFuncs.CreateShake2D(
+          oscillationCount: oscillationCount,
+          amplitudeDecay: amplitudeDecay,
+          frequencyDecay: frequencyDecay,
+          amplitudeRandomness: amplitudeRandomness,
+          frequencyRandomness: frequencyRandomness
+        );
+      }
+      return tween;
+    }
+
+    /// <summary>
+    /// Set the lerp function to shake.
+    ///
+    /// <para>
     /// <b>Supported by Vector3 tweens only.</b>
     /// </para>
     /// <para>
@@ -477,7 +544,7 @@ namespace PeachyTween {
     ) {
       if (Entity(tween, out var entity)) {
         if (!_world.HasComponent<TweenConfig<Vector3>>(entity)) {
-          throw new ArgumentException("Tween is not operating on a Vector3 value", nameof(tween));
+          throw new ArgumentException($"Tween is not operating on a {nameof(Vector3)} value", nameof(tween));
         }
         ref var lerp = ref _world.EnsureComponent<OverrideLerp<Vector3>>(entity);
         lerp.Func = LerpFuncs.CreateShake(

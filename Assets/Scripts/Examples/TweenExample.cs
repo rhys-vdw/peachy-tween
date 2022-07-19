@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PeachyTween.Test {
   public class TweenExample : MonoBehaviour {
-    public Vector3 Range = Vector3.one;
+    public Vector2 Range = Vector3.one;
     public int OscillationCount = 5;
     public float Duration = 1f;
     public float AmplitudeDecay = 1f;
@@ -17,7 +17,7 @@ namespace PeachyTween.Test {
       if (Input.GetKeyDown(KeyCode.Space)) {
         _tween.Kill(complete: true).Sync();
         _tween = transform
-          .TweenScale(Range, Duration)
+          .TweenPosition2D(Range, Duration)
           .Shake(
             OscillationCount,
             AmplitudeDecay,
