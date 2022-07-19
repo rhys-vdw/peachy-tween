@@ -422,6 +422,34 @@ namespace PeachyTween {
     }
 
 #endregion
+#region Lerp
+
+    /// <summary>
+    /// Set the lerp function.
+    ///
+    /// <para>
+    /// Overrides the default lerp function for this tween.
+    /// </para>
+    /// </summary>
+    /// <seealso cref="Punch"/>
+    /// <param name="tween">The tween.</param>
+    /// <param name="lerp">The lerp function for this tween.</param>
+    public static Tween Lerp<T>(
+      this Tween tween,
+      LerpFunc<T> lerp
+    ) {
+      if (Entity(tween, out var entity)) {
+        if (!_world.HasComponent<TweenConfig<T>>(entity)) {
+          throw new ArgumentException($"Tween is not operating on a {typeof(T).Name} value", nameof(tween));
+        }
+        ref var l = ref _world.EnsureComponent<OverrideLerp<T>>(entity);
+        l.Func = lerp;
+      }
+      return tween;
+    }
+
+
+#endregion
 #region Shake
 
     /// <summary>
@@ -474,22 +502,13 @@ namespace PeachyTween {
       float frequencyDecay,
       float amplitudeRandomness,
       float frequencyRandomness
-    ) {
-      if (Entity(tween, out var entity)) {
-        if (!_world.HasComponent<TweenConfig<Vector2>>(entity)) {
-          throw new ArgumentException($"Tween is not operating on a {nameof(Vector2)} value", nameof(tween));
-        }
-        ref var lerp = ref _world.EnsureComponent<OverrideLerp<Vector2>>(entity);
-        lerp.Func = LerpFuncs.CreateShake2D(
-          oscillationCount: oscillationCount,
-          amplitudeDecay: amplitudeDecay,
-          frequencyDecay: frequencyDecay,
-          amplitudeRandomness: amplitudeRandomness,
-          frequencyRandomness: frequencyRandomness
-        );
-      }
-      return tween;
-    }
+    ) => Lerp(tween, LerpFuncs.CreateShake2D(
+      oscillationCount: oscillationCount,
+      amplitudeDecay: amplitudeDecay,
+      frequencyDecay: frequencyDecay,
+      amplitudeRandomness: amplitudeRandomness,
+      frequencyRandomness: frequencyRandomness
+    ));
 
     /// <summary>
     /// Set the lerp function to shake.
@@ -541,22 +560,13 @@ namespace PeachyTween {
       float frequencyDecay,
       float amplitudeRandomness,
       float frequencyRandomness
-    ) {
-      if (Entity(tween, out var entity)) {
-        if (!_world.HasComponent<TweenConfig<Vector3>>(entity)) {
-          throw new ArgumentException($"Tween is not operating on a {nameof(Vector3)} value", nameof(tween));
-        }
-        ref var lerp = ref _world.EnsureComponent<OverrideLerp<Vector3>>(entity);
-        lerp.Func = LerpFuncs.CreateShake(
-          oscillationCount: oscillationCount,
-          amplitudeDecay: amplitudeDecay,
-          frequencyDecay: frequencyDecay,
-          amplitudeRandomness: amplitudeRandomness,
-          frequencyRandomness: frequencyRandomness
-        );
-      }
-      return tween;
-    }
+    ) => Lerp(tween, LerpFuncs.CreateShake(
+      oscillationCount: oscillationCount,
+      amplitudeDecay: amplitudeDecay,
+      frequencyDecay: frequencyDecay,
+      amplitudeRandomness: amplitudeRandomness,
+      frequencyRandomness: frequencyRandomness
+    ));
 
 #endregion
 #region Punch
