@@ -32,6 +32,20 @@ namespace PeachyTween {
         .SetTarget(transform);
 
     /// <summary>
+    /// Rotate a Transform in world space to face a point.
+    /// </summary>
+    /// <param name="transform">The transform.</param>
+    /// <param name="forward">The end forward vector.</param>
+    /// <param name="duration">Length of tween in seconds.</param>
+    public static Tween TweenLookAt(this Transform transform, Vector3 position, float duration) =>
+      TweenLookRotation(transform, position - transform.position, duration, Vector3.up);
+
+    /// <inheritdoc cref="TweenLookAt(Transform, Vector3, float)" />
+    /// <param name="up">The up direction of the end rotation.</param>
+    public static Tween TweenLookAt(this Transform transform, Vector3 position, float duration, Vector3 up) =>
+      TweenLookRotation(transform, position - transform.position, duration, up);
+
+    /// <summary>
     /// Rotate a Transform in world space to face a direction.
     /// </summary>
     /// <param name="transform">The transform.</param>
