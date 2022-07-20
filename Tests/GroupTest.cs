@@ -2,15 +2,9 @@ using UnityEngine;
 using NUnit.Framework;
 
 namespace PeachyTween.Tests {
-  public class GroupTest {
+  public class GroupTest : BaseTweenTest {
     struct TestGroupA { }
     struct TestGroupB { }
-
-    [SetUp]
-    public void SetUp() => TestUtility.InitializeEcs();
-
-    [TearDown]
-    public void TearDown() => TestUtility.Destroy();
 
     [Test]
     public void CustomGroupTest() {

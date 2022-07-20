@@ -2,13 +2,7 @@ using UnityEngine;
 using NUnit.Framework;
 
 namespace PeachyTween.Tests {
-  public class SlerpTest {
-    [SetUp]
-    public void SetUp() => TestUtility.InitializeEcs();
-
-    [TearDown]
-    public void TearDown() => TestUtility.Destroy();
-
+  public class SlerpTest : BaseTweenTest {
     [Test]
     public void SlerpVector3() {
       var actual = null as Vector3?;

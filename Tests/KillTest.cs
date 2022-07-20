@@ -2,13 +2,7 @@ using UnityEngine;
 using NUnit.Framework;
 
 namespace PeachyTween.Tests {
-  public class KillTest {
-    [SetUp]
-    public void SetUp() => TestUtility.InitializeEcs();
-
-    [TearDown]
-    public void TearDown() => TestUtility.Destroy();
-
+  public class KillTest : BaseTweenTest {
     [Test]
     public void Kill() {
       var onChange = false;
