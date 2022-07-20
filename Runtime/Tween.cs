@@ -3,8 +3,8 @@ using UnityEngine;
 using Leopotam.EcsLite;
 
 namespace PeachyTween {
-  public struct Tween {
-    readonly internal EcsPackedEntity _entity;
+  public readonly struct Tween {
+    readonly EcsPackedEntity _entity;
 
     internal Tween(EcsPackedEntity entity) {
       _entity = entity;
