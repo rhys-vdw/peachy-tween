@@ -56,7 +56,7 @@ namespace PeachyTween {
     }
 
     static float RandomScale(float value, float maxScale) =>
-        value * Random.Range(1 - maxScale, 1 + maxScale);
+      value * Random.Range(1 - maxScale, 1 + maxScale);
 
 #endregion
 #region Float
