@@ -68,11 +68,9 @@ namespace PeachyTween {
     /// <summary>
     /// Set the interal time of a tween.<para/>
     ///
-    /// <para id="warning">
     /// This has no effect until the next tween update. To reflect changes
     /// immediately (e.g. for a <see cref="Pause">paused</see> tween),
     /// then call <c>tween.GoTo(elapsed).Sync()</c>.<para/>
-    /// </para>
     /// </summary>
     /// <param name="elapsed">
     /// The time to set the tween to. <c>0</c> will rewind the tween to the
@@ -96,7 +94,6 @@ namespace PeachyTween {
     /// immediately (e.g. for a <see cref="Pause">paused</see> tween), then call
     /// <c>tween.GoTo(elapsed).Sync()</c>.<para/>
     /// </summary>
-    /// <returns></returns>
     public Tween Complete() {
       if (Entity(out var entity)) {
         Core.Complete(entity);
@@ -138,17 +135,17 @@ namespace PeachyTween {
 #region Target
 
     /// <summary>
-    /// <para>Set the associated target of a <c cref="Tween">Tween</c> for
+    /// Set the associated target of a <c cref="Tween">Tween</c> for
     /// killing by target.</para>
     ///
-    /// <para>This does not change which object the Tween is currently acting
+    /// This does not change which object the Tween is currently acting
     /// on, its purpose is to link this tween to an object so that it will be
     /// killed when the target object is passed to <c
     /// cref="Kill">Core.Kill</c>.</para>
     ///
-    /// <para>This will replace any previously set target.</para>
+    /// This will replace any previously set target.</para>
     ///
-    /// <para>This method is called by provided extension methods (e.g.
+    /// This method is called by provided extension methods (e.g.
     /// <c cref="TrasnformExtensions.TweenPosition">TweenPosition</c>), and
     /// should be called by any custom extension methods.</para>
     /// </summary>
@@ -286,8 +283,8 @@ namespace PeachyTween {
 #region Group
 
     /// <summary>
-    /// <para>Set tween to update on <c>Update</c>.</para>
-    /// <para>This is the default update group for new tweens.</para>
+    /// Set tween to update on <c>Update</c>.</para>
+    /// This is the default update group for new tweens.</para>
     /// </summary>
     public Tween SetUpdate() => SetGroup<Update>();
 
@@ -317,8 +314,8 @@ namespace PeachyTween {
     public Tween SetUnscaledFixedUpdate() => SetGroup<UnscaledFixedUpdate>();
 
     /// <summary>
-    /// <para>Disable automatic update of this tween.</para>
-    /// <para>This is an alias of <c cref="ClearGroup">ClearGroup</c>.</para>
+    /// Disable automatic update of this tween.</para>
+    /// This is an alias of <c cref="ClearGroup">ClearGroup</c>.</para>
     /// </summary>
     public Tween SetManualUpdate() => ClearGroup();
 
@@ -333,7 +330,7 @@ namespace PeachyTween {
     }
 
     /// <summary>
-    /// <para>Change the tween's update group.</para>
+    /// Change the tween's update group.</para>
     /// <param>Tweens default to the <c>Update</c> group, but custom groups can be added.</param>
     /// </summary>
     public Tween SetGroup<TGroup>() where TGroup : struct {
@@ -397,11 +394,8 @@ namespace PeachyTween {
 #region Lerp
 
     /// <summary>
-    /// Set the lerp function.
-    ///
-    /// <para>
+    /// Set the lerp function. <para/>
     /// Overrides the default lerp function for this tween.
-    /// </para>
     /// </summary>
     /// <seealso cref="Punch"/>
     /// <param name="tween">The tween.</param>
@@ -418,15 +412,11 @@ namespace PeachyTween {
 #region Shake
 
     /// <summary>
-    /// Set the lerp function to shake.
-    ///
-    /// <para>
-    /// <b>Supported by Vector2 tweens only.</b>
-    /// </para>
-    /// <para>
+    /// Set the lerp function to shake.<para/>
+    /// <b>Supported by Vector2 tweens only.</b><para/>
     /// This overrides the default tween function to shake its values. This
     /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
-    /// on each dimension of the tweened value.
+    /// on each dimension of the tweened value.<para/>
     /// </para>
     /// </summary>
     /// <seealso cref="Punch"/>
@@ -441,16 +431,13 @@ namespace PeachyTween {
     ) => Shake2D(oscillationCount, decay, decay, randomness, randomness);
 
     /// <summary>
-    /// Set the lerp function to shake.
+    /// Set the lerp function to shake.<para/>
     ///
-    /// <para>
-    /// <b>Supported by Vector2 tweens only.</b>
-    /// </para>
-    /// <para>
+    /// <b>Supported by Vector2 tweens only.</b><para/>
+    ///
     /// This overrides the default tween function to shake its values. This
     /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
-    /// on each dimension of the tweened value.
-    /// </para>
+    /// on each dimension of the tweened value.<para/>
     /// </summary>
     /// <seealso cref="Punch"/>
     /// <param name="tween">The tween.</param>
@@ -474,13 +461,11 @@ namespace PeachyTween {
     ));
 
     /// <summary>
-    /// Set the lerp function to shake.
+    /// Set the lerp function to shake.<para/>
     ///
-    /// <para>
-    /// <b>Supported by Vector3 tweens only.</b>
-    /// </para>
-    /// <para>
-    /// This overrides the default tween function to shake its values. This
+    /// <b>Supported by Vector3 tweens only.</b></para>
+    ///
+    /// /// This overrides the default tween function to shake its values. This
     /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
     /// on each dimension of the tweened value.
     /// </para>
@@ -497,16 +482,12 @@ namespace PeachyTween {
     ) => Shake(oscillationCount, decay, decay, randomness, randomness);
 
     /// <summary>
-    /// Set the lerp function to shake.
+    /// Set the lerp function to shake.<para/>
     ///
-    /// <para>
-    /// <b>Supported by Vector3 tweens only.</b>
-    /// </para>
-    /// <para>
+    /// <b>Supported by Vector3 tweens only.</b></para>
     /// This overrides the default tween function to shake its values. This
     /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
-    /// on each dimension of the tweened value.
-    /// </para>
+    /// on each dimension of the tweened value.</para>
     /// </summary>
     /// <seealso cref="Punch"/>
     /// <param name="tween">The tween.</param>
@@ -537,27 +518,23 @@ namespace PeachyTween {
     /// </summary>
     /// <param name="tween">The tween.</param>
     /// <param name="oscillationCount">
-    /// The number of times the value will oscillation (half the period).
+    /// The number of times the value will oscillation (half the period).<para/>
     ///
     /// Setting this value to a negative will move it away from the target on
     /// its first oscillation.
     /// </param>
     /// <param name="amplitudeDecay">
-    /// Rate at which amplitude of wave decreases.
+    /// Rate at which amplitude of wave decreases.<para/>
     ///
-    /// <para>
     /// Higher values cause a more vigorous initial shake.<br/>
     /// A value of zero will cause amplitude to stay constant.<br/>
     /// Values below zero cause the amplitude to increase over time, tending towards infinity.<br/>
-    /// </para>
     /// </param>
     /// <param name="frequencyDecay">
-    /// Rate at which frequency of wave decreases.
+    /// Rate at which frequency of wave decreases.<para/>
     ///
-    /// <para>
     /// Higher values cause a more vigorous initial shake. Values below zero
     /// cause the shake to increase in speed over time.
-    /// </para>
     /// </param>
     public Tween Punch(
       int oscillationCount,
