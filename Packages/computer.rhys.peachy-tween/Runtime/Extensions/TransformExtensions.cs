@@ -179,6 +179,28 @@ namespace PeachyTween {
       .Shake(oscillationCount, decay, randomness)
       .SetTarget(transform);
 
+    /// <summary>
+    /// Shake the Transform's world position on the XY axis with a random vector.
+    /// </summary>
+    /// <inheritdoc cref="ShakePosition" path="param" />
+    public static Tween ShakePosition2D(
+      this Transform transform,
+      float magnitude,
+      float duration,
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Peachy
+      .Tween(
+        (Vector2) transform.position,
+        VectorUtility.RandomOnUnitCircle() * magnitude,
+        duration,
+        v => transform.position = v.WithZ(transform.position.z)
+      )
+      .Shake2D(oscillationCount, decay, randomness)
+      .SetTarget(transform);
+
+
 #endregion
 #region Local position
 
@@ -227,6 +249,27 @@ namespace PeachyTween {
       .Shake(oscillationCount, decay, randomness)
       .SetTarget(transform);
 
+    /// <summary>
+    /// Shake the Transform's local position on the XY axis with a random vector.
+    /// </summary>
+    /// <inheritdoc cref="ShakePosition" path="param" />
+    public static Tween ShakeLocalPosition2D(
+      this Transform transform,
+      float magnitude,
+      float duration,
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Peachy
+      .Tween(
+        (Vector2) transform.localPosition,
+        VectorUtility.RandomOnUnitCircle() * magnitude,
+        duration,
+        v => transform.localPosition = v.WithZ(transform.localPosition.z)
+      )
+      .Shake2D(oscillationCount, decay, randomness)
+      .SetTarget(transform);
+
 #endregion
 #region Scale
 
@@ -273,6 +316,27 @@ namespace PeachyTween {
     ) => Peachy
       .Tween(transform.localScale, Random.onUnitSphere * magnitude, duration, v => transform.localScale = v)
       .Shake(oscillationCount, decay, randomness)
+      .SetTarget(transform);
+
+    /// <summary>
+    /// Shake the Transform's local scale on the XY axis with a random vector.
+    /// </summary>
+    /// <inheritdoc cref="ShakePosition" path="param" />
+    public static Tween ShakeLocalScale2D(
+      this Transform transform,
+      float magnitude,
+      float duration,
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Peachy
+      .Tween(
+        (Vector2) transform.localScale,
+        VectorUtility.RandomOnUnitCircle() * magnitude,
+        duration,
+        v => transform.localScale = v.WithZ(transform.localScale.z)
+      )
+      .Shake2D(oscillationCount, decay, randomness)
       .SetTarget(transform);
 
 #endregion
