@@ -49,7 +49,20 @@ namespace PeachyTween {
 #endregion
 #region Control
 
-    public Tween Restart() => GoTo(0);
+    /// <summary>
+    /// Restart the tween and unpause it.<para/>
+    /// Equivalent to <c>tween.Rewind().Resume()</c><para/>
+    /// </summary>
+    /// <seealso cref="Rewind"/>
+    /// <seealso cref="Resume"/>
+    public Tween Restart() => Rewind().Resume();
+
+    /// <summary>
+    /// Return the tween to the start.<para/>
+    /// Equivalent to <c cref="GoTo">GoTo(0)</c>.<para/>
+    /// </summary>
+    /// <seealso cref="GoTo"/>
+    public Tween Rewind() => GoTo(0);
 
     public Tween GoTo(float elapsed) {
       if (Entity(out var entity)) {
