@@ -2,13 +2,7 @@ using UnityEngine;
 using NUnit.Framework;
 
 namespace PeachyTween.Tests {
-  public class TargetTest {
-    [SetUp]
-    public void SetUp() => TestUtility.InitializeEcs();
-
-    [TearDown]
-    public void TearDown() => TestUtility.Destroy();
-
+  public class TargetTest : BaseTweenTest {
     [Test]
     public void SetTarget() {
       var expected = new Object();

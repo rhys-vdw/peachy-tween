@@ -2,13 +2,7 @@ using UnityEngine;
 using NUnit.Framework;
 
 namespace PeachyTween.Tests {
-  public class ShortestAngleTest {
-    [SetUp]
-    public void SetUp() => TestUtility.InitializeEcs();
-
-    [TearDown]
-    public void TearDown() => TestUtility.Destroy();
-
+  public class ShortestAngleTest : BaseTweenTest {
     [Test]
     public void ShortestAngle() {
       var actual = null as float?;

@@ -2,13 +2,7 @@ using UnityEngine;
 using NUnit.Framework;
 
 namespace PeachyTween.Tests {
-  public class LoopTest {
-    [SetUp]
-    public void SetUp() => TestUtility.InitializeEcs();
-
-    [TearDown]
-    public void TearDown() => TestUtility.Destroy();
-
+  public class LoopTest : BaseTweenTest {
     [Test]
     public void LoopRewind() {
       var value = 0f;
