@@ -25,7 +25,8 @@ namespace PeachyTween {
   struct UnscaledFixedUpdate { }
 
   // Lerp filter
-  struct Rotate { }
+  struct Slerp { }
+  struct ShortestAngle { }
 
   // Tween
   struct TweenConfig<T> {
