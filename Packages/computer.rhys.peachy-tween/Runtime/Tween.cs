@@ -194,9 +194,15 @@ namespace PeachyTween {
 
     public Tween SetUpdate() => SetGroup<Update>();
 
-    public Tween SetFixedUpdate() => SetGroup<FixedUpdate>();
+    public Tween SetUnscaledUpdate() => SetGroup<UnscaledUpdate>();
 
     public Tween SetLateUpdate() => SetGroup<LateUpdate>();
+
+    public Tween SetUnscaledLateUpdate() => SetGroup<UnscaledLateUpdate>();
+
+    public Tween SetFixedUpdate() => SetGroup<FixedUpdate>();
+
+    public Tween SetUnscaledFixedUpdate() => SetGroup<UnscaledFixedUpdate>();
 
     public Tween SetManualUpdate() => ClearGroup();
 

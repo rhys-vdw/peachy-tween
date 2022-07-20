@@ -18,8 +18,11 @@ namespace PeachyTween {
 
   // Groups
   struct Update { }
+  struct UnscaledUpdate { }
   struct LateUpdate { }
+  struct UnscaledLateUpdate { }
   struct FixedUpdate { }
+  struct UnscaledFixedUpdate { }
 
   // Lerp filter
   struct Rotate { }
