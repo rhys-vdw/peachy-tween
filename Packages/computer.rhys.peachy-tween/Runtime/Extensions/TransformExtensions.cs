@@ -35,7 +35,7 @@ namespace PeachyTween {
     /// Rotate a Transform in world space to face a point.
     /// </summary>
     /// <param name="transform">The transform.</param>
-    /// <param name="forward">The end forward vector.</param>
+    /// <param name="forward">The point to rotate towards.</param>
     /// <param name="duration">Length of tween in seconds.</param>
     public static Tween TweenLookAt(this Transform transform, Vector3 position, float duration) =>
       TweenLookRotation(transform, position - transform.position, duration, Vector3.up);
