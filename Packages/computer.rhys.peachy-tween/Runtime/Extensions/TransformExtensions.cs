@@ -11,11 +11,11 @@ namespace PeachyTween {
     /// beyond 360 degrees use the <see cref="TweenRotation(Transform, Vector3, float)">Euler angles override</see>.
     /// </summary>
     /// <param name="transform">The transform.</param>
-    /// <param name="endValue">The end world rotation.</param>
+    /// <param name="to">The end world rotation.</param>
     /// <param name="duration">Length of tween in seconds.</param>
-     public static Tween TweenRotation(this Transform transform, Quaternion endValue, float duration) =>
+     public static Tween TweenRotation(this Transform transform, Quaternion to, float duration) =>
       Peachy
-        .Tween(transform.rotation, endValue, duration, v => transform.rotation = v)
+        .Tween(transform.rotation, to, duration, v => transform.rotation = v)
         .SetTarget(transform);
 
     /// <summary>
@@ -24,11 +24,11 @@ namespace PeachyTween {
     /// This supports rotating beyond 360 degrees.
     /// </summary>
     /// <param name="transform">The transform.</param>
-    /// <param name="endValue">The end world rotation Euler angles in degrees.</param>
+    /// <param name="to">The end world rotation Euler angles in degrees.</param>
     /// <param name="duration">Length of tween in seconds.</param>
-    public static Tween TweenRotation(this Transform transform, Vector3 endValue, float duration) =>
+    public static Tween TweenRotation(this Transform transform, Vector3 to, float duration) =>
       Peachy
-        .Tween(transform.eulerAngles, endValue, duration, v => transform.eulerAngles = v)
+        .Tween(transform.eulerAngles, to, duration, v => transform.eulerAngles = v)
         .SetTarget(transform);
 
     /// <summary>
@@ -84,11 +84,11 @@ namespace PeachyTween {
     /// Rotate a Transform in local space.
     /// </summary>
     /// <param name="transform">The transform.</param>
-    /// <param name="endValue">The end local rotation.</param>
+    /// <param name="to">The end local rotation.</param>
     /// <param name="duration">Length of tween in seconds.</param>
-    public static Tween TweenLocalRotation(this Transform transform, Quaternion endValue, float duration) =>
+    public static Tween TweenLocalRotation(this Transform transform, Quaternion to, float duration) =>
       Peachy
-        .Tween(transform.localRotation, endValue, duration, v => transform.localRotation = v)
+        .Tween(transform.localRotation, to, duration, v => transform.localRotation = v)
         .SetTarget(transform);
 
     /// <summary>
@@ -97,11 +97,11 @@ namespace PeachyTween {
     /// This supports rotating beyond 360 degrees.
     /// </summary>
     /// <param name="transform">The transform.</param>
-    /// <param name="endValue">The end local rotation Euler angles in degrees.</param>
+    /// <param name="to">The end local rotation Euler angles in degrees.</param>
     /// <param name="duration">Length of tween in seconds.</param>
-    public static Tween TweenLocalRotation(this Transform transform, Vector3 endValue, float duration) =>
+    public static Tween TweenLocalRotation(this Transform transform, Vector3 to, float duration) =>
       Peachy
-        .Tween(transform.localEulerAngles, endValue, duration, v => transform.localEulerAngles = v)
+        .Tween(transform.localEulerAngles, to, duration, v => transform.localEulerAngles = v)
         .SetTarget(transform);
 
     /// <summary>
@@ -123,39 +123,39 @@ namespace PeachyTween {
 #endregion
 #region Position
 
-    public static Tween TweenPosition(this Transform transform, Vector3 endValue, float duration) =>
+    public static Tween TweenPosition(this Transform transform, Vector3 to, float duration) =>
       Peachy
-        .Tween(transform.position, endValue, duration, v => transform.position = v)
+        .Tween(transform.position, to, duration, v => transform.position = v)
         .SetTarget(transform);
 
-    public static Tween TweenPosition2D(this Transform transform, Vector2 endValue, float duration) =>
+    public static Tween TweenPosition2D(this Transform transform, Vector2 to, float duration) =>
       Peachy.Tween(
         (Vector2) transform.position,
-        endValue,
+        to,
         duration,
         v => transform.position = v.WithZ(transform.position.z)
       ).SetTarget(transform);
 
-    public static Tween TweenPositionX(this Transform transform, float endValue, float duration) =>
+    public static Tween TweenPositionX(this Transform transform, float to, float duration) =>
       Peachy.Tween(
         transform.position.x,
-        endValue,
+        to,
         duration,
         v => transform.position = transform.position.WithX(v)
       ).SetTarget(transform);
 
-    public static Tween TweenPositionY(this Transform transform, float endValue, float duration) =>
+    public static Tween TweenPositionY(this Transform transform, float to, float duration) =>
       Peachy.Tween(
         transform.position.y,
-        endValue,
+        to,
         duration,
         v => transform.position = transform.position.WithY(v)
       ).SetTarget(transform);
 
-    public static Tween TweenPositionZ(this Transform transform, float endValue, float duration) =>
+    public static Tween TweenPositionZ(this Transform transform, float to, float duration) =>
       Peachy.Tween(
         transform.position.z,
-        endValue,
+        to,
         duration,
         v => transform.position = transform.position.WithZ(v)
       ).SetTarget(transform);
@@ -204,31 +204,31 @@ namespace PeachyTween {
 #endregion
 #region Local position
 
-    public static Tween TweenLocalPosition(this Transform transform, Vector3 endValue, float duration) =>
+    public static Tween TweenLocalPosition(this Transform transform, Vector3 to, float duration) =>
       Peachy
-        .Tween(transform.localPosition, endValue, duration, v => transform.localPosition = v)
+        .Tween(transform.localPosition, to, duration, v => transform.localPosition = v)
         .SetTarget(transform);
 
-    public static Tween TweenLocalPositionX(this Transform transform, float endValue, float duration) =>
+    public static Tween TweenLocalPositionX(this Transform transform, float to, float duration) =>
       Peachy.Tween(
         transform.localPosition.x,
-        endValue,
+        to,
         duration,
         v => transform.localPosition = transform.localPosition.WithX(v)
       ).SetTarget(transform);
 
-    public static Tween TweenLocalPositionY(this Transform transform, float endValue, float duration) =>
+    public static Tween TweenLocalPositionY(this Transform transform, float to, float duration) =>
       Peachy.Tween(
         transform.localPosition.y,
-        endValue,
+        to,
         duration,
         v => transform.localPosition = transform.localPosition.WithY(v)
       ).SetTarget(transform);
 
-    public static Tween TweenLocalPositionZ(this Transform transform, float endValue, float duration) =>
+    public static Tween TweenLocalPositionZ(this Transform transform, float to, float duration) =>
       Peachy.Tween(
         transform.localPosition.z,
-        endValue,
+        to,
         duration,
         v => transform.localPosition = transform.localPosition.WithZ(v)
       ).SetTarget(transform);
@@ -273,31 +273,31 @@ namespace PeachyTween {
 #endregion
 #region Scale
 
-    public static Tween TweenScale(this Transform transform, Vector3 endValue, float duration) =>
+    public static Tween TweenScale(this Transform transform, Vector3 to, float duration) =>
       Peachy
-        .Tween(transform.localScale, endValue, duration, v => transform.localScale = v)
+        .Tween(transform.localScale, to, duration, v => transform.localScale = v)
         .SetTarget(transform);
 
-    public static Tween TweenScaleX(this Transform transform, float endValue, float duration) =>
+    public static Tween TweenScaleX(this Transform transform, float to, float duration) =>
       Peachy.Tween(
         transform.localScale.x,
-        endValue,
+        to,
         duration,
         v => transform.localScale = transform.localScale.WithX(v)
       ).SetTarget(transform);
 
-    public static Tween TweenScaleY(this Transform transform, float endValue, float duration) =>
+    public static Tween TweenScaleY(this Transform transform, float to, float duration) =>
       Peachy.Tween(
         transform.localScale.y,
-        endValue,
+        to,
         duration,
         v => transform.localScale = transform.localScale.WithY(v)
       ).SetTarget(transform);
 
-    public static Tween TweenScaleZ(this Transform transform, float endValue, float duration) =>
+    public static Tween TweenScaleZ(this Transform transform, float to, float duration) =>
       Peachy.Tween(
         transform.localScale.z,
-        endValue,
+        to,
         duration,
         v => transform.localScale = transform.localScale.WithZ(v)
       ).SetTarget(transform);
