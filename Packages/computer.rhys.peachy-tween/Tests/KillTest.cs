@@ -22,15 +22,15 @@ namespace PeachyTween.Tests {
         .SetManualUpdate()
         .Kill();
 
-      Assert.False(onKill, $"Called OnKill prematurely");
-      Assert.True(tween.IsValid(), $"Tween is still valid");
+      Assert.False(onKill, "Called OnKill prematurely");
+      Assert.True(tween.IsValid(), "Tween is still valid");
 
       tween.ManualUpdate(0.5f);
 
-      Assert.False(onComplete, $"Called OnComplete");
-      Assert.False(onChange, $"Called OnChange");
-      Assert.True(onKill, $"Called OnKill");
-      Assert.False(tween.IsValid(), $"Tween is no longer valid");
+      Assert.False(onComplete, "Called OnComplete");
+      Assert.False(onChange, "Called OnChange");
+      Assert.True(onKill, "Called OnKill");
+      Assert.False(tween.IsValid(), "Tween is no longer valid");
     }
 
     [Test]
@@ -46,10 +46,10 @@ namespace PeachyTween.Tests {
         .Kill()
         .Sync();
 
-      Assert.False(onComplete, $"Called OnComplete");
-      Assert.False(onChange, $"Called OnChange");
-      Assert.True(onKill, $"Called OnKill");
-      Assert.False(tween.IsValid(), $"Tween is no longer valid");
+      Assert.False(onComplete, "Called OnComplete");
+      Assert.False(onChange, "Called OnChange");
+      Assert.True(onKill, "Called OnKill");
+      Assert.False(tween.IsValid(), "Tween is no longer valid");
     }
 
     [Test]
@@ -65,10 +65,10 @@ namespace PeachyTween.Tests {
         .Kill(complete: true)
         .Sync();
 
-      Assert.True(onComplete, $"Called OnComplete");
-      Assert.True(onChange, $"Called OnChange");
-      Assert.True(onKill, $"Called OnKill");
-      Assert.False(tween.IsValid(), $"Tween is no longer valid");
+      Assert.True(onComplete, "Called OnComplete");
+      Assert.True(onChange, "Called OnChange");
+      Assert.True(onKill, "Called OnKill");
+      Assert.False(tween.IsValid(), "Tween is no longer valid");
     }
   }
 }
