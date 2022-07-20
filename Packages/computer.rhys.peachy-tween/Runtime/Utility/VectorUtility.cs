@@ -15,7 +15,12 @@ namespace PeachyTween {
     public static Vector2 RadiansLength(float radians, float length) =>
       new Vector2(Cos(radians), Sin(radians)) * length;
 
+    public static Vector2 FromRadians(float radians) =>
+      new (Mathf.Cos(radians), Mathf.Sin(radians));
     public static float ToRadians(this in Vector2 v) =>
       Atan2(v.y, v.x);
+
+    public static Vector2 RandomOnUnitCircle() =>
+      FromRadians(Random.Range(0f, PI * 2f));
   }
 }
