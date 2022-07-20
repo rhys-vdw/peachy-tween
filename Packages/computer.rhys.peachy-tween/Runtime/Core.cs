@@ -240,8 +240,6 @@ namespace PeachyTween {
     }
 #pragma warning restore IDE0051
 
-    public static bool IsInitialized() => _world != null;
-
     internal static void InitializeEcs() {
       _world = new ();
       _systems = new EcsSystems(_world, _runState)
