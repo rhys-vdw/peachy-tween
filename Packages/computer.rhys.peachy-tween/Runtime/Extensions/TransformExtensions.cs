@@ -5,7 +5,10 @@ namespace PeachyTween {
 #region Rotation
 
     /// <summary>
-    /// Rotate a Transform in world space.
+    /// Rotate a Transform in world space.<para/>
+    ///
+    /// Quaternion rotations will always take the shortest path. For rotations
+    /// beyond 360 degrees use the <see cref="TweenRotation(Transform, Vector3, float)">Euler angles override</see>.
     /// </summary>
     /// <param name="transform">The transform.</param>
     /// <param name="endValue">The end world rotation.</param>
@@ -16,7 +19,7 @@ namespace PeachyTween {
         .SetTarget(transform);
 
     /// <summary>
-    /// Rotate a Transform in world space.
+    /// Rotate a Transform in world space.<para/>
     ///
     /// This supports rotating beyond 360 degrees.
     /// </summary>
@@ -28,10 +31,32 @@ namespace PeachyTween {
         .Tween(transform.eulerAngles, endValue, duration, v => transform.eulerAngles = v)
         .SetTarget(transform);
 
-    public static Tween TweenLookAt(this Transform transform, Vector3 forward, float duration) =>
-      TweenLookAt(transform, forward, duration, Vector3.up);
+    /// <summary>
+    /// Rotate a Transform in world space to face a point.
+    /// </summary>
+    /// <param name="transform">The transform.</param>
+    /// <param name="forward">The end forward vector.</param>
+    /// <param name="duration">Length of tween in seconds.</param>
+    public static Tween TweenLookAt(this Transform transform, Vector3 position, float duration) =>
+      TweenLookRotation(transform, position - transform.position, duration, Vector3.up);
 
-    public static Tween TweenLookAt(this Transform transform, Vector3 forward, float duration, Vector3 up) =>
+    /// <inheritdoc cref="TweenLookAt(Transform, Vector3, float)" />
+    /// <param name="up">The up direction of the end rotation.</param>
+    public static Tween TweenLookAt(this Transform transform, Vector3 position, float duration, Vector3 up) =>
+      TweenLookRotation(transform, position - transform.position, duration, up);
+
+    /// <summary>
+    /// Rotate a Transform in world space to face a direction.
+    /// </summary>
+    /// <param name="transform">The transform.</param>
+    /// <param name="forward">The end forward vector.</param>
+    /// <param name="duration">Length of tween in seconds.</param>
+    public static Tween TweenLookRotation(this Transform transform, Vector3 forward, float duration) =>
+      TweenLookRotation(transform, forward, duration, Vector3.up);
+
+    /// <inheritdoc cref="TweenLookRotation(Transform, Vector3, float)" />
+    /// <param name="up">The up direction of the end rotation.</param>
+    public static Tween TweenLookRotation(this Transform transform, Vector3 forward, float duration, Vector3 up) =>
       Peachy
         .Tween(transform.rotation, Quaternion.LookRotation(forward, up), duration, v => transform.rotation = v)
         .SetTarget(transform);
