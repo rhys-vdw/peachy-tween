@@ -151,10 +151,13 @@ namespace PeachyTween {
     }
 
 #endregion
-#region Rotation
+#region Change filters
+
+    public static void ShortestAngle(int entity) =>
+      _world.EnsureComponent<ShortestAngle>(entity);
 
     public static void Rotate(int entity) =>
-      _world.EnsureComponent<Rotate>(entity);
+      _world.EnsureComponent<Slerp>(entity);
 
 #endregion
 #region Group
@@ -240,8 +243,6 @@ namespace PeachyTween {
     }
 #pragma warning restore IDE0051
 
-    public static bool IsInitialized() => _world != null;
-
     internal static void InitializeEcs() {
       _world = new ();
       _systems = new EcsSystems(_world, _runState)
@@ -253,15 +254,15 @@ namespace PeachyTween {
         .Add(new ProgressSystem())
         .Add(new ReverseSystem())
         .Add(new EaseSystem())
-        .Add(ChangeSystemExc<float, Rotate>(Mathf.LerpUnclamped))
-        .Add(ChangeSystemInc<float, Rotate>(Mathf.LerpAngle))
-        .Add(ChangeSystemExc<Vector2, Rotate>(Vector2.LerpUnclamped))
-        .Add(ChangeSystemInc<Vector2, Rotate>(LerpFuncs.SlerpUnclamped))
-        .Add(ChangeSystemExc<Vector3, Rotate>(Vector3.LerpUnclamped))
-        .Add(ChangeSystemInc<Vector3, Rotate>(Vector3.SlerpUnclamped))
+        .Add(ChangeSystemExc<float, ShortestAngle>(Mathf.LerpUnclamped))
+        .Add(ChangeSystemInc<float, ShortestAngle>(Mathf.LerpAngle))
+        .Add(ChangeSystemExc<Vector2, Slerp>(Vector2.LerpUnclamped))
+        .Add(ChangeSystemInc<Vector2, Slerp>(LerpFuncs.SlerpUnclamped))
+        .Add(ChangeSystemExc<Vector3, Slerp>(Vector3.LerpUnclamped))
+        .Add(ChangeSystemInc<Vector3, Slerp>(Vector3.SlerpUnclamped))
         .Add(ChangeSystem<Vector4>(Vector4.LerpUnclamped))
-        .Add(ChangeSystemExc<Quaternion, Rotate>(Quaternion.LerpUnclamped))
-        .Add(ChangeSystemInc<Quaternion, Rotate>(Quaternion.SlerpUnclamped))
+        .Add(ChangeSystemExc<Quaternion, Slerp>(Quaternion.LerpUnclamped))
+        .Add(ChangeSystemInc<Quaternion, Slerp>(Quaternion.SlerpUnclamped))
         .Add(ChangeSystem<Color>(Color.LerpUnclamped))
         .Add(new CallbackSystem<OnComplete>(FilterActive().Inc<Complete>().End()))
         .Add(new CompleteSystem())

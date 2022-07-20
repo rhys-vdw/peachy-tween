@@ -156,17 +156,36 @@ namespace PeachyTween {
       return this;
     }
 
+    /// <summary>
+    /// Does this tween exist.
+    /// </summary>
+    /// <returns>`true` if the tween exists; `false` if the tween not been set or has been killed.</returns>
     public bool IsValid() =>
       TryEntity(out _);
 
 #endregion
 #region Rotation
 
-    public Tween Angle() => Rotate();
+    /// <summary>
+    /// Treat the value of the tween as a rotation in degrees, and rotate
+    /// through the shorest angle to the end value.<para/>
+    ///
+    /// <strong>Only compatible with <c>float</c> tweens.</strong>
+    /// </summary>
+    public Tween ShortestAngle() {
+      if (Entity(out var entity)) {
+        Core.ShortestAngle(entity);
+      }
+      return this;
+    }
 
-    public Tween Slerp() => Rotate();
-
-    public Tween Rotate() {
+    /// <summary>
+    /// Rotate the vector tween value around the origin, instead of taking the shortest path.
+    /// through the shorest angle to the end value.<para/>
+    ///
+    /// <strong>Only compatible with <c>Vector2</c> and <c>Vector3</c> tweens.</strong>
+    /// </summary>
+    public Tween Slerp() {
       if (Entity(out var entity)) {
         Core.Rotate(entity);
       }
