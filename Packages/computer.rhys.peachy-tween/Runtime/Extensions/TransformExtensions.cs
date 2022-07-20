@@ -73,7 +73,7 @@ namespace PeachyTween {
       float decay,
       float randomness
     ) => Peachy
-      .Tween(transform.rotation, Random.onUnitSphere * magnitude, duration, v => transform.rotation = v)
+      .Tween(transform.eulerAngles, Random.onUnitSphere * magnitude, duration, v => transform.eulerAngles = v)
       .Shake(oscillationCount, decay, randomness)
       .SetTarget(transform);
 
@@ -116,7 +116,12 @@ namespace PeachyTween {
       float decay,
       float randomness
     ) => Peachy
-      .Tween(transform.localRotation, Random.onUnitSphere * magnitude, duration, v => transform.localRotation = v)
+      .Tween(
+        transform.localEulerAngles,
+        Random.onUnitSphere * magnitude,
+        duration,
+        v => transform.localEulerAngles = v
+      )
       .Shake(oscillationCount, decay, randomness)
       .SetTarget(transform);
 
