@@ -156,6 +156,10 @@ namespace PeachyTween {
       return this;
     }
 
+    /// <summary>
+    /// Does this tween exist.
+    /// </summary>
+    /// <returns>`true` if the tween exists; `false` if the tween not been set or has been killed.</returns>
     public bool IsValid() =>
       TryEntity(out _);
 
