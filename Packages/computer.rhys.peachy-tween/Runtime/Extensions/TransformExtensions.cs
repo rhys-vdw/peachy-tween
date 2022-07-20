@@ -128,12 +128,13 @@ namespace PeachyTween {
         .Tween(transform.position, endValue, duration, v => transform.position = v)
         .SetTarget(transform);
 
-    public static Tween TweenPosition2D(this Transform transform, Vector2 endValue, float duration) {
-      var z = transform.position.z;
-      return Peachy
-        .Tween((Vector2) transform.position, endValue, duration, v => transform.position = v.WithZ(z))
-        .SetTarget(transform);
-    }
+    public static Tween TweenPosition2D(this Transform transform, Vector2 endValue, float duration) =>
+      Peachy.Tween(
+        (Vector2) transform.position,
+        endValue,
+        duration,
+        v => transform.position = v.WithZ(transform.position.z)
+      ).SetTarget(transform);
 
     public static Tween TweenPositionX(this Transform transform, float endValue, float duration) =>
       Peachy.Tween(
