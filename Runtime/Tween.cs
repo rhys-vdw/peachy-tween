@@ -64,6 +64,20 @@ namespace PeachyTween {
     /// <seealso cref="GoTo"/>
     public Tween Rewind() => GoTo(0);
 
+
+    /// <summary>
+    /// Set the interal time of a tween.<para/>
+    ///
+    /// <para id="warning">
+    /// This has no effect until the next tween update. To reflect changes
+    /// immediately (e.g. for a <see cref="Pause">paused</see> tween),
+    /// then call <c>tween.GoTo(elapsed).Sync()</c>.<para/>
+    /// </para>
+    /// </summary>
+    /// <param name="elapsed">
+    /// The time to set the tween to. <c>0</c> will rewind the tween to the
+    /// start, and passing the tween's duration will fast-forward to the end.
+    /// </param>
     public Tween GoTo(float elapsed) {
       if (Entity(out var entity)) {
         Core.GoTo(entity, elapsed);
@@ -71,6 +85,18 @@ namespace PeachyTween {
       return this;
     }
 
+    /// <summary>
+    /// Cancel any loops and finish the tween.<para/>
+    ///
+    /// When the tween is updated it will call its <c
+    /// cref="OnComplete">OnComplete</c> callback, and will be killed if not
+    /// <see cref="Preserve">preserved</see>.<para/>
+    ///
+    /// This has no effect until the next tween update. To reflect changes
+    /// immediately (e.g. for a <see cref="Pause">paused</see> tween), then call
+    /// <c>tween.GoTo(elapsed).Sync()</c>.<para/>
+    /// </summary>
+    /// <returns></returns>
     public Tween Complete() {
       if (Entity(out var entity)) {
         Core.Complete(entity);
@@ -78,10 +104,19 @@ namespace PeachyTween {
       return this;
     }
 
+    /// <summary>
+    /// Check if the tween has ended.<para/>
+    /// This is useful for tweens that are <see cref="Preserve">preserved</see>,
+    /// as any other tween will be killed upon completion.
+    /// </summary>
+    /// <returns>`true` if tween is complete; `false` if tween is not complete.</returns>
     public bool IsComplete() =>
       Entity(out var entity) &&
       Core.IsComplete(entity);
 
+    /// <summary>
+    /// Reverse the direction of this tween.
+    /// </summary>
     public Tween Reverse() {
       if (Entity(out var entity)) {
         Core.Reverse(entity);
