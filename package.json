@@ -7,7 +7,9 @@
   "unityRelease": "2f1",
   "documentationUrl": "https://github.com/rhys-vdw/peachy-tween",
   "licensesUrl": "https://choosealicense.com/licenses/mit/",
-  "dependencies": {},
+  "dependencies": {
+    "com.leoecscommunity.ecslite": "1.0.0"
+  },
   "devDependencies": {
     "com.unity.test-framework": "1.1.31"
   },
