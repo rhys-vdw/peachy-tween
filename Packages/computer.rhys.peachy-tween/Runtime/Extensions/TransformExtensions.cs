@@ -61,6 +61,22 @@ namespace PeachyTween {
         .Tween(transform.rotation, Quaternion.LookRotation(forward, up), duration, v => transform.rotation = v)
         .SetTarget(transform);
 
+    /// <summary>
+    /// Shake the Transform's world rotation with a random vector.
+    /// </summary>
+    /// <inheritdoc cref="ShakePosition" path="param" />
+    public static Tween ShakeRotation(
+      this Transform transform,
+      float magnitude,
+      float duration,
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Peachy
+      .Tween(transform.rotation, Random.onUnitSphere * magnitude, duration, v => transform.rotation = v)
+      .Shake(oscillationCount, decay, randomness)
+      .SetTarget(transform);
+
 #endregion
 #region Local rotation
 
@@ -87,6 +103,22 @@ namespace PeachyTween {
       Peachy
         .Tween(transform.localEulerAngles, endValue, duration, v => transform.localEulerAngles = v)
         .SetTarget(transform);
+
+    /// <summary>
+    /// Shake the Transform's local rotation with a random vector.
+    /// </summary>
+    /// <inheritdoc cref="ShakePosition" path="param" />
+    public static Tween ShakeLocalRotation(
+      this Transform transform,
+      float magnitude,
+      float duration,
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Peachy
+      .Tween(transform.localRotation, Random.onUnitSphere * magnitude, duration, v => transform.localRotation = v)
+      .Shake(oscillationCount, decay, randomness)
+      .SetTarget(transform);
 
 #endregion
 #region Position
@@ -127,6 +159,25 @@ namespace PeachyTween {
         v => transform.position = transform.position.WithZ(v)
       ).SetTarget(transform);
 
+    /// <summary>
+    /// Shake the Transform's world position with a random vector.
+    /// </summary>
+    /// <param name="transform">The transform.</param>
+    /// <param name="magnitude">The magnitude of a random direction vector that informs the range of the shake.</param>
+    /// <inheritdoc cref="Peachy.Tween" path="param[@name='duration']" />
+    /// <inheritdoc cref="Tween.Shake" path="param[@name='oscillationCount' or @name='decay' or @name='randomness']" />
+    public static Tween ShakePosition(
+      this Transform transform,
+      float magnitude,
+      float duration,
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Peachy
+      .Tween(transform.position, Random.onUnitSphere * magnitude, duration, v => transform.position = v)
+      .Shake(oscillationCount, decay, randomness)
+      .SetTarget(transform);
+
 #endregion
 #region Local position
 
@@ -159,6 +210,22 @@ namespace PeachyTween {
         v => transform.localPosition = transform.localPosition.WithZ(v)
       ).SetTarget(transform);
 
+    /// <summary>
+    /// Shake the Transform's local position with a random vector.
+    /// </summary>
+    /// <inheritdoc cref="ShakePosition" path="param" />
+    public static Tween ShakeLocalPosition(
+      this Transform transform,
+      float magnitude,
+      float duration,
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Peachy
+      .Tween(transform.localPosition, Random.onUnitSphere * magnitude, duration, v => transform.localPosition = v)
+      .Shake(oscillationCount, decay, randomness)
+      .SetTarget(transform);
+
 #endregion
 #region Scale
 
@@ -190,6 +257,22 @@ namespace PeachyTween {
         duration,
         v => transform.localScale = transform.localScale.WithZ(v)
       ).SetTarget(transform);
+
+    /// <summary>
+    /// Shake the Transform's local scale with a random vector.
+    /// </summary>
+    /// <inheritdoc cref="ShakePosition" path="param" />
+    public static Tween ShakeLocalScale(
+      this Transform transform,
+      float magnitude,
+      float duration,
+      int oscillationCount,
+      float decay,
+      float randomness
+    ) => Peachy
+      .Tween(transform.localScale, Random.onUnitSphere * magnitude, duration, v => transform.localScale = v)
+      .Shake(oscillationCount, decay, randomness)
+      .SetTarget(transform);
 
 #endregion
   }
