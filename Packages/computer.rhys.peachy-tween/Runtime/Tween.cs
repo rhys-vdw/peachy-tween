@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
 using Leopotam.EcsLite;
-using System.Collections.Generic;
 
 namespace PeachyTween {
-  using static Peachy;
   public struct Tween {
     readonly internal EcsPackedEntity _entity;
 
@@ -92,19 +90,21 @@ namespace PeachyTween {
 #region Target
 
     /// <summary>
-    /// Set the associated target of a <c cref="Tween">Tween</c> for killing by
-    /// target.
+    /// <para>Set the associated target of a <c cref="Tween">Tween</c> for
+    /// killing by target.</para>
     ///
-    /// This does not change which object the Tween is currently acting on, its
-    /// purpose is to link this tween to an object so that it will be killed
-    /// when the target object is passed to <c cref="Kill">Core.Kill</c>.
+    /// <para>This does not change which object the Tween is currently acting
+    /// on, its purpose is to link this tween to an object so that it will be
+    /// killed when the target object is passed to <c
+    /// cref="Kill">Core.Kill</c>.</para>
     ///
-    /// This will replace any previously set target.
+    /// <para>This will replace any previously set target.</para>
     ///
-    /// This method is called by provided extension methods (e.g.
+    /// <para>This method is called by provided extension methods (e.g.
     /// <c cref="TrasnformExtensions.TweenPosition">TweenPosition</c>), and
-    /// should be called by any custom extension methods.
+    /// should be called by any custom extension methods.</para>
     /// </summary>
+    /// <seealso cref="Peachy.KillAllWithTarget(object, bool)"/>
     /// <param name="tween">The tween.</param>
     /// <param name="target">Any instance of a reference type to become the target of this tween.</param>
     public Tween SetTarget<T>(T target) where T : class {
@@ -192,20 +192,46 @@ namespace PeachyTween {
 #endregion
 #region Group
 
+    /// <summary>
+    /// <para>Set tween to update on <c>Update</c>.</para>
+    /// <para>This is the default update group for new tweens.</para>
+    /// </summary>
     public Tween SetUpdate() => SetGroup<Update>();
 
+    /// <summary>
+    /// Set tween to update on <c>Update</c> using unscaled time.
+    /// </summary>
     public Tween SetUnscaledUpdate() => SetGroup<UnscaledUpdate>();
 
+    /// <summary>
+    /// Set tween to update on <c>LateUpdate</c>.
+    /// </summary>
     public Tween SetLateUpdate() => SetGroup<LateUpdate>();
 
+    /// <summary>
+    /// Set tween to update on <c>LateUpdate</c> using unscaled time.
+    /// </summary>
     public Tween SetUnscaledLateUpdate() => SetGroup<UnscaledLateUpdate>();
 
+    /// <summary>
+    /// Set tween to update on <c>FixedUpdate</c>.
+    /// </summary>
     public Tween SetFixedUpdate() => SetGroup<FixedUpdate>();
 
+    /// <summary>
+    /// Set tween to update on <c>FixedUpdate</c> using unscaled time.
+    /// </summary>
     public Tween SetUnscaledFixedUpdate() => SetGroup<UnscaledFixedUpdate>();
 
+    /// <summary>
+    /// <para>Disable automatic update of this tween.</para>
+    /// <para>This is an alias of <c cref="ClearGroup">ClearGroup</c>.</para>
+    /// </summary>
     public Tween SetManualUpdate() => ClearGroup();
 
+    /// <summary>
+    /// Remove the assigned update group from this tween.
+    /// </summary>
     public Tween ClearGroup() {
       if (Entity(out var entity)) {
         Core.ClearGroup(entity);
@@ -213,6 +239,10 @@ namespace PeachyTween {
       return this;
     }
 
+    /// <summary>
+    /// <para>Change the tween's update group.</para>
+    /// <param>Tweens default to the <c>Update</c> group, but custom groups can be added.</param>
+    /// </summary>
     public Tween SetGroup<TGroup>() where TGroup : struct {
       if (Entity(out var entity)) {
         Core.SetGroup<TGroup>(entity);
