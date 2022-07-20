@@ -10,7 +10,7 @@ namespace PeachyTween.Tests {
     public void TearDown() => TestUtility.Destroy();
 
     [Test]
-    public void KillTweenTest() {
+    public void Kill() {
       var onChange = false;
       var onKill = false;
       var onComplete = false;
@@ -34,7 +34,7 @@ namespace PeachyTween.Tests {
     }
 
     [Test]
-    public void KillTweenApplyTest() {
+    public void KillThenSync() {
       var onChange = false;
       var onKill = false;
       var onComplete = false;
@@ -53,7 +53,7 @@ namespace PeachyTween.Tests {
     }
 
     [Test]
-    public void KillTweenCompleteTest() {
+    public void KillComplete() {
       var onChange = false;
       var onKill = false;
       var onComplete = false;
