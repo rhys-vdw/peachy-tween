@@ -14,7 +14,22 @@ PeachyTween does not aim to be API compatible with DOTween, not to fully mirror 
 
 ## Install
 
-_Not yet available to install._
+To install on Unity, you must first install the internal dependency [ecslite](https://github.com/LeoECSCommunity/ecslite).
+
+In Unity package manager, select "Add package from git URL..." and add the following two URLs:
+
+1. `https://github.com/LeoECSCommunity/ecslite.git#1.0.0`
+2. `https://github.com/rhys-vdw/peachy-tween.git`
+
+Or add the following two lines to `dependencies` in your `manifest.json`:
+
+```json
+"dependencies": {
+  "com.leoecscommunity.ecslite": "https://github.com/LeoECSCommunity/ecslite.git#1.0.0",
+  "computer.rhys.peachy-tween": "https://github.com/rhys-vdw/peachy-tween.git",
+```
+
+_Installation will streamlined before full release._
 
 ## Usage
 
