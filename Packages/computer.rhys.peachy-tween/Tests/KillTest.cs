@@ -70,6 +70,41 @@ namespace PeachyTween.Tests {
       Assert.True(onKill, "Called OnKill");
       Assert.False(tween.IsValid(), "Tween is no longer valid");
     }
+
+    [Test]
+    public void KillWarnings() {
+      (string message, LogType type) lastLog = default;
+      int logCount = 0;
+
+      void HandleLog(string message, string stackTrace, LogType logType) {
+        lastLog = (message, logType);
+        logCount++;
+      }
+
+      Application.logMessageReceived += HandleLog;
+
+      var tween = Peachy.Tween(0f, 1f, 1f, v => {});
+      tween.Kill().Sync();
+
+      Assert.False(tween.IsValid(), "Tween is no longer valid");
+      Assert.AreEqual(0, logCount, "No logs yet");
+
+      tween.Kill();
+
+      Assert.AreEqual(0, logCount, "Does not log on kill");
+
+      const string expectedMessage = "Tween is invalid";
+      Debug.Log($"'{expectedMessage}' warning logged after this is expected:");
+      tween.Kill().Sync();
+
+      Assert.AreEqual(1, logCount, "Logs on sync after kill");
+      Assert.AreEqual(expectedMessage, lastLog.message, "Logs on invalid tween");
+      Assert.AreEqual(LogType.Warning, lastLog.type, "Log is warning");
+
+      tween.KillSync();
+
+      Assert.AreEqual(1, logCount, $"Does not log on {nameof(Tween.KillSync)}");
+    }
   }
 }
 

@@ -149,6 +149,34 @@ namespace PeachyTween {
 #endregion
 #region Kill
 
+    /// <summary>
+    /// Like <c cref="Kill">Kill</c> but updates the tween immediately.<para/>
+    ///
+    /// This is equivalent to <c>tween.Kill().Sync()</c> but will not log a
+    /// warning if the tween has previously been killed.</para>
+    /// </summary>
+    /// <inheritdoc cref="Kill" path="param" />
+    public void KillSync(bool complete = false) {
+      if (TryEntity(out var entity)) {
+        Core.Kill(entity, complete);
+        Core.Sync(entity);
+      }
+    }
+
+    /// <summary>
+    /// Deactivate this tween and delete it next time it's updated.<para/>
+    ///
+    /// Note that this marks a tween for deletion, but it will not be deleted
+    /// until its next update. This means that callbacks such as
+    /// <c cref="OnKill">OnKill<c> will not be triggered immediately. If you
+    /// need callbacks to run immediately, then use
+    /// <c cref="KillSync">KillSync</c> instead.<para/>
+    /// </summary>
+    /// <seealso cref="KillSync"/>
+    /// <param name="complete">
+    /// Also complete this tween, updating its value to its end value and calling its <c cref="OnComplete">OnComplete</c> callback.
+    /// </param>
+    /// <returns>`true` if the tween exists; `false` if the tween not been set or has been killed.</returns>
     public Tween Kill(bool complete = false) {
       if (TryEntity(out var entity)) {
         Core.Kill(entity, complete);
