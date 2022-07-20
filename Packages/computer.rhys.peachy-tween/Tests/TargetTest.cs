@@ -10,7 +10,7 @@ namespace PeachyTween.Tests {
     public void TearDown() => TestUtility.Destroy();
 
     [Test]
-    public void SetTargetTest() {
+    public void SetTarget() {
       var expected = new Object();
       var tween = Peachy.Tween(0f, 1f, 1f, v => {}).SetTarget(expected);
 

@@ -15,7 +15,7 @@ namespace PeachyTween.Test {
 
     void Update() {
       if (Input.GetKeyDown(KeyCode.Space)) {
-        _tween.Kill(complete: true).Sync();
+        _tween.KillSync(complete: true);
         _tween = transform
           .TweenPosition2D(Range, Duration)
           .Shake(
