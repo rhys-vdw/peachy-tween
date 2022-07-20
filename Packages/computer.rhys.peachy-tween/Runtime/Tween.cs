@@ -152,7 +152,7 @@ namespace PeachyTween {
     /// <summary>
     /// Like <c cref="Kill">Kill</c> but updates the tween immediately.<para/>
     ///
-    /// This is equivalent to <c>tween.Kill().Sync()</c> but will not log a
+    /// This is equivalent to <c>tween.Kill(); tween.Sync()</c> but will not log a
     /// warning if the tween has previously been killed.</para>
     /// </summary>
     /// <inheritdoc cref="Kill" path="param" />
@@ -176,12 +176,10 @@ namespace PeachyTween {
     /// <param name="complete">
     /// Also complete this tween, updating its value to its end value and calling its <c cref="OnComplete">OnComplete</c> callback.
     /// </param>
-    /// <returns>`true` if the tween exists; `false` if the tween not been set or has been killed.</returns>
-    public Tween Kill(bool complete = false) {
+    public void Kill(bool complete = false) {
       if (TryEntity(out var entity)) {
         Core.Kill(entity, complete);
       }
-      return this;
     }
 
     /// <summary>

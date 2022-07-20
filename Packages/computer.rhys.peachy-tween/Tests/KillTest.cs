@@ -18,9 +18,9 @@ namespace PeachyTween.Tests {
       var tween = Peachy
         .Tween(0f, 1f, 1f, v => onChange = true)
         .OnComplete(() => onComplete = true)
-        .OnKill(() => onKill = true)
-        .SetManualUpdate()
-        .Kill();
+        .OnKill(() => onKill = true);
+
+      tween.Kill();
 
       Assert.False(onKill, "Called OnKill prematurely");
       Assert.True(tween.IsValid(), "Tween is still valid");
@@ -34,7 +34,7 @@ namespace PeachyTween.Tests {
     }
 
     [Test]
-    public void KillThenSync() {
+    public void KillSync() {
       var onChange = false;
       var onKill = false;
       var onComplete = false;
@@ -42,9 +42,10 @@ namespace PeachyTween.Tests {
       var tween = Peachy
         .Tween(0f, 1f, 1f, v => onChange = true)
         .OnComplete(() => onComplete = true)
-        .OnKill(() => onKill = true)
-        .Kill()
-        .Sync();
+        .OnKill(() => onKill = true);
+
+      tween.Kill();
+      tween.Sync();
 
       Assert.False(onComplete, "Called OnComplete");
       Assert.False(onChange, "Called OnChange");
@@ -61,9 +62,10 @@ namespace PeachyTween.Tests {
       var tween = Peachy
         .Tween(0f, 1f, 1f, v => onChange = true)
         .OnComplete(() => onComplete = true)
-        .OnKill(() => onKill = true)
-        .Kill(complete: true)
-        .Sync();
+        .OnKill(() => onKill = true);
+
+      tween.Kill(complete: true);
+      tween.Sync();
 
       Assert.True(onComplete, "Called OnComplete");
       Assert.True(onChange, "Called OnChange");
@@ -84,7 +86,8 @@ namespace PeachyTween.Tests {
       Application.logMessageReceived += HandleLog;
 
       var tween = Peachy.Tween(0f, 1f, 1f, v => {});
-      tween.Kill().Sync();
+      tween.Kill();
+      tween.Sync();
 
       Assert.False(tween.IsValid(), "Tween is no longer valid");
       Assert.AreEqual(0, logCount, "No logs yet");
@@ -94,8 +97,11 @@ namespace PeachyTween.Tests {
       Assert.AreEqual(0, logCount, "Does not log on kill");
 
       const string expectedMessage = "Tween is invalid";
+
       Debug.Log($"'{expectedMessage}' warning logged after this is expected:");
-      tween.Kill().Sync();
+      logCount--; // Subtract one for log above.
+
+      tween.Sync();
 
       Assert.AreEqual(1, logCount, "Logs on sync after kill");
       Assert.AreEqual(expectedMessage, lastLog.message, "Logs on invalid tween");
