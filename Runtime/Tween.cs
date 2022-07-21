@@ -51,6 +51,13 @@ namespace PeachyTween {
 #endregion
 #region Preserve
 
+    /// <summary>
+    /// Prevent tween from being automatically killed when it completes.
+    /// </summary>
+    /// <remarks>
+    /// Use this to create a replayable tween.
+    /// </remarks>
+    /// <seealso cref="ClearPreserve"/>
     public Tween Preserve() {
       if (Entity(out var entity)) {
         Core.Preserve(entity);
@@ -58,6 +65,11 @@ namespace PeachyTween {
       return this;
     }
 
+    /// <summary>
+    /// Cancels <see cref="Preserve"><c>Preserve</c></see>, allowing the tween
+    /// to be killed when it completes.
+    /// </summary>
+    /// <seealso cref="Preserve"/>
     public Tween ClearPreserve() {
       if (Entity(out var entity)) {
         Core.ClearPreserve(entity);
@@ -318,12 +330,31 @@ namespace PeachyTween {
 #endregion
 #region Run
 
+    /// <summary>
+    /// Update this tween is isolation, applying its changes immediately.
+    /// </summary>
+    /// <remarks>
+    /// Typically used in combination with <see
+    /// cref="SetManualUpdate"><c>SetManualUpdate</c></see>.
+    /// </remarks>
+    /// <seealso cref="SetManualUpdate"/>
+    /// <param name="deltaTime">The amount of time to progress tweens by.</param>
     public void ManualUpdate(float deltaTime) {
       if (Entity(out var entity)) {
         Core.ManualUpdate(entity, deltaTime);
       }
     }
 
+    /// <summary>
+    /// Immediately apply any changes to this tween.
+    /// </summary>
+    /// <remarks>
+    /// This will trigger callbacks.<para/>
+    /// Equivalent to <c>tween.SetManualUpdate(0)</c>.
+    /// </remarks>
+    /// <seealso cref="KillSync"/>
+    /// <seealso cref="SetManualUpdate"/>
+    /// <param name="deltaTime">The amount of time to progress tweens by.</param>
     public Tween Sync() {
       if (Entity(out var entity)) {
         Core.Sync(entity);
