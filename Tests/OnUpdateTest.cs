@@ -2,38 +2,38 @@ using UnityEngine;
 using NUnit.Framework;
 
 namespace PeachyTween.Tests {
-  public class OnProgressTest : BaseTweenTest {
+  public class OnUpdateTest : BaseTweenTest {
     struct TestGroup { }
 
     [Test]
-    public void OnProgressSingleHandler() {
+    public void OnUpdateSingleHandler() {
       var callCount = 0;
 
       var tween = Peachy
         .Tween(0f, 1f, 1f, _ => {})
-        .OnProgress(() => callCount++)
+        .OnUpdate(() => callCount++)
         .SetGroup<TestGroup>();
 
       Peachy.Run<TestGroup>(0.5f);
       Peachy.Run<TestGroup>(0.5f);
-      Assert.AreEqual(2, callCount, $"{nameof(OnProgress)} callback called twice");
+      Assert.AreEqual(2, callCount, $"{nameof(OnUpdate)} callback called twice");
     }
 
     [Test]
-    public void OnProgressMultipleHandlers() {
+    public void OnUpdateMultipleHandlers() {
       var aCount = 0;
       var bCount = 0;
 
       var tween = Peachy
         .Tween(0f, 1f, 1f, _ => {})
-        .OnProgress(() => aCount++)
-        .OnProgress(() => bCount++)
+        .OnUpdate(() => aCount++)
+        .OnUpdate(() => bCount++)
         .SetGroup<TestGroup>();
 
       Peachy.Run<TestGroup>(0.5f);
 
-      Assert.AreEqual(1, aCount, $"first {nameof(OnProgress)} callback called");
-      Assert.AreEqual(1, bCount, $"second {nameof(OnProgress)} callback called");
+      Assert.AreEqual(1, aCount, $"first {nameof(OnUpdate)} callback called");
+      Assert.AreEqual(1, bCount, $"second {nameof(OnUpdate)} callback called");
     }
   }
 }

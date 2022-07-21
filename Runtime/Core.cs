@@ -251,7 +251,7 @@ namespace PeachyTween {
         .Add(new PingPongSystem())
         .Add(new CallbackSystem<OnLoop>(FilterActive().Inc<Complete>().Inc<Loop>().End()))
         .Add(new LoopSystem())
-        .Add(new CallbackSystem<OnProgress>(FilterActive().End()))
+        .Add(new CallbackSystem<OnUpdate>(FilterActive().End()))
         .Add(new ProgressSystem())
         .Add(new ReverseSystem())
         .Add(new EaseSystem())

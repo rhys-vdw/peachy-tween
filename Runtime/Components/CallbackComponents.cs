@@ -6,7 +6,7 @@ namespace PeachyTween {
     Action Callback { get; set; }
   }
 
-  internal struct OnProgress : ICallback {
+  internal struct OnUpdate : ICallback {
     public Action Callback { get; set; }
   }
 
