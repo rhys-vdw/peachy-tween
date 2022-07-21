@@ -38,7 +38,7 @@ namespace PeachyTween {
 #region Active
 
     public static bool IsActive(int entity) =>
-      _world.HasComponent<Complete>(entity);
+      !_world.HasComponent<Complete>(entity);
 
 #endregion
 #region Pause
