@@ -227,6 +227,10 @@ namespace PeachyTween {
       _world.AddHandler<T>(entity, handler);
     }
 
+    public static void RemoveHandler<T>(int entity, Action handler) where T : struct, ICallback {
+      _world.RemoveHandler<T>(entity, handler);
+    }
+
 #endregion
 #region Ecs
 

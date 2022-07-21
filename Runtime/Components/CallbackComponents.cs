@@ -34,5 +34,10 @@ namespace PeachyTween {
       ref var cb = ref world.EnsureComponent<T>(entity);
       cb.Callback += callback;
     }
+
+    internal static void RemoveHandler<T>(this EcsWorld world, int entity, Action callback) where T : struct, ICallback {
+      ref var cb = ref world.EnsureComponent<T>(entity);
+      cb.Callback -= callback;
+    }
   }
 }
