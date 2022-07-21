@@ -17,14 +17,14 @@ namespace PeachyTween.Tests {
       tween.Kill();
 
       Assert.False(onKill, "Called OnKill prematurely");
-      Assert.True(tween.IsValid(), "Tween is still valid");
+      Assert.True(tween.IsAlive(), "Tween is still alive");
 
       tween.ManualUpdate(0.5f);
 
       Assert.False(onComplete, "Called OnComplete");
       Assert.False(onChange, "Called OnChange");
       Assert.True(onKill, "Called OnKill");
-      Assert.False(tween.IsValid(), "Tween is no longer valid");
+      Assert.False(tween.IsAlive(), "Tween is no longer alive");
     }
 
     [Test]
@@ -44,7 +44,7 @@ namespace PeachyTween.Tests {
       Assert.False(onComplete, "Called OnComplete");
       Assert.False(onChange, "Called OnChange");
       Assert.True(onKill, "Called OnKill");
-      Assert.False(tween.IsValid(), "Tween is no longer valid");
+      Assert.False(tween.IsAlive(), "Tween is no longer alive");
     }
 
     [Test]
@@ -64,7 +64,7 @@ namespace PeachyTween.Tests {
       Assert.True(onComplete, "Called OnComplete");
       Assert.True(onChange, "Called OnChange");
       Assert.True(onKill, "Called OnKill");
-      Assert.False(tween.IsValid(), "Tween is no longer valid");
+      Assert.False(tween.IsAlive(), "Tween is no longer alive");
     }
 
     [Test]
@@ -83,14 +83,14 @@ namespace PeachyTween.Tests {
       tween.Kill();
       tween.Sync();
 
-      Assert.False(tween.IsValid(), "Tween is no longer valid");
+      Assert.False(tween.IsAlive(), "Tween is no longer alive");
       Assert.AreEqual(0, logCount, "No logs yet");
 
       tween.Kill();
 
       Assert.AreEqual(0, logCount, "Does not log on kill");
 
-      const string expectedMessage = "Tween is invalid";
+      const string expectedMessage = "Tween is not alive";
 
       Debug.Log($"'{expectedMessage}' warning logged after this is expected:");
       logCount--; // Subtract one for log above.
@@ -98,7 +98,7 @@ namespace PeachyTween.Tests {
       tween.Sync();
 
       Assert.AreEqual(1, logCount, "Logs on sync after kill");
-      Assert.AreEqual(expectedMessage, lastLog.message, "Logs on invalid tween");
+      Assert.AreEqual(expectedMessage, lastLog.message, "Logs correct message");
       Assert.AreEqual(LogType.Warning, lastLog.type, "Log is warning");
 
       tween.KillSync();
@@ -107,5 +107,3 @@ namespace PeachyTween.Tests {
     }
   }
 }
-
-

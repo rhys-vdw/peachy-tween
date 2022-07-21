@@ -106,9 +106,11 @@ namespace PeachyTween {
 
     /// <summary>
     /// Check if the tween has ended.<para/>
+    /// </summary>
+    /// <remarks>
     /// This is useful for tweens that are <see cref="Preserve">preserved</see>,
     /// as any other tween will be killed upon completion.
-    /// </summary>
+    /// </remarks>
     /// <returns>`true` if tween is complete; `false` if tween is not complete.</returns>
     public bool IsComplete() =>
       Entity(out var entity) &&
@@ -233,8 +235,17 @@ namespace PeachyTween {
     /// <summary>
     /// Does this tween exist.
     /// </summary>
+    /// <remarks>
+    /// Tweens will are alive from creation until they complete or are <c
+    /// cref="Kill">killed</c>. You can prevent automatic killing of complete
+    /// tweens by <see cref="Preserve">preserving</see> them.</para>
+    ///
+    /// Use this to check if a tween
+    /// </remarks>
+    /// <seealso cref="Kill"/>
+    /// <seealso cref="Preserve"/>
     /// <returns>`true` if the tween exists; `false` if the tween not been set or has been killed.</returns>
-    public bool IsValid() =>
+    public bool IsAlive() =>
       TryEntity(out _);
 
 #endregion
@@ -571,7 +582,7 @@ namespace PeachyTween {
 
     bool Entity(out int entity) {
       if (!TryEntity(out entity)) {
-        Debug.LogWarning($"Tween is invalid");
+        Debug.LogWarning($"Tween is not alive");
         return false;
       }
       return true;

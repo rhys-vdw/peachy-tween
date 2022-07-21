@@ -35,10 +35,9 @@ namespace PeachyTween.Tests {
       targeting.Sync();
       nonTargeting.Sync();
 
-      Assert.True(nonTargeting.IsValid(), "Did not kill untargeting tween");
+      Assert.True(nonTargeting.IsAlive(), "Did not kill untargeting tween");
       Assert.True(onKill, "Called OnKill");
-      Assert.False(targeting.IsValid(), "Targeting tween is invalid");
+      Assert.False(targeting.IsAlive(), "Targeting tween is invalid");
     }
   }
 }
-
