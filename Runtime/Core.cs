@@ -35,6 +35,12 @@ namespace PeachyTween {
     }
 
 #endregion
+#region Active
+
+    public static bool IsActive(int entity) =>
+      !_world.HasComponent<Complete>(entity);
+
+#endregion
 #region Pause
 
     public static void Pause(int entity) =>
@@ -293,6 +299,7 @@ namespace PeachyTween {
 #region Run
 
     public static void Run<TGroup>(float deltaTime) where TGroup : struct {
+      AssertNotRunning();
       if (_groupFilters.TryGetValue(typeof(TGroup), out var filter)) {
         _runState.Set(filter, deltaTime);
         _systems.Run();
@@ -300,11 +307,29 @@ namespace PeachyTween {
     }
 
     public static void ManualUpdate(int entity, float deltaTime) {
+      AssertNotRunning();
       _runState.Set(entity, deltaTime);
       _systems.Run();
     }
 
     public static void Sync(int entity) => ManualUpdate(entity, 0);
+
+    static bool _isRunning = false;
+
+    static void AssertNotRunning() {
+      if (_isRunning) {
+        throw new InvalidOperationException($"Cannot perform this operation while tweening is in process");
+      }
+    }
+
+    static void Run() {
+      try {
+        _isRunning = true;
+        _systems.Run();
+      } finally {
+        _isRunning = false;
+      }
+    }
 
 #endregion
 #region Private
