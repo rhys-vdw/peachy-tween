@@ -198,7 +198,7 @@ namespace PeachyTween {
 #region Ping-pong
 
     /// <summary>
-    /// Set a <see cref="Loop">looping</see> tween to <see cref="Reverse">reverse</see> on each loop.
+    /// Set the tween to <see cref="Reverse">reverse</see> at the start of each <see cref="Loop">loop</see>.
     /// </summary>
     /// <seealso cref="Loop"/>
     /// <seealso cref="ClearPingPong"/>
