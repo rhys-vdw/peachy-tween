@@ -16,13 +16,13 @@ namespace PeachyTween.Tests {
 
       tween.Kill();
 
-      Assert.False(onKill, "Called OnKill prematurely");
+      Assert.False(onKill, "Did not call OnKill prematurely");
       Assert.True(tween.IsAlive(), "Tween is still alive");
 
       tween.ManualUpdate(0.5f);
 
-      Assert.False(onComplete, "Called OnComplete");
-      Assert.False(onChange, "Called OnChange");
+      Assert.False(onComplete, "Did not call OnComplete");
+      Assert.False(onChange, "Did not call OnChange");
       Assert.True(onKill, "Called OnKill");
       Assert.False(tween.IsAlive(), "Tween is no longer alive");
     }
@@ -43,13 +43,13 @@ namespace PeachyTween.Tests {
 
       tween.Kill();
 
-      Assert.False(onKill, "Called OnKill prematurely");
+      Assert.False(onKill, "Did not call OnKill prematurely");
       Assert.True(tween.IsAlive(), "Tween is still alive");
 
       Core.Run<TestGroup>(0.5f);
 
-      Assert.False(onComplete, "Called OnComplete");
-      Assert.False(onChange, "Called OnChange");
+      Assert.False(onComplete, "Did not call OnComplete");
+      Assert.False(onChange, "Did not call OnChange");
       Assert.True(onKill, "Called OnKill");
       Assert.False(tween.IsAlive(), "Tween is no longer alive");
     }
@@ -68,8 +68,8 @@ namespace PeachyTween.Tests {
       tween.Kill();
       tween.Sync();
 
-      Assert.False(onComplete, "Called OnComplete");
-      Assert.False(onChange, "Called OnChange");
+      Assert.False(onComplete, "Did not call OnComplete");
+      Assert.False(onChange, "Did not call OnChange");
       Assert.True(onKill, "Called OnKill");
       Assert.False(tween.IsAlive(), "Tween is no longer alive");
     }
