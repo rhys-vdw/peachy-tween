@@ -564,18 +564,37 @@ namespace PeachyTween {
     public Tween OnUpdate(Action handler) =>
       AddHandler<OnUpdate>(handler);
 
+    public Tween RemoveOnUpdate(Action handler) =>
+      RemoveHandler<OnUpdate>(handler);
+
     public Tween OnLoop(Action onComplete) =>
       AddHandler<OnLoop>(onComplete);
+
+    public Tween RemoveOnLoop(Action onComplete) =>
+      RemoveHandler<OnLoop>(onComplete);
 
     public Tween OnComplete(Action onComplete) =>
       AddHandler<OnComplete>(onComplete);
 
+    public Tween RemoveOnComplete(Action onComplete) =>
+      RemoveHandler<OnComplete>(onComplete);
+
     public Tween OnKill(Action onKill) =>
       AddHandler<OnKill>(onKill);
+
+    public Tween RemoveOnKill(Action onKill) =>
+      RemoveHandler<OnKill>(onKill);
 
     Tween AddHandler<T>(Action handler) where T : struct, ICallback {
       if (Entity(out var entity)) {
         Core.AddHandler<T>(entity, handler);
+      }
+      return this;
+    }
+
+    Tween RemoveHandler<T>(Action handler) where T : struct, ICallback {
+      if (Entity(out var entity)) {
+        Core.RemoveHandler<T>(entity, handler);
       }
       return this;
     }

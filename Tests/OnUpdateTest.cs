@@ -35,5 +35,26 @@ namespace PeachyTween.Tests {
       Assert.AreEqual(1, aCount, $"first {nameof(OnUpdate)} callback called");
       Assert.AreEqual(1, bCount, $"second {nameof(OnUpdate)} callback called");
     }
+
+    [Test]
+    public void RemoveOnUpdate() {
+      var aCount = 0;
+      var bCount = 0;
+
+      void a() => aCount++;
+      void b() => bCount++;
+
+      var tween = Peachy
+        .Tween(0f, 1f, 1f, _ => {})
+        .OnUpdate(a)
+        .OnUpdate(b)
+        .RemoveOnUpdate(b)
+        .SetGroup<TestGroup>();
+
+      Peachy.Run<TestGroup>(0.5f);
+
+      Assert.AreEqual(1, aCount, $"first {nameof(OnUpdate)} callback called");
+      Assert.AreEqual(0, bCount, $"second {nameof(OnUpdate)} callback was not called");
+    }
   }
 }
