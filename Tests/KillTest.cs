@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace PeachyTween.Tests {
   public class KillTest : BaseTweenTest {
     [Test]
-    public void Kill() {
+    public void KillManualUpdate() {
       var onChange = false;
       var onKill = false;
       var onComplete = false;
@@ -20,6 +20,33 @@ namespace PeachyTween.Tests {
       Assert.True(tween.IsAlive(), "Tween is still alive");
 
       tween.ManualUpdate(0.5f);
+
+      Assert.False(onComplete, "Called OnComplete");
+      Assert.False(onChange, "Called OnChange");
+      Assert.True(onKill, "Called OnKill");
+      Assert.False(tween.IsAlive(), "Tween is no longer alive");
+    }
+
+    struct TestGroup { }
+
+    [Test]
+    public void KillGroupUpdate() {
+      var onChange = false;
+      var onKill = false;
+      var onComplete = false;
+
+      var tween = Peachy
+        .Tween(0f, 1f, 1f, v => onChange = true)
+        .OnComplete(() => onComplete = true)
+        .OnKill(() => onKill = true)
+        .SetGroup<TestGroup>();
+
+      tween.Kill();
+
+      Assert.False(onKill, "Called OnKill prematurely");
+      Assert.True(tween.IsAlive(), "Tween is still alive");
+
+      Core.Run<TestGroup>(0.5f);
 
       Assert.False(onComplete, "Called OnComplete");
       Assert.False(onChange, "Called OnChange");
