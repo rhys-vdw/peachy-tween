@@ -168,7 +168,7 @@ namespace PeachyTween {
     /// <summary>
     /// Get the associated target of a <c cref="Tween">Tween</c>.
     /// </summary>
-    /// <seealso cref="SetTarget"/>
+    /// <seealso cref="SetTarget<T>"/>
     /// <param name="tween">The tween.</param>
     /// <param name="target">The previously set target.</param>
     /// <returns><c>true</c> if a target has been set; otherwise, <c>false</c>.</returns>
@@ -440,13 +440,15 @@ namespace PeachyTween {
 #region Shake
 
     /// <summary>
-    /// Set the lerp function to shake.<para/>
-    /// <b>Supported by Vector2 tweens only.</b><para/>
-    /// This overrides the default tween function to shake its values. This
-    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
-    /// on each dimension of the tweened value.<para/>
-    /// </para>
+    /// Set the lerp function to shake.
     /// </summary>
+    /// <remarks>
+    /// <strong>Supported by Vector2 tweens only.</strong>
+    ///
+    /// This overrides the default tween function to shake its values. This
+    /// creates a lerp function that performs the <c cref="Punch">Punch</c> ease
+    /// on each dimension of the tweened value.
+    /// </remarks>
     /// <seealso cref="Punch"/>
     /// <param name="tween">The tween.</param>
     /// <param name="oscillationCount">Number of oscillations per axis.</param>
@@ -460,13 +462,14 @@ namespace PeachyTween {
 
     /// <summary>
     /// Set the lerp function to shake.<para/>
-    ///
-    /// <b>Supported by Vector2 tweens only.</b><para/>
+    /// </summary>
+    /// <remarks>
+    /// **Supported by Vector2 tweens only.**<para/>
     ///
     /// This overrides the default tween function to shake its values. This
-    /// creates a lerp function that performs the <c cref="Punch">Punch<c> ease
+    /// creates a lerp function that performs the <c cref="Punch">Punch</c> ease
     /// on each dimension of the tweened value.<para/>
-    /// </summary>
+    /// </remarks>
     /// <seealso cref="Punch"/>
     /// <param name="tween">The tween.</param>
     /// <param name="oscillationCount">Number of oscillations per axis.</param>
