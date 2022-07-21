@@ -420,8 +420,11 @@ namespace PeachyTween {
     /// Change the tween's update group.
     /// </summary>
     /// <remarks>
-    /// Tweens default to the <c>Update</c> group, but custom groups can be added.
+    /// Tweens default to the <c>Update</c> group, but custom groups can be added.<para/>
+    /// This group can be updated on a custom update cycle using <see
+    /// cref="Peachy.Run"><c>Peachy.Run</c></see>.
     /// </remarks>
+    /// <typeparam name="TGroup">An empty struct that is used as an identifier for your custom group.</typeparam>
     public Tween SetGroup<TGroup>() where TGroup : struct {
       if (Entity(out var entity)) {
         Core.SetGroup<TGroup>(entity);
