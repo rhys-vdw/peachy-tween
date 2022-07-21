@@ -75,7 +75,7 @@ namespace PeachyTween.Tests {
     }
 
     [Test]
-    public void KillComplete() {
+    public void KillCompleteSync() {
       var onChange = false;
       var onKill = false;
       var onComplete = false;
@@ -87,6 +87,27 @@ namespace PeachyTween.Tests {
 
       tween.Kill(complete: true);
       tween.Sync();
+
+      Assert.True(onComplete, "Called OnComplete");
+      Assert.True(onChange, "Called OnChange");
+      Assert.True(onKill, "Called OnKill");
+      Assert.False(tween.IsAlive(), "Tween is no longer alive");
+    }
+
+    [Test]
+    public void KillCompleteGroupUpdate() {
+      var onChange = false;
+      var onKill = false;
+      var onComplete = false;
+
+      var tween = Peachy
+        .Tween(0f, 1f, 1f, v => onChange = true)
+        .OnComplete(() => onComplete = true)
+        .OnKill(() => onKill = true)
+        .SetGroup<TestGroup>();
+
+      tween.Kill(complete: true);
+      Core.Run<TestGroup>(0.5f);
 
       Assert.True(onComplete, "Called OnComplete");
       Assert.True(onChange, "Called OnChange");
