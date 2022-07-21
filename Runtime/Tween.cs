@@ -280,13 +280,6 @@ namespace PeachyTween {
 #endregion
 #region Run
 
-    public Tween OnUpdate(Action handler) {
-      if (Entity(out var entity)) {
-        Core.AddHandler<OnUpdate>(entity, handler);
-      }
-      return this;
-    }
-
     public void ManualUpdate(float deltaTime) {
       if (Entity(out var entity)) {
         Core.ManualUpdate(entity, deltaTime);
@@ -567,6 +560,9 @@ namespace PeachyTween {
 
 #endregion
 #region Callbacks
+
+    public Tween OnUpdate(Action handler) =>
+      AddHandler<OnUpdate>(handler);
 
     public Tween OnLoop(Action onComplete) =>
       AddHandler<OnLoop>(onComplete);
