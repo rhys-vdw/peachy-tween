@@ -28,50 +28,36 @@ namespace PeachyTween {
     }
 
     public static UniTask WithCancellation(this Tween tween, CancellationToken cancellationToken) {
-      Error.ThrowArgumentNullException(tween, nameof(tween));
-
       if (!tween.IsActive()) return UniTask.CompletedTask;
       return new UniTask(TweenConfiguredSource.Create(tween, TweenCancelBehaviour.Kill, cancellationToken, CallbackType.Kill, out var token), token);
     }
 
     public static UniTask ToUniTask(this Tween tween, TweenCancelBehaviour tweenCancelBehaviour = TweenCancelBehaviour.Kill, CancellationToken cancellationToken = default) {
-      Error.ThrowArgumentNullException(tween, nameof(tween));
-
       if (!tween.IsActive()) return UniTask.CompletedTask;
       return new UniTask(TweenConfiguredSource.Create(tween, tweenCancelBehaviour, cancellationToken, CallbackType.Kill, out var token), token);
     }
 
     public static UniTask AwaitForComplete(this Tween tween, TweenCancelBehaviour tweenCancelBehaviour = TweenCancelBehaviour.Kill, CancellationToken cancellationToken = default) {
-      Error.ThrowArgumentNullException(tween, nameof(tween));
-
       if (!tween.IsActive()) return UniTask.CompletedTask;
       return new UniTask(TweenConfiguredSource.Create(tween, tweenCancelBehaviour, cancellationToken, CallbackType.Complete, out var token), token);
     }
 
     public static UniTask AwaitForPause(this Tween tween, TweenCancelBehaviour tweenCancelBehaviour = TweenCancelBehaviour.Kill, CancellationToken cancellationToken = default) {
-      Error.ThrowArgumentNullException(tween, nameof(tween));
-
       if (!tween.IsActive()) return UniTask.CompletedTask;
       return new UniTask(TweenConfiguredSource.Create(tween, tweenCancelBehaviour, cancellationToken, CallbackType.Pause, out var token), token);
     }
 
     public static UniTask AwaitForPlay(this Tween tween, TweenCancelBehaviour tweenCancelBehaviour = TweenCancelBehaviour.Kill, CancellationToken cancellationToken = default) {
-      Error.ThrowArgumentNullException(tween, nameof(tween));
-
       if (!tween.IsActive()) return UniTask.CompletedTask;
       return new UniTask(TweenConfiguredSource.Create(tween, tweenCancelBehaviour, cancellationToken, CallbackType.Play, out var token), token);
     }
 
     public static UniTask AwaitForRewind(this Tween tween, TweenCancelBehaviour tweenCancelBehaviour = TweenCancelBehaviour.Kill, CancellationToken cancellationToken = default) {
-      Error.ThrowArgumentNullException(tween, nameof(tween));
-
       if (!tween.IsActive()) return UniTask.CompletedTask;
       return new UniTask(TweenConfiguredSource.Create(tween, tweenCancelBehaviour, cancellationToken, CallbackType.Rewind, out var token), token);
     }
 
     public static UniTask AwaitForStepComplete(this Tween tween, TweenCancelBehaviour tweenCancelBehaviour = TweenCancelBehaviour.Kill, CancellationToken cancellationToken = default) {
-      Error.ThrowArgumentNullException(tween, nameof(tween));
-
       if (!tween.IsActive()) return UniTask.CompletedTask;
       return new UniTask(TweenConfiguredSource.Create(tween, tweenCancelBehaviour, cancellationToken, CallbackType.StepComplete, out var token), token);
     }
@@ -79,32 +65,23 @@ namespace PeachyTween {
     public struct TweenAwaiter : ICriticalNotifyCompletion {
       readonly Tween tween;
 
-      // killed(non active) as completed.
       public bool IsCompleted => !tween.IsActive();
 
-      public TweenAwaiter(Tween tween)
-      {
+      public TweenAwaiter(Tween tween) {
         this.tween = tween;
       }
 
-      public TweenAwaiter GetAwaiter()
-      {
-        return this;
-      }
+      public TweenAwaiter GetAwaiter() => this;
 
-      public void GetResult()
-      {
-      }
+      public void GetResult() { }
 
-      public void OnCompleted(System.Action continuation)
-      {
+      public void OnCompleted(System.Action continuation) {
         UnsafeOnCompleted(continuation);
       }
 
-      public void UnsafeOnCompleted(System.Action continuation)
-      {
-        // onKill is called after OnCompleted, both Complete(false/true) and Kill(false/true).
-        tween.onKill = PooledTweenCallback.Create(continuation);
+      public void UnsafeOnCompleted(System.Action continuation) {
+        // OnKill is called after OnComplete
+        tween.OnKill(PooledTweenCallback.Create(continuation));
       }
     }
 
