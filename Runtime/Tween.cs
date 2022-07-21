@@ -185,7 +185,7 @@ namespace PeachyTween {
     /// <seealso cref="SetTarget"/>
     /// <param name="tween">The tween.</param>
     /// <param name="target">The previously set target.</param>
-    /// <returns><c>true</c> if a target has been set; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if a target has been set; <c>false</c> if no target has been set.</returns>
     public bool TryGetTarget(out object target) {
       if (Entity(out var entity)) {
         return Core.TryGetTarget(entity, out target);
@@ -197,6 +197,12 @@ namespace PeachyTween {
 #endregion
 #region Ping-pong
 
+    /// <summary>
+    /// Set a <see cref="Loop">looping</see> tween to <see cref="Reverse">reverse</see> on each loop.
+    /// </summary>
+    /// <seealso cref="Loop"/>
+    /// <seealso cref="ClearPingPong"/>
+    /// <seealso cref="Reverse"/>
     public Tween PingPong() {
       if (Entity(out int entity)) {
         Core.PingPong(entity);
@@ -204,6 +210,10 @@ namespace PeachyTween {
       return this;
     }
 
+    /// <summary>
+    /// Cancel <see cref="PingPong"><c>PingPong</c></see>.
+    /// </summary>
+    /// <seealso cref="PingPong"/>
     public Tween ClearPingPong() {
       if (Entity(out int entity)) {
         Core.ClearPingPong(entity);
