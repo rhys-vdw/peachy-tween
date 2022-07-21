@@ -71,8 +71,27 @@ namespace PeachyTween {
     }
 
     public static void Complete(int entity) {
-      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
-      GoTo(entity, tweenState.Duration);
+      if (!IsComplete(entity)) {
+        ref var tweenState = ref _world.GetComponent<TweenState>(entity);
+
+        // Resolve loops.
+        if (_world.HasComponent<Loop>(entity)) {
+          // Check if we need to flip direction to get to final loop.
+          if (_world.HasComponent<PingPong>(entity)) {
+            ref var loop = ref _world.GetComponent<Loop>(entity);
+            if (loop.Remaining != -1) {
+              if (loop.Remaining % 2 == 1) {
+                _world.ToggleComponent<Reverse>(entity);
+              }
+            }
+          }
+
+          // Cancel any loops.
+          _world.DelComponent<Loop>(entity);
+        }
+
+        GoTo(entity, tweenState.Duration);
+      }
     }
 
     public static bool IsComplete(int entity) =>
@@ -142,9 +161,6 @@ namespace PeachyTween {
 
     public static void Kill(int entity, bool complete) {
       if (complete && !IsComplete(entity)) {
-        // Cancel any loops.
-        _world.DelComponent<Loop>(entity);
-
         // Cancel preserve.
         _world.DelComponent<Preserve>(entity);
 
