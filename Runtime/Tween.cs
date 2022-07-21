@@ -280,6 +280,13 @@ namespace PeachyTween {
 #endregion
 #region Run
 
+    public Tween OnProgress(Action handler) {
+      if (Entity(out var entity)) {
+        Core.AddHandler<OnProgress>(entity, handler);
+      }
+      return this;
+    }
+
     public void ManualUpdate(float deltaTime) {
       if (Entity(out var entity)) {
         Core.ManualUpdate(entity, deltaTime);
