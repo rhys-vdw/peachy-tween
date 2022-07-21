@@ -248,6 +248,19 @@ namespace PeachyTween {
     public bool IsAlive() =>
       TryEntity(out _);
 
+    /// <summary>
+    /// Is this tween incomplete.
+    /// </summary>
+    /// <remarks>
+    /// A tween is considered active until it's complete or killed. <see
+    /// cref="Pause">Pausing</see> a tween does not decativate it.
+    /// </remarks>
+    /// <returns>
+    /// `true` if the tween has not yet completed or been killed; `false` if the tween has completed or been killed.
+    /// </returns>
+    public bool IsActive() =>
+      TryEntity(out var entity) && Core.IsActive(entity);
+
 #endregion
 #region Rotation
 
