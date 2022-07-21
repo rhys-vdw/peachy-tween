@@ -89,14 +89,15 @@ namespace PeachyTween {
     }
 
     /// <summary>
-    /// Cancel any loops and finish the tween.<para/>
-    ///
+    /// Complete the tween, including all loops.<para/>
+    /// </summary>
+    /// <remarks>
     /// When the tween is updated it will call its <c
     /// cref="OnComplete">OnComplete</c> callback, and will be killed if not
     /// <see cref="Preserve">preserved</see>.<para/>
     ///
     /// <inheritdoc cref="Tween" path="/warning[@id='sync']"/>
-    /// </summary>
+    /// </remarks>
     public Tween Complete() {
       if (Entity(out var entity)) {
         Core.Complete(entity);
@@ -383,7 +384,7 @@ namespace PeachyTween {
     public Tween LoopForever() =>
       SetLooping(-1);
 
-    Tween SetLooping(int remaining) {
+    internal Tween SetLooping(int remaining) {
       if (Entity(out var entity)) {
         Core.SetLooping(entity, remaining);
       }
