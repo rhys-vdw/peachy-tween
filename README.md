@@ -61,9 +61,9 @@ public class PeachyExample : MonoBehaviour
 
 ## Contributing
 
-_Contributions will be welcome after release._
+See [development project](https://github.com/rhys-vdw/peachy-tween/projects/1).
 
-Follow progress in the [development project](https://github.com/rhys-vdw/peachy-tween/projects/1).
+Contributions welcome. If you wish to make a pull request, please open an issue first.
 
 ## License
 
