@@ -218,9 +218,7 @@ namespace PeachyTween {
     static readonly ConcurrentQueue<PooledTweenCallback> _pool = new ();
 
     readonly Action _run;
-
     Action _continuation;
-
 
     PooledTweenCallback() {
       _run = Run;
@@ -231,7 +229,6 @@ namespace PeachyTween {
       if (!_pool.TryDequeue(out var item)) {
         item = new PooledTweenCallback();
       }
-
       item._continuation = continuation;
       return item._run;
     }
