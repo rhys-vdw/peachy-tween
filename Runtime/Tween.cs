@@ -586,7 +586,7 @@ namespace PeachyTween {
       float frequencyDecay,
       float amplitudeRandomness,
       float frequencyRandomness
-    ) => Lerp(LerpFuncs.CreateShake(
+    ) => Lerp(LerpFuncFactory.CreateShake(
       oscillationCount: oscillationCount,
       amplitudeDecay: amplitudeDecay,
       frequencyDecay: frequencyDecay,
@@ -616,7 +616,7 @@ namespace PeachyTween {
       float frequencyDecay,
       float amplitudeRandomness,
       float frequencyRandomness
-    ) => Lerp(LerpFuncs.CreateShake2D(
+    ) => Lerp(LerpFuncFactory.CreateShake2D(
       oscillationCount: oscillationCount,
       amplitudeDecay: amplitudeDecay,
       frequencyDecay: frequencyDecay,
@@ -656,7 +656,7 @@ namespace PeachyTween {
       float amplitudeDecay,
       float frequencyDecay
     ) => Ease(
-      EaseFuncs.CreatePunch(oscillationCount, amplitudeDecay, frequencyDecay)
+      EaseFuncFactory.CreatePunch(oscillationCount, amplitudeDecay, frequencyDecay)
     );
 
 #endregion

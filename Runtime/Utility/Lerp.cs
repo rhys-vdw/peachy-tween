@@ -14,7 +14,7 @@ namespace PeachyTween {
   /// <returns>The interpolated value.</returns>
   public delegate T LerpFunc<T>(T from, T to, float t);
 
-  public static class LerpFuncs {
+  public static class LerpFuncFactory {
 #region Shake
 
     public static LerpFunc<Vector2> CreateShake2D(
@@ -25,7 +25,7 @@ namespace PeachyTween {
       float frequencyRandomness = 0f
     ) {
       EaseFunc Create() {
-        return EaseFuncs.CreatePunch(
+        return EaseFuncFactory.CreatePunch(
           oscillationCount,
           RandomScale(amplitudeDecay, amplitudeRandomness),
           RandomScale(frequencyDecay, frequencyRandomness),
@@ -48,7 +48,7 @@ namespace PeachyTween {
       float frequencyRandomness = 0f
     ) {
       EaseFunc Create() {
-        return EaseFuncs.CreatePunch(
+        return EaseFuncFactory.CreatePunch(
           oscillationCount,
           RandomScale(amplitudeDecay, amplitudeRandomness),
           RandomScale(frequencyDecay, frequencyRandomness),
@@ -69,6 +69,9 @@ namespace PeachyTween {
       value * Random.Range(1 - maxScale, 1 + maxScale);
 
 #endregion
+  }
+
+  internal static class LerpFuncs {
 #region Float
 
     public static float InverseLerpUnclamped(float a, float b, float value) =>

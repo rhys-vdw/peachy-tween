@@ -215,7 +215,9 @@ namespace PeachyTween {
         ? (1 - BounceOut(1 - 2 * t)) / 2
         : (1 + BounceOut(2 * t - 1)) / 2;
     }
+  }
 
+  public static class EaseFuncFactory {
     public static EaseFunc CreatePunch(
       int oscillationCount,
       float amplitudeDecay,
