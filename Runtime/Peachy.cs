@@ -77,6 +77,15 @@ namespace PeachyTween {
 #endregion
 #region Run
 
+    /// <summary>
+    /// Update a custom group of tweens.
+    /// </summary>
+    /// <remarks>
+    /// Tweens default to the <c>Update</c> group, but custom groups can be
+    /// assigned using <see cref="Tween.SetGroup{TGroup}"><c>SetGroup</c></see>.
+    /// </remarks>
+    /// <param name="t">The time step to progress your group by.</param>
+    /// <typeparam name="TGroup">An empty struct that is used as an identifier for your custom group.</typeparam>
     public static void Run<TGroup>(float deltaTime) where TGroup : struct =>
       Core.Run<TGroup>(deltaTime);
 
@@ -84,13 +93,12 @@ namespace PeachyTween {
 #region Control
 
     /// <summary>
-    /// Kill all <c cref="Tween">Tween</c>s targeting an object.
+    /// Kill all <see cref="Tween">tweens</see> targeting an object.
     /// </summary>
     /// <seealso cref="Tween.SetTarget"/>
-    /// <param name="tween">The object.</param>
     /// <param name="target">The target object.</param>
     /// <param name="complete">
-    /// Progress tween to end value and trigger <c cref="Tween.OnComplete">OnComplete</c> handlers.
+    /// Progress tween to end value and trigger <see cref="Tween.OnComplete"><c>OnComplete</c></see> handlers.
     /// </param>
     public static void KillAllWithTarget(object target, bool complete = false) =>
       Core.KillAllWithTarget(target, complete);
