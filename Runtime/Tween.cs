@@ -633,7 +633,6 @@ namespace PeachyTween {
     /// <summary>
     /// Set the ease to oscillate and fade out.
     /// </summary>
-    /// <param name="tween">The tween.</param>
     /// <param name="oscillationCount">
     /// The number of times the value will oscillate (half the period).<para/>
     ///

@@ -139,6 +139,14 @@ namespace PeachyTween {
     BounceInOut
   }
 
+  /// <summary>
+  /// A collection of standard easing functions.
+  /// </summary>
+  /// <remarks>
+  /// These functions were all taken from <see
+  /// href="https://easings.net">easings.net</see>, you can use their animations
+  /// for reference.
+  /// </remarks>
   public static class EaseFuncs {
     const float c1 = 1.70158f;
     const float c2 = c1 * 1.525f;
@@ -443,7 +451,36 @@ namespace PeachyTween {
     };
   }
 
+  /// <summary>
+  /// Helpers for creating configurable easing functions.
+  /// </summary>
   public static class EaseFuncFactory {
+    /// <summary>
+    /// Create an easing function that oscillates and fade out.
+    /// </summary>
+    /// <param name="oscillationCount">
+    /// The number of times the value will oscillate (half the period).<para/>
+    ///
+    /// A negative value will move the value away from the target on its first
+    /// oscillation.
+    /// </param>
+    /// <param name="amplitudeDecay">
+    /// Rate at which the amplitude of the wave decreases.<para/>
+    ///
+    /// - Higher values cause a more vigorous initial shake.<br/>
+    /// - A value of zero will cause amplitude to stay constant.<br/>
+    /// - Values below zero cause the amplitude to increase over time, tending towards infinity.<br/>
+    /// </param>
+    /// <param name="frequencyDecay">
+    /// Rate at which the frequency of the wave decreases.<para/>
+    ///
+    /// Higher values cause a more vigorous initial shake. Values below zero
+    /// cause the shake to increase in speed over time.
+    /// </param>
+    /// <param name="alwaysStartPositive">
+    /// If the curve would start with a negative gradient, invert it.
+    /// </param>
+    /// <returns>The easing function.</returns>
     public static EaseFunc CreatePunch(
       int oscillationCount,
       float amplitudeDecay,

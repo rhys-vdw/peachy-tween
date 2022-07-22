@@ -14,9 +14,17 @@ namespace PeachyTween {
   /// <returns>The interpolated value.</returns>
   public delegate T LerpFunc<T>(T from, T to, float t);
 
+  /// <summary>
+  /// Helpers for creating configurable interpolation functions.
+  /// </summary>
   public static class LerpFuncFactory {
 #region Shake
 
+    /// <summary>
+    /// Create a interpolation function that shakes a <c>Vector3</c> on all axes.
+    /// </summary>
+    /// <returns>The shake interpolation function.</returns>
+    /// <inheritdoc cref="CreateShake"/>
     public static LerpFunc<Vector2> CreateShake2D(
       int oscillationCount,
       float amplitudeDecay = 1f,
@@ -40,6 +48,15 @@ namespace PeachyTween {
       );
     }
 
+    /// <summary>
+    /// Create a interpolation function that shakes a <c>Vector2</c> on both axes.
+    /// </summary>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="frequencyDecay">Rate at which frequency decreases over time.</param>
+    /// <param name="amplitudeDecay">Rate at which amplitude decreases over time.</param>
+    /// <param name="frequencyRandomness">Maximum percentage change randomly applied to frequency per axis.</param>
+    /// <param name="amplitudeRandomness">Maximum percentage change randomly applied to amplitude per axis.</param>
+    /// <returns>The shake interpolation function.</returns>
     public static LerpFunc<Vector3> CreateShake(
       int oscillationCount,
       float amplitudeDecay = 1f,
