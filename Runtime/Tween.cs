@@ -3,11 +3,6 @@ using UnityEngine;
 using Leopotam.EcsLite;
 
 namespace PeachyTween {
-  /// <warning id='sync'>
-  /// This has no effect until the next tween update. To reflect changes
-  /// immediately (e.g. for a <see cref="Pause">paused</see> tween),
-  /// then call <c cref="Sync">.Sync()</c>.<para/>
-  /// </warning>
   public readonly struct Tween {
     readonly EcsPackedEntity _entity;
 
@@ -83,7 +78,6 @@ namespace PeachyTween {
     /// <summary>
     /// Restart the tween and unpause it.<para/>
     /// Equivalent to <c>tween.Rewind().Resume()</c><para/>
-    /// <inheritdoc cref="Tween" path="/warning[@id='sync']"/>
     /// </summary>
     /// <seealso cref="Rewind"/>
     /// <seealso cref="Resume"/>
@@ -92,7 +86,6 @@ namespace PeachyTween {
     /// <summary>
     /// Return the tween to the start.<para/>
     /// Equivalent to <c cref="GoTo">GoTo(0)</c>.<para/>
-    /// <inheritdoc cref="Tween" path="/warning[@id='sync']"/>
     /// </summary>
     /// <seealso cref="GoTo"/>
     public Tween Rewind() => GoTo(0);
@@ -100,8 +93,6 @@ namespace PeachyTween {
 
     /// <summary>
     /// Set the interal time of a tween.<para/>
-    ///
-    /// <inheritdoc cref="Tween" path="/warning[@id='sync']"/>
     /// </summary>
     /// <param name="elapsed">
     /// The time to set the tween to. <c>0</c> will rewind the tween to the
@@ -122,7 +113,7 @@ namespace PeachyTween {
     /// cref="OnComplete">OnComplete</c> callback, and will be killed if not
     /// <see cref="Preserve">preserved</see>.<para/>
     ///
-    /// <inheritdoc cref="Tween" path="/warning[@id='sync']"/>
+    /// To complete the tween immediately, call <c cref="Sync">tween.Sync()</c>.
     /// </remarks>
     public Tween Complete() {
       if (Entity(out var entity)) {
@@ -171,15 +162,16 @@ namespace PeachyTween {
     /// killing by target.
     /// </summary>
     /// <remarks>
-    /// This does not change which object the Tween is currently acting
-    /// on, its purpose is to link this tween to an object so that it will be
-    /// killed when the target object is passed to <c cref="Kill">Tween.Kill</c>.<para/>
-    ///
     /// This will replace any previously set target.<para/>
     ///
     /// This method is called by provided extension methods (e.g.
     /// <c cref="TrasnformExtensions.TweenPosition">TweenPosition</c>), and
     /// should be called by any custom extension methods.<para/>
+    ///
+    /// This does not change which object the Tween is currently acting
+    /// on, its purpose is to link this tween to an object so that it will be
+    /// killed when the target object is passed to
+    /// <c cref="Peachy.KillAllWithTarget">KillAllWithTarget</c>.<para/>
     /// </remarks>
     /// <seealso cref="Peachy.KillAllWithTarget(object, bool)"/>
     /// <param name="tween">The tween.</param>
