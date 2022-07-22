@@ -3,8 +3,8 @@ using static UnityEngine.Mathf;
 
 namespace PeachyTween {
   /// <summary>
-  /// A custom interpolation function that can be used to override a tween's
-  /// interpolation.
+  /// An interpolation function that controls how a tweened value is moves from
+  /// start to end.
   /// </summary>
   /// <seealso cref="Tween.Lerp"/>
   /// <param name="from">The starting value.</param>
