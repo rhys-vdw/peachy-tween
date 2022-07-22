@@ -16,6 +16,7 @@ namespace PeachyTween {
     /// Pause the tween.
     /// </summary>
     /// <seealso cref="Resume"/>
+    /// <returns>This tween.</returns>
     public Tween Pause() {
       if (Entity(out var entity)) {
         Core.Pause(entity);
@@ -27,6 +28,7 @@ namespace PeachyTween {
     /// Unpause the tween.
     /// </summary>
     /// <seealso cref="Pause"/>
+    /// <returns>This tween.</returns>
     public Tween Resume() {
       if (Entity(out var entity)) {
         Core.Resume(entity);
@@ -53,6 +55,7 @@ namespace PeachyTween {
     /// Use this to create a replayable tween.
     /// </remarks>
     /// <seealso cref="ClearPreserve"/>
+    /// <returns>This tween.</returns>
     public Tween Preserve() {
       if (Entity(out var entity)) {
         Core.Preserve(entity);
@@ -65,6 +68,7 @@ namespace PeachyTween {
     /// to be killed when it completes.
     /// </summary>
     /// <seealso cref="Preserve"/>
+    /// <returns>This tween.</returns>
     public Tween ClearPreserve() {
       if (Entity(out var entity)) {
         Core.ClearPreserve(entity);
@@ -88,8 +92,8 @@ namespace PeachyTween {
     /// Equivalent to <c cref="GoTo">GoTo(0)</c>.<para/>
     /// </summary>
     /// <seealso cref="GoTo"/>
+    /// <returns>This tween.</returns>
     public Tween Rewind() => GoTo(0);
-
 
     /// <summary>
     /// Set the interal time of a tween.<para/>
@@ -98,6 +102,7 @@ namespace PeachyTween {
     /// The time to set the tween to. <c>0</c> will rewind the tween to the
     /// start, and passing the tween's duration will fast-forward to the end.
     /// </param>
+    /// <returns>This tween.</returns>
     public Tween GoTo(float elapsed) {
       if (Entity(out var entity)) {
         Core.GoTo(entity, elapsed);
@@ -115,6 +120,7 @@ namespace PeachyTween {
     ///
     /// To complete the tween immediately, call <c cref="Sync">tween.Sync()</c>.
     /// </remarks>
+    /// <returns>This tween.</returns>
     public Tween Complete() {
       if (Entity(out var entity)) {
         Core.Complete(entity);
@@ -137,6 +143,7 @@ namespace PeachyTween {
     /// <summary>
     /// Reverse the direction of this tween.
     /// </summary>
+    /// <returns>This tween.</returns>
     public Tween Reverse() {
       if (Entity(out var entity)) {
         Core.Reverse(entity);
@@ -147,6 +154,7 @@ namespace PeachyTween {
     /// <summary>
     /// Run this tween from end to start.
     /// </summary>
+    /// <returns>This tween.</returns>
     public Tween From() {
       if (Entity(out var entity)) {
         Core.From(entity);
@@ -176,6 +184,7 @@ namespace PeachyTween {
     /// <seealso cref="Peachy.KillAllWithTarget(object, bool)"/>
     /// <param name="tween">The tween.</param>
     /// <param name="target">Any instance of a reference type to become the target of this tween.</param>
+    /// <returns>This tween.</returns>
     public Tween SetTarget<T>(T target) where T : class {
       if (Entity(out var entity)) {
         Core.SetTarget(entity, target);
@@ -207,6 +216,7 @@ namespace PeachyTween {
     /// <seealso cref="Loop"/>
     /// <seealso cref="ClearPingPong"/>
     /// <seealso cref="Reverse"/>
+    /// <returns>This tween.</returns>
     public Tween PingPong() {
       if (Entity(out int entity)) {
         Core.PingPong(entity);
@@ -218,6 +228,7 @@ namespace PeachyTween {
     /// Cancel <see cref="PingPong"><c>PingPong</c></see>.
     /// </summary>
     /// <seealso cref="PingPong"/>
+    /// <returns>This tween.</returns>
     public Tween ClearPingPong() {
       if (Entity(out int entity)) {
         Core.ClearPingPong(entity);
@@ -237,6 +248,7 @@ namespace PeachyTween {
     /// </remarks>
     /// <seealso cref="Kill" />
     /// <inheritdoc cref="Kill" />
+    /// <returns>This tween.</returns>
     public void KillSync(bool complete = false) {
       if (TryEntity(out var entity)) {
         Core.Kill(entity, complete);
@@ -300,6 +312,7 @@ namespace PeachyTween {
     ///
     /// <strong>Only compatible with <c>float</c> tweens.</strong>
     /// </summary>
+    /// <returns>This tween.</returns>
     public Tween ShortestAngle() {
       if (Entity(out var entity)) {
         Core.ShortestAngle(entity);
@@ -313,6 +326,7 @@ namespace PeachyTween {
     ///
     /// <strong>Only compatible with <c>Vector2</c> and <c>Vector3</c> tweens.</strong>
     /// </summary>
+    /// <returns>This tween.</returns>
     public Tween Slerp() {
       if (Entity(out var entity)) {
         Core.Rotate(entity);
@@ -332,6 +346,7 @@ namespace PeachyTween {
     /// </remarks>
     /// <seealso cref="SetManualUpdate"/>
     /// <param name="deltaTime">The amount of time to progress tweens by.</param>
+    /// <returns>This tween.</returns>
     public void ManualUpdate(float deltaTime) {
       if (Entity(out var entity)) {
         Core.ManualUpdate(entity, deltaTime);
@@ -348,6 +363,7 @@ namespace PeachyTween {
     /// <seealso cref="KillSync"/>
     /// <seealso cref="SetManualUpdate"/>
     /// <param name="deltaTime">The amount of time to progress tweens by.</param>
+    /// <returns>This tween.</returns>
     public Tween Sync() {
       if (Entity(out var entity)) {
         Core.Sync(entity);
@@ -364,31 +380,37 @@ namespace PeachyTween {
     /// <remarks>
     /// This is the default update group for new tweens.
     /// </remarks>
+    /// <returns>This tween.</returns>
     public Tween SetUpdate() => SetGroup<Update>();
 
     /// <summary>
     /// Set tween to update on <c>Update</c> using unscaled time.
     /// </summary>
+    /// <returns>This tween.</returns>
     public Tween SetUnscaledUpdate() => SetGroup<UnscaledUpdate>();
 
     /// <summary>
     /// Set tween to update on <c>LateUpdate</c>.
     /// </summary>
+    /// <returns>This tween.</returns>
     public Tween SetLateUpdate() => SetGroup<LateUpdate>();
 
     /// <summary>
     /// Set tween to update on <c>LateUpdate</c> using unscaled time.
     /// </summary>
+    /// <returns>This tween.</returns>
     public Tween SetUnscaledLateUpdate() => SetGroup<UnscaledLateUpdate>();
 
     /// <summary>
     /// Set tween to update on <c>FixedUpdate</c>.
     /// </summary>
+    /// <returns>This tween.</returns>
     public Tween SetFixedUpdate() => SetGroup<FixedUpdate>();
 
     /// <summary>
     /// Set tween to update on <c>FixedUpdate</c> using unscaled time.
     /// </summary>
+    /// <returns>This tween.</returns>
     public Tween SetUnscaledFixedUpdate() => SetGroup<UnscaledFixedUpdate>();
 
     /// <summary>
@@ -397,11 +419,13 @@ namespace PeachyTween {
     /// <remarks>
     /// This is an alias of <c cref="ClearGroup">ClearGroup</c>.
     /// </remarks>
+    /// <returns>This tween.</returns>
     public Tween SetManualUpdate() => ClearGroup();
 
     /// <summary>
     /// Remove the assigned update group from this tween.
     /// </summary>
+    /// <returns>This tween.</returns>
     public Tween ClearGroup() {
       if (Entity(out var entity)) {
         Core.ClearGroup(entity);
@@ -418,6 +442,7 @@ namespace PeachyTween {
     /// cref="Peachy.Run"><c>Peachy.Run</c></see>.
     /// </remarks>
     /// <typeparam name="TGroup">An empty struct that is used as an identifier for your custom group.</typeparam>
+    /// <returns>This tween.</returns>
     public Tween SetGroup<TGroup>() where TGroup : struct {
       if (Entity(out var entity)) {
         Core.SetGroup<TGroup>(entity);
@@ -428,6 +453,14 @@ namespace PeachyTween {
 #endregion
 #region Loop
 
+    /// <summary>
+    /// Set the number of times this tween should loop.
+    /// </summary>
+    /// <param name="count">
+    /// The number of times this tween should loop, cannot be negative.<para/>
+    /// Setting to <c>0</c> will stop the tween from looping.
+    /// </param>
+    /// <returns>This tween.</returns>
     public Tween Loop(int count) {
       if (count < 0) {
         throw new ArgumentOutOfRangeException(nameof(count), count, "Must not be negative");
@@ -435,9 +468,17 @@ namespace PeachyTween {
       return SetLooping(count);
     }
 
+    /// <summary>
+    /// Stop the tween from looping.
+    /// </summary>
+    /// <returns>This tween.</returns>
     public Tween StopLoop() =>
       SetLooping(0);
 
+    /// <summary>
+    /// Set the tween to loop endlessly.
+    /// </summary>
+    /// <returns>This tween.</returns>
     public Tween LoopForever() =>
       SetLooping(-1);
 
@@ -451,6 +492,12 @@ namespace PeachyTween {
 #endregion
 #region Easing
 
+    /// <summary>
+    /// Clears the easing function, defaulting to linear interpolation.
+    /// </summary>
+    /// <seealso cref="Ease"/>
+    /// <param name="easeFunc">An easing function.</param>
+    /// <returns>This tween.</returns>
     public Tween ClearEase() {
       if (Entity(out var entity)) {
         Core.ClearEase(entity);
@@ -458,16 +505,18 @@ namespace PeachyTween {
       return this;
     }
 
-    public Tween Ease(AnimationCurve animationCurve) {
-      _ = animationCurve ?? throw new ArgumentNullException(nameof(animationCurve));
-      return Ease(animationCurve.Evaluate);
-    }
-
+    /// <summary>
+    /// Set the easing function for this tween.
+    /// </summary>
+    /// <param name="ease">A standard easing function.</param>
+    /// <returns>This tween.</returns>
     public Tween Ease(Ease ease) =>
       ease == PeachyTween.Ease.Linear
         ? ClearEase()
         : Ease(ease.ToFunc());
 
+    /// <inheritdoc cref="Ease" />
+    /// <param name="easeFunc">An easing function.</param>
     public Tween Ease(EaseFunc easeFunc) {
       if (Entity(out var entity)) {
         Core.Ease(entity, easeFunc);
@@ -475,18 +524,24 @@ namespace PeachyTween {
       return this;
     }
 
+    /// <inheritdoc cref="Ease" />
+    /// <param name="animationCurve">An animation curve from (0,0) to (1,1).</param>
+    public Tween Ease(AnimationCurve animationCurve) {
+      _ = animationCurve ?? throw new ArgumentNullException(nameof(animationCurve));
+      return Ease(animationCurve.Evaluate);
+    }
+
 #endregion
 #region Lerp
 
-    /// <summary>
-    /// Set the lerp function. <para/>
-    /// Overrides the default lerp function for this tween.
-    /// </summary>
-    /// <seealso cref="Punch"/>
-    /// <param name="tween">The tween.</param>
-    /// <param name="lerp">The lerp function for this tween.</param>
-    /// <typeparam name="T">The type of the value being tweened.</param>
-    public Tween Lerp<T>(LerpFunc<T> lerp) {
+     /// <summary>
+     /// Override the default lerp function for this tween.
+     /// </summary>
+     /// <seealso cref="Punch"/>
+     /// <typeparam name="T">The type of the value being tweened.</typeparam>
+     /// <param name="lerp">The lerp function for this tween.</param>
+     /// <returns>This tween.</returns>
+     public Tween Lerp<T>(LerpFunc<T> lerp) {
       if (Entity(out var entity)) {
         Core.Lerp(entity, lerp);
       }
@@ -499,7 +554,7 @@ namespace PeachyTween {
 
     /// <summary>
     /// Set the lerp function to shake.<para/>
-    /// <b>Supported by Vector3 tweens only.</b>
+    /// <b>Supported by <c>Vector3</c> tweens only.</b>
     /// </summary>
     /// <remarks>
     /// This overrides the default tween function to shake its values. This
@@ -510,19 +565,21 @@ namespace PeachyTween {
     /// <param name="oscillationCount">Number of oscillations per axis.</param>
     /// <param name="decay">Rate at which amplitude and frequency decrease over time.</param>
     /// <param name="randomness">Maximum percentage change randomly applied to amplitude and frequency per axis.</param>
+    /// <returns>This tween.</returns>
     public Tween Shake(
       int oscillationCount,
       float decay,
       float randomness
     ) => Shake(oscillationCount, decay, decay, randomness, randomness);
 
-    /// <inheritdoc cref="Shake" path="summary or remarks"/>
+    /// <inheritdoc cref="Shake"/>
     /// <seealso cref="Punch"/>
     /// <param name="oscillationCount">Number of oscillations per axis.</param>
     /// <param name="frequencyDecay">Rate at which frequency decreases over time.</param>
     /// <param name="amplitudeDecay">Rate at which amplitude decreases over time.</param>
     /// <param name="frequencyRandomness">Maximum percentage change randomly applied to frequency per axis.</param>
     /// <param name="amplitudeRandomness">Maximum percentage change randomly applied to amplitude per axis.</param>
+    /// <returns>This tween.</returns>
     public Tween Shake(
       int oscillationCount,
       float amplitudeDecay,
@@ -539,7 +596,7 @@ namespace PeachyTween {
 
     /// <summary>
     /// Set the lerp function to shake.<para/>
-    /// <strong>Supported by Vector2 tweens only.</strong><para/>
+    /// <strong>Supported by <c>Vector2</c> tweens only.</strong><para/>
     /// </summary>
     /// <inheritdoc cref="Shake" path="remarks"/>
     /// <inheritdoc cref="Shake(int, float, float)" path="param"/>
@@ -593,6 +650,7 @@ namespace PeachyTween {
     /// Higher values cause a more vigorous initial shake. Values below zero
     /// cause the shake to increase in speed over time.
     /// </param>
+    /// <returns>This tween.</returns>
     public Tween Punch(
       int oscillationCount,
       float amplitudeDecay,
@@ -604,27 +662,66 @@ namespace PeachyTween {
 #endregion
 #region Callbacks
 
+    /// <summary>
+    /// Register a callback to be invoked every time this tween progresses.
+    /// </summary>
+    /// <returns>This tween.</returns>
     public Tween OnUpdate(Action handler) =>
       AddHandler<OnUpdate>(handler);
 
+    /// <summary>
+    /// Remove <c cref="OnUpdate">OnUpdate</c> callback.
+    /// </summary>
+    /// <seealso cref="OnUpdate"/>
+    /// <returns>This tween.</returns>
     public Tween RemoveOnUpdate(Action handler) =>
       RemoveHandler<OnUpdate>(handler);
 
+    /// <summary>
+    /// Register a callback to be invoked every time this tween loops.
+    /// </summary>
+    /// <seealso cref="Loop"/>
+    /// <returns>This tween.</returns>
     public Tween OnLoop(Action onComplete) =>
       AddHandler<OnLoop>(onComplete);
 
+    /// <summary>
+    /// Remove <c cref="OnLoop">OnLoop</c> callback.
+    /// </summary>
+    /// <seealso cref="OnLoop"/>
+    /// <returns>This tween.</returns>
     public Tween RemoveOnLoop(Action onComplete) =>
       RemoveHandler<OnLoop>(onComplete);
 
+    /// <summary>
+    /// Register a callback to be invoked when this tween reaches the end value.
+    /// </summary>
+    /// <returns>This tween.</returns>
     public Tween OnComplete(Action onComplete) =>
       AddHandler<OnComplete>(onComplete);
 
+    /// <summary>
+    /// Remove <c cref="OnComplete">OnComplete</c> callback.
+    /// </summary>
+    /// <seealso cref="OnComplete"/>
+    /// <returns>This tween.</returns>
     public Tween RemoveOnComplete(Action onComplete) =>
       RemoveHandler<OnComplete>(onComplete);
 
+    /// <summary>
+    /// Register a callback to be invoked when this tween dies, either due to
+    /// completion or because it was <see cref="Kill">killed</see>.
+    /// </summary>
+    /// <seealso cref="Kill"/>
+    /// <returns>This tween.</returns>
     public Tween OnKill(Action onKill) =>
       AddHandler<OnKill>(onKill);
 
+    /// <summary>
+    /// Remove <c cref="OnKill">OnKill</c> callback.
+    /// </summary>
+    /// <seealso cref="OnKill"/>
+    /// <returns>This tween.</returns>
     public Tween RemoveOnKill(Action onKill) =>
       RemoveHandler<OnKill>(onKill);
 
