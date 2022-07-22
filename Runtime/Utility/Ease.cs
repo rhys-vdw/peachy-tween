@@ -139,9 +139,6 @@ namespace PeachyTween {
     BounceInOut
   }
 
-  public static class EaseUtility {
-  }
-
   public static class EaseFuncs {
     const float c1 = 1.70158f;
     const float c2 = c1 * 1.525f;
