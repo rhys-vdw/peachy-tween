@@ -13,36 +13,129 @@ namespace PeachyTween {
   public delegate float EaseFunc(float t);
 
   public enum Ease {
+    /// <summary>
+    /// No ease.
+    /// </summary>
     Linear,
+    /// <summary>
+    /// Easing function with a quadratic ease in.
+    /// </summary>
     QuadIn,
+    /// <summary>
+    /// Easing function with a quadratic ease out.
+    /// </summary>
     QuadOut,
+    /// <summary>
+    /// Easing function with a quadratic ease in and out.
+    /// </summary>
     QuadInOut,
+    /// <summary>
+    /// Easing function with a cubic ease in.
+    /// </summary>
     CubicIn,
+    /// <summary>
+    /// Easing function with a cubic ease out.
+    /// </summary>
     CubicOut,
+    /// <summary>
+    /// Easing function with a cubic ease in and out.
+    /// </summary>
     CubicInOut,
+    /// <summary>
+    /// Easing function with a quartic ease in.
+    /// </summary>
     QuartIn,
+    /// <summary>
+    /// Easing function with a quartic ease out.
+    /// </summary>
     QuartOut,
+    /// <summary>
+    /// Easing function with a quartic ease in and out.
+    /// </summary>
     QuartInOut,
+    /// <summary>
+    /// Easing function with a quintic ease in.
+    /// </summary>
     QuintIn,
+    /// <summary>
+    /// Easing function with a quintic ease out.
+    /// </summary>
     QuintOut,
+    /// <summary>
+    /// Easing function with a quintic ease in and out.
+    /// </summary>
     QuintInOut,
+    /// <summary>
+    /// Easing function with a sine ease in.
+    /// </summary>
     SineIn,
+    /// <summary>
+    /// Easing function with a sine ease out.
+    /// </summary>
     SineOut,
+    /// <summary>
+    /// Easing function with a sine ease in and out.
+    /// </summary>
     SineInOut,
+    /// <summary>
+    /// Easing function with a exponential ease in.
+    /// </summary>
     ExpoIn,
+    /// <summary>
+    /// Easing function with a exponential ease out.
+    /// </summary>
     ExpoOut,
+    /// <summary>
+    /// Easing function with a exponential ease in and out.
+    /// </summary>
     ExpoInOut,
+    /// <summary>
+    /// Easing function with a circular ease in.
+    /// </summary>
     CircIn,
+    /// <summary>
+    /// Easing function with a circular out.
+    /// </summary>
     CircOut,
+    /// <summary>
+    /// Easing function with a circular ease in and out.
+    /// </summary>
     CircInOut,
+    /// <summary>
+    /// Easing function that backs off before continuing.
+    /// </summary>
     BackIn,
+    /// <summary>
+    /// Easing function that overshoots the end.
+    /// </summary>
     BackOut,
+    /// <summary>
+    /// Easing function that backs off before continuing and overshoots the end.
+    /// </summary>
     BackInOut,
+    /// <summary>
+    /// Easing function with an elastic ease in.
+    /// </summary>
     ElasticIn,
+    /// <summary>
+    /// Easing function with an elastic ease out.
+    /// </summary>
     ElasticOut,
+    /// <summary>
+    /// Easing function with an elastic ease in and out.
+    /// </summary>
     ElasticInOut,
+    /// <summary>
+    /// Easing function with a bounce in and out.
+    /// </summary>
     BounceIn,
+    /// <summary>
+    /// Easing function with a bounce in and out.
+    /// </summary>
     BounceOut,
+    /// <summary>
+    /// Easing function with a bounce in and out.
+    /// </summary>
     BounceInOut
   }
 
