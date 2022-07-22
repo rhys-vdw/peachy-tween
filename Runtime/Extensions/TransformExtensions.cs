@@ -107,7 +107,7 @@ namespace PeachyTween {
     /// <summary>
     /// Shake the Transform's local rotation with a random vector.
     /// </summary>
-    /// <inheritdoc cref="ShakePosition" path="param" />
+    /// <inheritdoc cref="ShakePosition"/>
     public static Tween ShakeLocalRotation(
       this Transform transform,
       float magnitude,
@@ -170,8 +170,10 @@ namespace PeachyTween {
     /// </summary>
     /// <param name="transform">The transform.</param>
     /// <param name="magnitude">The magnitude of a random direction vector that informs the range of the shake.</param>
-    /// <inheritdoc cref="Peachy.Tween" path="param[@name='duration']" />
-    /// <inheritdoc cref="Tween.Shake" path="param[@name='oscillationCount' or @name='decay' or @name='randomness']" />
+    /// <param name="duration">Total tween duration in seconds.</param>
+    /// <param name="oscillationCount">Number of oscillations per axis.</param>
+    /// <param name="decay">Rate at which amplitude and frequency decrease over time.</param>
+    /// <param name="randomness">Maximum percentage change randomly applied to amplitude and frequency per axis.</param>
     public static Tween ShakePosition(
       this Transform transform,
       float magnitude,

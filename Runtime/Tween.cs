@@ -572,7 +572,6 @@ namespace PeachyTween {
       float randomness
     ) => Shake(oscillationCount, decay, decay, randomness, randomness);
 
-    /// <inheritdoc cref="Shake"/>
     /// <seealso cref="Punch"/>
     /// <param name="oscillationCount">Number of oscillations per axis.</param>
     /// <param name="frequencyDecay">Rate at which frequency decreases over time.</param>
@@ -580,6 +579,7 @@ namespace PeachyTween {
     /// <param name="frequencyRandomness">Maximum percentage change randomly applied to frequency per axis.</param>
     /// <param name="amplitudeRandomness">Maximum percentage change randomly applied to amplitude per axis.</param>
     /// <returns>This tween.</returns>
+    /// <inheritdoc cref="Shake"/>
     public Tween Shake(
       int oscillationCount,
       float amplitudeDecay,
@@ -599,7 +599,7 @@ namespace PeachyTween {
     /// <strong>Supported by <c>Vector2</c> tweens only.</strong><para/>
     /// </summary>
     /// <inheritdoc cref="Shake" path="remarks"/>
-    /// <inheritdoc cref="Shake(int, float, float)" path="param"/>
+    /// <inheritdoc cref="Shake(int, float, float)" />
     /// <seealso cref="Punch"/>
     public Tween Shake2D(
       int oscillationCount,
@@ -607,9 +607,12 @@ namespace PeachyTween {
       float randomness
     ) => Shake2D(oscillationCount, decay, decay, randomness, randomness);
 
-    /// <inheritdoc cref="Shake2D" path="summary or remarks"/>
+    /// <summary>
+    /// Set the lerp function to shake.<para/>
+    /// <strong>Supported by <c>Vector2</c> tweens only.</strong><para/>
+    /// </summary>
     /// <seealso cref="Punch"/>
-    /// <inheritdoc cref="Shake(int, float, float, float, float)" path="param"/>
+    /// <inheritdoc cref="Shake(int, float, float, float, float)"/>
     public Tween Shake2D(
       int oscillationCount,
       float amplitudeDecay,
