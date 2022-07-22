@@ -2,6 +2,16 @@ using UnityEngine;
 using static UnityEngine.Mathf;
 
 namespace PeachyTween {
+  /// <summary>
+  /// A custom interpolation function that can be used to override a tween's
+  /// interpolation.
+  /// </summary>
+  /// <seealso cref="Tween.Lerp"/>
+  /// <param name="from">The starting value.</param>
+  /// <param name="to">The value to tween to.</param>
+  /// <param name="t">Normalized time in range [0, 1].</param>
+  /// <typeparam name="T">The type being interpolated.</typeparam>
+  /// <returns>The interpolated value.</returns>
   public delegate T LerpFunc<T>(T from, T to, float t);
 
   public static class LerpFuncs {

@@ -235,7 +235,8 @@ namespace PeachyTween {
     /// This is equivalent to <c>tween.Kill(); tween.Sync()</c> but will not log a
     /// warning if the tween has previously been killed.
     /// </remarks>
-    /// <inheritdoc cref="Kill" path="param" />
+    /// <seealso cref="Kill" />
+    /// <inheritdoc cref="Kill" />
     public void KillSync(bool complete = false) {
       if (TryEntity(out var entity)) {
         Core.Kill(entity, complete);
@@ -484,6 +485,7 @@ namespace PeachyTween {
     /// <seealso cref="Punch"/>
     /// <param name="tween">The tween.</param>
     /// <param name="lerp">The lerp function for this tween.</param>
+    /// <typeparam name="T">The type of the value being tweened.</param>
     public Tween Lerp<T>(LerpFunc<T> lerp) {
       if (Entity(out var entity)) {
         Core.Lerp(entity, lerp);
