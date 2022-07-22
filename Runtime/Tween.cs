@@ -3,6 +3,9 @@ using UnityEngine;
 using Leopotam.EcsLite;
 
 namespace PeachyTween {
+  /// <summary>
+  /// Reference to an individual tween.
+  /// </summary>
   public readonly struct Tween {
     readonly EcsPackedEntity _entity;
 

@@ -12,6 +12,9 @@ namespace PeachyTween {
   /// <returns>The interpolated value.</returns>
   public delegate float EaseFunc(float t);
 
+  /// <summary>
+  /// Standard easing functions.
+  /// </summary>
   public enum Ease {
     /// <summary>
     /// No ease.

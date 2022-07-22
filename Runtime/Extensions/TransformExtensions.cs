@@ -1,6 +1,9 @@
 using UnityEngine;
 
 namespace PeachyTween {
+  /// <summary>
+  /// Convenience functions for tweening <c>Transform</c>.
+  /// </summary>
   public static class TransformExtensions {
 #region Rotation
 
@@ -40,7 +43,7 @@ namespace PeachyTween {
     public static Tween TweenLookAt(this Transform transform, Vector3 position, float duration) =>
       TweenLookAt(transform, position, duration, Vector3.up);
 
-    /// <inheritdoc cref="TweenLookAt(Transform, Vector3, float)" />
+    /// <inheritdoc cref="TweenLookAt" />
     /// <param name="up">The up direction of the end rotation.</param>
     public static Tween TweenLookAt(this Transform transform, Vector3 position, float duration, Vector3 up) =>
       TweenLookRotation(transform, position - transform.position, duration, up);
