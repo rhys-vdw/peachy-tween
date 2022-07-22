@@ -2,6 +2,9 @@ using System;
 using UnityEngine;
 
 namespace PeachyTween {
+  /// <summary>
+  /// Methods for creating new tweens and operating on tweens in groups.
+  /// </summary>
   public static class Peachy {
 #region Tween factory
 
