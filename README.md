@@ -1,5 +1,6 @@
 # PeachyTween :peach:
 
+[![openupm](https://img.shields.io/npm/v/computer.rhys.peachy-tween?label=openupm&registry_uri=https://package.openupm.com&style=flat-square)](https://openupm.com/packages/computer.rhys.peachy-tween/)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 A tweening library for Unity designed to be simple to use and extend.
