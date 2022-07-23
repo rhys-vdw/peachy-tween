@@ -19,7 +19,27 @@ namespace PeachyTween {
     /// <summary>
     /// No ease.
     /// </summary>
+    /// <remarks>
+    /// This is the same as <c cref="Linear">Linear</c>. It exists as a default
+    /// to mirror DOTween's ease enum for easier migration.
+    /// </remarks>
+    Unset,
+    /// <summary>
+    /// No ease.
+    /// </summary>
     Linear,
+    /// <summary>
+    /// Easing function with a sine ease in.
+    /// </summary>
+    SineIn,
+    /// <summary>
+    /// Easing function with a sine ease out.
+    /// </summary>
+    SineOut,
+    /// <summary>
+    /// Easing function with a sine ease in and out.
+    /// </summary>
+    SineInOut,
     /// <summary>
     /// Easing function with a quadratic ease in.
     /// </summary>
@@ -69,18 +89,6 @@ namespace PeachyTween {
     /// </summary>
     QuintInOut,
     /// <summary>
-    /// Easing function with a sine ease in.
-    /// </summary>
-    SineIn,
-    /// <summary>
-    /// Easing function with a sine ease out.
-    /// </summary>
-    SineOut,
-    /// <summary>
-    /// Easing function with a sine ease in and out.
-    /// </summary>
-    SineInOut,
-    /// <summary>
     /// Easing function with a exponential ease in.
     /// </summary>
     ExpoIn,
@@ -105,18 +113,6 @@ namespace PeachyTween {
     /// </summary>
     CircInOut,
     /// <summary>
-    /// Easing function that backs off before continuing.
-    /// </summary>
-    BackIn,
-    /// <summary>
-    /// Easing function that overshoots the end.
-    /// </summary>
-    BackOut,
-    /// <summary>
-    /// Easing function that backs off before continuing and overshoots the end.
-    /// </summary>
-    BackInOut,
-    /// <summary>
     /// Easing function with an elastic ease in.
     /// </summary>
     ElasticIn,
@@ -128,6 +124,18 @@ namespace PeachyTween {
     /// Easing function with an elastic ease in and out.
     /// </summary>
     ElasticInOut,
+    /// <summary>
+    /// Easing function that backs off before continuing.
+    /// </summary>
+    BackIn,
+    /// <summary>
+    /// Easing function that overshoots the end.
+    /// </summary>
+    BackOut,
+    /// <summary>
+    /// Easing function that backs off before continuing and overshoots the end.
+    /// </summary>
+    BackInOut,
     /// <summary>
     /// Easing function with a bounce in and out.
     /// </summary>
@@ -419,6 +427,7 @@ namespace PeachyTween {
     /// <param name="ease">The desired easing function.</param>
     /// <returns>The easing function.</returns>
     public static EaseFunc ToFunc(this Ease ease) => ease switch {
+      Ease.Unset => Linear,
       Ease.Linear => Linear,
       Ease.QuadIn => QuadIn,
       Ease.QuadOut => QuadOut,

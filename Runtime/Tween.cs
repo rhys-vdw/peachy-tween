@@ -513,10 +513,10 @@ namespace PeachyTween {
     /// </summary>
     /// <param name="ease">A standard easing function.</param>
     /// <returns>This tween.</returns>
-    public Tween Ease(Ease ease) =>
-      ease == PeachyTween.Ease.Linear
-        ? ClearEase()
-        : Ease(ease.ToFunc());
+    public Tween Ease(Ease ease) => ease switch {
+      PeachyTween.Ease.Unset or PeachyTween.Ease.Linear => ClearEase(),
+      _ => Ease(ease.ToFunc())
+    };
 
     /// <inheritdoc cref="Ease" />
     /// <param name="easeFunc">An easing function.</param>
