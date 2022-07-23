@@ -74,6 +74,10 @@ public class PeachyExample : MonoBehaviour
 }
 ```
 
+## API
+
+[API Documentation](https://peachy-tween.rhys.computer/api/PeachyTween.html).
+
 ## Contributing
 
 Contributions welcome. If you wish to make a pull request, please open an issue first.
@@ -82,4 +86,4 @@ See [development project](https://github.com/rhys-vdw/peachy-tween/projects/1).
 
 ## License
 
-[MIT © Rhys van der Waerden](LICENSE)
+[MIT © Rhys van der Waerden](https://github.com/rhys-vdw/peachy-tween/blob/main/LICENSE)
