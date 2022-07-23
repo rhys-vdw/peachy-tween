@@ -1,0 +1,1756 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>class EaseFuncs
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="class EaseFuncs
+   ">
+    <meta name="generator" content="docfx 2.59.3.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PeachyTween.EaseFuncs">
+  
+  
+  <h1 id="PeachyTween_EaseFuncs" data-uid="PeachyTween.EaseFuncs" class="text-break">class EaseFuncs
+  </h1>
+  <div class="markdown level0 summary"><p>A collection of standard easing functions.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h5 id="PeachyTween_EaseFuncs_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class EaseFuncs</code></pre>
+  </div>
+  <h5 id="PeachyTween_EaseFuncs_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>These functions were all taken from <a href="https://easings.net">easings.net</a>, you can use their animations
+for reference.</p>
+</div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L326">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_BackIn_" data-uid="PeachyTween.EaseFuncs.BackIn*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_BackIn_System_Single_" data-uid="PeachyTween.EaseFuncs.BackIn(System.Single)">BackIn(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function that backs off before continuing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float BackIn(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_BackIn_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L340">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_BackInOut_" data-uid="PeachyTween.EaseFuncs.BackInOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_BackInOut_System_Single_" data-uid="PeachyTween.EaseFuncs.BackInOut(System.Single)">BackInOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function that backs off before continuing and overshoots the end.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float BackInOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_BackInOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L333">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_BackOut_" data-uid="PeachyTween.EaseFuncs.BackOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_BackOut_System_Single_" data-uid="PeachyTween.EaseFuncs.BackOut(System.Single)">BackOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function that overshoots the end.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float BackOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_BackOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L384">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_BounceIn_" data-uid="PeachyTween.EaseFuncs.BounceIn*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_BounceIn_System_Single_" data-uid="PeachyTween.EaseFuncs.BounceIn(System.Single)">BounceIn(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a bounce in and out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float BounceIn(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_BounceIn_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L410">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_BounceInOut_" data-uid="PeachyTween.EaseFuncs.BounceInOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_BounceInOut_System_Single_" data-uid="PeachyTween.EaseFuncs.BounceInOut(System.Single)">BounceInOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a bounce in and out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float BounceInOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_BounceInOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L391">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_BounceOut_" data-uid="PeachyTween.EaseFuncs.BounceOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_BounceOut_System_Single_" data-uid="PeachyTween.EaseFuncs.BounceOut(System.Single)">BounceOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a bounce in and out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float BounceOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_BounceOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L303">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_CircIn_" data-uid="PeachyTween.EaseFuncs.CircIn*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_CircIn_System_Single_" data-uid="PeachyTween.EaseFuncs.CircIn(System.Single)">CircIn(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a circular ease in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float CircIn(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_CircIn_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L317">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_CircInOut_" data-uid="PeachyTween.EaseFuncs.CircInOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_CircInOut_System_Single_" data-uid="PeachyTween.EaseFuncs.CircInOut(System.Single)">CircInOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a circular ease in and out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float CircInOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_CircInOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L310">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_CircOut_" data-uid="PeachyTween.EaseFuncs.CircOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_CircOut_System_Single_" data-uid="PeachyTween.EaseFuncs.CircOut(System.Single)">CircOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a circular out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float CircOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_CircOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L192">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_CubicIn_" data-uid="PeachyTween.EaseFuncs.CubicIn*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_CubicIn_System_Single_" data-uid="PeachyTween.EaseFuncs.CubicIn(System.Single)">CubicIn(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a cubic ease in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float CubicIn(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_CubicIn_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L206">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_CubicInOut_" data-uid="PeachyTween.EaseFuncs.CubicInOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_CubicInOut_System_Single_" data-uid="PeachyTween.EaseFuncs.CubicInOut(System.Single)">CubicInOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a cubic ease in and out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float CubicInOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_CubicInOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L199">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_CubicOut_" data-uid="PeachyTween.EaseFuncs.CubicOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_CubicOut_System_Single_" data-uid="PeachyTween.EaseFuncs.CubicOut(System.Single)">CubicOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a cubic ease out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float CubicOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_CubicOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L349">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_ElasticIn_" data-uid="PeachyTween.EaseFuncs.ElasticIn*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_ElasticIn_System_Single_" data-uid="PeachyTween.EaseFuncs.ElasticIn(System.Single)">ElasticIn(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with an elastic ease in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float ElasticIn(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_ElasticIn_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L371">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_ElasticInOut_" data-uid="PeachyTween.EaseFuncs.ElasticInOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_ElasticInOut_System_Single_" data-uid="PeachyTween.EaseFuncs.ElasticInOut(System.Single)">ElasticInOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with an elastic ease in and out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float ElasticInOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_ElasticInOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L360">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_ElasticOut_" data-uid="PeachyTween.EaseFuncs.ElasticOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_ElasticOut_System_Single_" data-uid="PeachyTween.EaseFuncs.ElasticOut(System.Single)">ElasticOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with an elastic ease out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float ElasticOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_ElasticOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L276">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_ExpoIn_" data-uid="PeachyTween.EaseFuncs.ExpoIn*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_ExpoIn_System_Single_" data-uid="PeachyTween.EaseFuncs.ExpoIn(System.Single)">ExpoIn(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a exponential ease in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float ExpoIn(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_ExpoIn_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L290">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_ExpoInOut_" data-uid="PeachyTween.EaseFuncs.ExpoInOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_ExpoInOut_System_Single_" data-uid="PeachyTween.EaseFuncs.ExpoInOut(System.Single)">ExpoInOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a exponential ease in and out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float ExpoInOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_ExpoInOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L283">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_ExpoOut_" data-uid="PeachyTween.EaseFuncs.ExpoOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_ExpoOut_System_Single_" data-uid="PeachyTween.EaseFuncs.ExpoOut(System.Single)">ExpoOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a exponential ease out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float ExpoOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_ExpoOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L164">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_Linear_" data-uid="PeachyTween.EaseFuncs.Linear*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_Linear_System_Single_" data-uid="PeachyTween.EaseFuncs.Linear(System.Single)">Linear(Single)</h4>
+  <div class="markdown level1 summary"><p>Linear easing function.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float Linear(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_Linear_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L171">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_QuadIn_" data-uid="PeachyTween.EaseFuncs.QuadIn*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_QuadIn_System_Single_" data-uid="PeachyTween.EaseFuncs.QuadIn(System.Single)">QuadIn(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a quadratic ease in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float QuadIn(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_QuadIn_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L185">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_QuadInOut_" data-uid="PeachyTween.EaseFuncs.QuadInOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_QuadInOut_System_Single_" data-uid="PeachyTween.EaseFuncs.QuadInOut(System.Single)">QuadInOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a quadratic ease in and out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float QuadInOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_QuadInOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L178">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_QuadOut_" data-uid="PeachyTween.EaseFuncs.QuadOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_QuadOut_System_Single_" data-uid="PeachyTween.EaseFuncs.QuadOut(System.Single)">QuadOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a quadratic ease out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float QuadOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_QuadOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L213">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_QuartIn_" data-uid="PeachyTween.EaseFuncs.QuartIn*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_QuartIn_System_Single_" data-uid="PeachyTween.EaseFuncs.QuartIn(System.Single)">QuartIn(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a quartic ease in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float QuartIn(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_QuartIn_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L227">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_QuartInOut_" data-uid="PeachyTween.EaseFuncs.QuartInOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_QuartInOut_System_Single_" data-uid="PeachyTween.EaseFuncs.QuartInOut(System.Single)">QuartInOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a quartic ease in and out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float QuartInOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_QuartInOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L220">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_QuartOut_" data-uid="PeachyTween.EaseFuncs.QuartOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_QuartOut_System_Single_" data-uid="PeachyTween.EaseFuncs.QuartOut(System.Single)">QuartOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a quartic ease out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float QuartOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_QuartOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L234">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_QuintIn_" data-uid="PeachyTween.EaseFuncs.QuintIn*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_QuintIn_System_Single_" data-uid="PeachyTween.EaseFuncs.QuintIn(System.Single)">QuintIn(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a quintic ease in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float QuintIn(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_QuintIn_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L248">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_QuintInOut_" data-uid="PeachyTween.EaseFuncs.QuintInOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_QuintInOut_System_Single_" data-uid="PeachyTween.EaseFuncs.QuintInOut(System.Single)">QuintInOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a quintic ease in and out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float QuintInOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_QuintInOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L241">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_QuintOut_" data-uid="PeachyTween.EaseFuncs.QuintOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_QuintOut_System_Single_" data-uid="PeachyTween.EaseFuncs.QuintOut(System.Single)">QuintOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a quintic ease out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float QuintOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_QuintOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L255">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_SineIn_" data-uid="PeachyTween.EaseFuncs.SineIn*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_SineIn_System_Single_" data-uid="PeachyTween.EaseFuncs.SineIn(System.Single)">SineIn(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a sine ease in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float SineIn(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_SineIn_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L269">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_SineInOut_" data-uid="PeachyTween.EaseFuncs.SineInOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_SineInOut_System_Single_" data-uid="PeachyTween.EaseFuncs.SineInOut(System.Single)">SineInOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a sine ease in and out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float SineInOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_SineInOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L262">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_SineOut_" data-uid="PeachyTween.EaseFuncs.SineOut*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_SineOut_System_Single_" data-uid="PeachyTween.EaseFuncs.SineOut(System.Single)">SineOut(Single)</h4>
+  <div class="markdown level1 summary"><p>Easing function with a sine ease out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float SineOut(float t)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Normalized time in range [0, 1].</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The interpolated value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_EaseFuncs_SineOut_System_Single__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Tween.html#PeachyTween_Tween_Ease_PeachyTween_Ease_">Ease(Ease)</a></div>
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L421">View Source</a>
+  </span>
+  <a id="PeachyTween_EaseFuncs_ToFunc_" data-uid="PeachyTween.EaseFuncs.ToFunc*"></a>
+  <h4 class="class-header" id="PeachyTween_EaseFuncs_ToFunc_PeachyTween_Ease_" data-uid="PeachyTween.EaseFuncs.ToFunc(PeachyTween.Ease)">ToFunc(Ease)</h4>
+  <div class="markdown level1 summary"><p>Get an easing function.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static EaseFunc ToFunc(this Ease ease)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Ease.html">Ease</a></td>
+        <td><span class="parametername">ease</span></td>
+        <td><p>The desired easing function.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.EaseFunc.html">EaseFunc</a></td>
+        <td><p>The easing function.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Utility/Ease.cs/#L153" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>On this page</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

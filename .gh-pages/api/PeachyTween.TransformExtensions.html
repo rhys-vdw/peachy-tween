@@ -1,0 +1,1908 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>class TransformExtensions
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="class TransformExtensions
+   ">
+    <meta name="generator" content="docfx 2.59.3.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PeachyTween.TransformExtensions">
+  
+  
+  <h1 id="PeachyTween_TransformExtensions" data-uid="PeachyTween.TransformExtensions" class="text-break">class TransformExtensions
+  </h1>
+  <div class="markdown level0 summary"><p>Convenience functions for tweening <code>Transform</code>.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h5 id="PeachyTween_TransformExtensions_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class TransformExtensions</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L250">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_ShakeLocalPosition_" data-uid="PeachyTween.TransformExtensions.ShakeLocalPosition*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_ShakeLocalPosition_UnityEngine_Transform_System_Single_System_Single_System_Int32_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.ShakeLocalPosition(UnityEngine.Transform,System.Single,System.Single,System.Int32,System.Single,System.Single)">ShakeLocalPosition(Transform, Single, Single, Int32, Single, Single)</h4>
+  <div class="markdown level1 summary"><p>Shake the Transform's local position with a random vector.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween ShakeLocalPosition(this Transform transform, float magnitude, float duration, int oscillationCount, float decay, float randomness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">magnitude</span></td>
+        <td><p>The magnitude of a random direction vector that informs the range of the shake.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Total tween duration in seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">oscillationCount</span></td>
+        <td><p>Number of oscillations per axis.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">decay</span></td>
+        <td><p>Rate at which amplitude and frequency decrease over time.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">randomness</span></td>
+        <td><p>Maximum percentage change randomly applied to amplitude and frequency per axis.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L266">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_ShakeLocalPosition2D_" data-uid="PeachyTween.TransformExtensions.ShakeLocalPosition2D*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_ShakeLocalPosition2D_UnityEngine_Transform_System_Single_System_Single_System_Int32_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.ShakeLocalPosition2D(UnityEngine.Transform,System.Single,System.Single,System.Int32,System.Single,System.Single)">ShakeLocalPosition2D(Transform, Single, Single, Int32, Single, Single)</h4>
+  <div class="markdown level1 summary"><p>Shake the Transform's local position on the XY axis with a random vector.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween ShakeLocalPosition2D(this Transform transform, float magnitude, float duration, int oscillationCount, float decay, float randomness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">magnitude</span></td>
+        <td><p>The magnitude of a random direction vector that informs the range of the shake.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Total tween duration in seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">oscillationCount</span></td>
+        <td><p>Number of oscillations per axis.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">decay</span></td>
+        <td><p>Rate at which amplitude and frequency decrease over time.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">randomness</span></td>
+        <td><p>Maximum percentage change randomly applied to amplitude and frequency per axis.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L114">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_ShakeLocalRotation_" data-uid="PeachyTween.TransformExtensions.ShakeLocalRotation*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_ShakeLocalRotation_UnityEngine_Transform_System_Single_System_Single_System_Int32_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.ShakeLocalRotation(UnityEngine.Transform,System.Single,System.Single,System.Int32,System.Single,System.Single)">ShakeLocalRotation(Transform, Single, Single, Int32, Single, Single)</h4>
+  <div class="markdown level1 summary"><p>Shake the Transform's local rotation with a random vector.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween ShakeLocalRotation(this Transform transform, float magnitude, float duration, int oscillationCount, float decay, float randomness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">magnitude</span></td>
+        <td><p>The magnitude of a random direction vector that informs the range of the shake.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Total tween duration in seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">oscillationCount</span></td>
+        <td><p>Number of oscillations per axis.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">decay</span></td>
+        <td><p>Rate at which amplitude and frequency decrease over time.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">randomness</span></td>
+        <td><p>Maximum percentage change randomly applied to amplitude and frequency per axis.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L319">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_ShakeLocalScale_" data-uid="PeachyTween.TransformExtensions.ShakeLocalScale*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_ShakeLocalScale_UnityEngine_Transform_System_Single_System_Single_System_Int32_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.ShakeLocalScale(UnityEngine.Transform,System.Single,System.Single,System.Int32,System.Single,System.Single)">ShakeLocalScale(Transform, Single, Single, Int32, Single, Single)</h4>
+  <div class="markdown level1 summary"><p>Shake the Transform's local scale with a random vector.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween ShakeLocalScale(this Transform transform, float magnitude, float duration, int oscillationCount, float decay, float randomness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">magnitude</span></td>
+        <td><p>The magnitude of a random direction vector that informs the range of the shake.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Total tween duration in seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">oscillationCount</span></td>
+        <td><p>Number of oscillations per axis.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">decay</span></td>
+        <td><p>Rate at which amplitude and frequency decrease over time.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">randomness</span></td>
+        <td><p>Maximum percentage change randomly applied to amplitude and frequency per axis.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L335">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_ShakeLocalScale2D_" data-uid="PeachyTween.TransformExtensions.ShakeLocalScale2D*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_ShakeLocalScale2D_UnityEngine_Transform_System_Single_System_Single_System_Int32_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.ShakeLocalScale2D(UnityEngine.Transform,System.Single,System.Single,System.Int32,System.Single,System.Single)">ShakeLocalScale2D(Transform, Single, Single, Int32, Single, Single)</h4>
+  <div class="markdown level1 summary"><p>Shake the Transform's local scale on the XY axis with a random vector.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween ShakeLocalScale2D(this Transform transform, float magnitude, float duration, int oscillationCount, float decay, float randomness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">magnitude</span></td>
+        <td><p>The magnitude of a random direction vector that informs the range of the shake.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Total tween duration in seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">oscillationCount</span></td>
+        <td><p>Number of oscillations per axis.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">decay</span></td>
+        <td><p>Rate at which amplitude and frequency decrease over time.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">randomness</span></td>
+        <td><p>Maximum percentage change randomly applied to amplitude and frequency per axis.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L180">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_ShakePosition_" data-uid="PeachyTween.TransformExtensions.ShakePosition*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_ShakePosition_UnityEngine_Transform_System_Single_System_Single_System_Int32_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.ShakePosition(UnityEngine.Transform,System.Single,System.Single,System.Int32,System.Single,System.Single)">ShakePosition(Transform, Single, Single, Int32, Single, Single)</h4>
+  <div class="markdown level1 summary"><p>Shake the Transform's world position with a random vector.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween ShakePosition(this Transform transform, float magnitude, float duration, int oscillationCount, float decay, float randomness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">magnitude</span></td>
+        <td><p>The magnitude of a random direction vector that informs the range of the shake.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Total tween duration in seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">oscillationCount</span></td>
+        <td><p>Number of oscillations per axis.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">decay</span></td>
+        <td><p>Rate at which amplitude and frequency decrease over time.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">randomness</span></td>
+        <td><p>Maximum percentage change randomly applied to amplitude and frequency per axis.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L196">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_ShakePosition2D_" data-uid="PeachyTween.TransformExtensions.ShakePosition2D*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_ShakePosition2D_UnityEngine_Transform_System_Single_System_Single_System_Int32_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.ShakePosition2D(UnityEngine.Transform,System.Single,System.Single,System.Int32,System.Single,System.Single)">ShakePosition2D(Transform, Single, Single, Int32, Single, Single)</h4>
+  <div class="markdown level1 summary"><p>Shake the Transform's world position on the XY axis with a random vector.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween ShakePosition2D(this Transform transform, float magnitude, float duration, int oscillationCount, float decay, float randomness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">magnitude</span></td>
+        <td><p>The magnitude of a random direction vector that informs the range of the shake.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Total tween duration in seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">oscillationCount</span></td>
+        <td><p>Number of oscillations per axis.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">decay</span></td>
+        <td><p>Rate at which amplitude and frequency decrease over time.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">randomness</span></td>
+        <td><p>Maximum percentage change randomly applied to amplitude and frequency per axis.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L71">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_ShakeRotation_" data-uid="PeachyTween.TransformExtensions.ShakeRotation*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_ShakeRotation_UnityEngine_Transform_System_Single_System_Single_System_Int32_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.ShakeRotation(UnityEngine.Transform,System.Single,System.Single,System.Int32,System.Single,System.Single)">ShakeRotation(Transform, Single, Single, Int32, Single, Single)</h4>
+  <div class="markdown level1 summary"><p>Shake the Transform's world rotation with a random vector.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween ShakeRotation(this Transform transform, float magnitude, float duration, int oscillationCount, float decay, float randomness)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">magnitude</span></td>
+        <td><p>The magnitude of a random direction vector that informs the range of the shake.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Total tween duration in seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">oscillationCount</span></td>
+        <td><p>Number of oscillations per axis.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">decay</span></td>
+        <td><p>Rate at which amplitude and frequency decrease over time.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">randomness</span></td>
+        <td><p>Maximum percentage change randomly applied to amplitude and frequency per axis.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L217">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenLocalPosition_" data-uid="PeachyTween.TransformExtensions.TweenLocalPosition*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenLocalPosition_UnityEngine_Transform_UnityEngine_Vector3_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenLocalPosition(UnityEngine.Transform,UnityEngine.Vector3,System.Single)">TweenLocalPosition(Transform, Vector3, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenLocalPosition(this Transform transform, Vector3 to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L222">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenLocalPositionX_" data-uid="PeachyTween.TransformExtensions.TweenLocalPositionX*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenLocalPositionX_UnityEngine_Transform_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenLocalPositionX(UnityEngine.Transform,System.Single,System.Single)">TweenLocalPositionX(Transform, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenLocalPositionX(this Transform transform, float to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L230">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenLocalPositionY_" data-uid="PeachyTween.TransformExtensions.TweenLocalPositionY*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenLocalPositionY_UnityEngine_Transform_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenLocalPositionY(UnityEngine.Transform,System.Single,System.Single)">TweenLocalPositionY(Transform, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenLocalPositionY(this Transform transform, float to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L238">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenLocalPositionZ_" data-uid="PeachyTween.TransformExtensions.TweenLocalPositionZ*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenLocalPositionZ_UnityEngine_Transform_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenLocalPositionZ(UnityEngine.Transform,System.Single,System.Single)">TweenLocalPositionZ(Transform, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenLocalPositionZ(this Transform transform, float to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L92">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenLocalRotation_" data-uid="PeachyTween.TransformExtensions.TweenLocalRotation*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenLocalRotation_UnityEngine_Transform_UnityEngine_Quaternion_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenLocalRotation(UnityEngine.Transform,UnityEngine.Quaternion,System.Single)">TweenLocalRotation(Transform, Quaternion, Single)</h4>
+  <div class="markdown level1 summary"><p>Rotate a Transform in local space.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenLocalRotation(this Transform transform, Quaternion to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Quaternion</span></td>
+        <td><span class="parametername">to</span></td>
+        <td><p>The end local rotation.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Length of tween in seconds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L105">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenLocalRotation_" data-uid="PeachyTween.TransformExtensions.TweenLocalRotation*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenLocalRotation_UnityEngine_Transform_UnityEngine_Vector3_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenLocalRotation(UnityEngine.Transform,UnityEngine.Vector3,System.Single)">TweenLocalRotation(Transform, Vector3, Single)</h4>
+  <div class="markdown level1 summary"><p>Rotate a Transform in local space.</p>
+<p>This supports rotating beyond 360 degrees.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenLocalRotation(this Transform transform, Vector3 to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span></td>
+        <td><span class="parametername">to</span></td>
+        <td><p>The end local rotation Euler angles in degrees.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Length of tween in seconds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L43">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenLookAt_" data-uid="PeachyTween.TransformExtensions.TweenLookAt*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenLookAt_UnityEngine_Transform_UnityEngine_Vector3_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenLookAt(UnityEngine.Transform,UnityEngine.Vector3,System.Single)">TweenLookAt(Transform, Vector3, Single)</h4>
+  <div class="markdown level1 summary"><p>Rotate a Transform in world space to face a point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenLookAt(this Transform transform, Vector3 position, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The point to rotate towards.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Length of tween in seconds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L48">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenLookAt_" data-uid="PeachyTween.TransformExtensions.TweenLookAt*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenLookAt_UnityEngine_Transform_UnityEngine_Vector3_System_Single_UnityEngine_Vector3_" data-uid="PeachyTween.TransformExtensions.TweenLookAt(UnityEngine.Transform,UnityEngine.Vector3,System.Single,UnityEngine.Vector3)">TweenLookAt(Transform, Vector3, Single, Vector3)</h4>
+  <div class="markdown level1 summary"><p>Rotate a Transform in world space to face a point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenLookAt(this Transform transform, Vector3 position, float duration, Vector3 up)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span></td>
+        <td><span class="parametername">up</span></td>
+        <td><p>The up direction of the end rotation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L57">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenLookRotation_" data-uid="PeachyTween.TransformExtensions.TweenLookRotation*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenLookRotation_UnityEngine_Transform_UnityEngine_Vector3_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenLookRotation(UnityEngine.Transform,UnityEngine.Vector3,System.Single)">TweenLookRotation(Transform, Vector3, Single)</h4>
+  <div class="markdown level1 summary"><p>Rotate a Transform in world space to face a direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenLookRotation(this Transform transform, Vector3 forward, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span></td>
+        <td><span class="parametername">forward</span></td>
+        <td><p>The end forward vector.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Length of tween in seconds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L62">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenLookRotation_" data-uid="PeachyTween.TransformExtensions.TweenLookRotation*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenLookRotation_UnityEngine_Transform_UnityEngine_Vector3_System_Single_UnityEngine_Vector3_" data-uid="PeachyTween.TransformExtensions.TweenLookRotation(UnityEngine.Transform,UnityEngine.Vector3,System.Single,UnityEngine.Vector3)">TweenLookRotation(Transform, Vector3, Single, Vector3)</h4>
+  <div class="markdown level1 summary"><p>Rotate a Transform in world space to face a direction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenLookRotation(this Transform transform, Vector3 forward, float duration, Vector3 up)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span></td>
+        <td><span class="parametername">forward</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span></td>
+        <td><span class="parametername">up</span></td>
+        <td><p>The up direction of the end rotation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L134">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenPosition_" data-uid="PeachyTween.TransformExtensions.TweenPosition*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenPosition_UnityEngine_Transform_UnityEngine_Vector3_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenPosition(UnityEngine.Transform,UnityEngine.Vector3,System.Single)">TweenPosition(Transform, Vector3, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenPosition(this Transform transform, Vector3 to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L139">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenPosition2D_" data-uid="PeachyTween.TransformExtensions.TweenPosition2D*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenPosition2D_UnityEngine_Transform_UnityEngine_Vector2_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenPosition2D(UnityEngine.Transform,UnityEngine.Vector2,System.Single)">TweenPosition2D(Transform, Vector2, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenPosition2D(this Transform transform, Vector2 to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector2</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L147">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenPositionX_" data-uid="PeachyTween.TransformExtensions.TweenPositionX*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenPositionX_UnityEngine_Transform_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenPositionX(UnityEngine.Transform,System.Single,System.Single)">TweenPositionX(Transform, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenPositionX(this Transform transform, float to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L155">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenPositionY_" data-uid="PeachyTween.TransformExtensions.TweenPositionY*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenPositionY_UnityEngine_Transform_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenPositionY(UnityEngine.Transform,System.Single,System.Single)">TweenPositionY(Transform, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenPositionY(this Transform transform, float to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L163">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenPositionZ_" data-uid="PeachyTween.TransformExtensions.TweenPositionZ*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenPositionZ_UnityEngine_Transform_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenPositionZ(UnityEngine.Transform,System.Single,System.Single)">TweenPositionZ(Transform, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenPositionZ(this Transform transform, float to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L19">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenRotation_" data-uid="PeachyTween.TransformExtensions.TweenRotation*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenRotation_UnityEngine_Transform_UnityEngine_Quaternion_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenRotation(UnityEngine.Transform,UnityEngine.Quaternion,System.Single)">TweenRotation(Transform, Quaternion, Single)</h4>
+  <div class="markdown level1 summary"><p>Rotate a Transform in world space.<p>
+<p>Quaternion rotations will always take the shortest path. For rotations
+beyond 360 degrees use the <a class="xref" href="PeachyTween.TransformExtensions.html#PeachyTween_TransformExtensions_TweenRotation_UnityEngine_Transform_UnityEngine_Vector3_System_Single_">Euler angles override</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenRotation(this Transform transform, Quaternion to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Quaternion</span></td>
+        <td><span class="parametername">to</span></td>
+        <td><p>The end world rotation.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Length of tween in seconds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L32">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenRotation_" data-uid="PeachyTween.TransformExtensions.TweenRotation*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenRotation_UnityEngine_Transform_UnityEngine_Vector3_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenRotation(UnityEngine.Transform,UnityEngine.Vector3,System.Single)">TweenRotation(Transform, Vector3, Single)</h4>
+  <div class="markdown level1 summary"><p>Rotate a Transform in world space.<p>
+<p>This supports rotating beyond 360 degrees.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenRotation(this Transform transform, Vector3 to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span></td>
+        <td><span class="parametername">to</span></td>
+        <td><p>The end world rotation Euler angles in degrees.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Length of tween in seconds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L286">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenScale_" data-uid="PeachyTween.TransformExtensions.TweenScale*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenScale_UnityEngine_Transform_UnityEngine_Vector3_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenScale(UnityEngine.Transform,UnityEngine.Vector3,System.Single)">TweenScale(Transform, Vector3, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenScale(this Transform transform, Vector3 to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UnityEngine.Vector3</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L291">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenScaleX_" data-uid="PeachyTween.TransformExtensions.TweenScaleX*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenScaleX_UnityEngine_Transform_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenScaleX(UnityEngine.Transform,System.Single,System.Single)">TweenScaleX(Transform, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenScaleX(this Transform transform, float to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L299">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenScaleY_" data-uid="PeachyTween.TransformExtensions.TweenScaleY*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenScaleY_UnityEngine_Transform_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenScaleY(UnityEngine.Transform,System.Single,System.Single)">TweenScaleY(Transform, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenScaleY(this Transform transform, float to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L307">View Source</a>
+  </span>
+  <a id="PeachyTween_TransformExtensions_TweenScaleZ_" data-uid="PeachyTween.TransformExtensions.TweenScaleZ*"></a>
+  <h4 class="class-header" id="PeachyTween_TransformExtensions_TweenScaleZ_UnityEngine_Transform_System_Single_System_Single_" data-uid="PeachyTween.TransformExtensions.TweenScaleZ(UnityEngine.Transform,System.Single,System.Single)">TweenScaleZ(Transform, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Tween TweenScaleZ(this Transform transform, float to, float duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">UnityEngine.Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">to</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/rhys-vdw/peachy-tween/blob/main/Runtime/Extensions/TransformExtensions.cs/#L7" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>On this page</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,582 @@
+:root {
+    --theme-dark: #18262F;
+    --theme-yellow: #E4B51C;
+    --theme-red: #EF5253;
+    --theme-light: #F1F2DA;
+    --theme-faint-purple: #f7f7fd;
+
+    --table-alternating-color: var(--theme-faint-purple);
+    --body-text-color: var(--theme-dark);
+    --heading-color: var(--theme-dark);
+    --link-color: var(--theme-red);
+    --link-active: var(--theme-dark);
+    --nav-bar-bg-color: var(--theme-dark);
+    --nav-text-color: var(--theme-dark);
+    --nav-link: var(--theme-red);
+    --nav-link-active: var(--theme-yellow);
+    --nav-link-active-underline-color: var(--nav-link-active);
+    --side-toc-accent: var(--theme-faint-purple);
+    --side-toc-button: var(--theme-red);
+    --side-toc-button-active: var(--theme-yellow);
+    --expand-stub-size: 14px;
+}
+
+body {
+    color: var(--body-text-color);
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+    font-size: 16px;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    word-wrap: break-word
+}
+
+#wrapper {
+    min-height: 100%;
+    position: absolute;
+    width: -webkit-fill-available;
+}
+
+/* HEADINGS */
+
+h1 {
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--heading-color);
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.8;
+    color: var(--heading-color);
+}
+
+h3 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.8;
+    color: var(--heading-color);
+}
+
+h5 {
+    font-size: 14px;
+    padding: 10px 0px;
+    color: var(--heading-color);
+    font-weight: bold;
+}
+
+article h1, article h2, article h3, article h4 {
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+article h4 {
+    padding-bottom: 8px;
+    border-bottom: 2px solid #ddd;
+}
+
+.article {
+    padding-left: 30px;
+}
+
+/* NAVBAR */
+
+.navbar-brand>img {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover {
+    color: var(--nav-link-active);
+    background-color: default;
+}
+
+.navbar {
+    border: none;
+    /* Both navbars use box-shadow */
+    -webkit-box-shadow: 0px 1px 3px 0px rgba(100, 100, 100, 0.5);
+    -moz-box-shadow: 0px 1px 3px 0px rgba(100, 100, 100, 0.5);
+    box-shadow: 0px 1px 3px 0px rgba(100, 100, 100, 0.5);
+}
+
+.subnav {
+    border-top: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.navbar-inverse {
+    background-color: var(--nav-bar-bg-color);
+    z-index: 100;
+}
+
+ul.level1.breadcrumb>li>a {
+    color: var(--link-color);
+}
+
+.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-text {
+    color: var(--nav-link);
+    background-color: var(--nav-bar-bg-color);
+    border-bottom: 3px solid transparent;
+    padding-bottom: 12px;
+    text-decoration: none;
+}
+
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+    color: var(--nav-link-active);
+    background-color: var(--nav-bar-bg-color);
+    border-bottom: 3px solid var(--nav-link-active-underline-color);
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    color: var(--nav-link-active);
+    background-color: var(--nav-bar-bg-color);
+    border-bottom: 3px solid var(--nav-link-active-underline-color);
+    text-decoration: underline;
+}
+
+.navbar-form .form-control {
+    border: none;
+    border-radius: 20px;
+}
+
+/* SIDEBAR */
+
+.toc {
+    margin: 0px 1px 0px 0px;
+    padding: 0 20px;
+}
+
+.toc .level1>li {
+    font-weight: 400;
+}
+
+.toc .nav>li>a {
+    color: #455463;
+    text-decoration: none;
+}
+
+.toc .nav>li>a:hover {
+    color: #455463;
+    text-decoration: underline;
+}
+
+/*selected element in sidebar at level 2*/
+ul.nav.level2>li.active.in>a.active {
+    background: var(--theme-dark);
+    color: #fff;
+    padding: 5px 8px;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.toc .nav>li.active>.expand-stub::before, .toc .nav>li.in>.expand-stub::before, .toc .nav>li.in.active>.expand-stub::before, .toc .nav>li.filtered>.expand-stub::before {
+    width: var(--expand-stub-size);
+    height: var(--expand-stub-size);
+    cursor: pointer;
+    border: var(--side-toc-button-active) 1px solid;
+    font-size: var(--expand-stub-size);
+    background: var(--side-toc-button-active);
+    color: #fff;
+    content: "-";
+    display: table;
+    margin-top: 3px;
+    text-align: center;
+    line-height: var(--expand-stub-size);
+    font-family: monospace;
+}
+
+.toc .nav>li>.expand-stub::before, .toc .nav>li.active>.expand-stub::before {
+    width: var(--expand-stub-size);
+    height: var(--expand-stub-size);
+    cursor: pointer;
+    border: var(--side-toc-button) 1px solid;
+    font-size: var(--expand-stub-size);
+    background: var(--side-toc-button);
+    color: #fff;
+    content: "+";
+    display: table;
+    margin-top: 3px;
+    text-align: center;
+    line-height: var(--expand-stub-size);
+    font-family: monospace;
+}
+
+.sidefilter {
+    background-color: #fff;
+    border-left: none;
+    border-right: none;
+}
+
+.sidefilter {
+    background-color: #fff;
+    border-left: none;
+    border-right: none;
+}
+
+.toc-filter {
+    padding: 10px;
+    margin: 0;
+}
+
+.toc-filter>input {
+    border: 2px solid #ddd;
+    border-radius: 20px;
+}
+
+.toc-filter>.filter-icon {
+    display: none;
+}
+
+.sidetoc>.toc {
+    background-color: #fff;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.sidetoc {
+    background-color: var(--side-toc-accent);
+    border: none;
+    color: var(--side-toc-accent);
+    padding-right: 8px;
+    height: 100%;
+}
+
+/* ALERTS */
+
+.alert {
+    padding: 0px 0px 5px 0px;
+    color: inherit;
+    background-color: inherit;
+    border: none;
+    box-shadow: 0px 2px 2px 0px rgba(100, 100, 100, 0.4);
+}
+
+.alert>p {
+    margin-bottom: 0;
+    padding: 5px 10px;
+}
+
+.alert>ul {
+    margin-bottom: 0;
+    padding: 5px 40px;
+}
+
+.alert>h5 {
+    padding: 10px 15px;
+    margin-top: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 4px 4px 0 0;
+}
+
+.alert-info>h5 {
+    color: #1976d2;
+    border-bottom: 4px solid #1976d2;
+    background-color: #e3f2fd;
+}
+
+/*custom tip alert*/
+.alert-tip>h5 {
+    color: var(--link-color);
+    border-bottom: 4px solid var(--link-color);
+    background-color: #ffdfe9;
+    content: "\e162";
+}
+
+.alert-tip h5:before {
+    content: "\e162";
+}
+
+.alert-warning>h5 {
+    color: #f57f17;
+    border-bottom: 4px solid #f57f17;
+    background-color: #fff3e0;
+}
+
+.alert-danger>h5 {
+    color: #d32f2f;
+    border-bottom: 4px solid #d32f2f;
+    background-color: #ffebee;
+}
+
+.toc .nav>li.active>a {
+    color: var(--link-active);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.toc .nav>li.active>a:hover {
+    color: var(--link-active);
+    text-decoration: underline;
+}
+
+.toc .nav>li.active>a:focus {
+    color: var(--link-active);
+    text-decoration: underline;
+}
+
+button, a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+button:hover, button:focus, a:hover, a:focus {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.affix>ul>li.active>a, .affix>ul>li.active>a:before {
+    color: var(--link-color);
+    font-weight: bold;
+}
+
+.affix ul>li.active>a, .affix ul>li.active>a:before {
+    color: var(--link-color);
+}
+
+.affix ul > li > a:before,
+.affix ul > li > a:hover {
+    color: var(--theme-yellow);
+}
+
+/* CODE HIGHLIGHT */
+
+pre {
+    font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    padding: 20px;
+    margin: 0 0 30px 0;
+    border: #ddd 1px solid;
+    background: #fff;
+    font-size: 0.9375em;
+    color: #455463;
+    overflow: auto;
+    border-radius: 0px;
+}
+
+/* Full width */
+@media (min-width:992px) {
+    .container {
+        width: 970px
+    }
+}
+
+@media (min-width:1200px) {
+    .container {
+        width: 100%;
+    }
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: var(--table-alternating-color);
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background: none;
+}
+
+.affix ul > li > a {
+    color: var(--body-text-color);
+}
+
+
+/*!
+  Theme: Solar Flare
+  Author: Chuck Harmston (https://chuck.harmston.ch)
+  License: ~ MIT (or more permissive) [via base16-schemes-source]
+  Maintainer: @highlightjs/core-team
+  Version: 2021.09.0
+*/
+
+/*
+  WARNING: DO NOT EDIT THIS FILE DIRECTLY.
+
+  This theme file was auto-generated from the Base16 scheme solar-flare
+  by the Highlight.js Base16 template builder.
+
+  - https://github.com/highlightjs/base16-highlightjs
+*/
+
+/*
+base00  #18262F  Default Background
+base01  #222E38  Lighter Background (Used for status bars, line number and folding marks)
+base02  #586875  Selection Background
+base03  #667581  Comments, Invisibles, Line Highlighting
+base04  #85939E  Dark Foreground (Used for status bars)
+base05  #A6AFB8  Default Foreground, Caret, Delimiters, Operators
+base06  #E8E9ED  Light Foreground (Not often used)
+base07  #F5F7FA  Light Background (Not often used)
+base08  #EF5253  Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+base09  #E66B2B  Integers, Boolean, Constants, XML Attributes, Markup Link Url
+base0A  #E4B51C  Classes, Markup Bold, Search Text Background
+base0B  #7CC844  Strings, Inherited Class, Markup Code, Diff Inserted
+base0C  #52CBB0  Support, Regular Expressions, Escape Characters, Markup Quotes
+base0D  #33B5E1  Functions, Methods, Attribute IDs, Headings
+base0E  #A363D5  Keywords, Storage, Selector, Markup Italic, Diff Changed
+base0F  #D73C9A  Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
+*/
+
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+
+code.hljs {
+  padding: 3px 5px;
+}
+
+.hljs {
+  color: #A6AFB8;
+  background: #18262F;
+}
+
+.hljs::selection,
+.hljs ::selection {
+  background-color: #586875;
+  color: #A6AFB8;
+}
+
+
+/* purposely do not highlight these things */
+.hljs-formula,
+.hljs-params,
+.hljs-property
+{}
+
+/* base03 - #667581 -  Comments, Invisibles, Line Highlighting */
+.hljs-comment {
+  color: #667581;
+}
+
+/* base04 - #85939E -  Dark Foreground (Used for status bars) */
+.hljs-tag {
+  color: #85939E;
+}
+
+/* base05 - #A6AFB8 -  Default Foreground, Caret, Delimiters, Operators */
+.hljs-subst,
+.hljs-punctuation,
+.hljs-operator {
+  color: #A6AFB8;
+}
+
+.hljs-operator {
+  opacity: 0.7;
+}
+
+/* base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted */
+.hljs-bullet,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-selector-tag,
+.hljs-name,
+.hljs-deletion {
+  color: #EF5253;
+}
+
+/* base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url */
+.hljs-symbol,
+.hljs-number,
+.hljs-link,
+.hljs-attr,
+.hljs-variable.constant_,
+.hljs-literal {
+  color: #E66B2B;
+}
+
+/* base0A - Classes, Markup Bold, Search Text Background */
+.hljs-title,
+.hljs-class .hljs-title,
+.hljs-title.class_
+{
+  color: #E4B51C;
+}
+
+.hljs-strong {
+  font-weight:bold;
+  color: #E4B51C;
+}
+
+/* base0B - Strings, Inherited Class, Markup Code, Diff Inserted */
+.hljs-code,
+.hljs-addition,
+.hljs-title.class_.inherited__,
+.hljs-string {
+  color: #7CC844;
+}
+
+/* base0C - Support, Regular Expressions, Escape Characters, Markup Quotes */
+.hljs-built_in,
+.hljs-doctag, /* guessing */
+.hljs-quote,
+.hljs-keyword.hljs-atrule,
+.hljs-regexp {
+  color: #52CBB0;
+}
+
+/* base0D - Functions, Methods, Attribute IDs, Headings */
+.hljs-function .hljs-title,
+.hljs-attribute,
+.ruby .hljs-property,
+.hljs-title.function_,
+.hljs-section {
+  color: #33B5E1;
+}
+
+/* base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed */
+.hljs-type,
+/* .hljs-selector-id, */
+/* .hljs-selector-class, */
+/* .hljs-selector-attr, */
+/* .hljs-selector-pseudo, */
+.hljs-template-tag,
+.diff .hljs-meta,
+.hljs-keyword {
+  color: #A363D5;
+}
+.hljs-emphasis {
+  color: #A363D5;
+  font-style: italic;
+}
+
+/* base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?> */
+.hljs-meta,
+/*
+  prevent top level .keyword and .string scopes
+  from leaking into meta by accident
+*/
+.hljs-meta .hljs-keyword,
+.hljs-meta .hljs-string
+{
+  color: #D73C9A;
+}
+
+.hljs-meta .hljs-keyword,
+/* for v10 compatible themes */
+.hljs-meta-keyword {
+  font-weight: bold;
+}
+
+/* -- end hljs theme -- */
+/* -- overrides -- */
+
+pre {
+    padding: 0;
+    border: none;
+}
+
+/* -- end hljs overrides -- */
+
+
+.breadcrumb > li + li:before {
+    color: var(--body-text-color);
+}
+
+.class-header {
+  padding-top: 60px;
+}
+
+.class-header:first-child {
+  padding-top: 0;
+}
