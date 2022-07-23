@@ -185,7 +185,12 @@ namespace PeachyTween {
       float decay,
       float randomness
     ) => Peachy
-      .Tween(transform.position, Random.onUnitSphere * magnitude, duration, v => transform.position = v)
+      .Tween(
+        transform.position,
+        transform.position + Random.onUnitSphere * magnitude,
+        duration,
+        v => transform.position = v
+      )
       .Shake(oscillationCount, decay, randomness)
       .SetTarget(transform);
 
@@ -200,15 +205,18 @@ namespace PeachyTween {
       int oscillationCount,
       float decay,
       float randomness
-    ) => Peachy
-      .Tween(
-        (Vector2) transform.position,
-        VectorUtility.RandomOnUnitCircle() * magnitude,
-        duration,
-        v => transform.position = v.WithZ(transform.position.z)
-      )
-      .Shake2D(oscillationCount, decay, randomness)
-      .SetTarget(transform);
+    ) {
+      var position2d = (Vector2) transform.position;
+      return Peachy
+        .Tween(
+          position2d,
+          position2d + VectorUtility.RandomOnUnitCircle() * magnitude,
+          duration,
+          v => transform.position = v.WithZ(transform.position.z)
+        )
+        .Shake2D(oscillationCount, decay, randomness)
+        .SetTarget(transform);
+    }
 
 
 #endregion
@@ -255,7 +263,12 @@ namespace PeachyTween {
       float decay,
       float randomness
     ) => Peachy
-      .Tween(transform.localPosition, Random.onUnitSphere * magnitude, duration, v => transform.localPosition = v)
+      .Tween(
+        transform.localPosition,
+        transform.localPosition + Random.onUnitSphere * magnitude,
+        duration,
+        v => transform.localPosition = v
+      )
       .Shake(oscillationCount, decay, randomness)
       .SetTarget(transform);
 
@@ -270,15 +283,18 @@ namespace PeachyTween {
       int oscillationCount,
       float decay,
       float randomness
-    ) => Peachy
-      .Tween(
-        (Vector2) transform.localPosition,
-        VectorUtility.RandomOnUnitCircle() * magnitude,
-        duration,
-        v => transform.localPosition = v.WithZ(transform.localPosition.z)
-      )
-      .Shake2D(oscillationCount, decay, randomness)
-      .SetTarget(transform);
+    ) {
+      var position2d = (Vector2) transform.localPosition;
+      return Peachy
+        .Tween(
+          position2d,
+          position2d + VectorUtility.RandomOnUnitCircle() * magnitude,
+          duration,
+          v => transform.localPosition = v.WithZ(transform.localPosition.z)
+        )
+        .Shake2D(oscillationCount, decay, randomness)
+        .SetTarget(transform);
+    }
 
 #endregion
 #region Scale
