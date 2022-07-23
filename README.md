@@ -16,13 +16,17 @@ PeachyTween does not aim to be API compatible with DOTween, nor to fully mirror 
 
 ### Installing from OpenUPM
 
-Package can be [installed from OpenUPM](https://openupm.com/packages/computer.rhys.peachy-tween/).
+[OpenUPM package](https://openupm.com/packages/computer.rhys.peachy-tween/).
+
+Package can be installed from [OpenUPM](https://openupm.com/) using [Open-UPM CLI](https://openupm.com/docs/getting-started.html);
 
 ```console
 $ openupm add computer.rhys.peachy-tween
 ```
 
 ### Installing from GitHub
+
+[GitHub repository](https://github.com/rhys-vdw/peachy-tween).
 
 To add to you Unity project, first add the internal dependency [ecslite](https://github.com/LeoECSCommunity/ecslite).
 
