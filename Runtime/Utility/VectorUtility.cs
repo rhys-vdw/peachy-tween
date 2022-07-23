@@ -21,11 +21,11 @@ namespace PeachyTween {
     public static Vector2 FromRadians(float radians) =>
       new (Cos(radians), Sin(radians));
 
-    public static float ToRadians(this in Vector2 v) =>
+    public static float ToRadians(this Vector2 v) =>
       Atan2(v.y, v.x);
 
     // From: http://answers.unity.com/comments/834881/view.html
-    public static Vector2 RotateRadians(this in Vector2 v, float radians) {
+    public static Vector2 RotateRadians(this Vector2 v, float radians) {
       var sin = Sin(radians);
       var cos = Cos(radians);
 
@@ -35,7 +35,7 @@ namespace PeachyTween {
       return new Vector2(cos * tx - sin * ty, sin * tx + cos * ty);
     }
 
-    public static Vector2 Rotate(this in Vector2 v, float degrees) =>
+    public static Vector2 Rotate(this Vector2 v, float degrees) =>
       RotateRadians(v, degrees * Deg2Rad);
 
 
