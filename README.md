@@ -2,7 +2,7 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-A tweening for Unity designed to be simple to use and extend.
+A tweening library for Unity designed to be simple to use and extend.
 
 ## Background
 
