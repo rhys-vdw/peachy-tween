@@ -8,11 +8,21 @@ A tweening for Unity designed to be simple to use and extend.
 
 Created as an alternative to [DOTween](https://github.com/Demigiant/dotween/), which has a proprietary license with some limitations. PeachyTween intends to create a similarly powerful tweening library that can be installed by UPM and allows public forks and distribution.
 
-PeachyTween does not aim to be API compatible with DOTween, not to fully mirror its functionality.
+PeachyTween does not aim to be API compatible with DOTween, nor to fully mirror its functionality.
 
 :warning: **PeachyTween is still in early development, and is untested**
 
 ## Install
+
+### Installing from OpenUPM
+
+Package can be [installed from OpenUPM](https://openupm.com/packages/computer.rhys.peachy-tween/).
+
+```console
+$ openupm add computer.rhys.peachy-tween
+```
+
+### Installing from GitHub
 
 To add to you Unity project, first add the internal dependency [ecslite](https://github.com/LeoECSCommunity/ecslite).
 
