@@ -19,7 +19,7 @@ PeachyTween does not aim to be API compatible with DOTween, nor to fully mirror 
 
 [OpenUPM package](https://openupm.com/packages/computer.rhys.peachy-tween/).
 
-Package can be installed from [OpenUPM](https://openupm.com/) using [Open-UPM CLI](https://openupm.com/docs/getting-started.html);
+Package can be installed from [OpenUPM](https://openupm.com/) using [OpenUPM CLI](https://openupm.com/docs/getting-started.html);
 
 ```console
 $ openupm add computer.rhys.peachy-tween
