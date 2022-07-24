@@ -19,12 +19,29 @@ namespace PeachyTween {
         if (activePool.Has(member.SequenceEntity)) {
           ref var tweenState = ref statePool.Get(entity);
           ref var sequenceState = ref statePool.Get(member.SequenceEntity);
-          var elapsed = sequenceState.Elapsed - member.StartTime;
-          if (elapsed > 0 && elapsed <= tweenState.Duration) {
-            tweenState.Elapsed = elapsed;
-            activePool.Add(entity);
+
+          // Update tween elapsed time.
+          tweenState.Elapsed = sequenceState.Elapsed - member.StartTime;
+
+          if (tweenState.Elapsed > tweenState.Duration) {
+            if (!_world.HasComponent<Complete>(entity)) {
+              // If we've exceeded duration, but the tween is yet to be marked
+              // complete, activate it so it can be completed.
+              activePool.Add(entity);
+
+              // Have to add complete here, because the ElapsedSystem has
+              // already run to update the sequencer.
+              _world.AddComponent<Complete>(entity);
+            }
+          } else {
+            // Mark tween incomplete.
+            _world.DelComponent<Complete>(entity);
+
+            // If the tween is active, mark it active so it will progress.
+            if (tweenState.Elapsed > 0) {
+              activePool.Add(entity);
+            }
           }
-          _world.SetHasComponent<Complete>(entity, elapsed > tweenState.Duration);
         }
       }
     }
