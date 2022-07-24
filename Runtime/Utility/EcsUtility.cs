@@ -49,5 +49,14 @@ namespace PeachyTween {
         pool.Add(entity);
       }
     }
+
+    public static void ToggleComponent<T>(this EcsWorld world, int entity, bool isPresent) where T : struct {
+      var pool = world.GetPool<T>();
+      if (isPresent) {
+        pool.Add(entity);
+      } else {
+        pool.Del(entity);
+      }
+    }
   }
 }

@@ -747,7 +747,7 @@ namespace PeachyTween {
 #endregion
 #region Private
 
-    bool Entity(out int entity) {
+    internal bool Entity(out int entity) {
       if (!TryEntity(out entity)) {
         Debug.LogWarning($"Tween is not alive");
         return false;
