@@ -296,6 +296,13 @@ namespace PeachyTween {
         .Add(new CallbackSystem<OnKill>(FilterActive().Inc<Kill>().End()))
         .Add(new KillSystem())
         .Add(new DeactivateSystem());
+
+#if PEACHY_DEBUG_ECS && PEACHY_DEBUG_ECS_SUPPORT && UNITY_EDITOR
+      _systems.Add(
+        new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(entityNameFormat: "D")
+      );
+#endif
+
       _systems.Init();
     }
 
