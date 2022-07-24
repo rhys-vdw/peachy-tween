@@ -78,6 +78,12 @@ namespace PeachyTween {
       new (Core.CreateTween(from, to, duration, onChange));
 
 #endregion
+#region Sequence factory
+
+    public static Sequence Sequence() =>
+      new (Core.CreateSequence());
+
+#endregion
 #region Run
 
     /// <summary>

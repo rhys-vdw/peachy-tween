@@ -16,6 +16,22 @@ namespace PeachyTween {
     public LerpFunc<T> Func;
   }
 
+  // Sequences
+  struct Sequencer {
+    public float JoinTime;
+    public float AppendTime;
+  }
+
+  struct SequenceMember {
+    public int SequenceEntity;
+    public float StartTime;
+
+    public SequenceMember(int sequenceEntity, float startTime) {
+      SequenceEntity = sequenceEntity;
+      StartTime = startTime;
+    }
+  }
+
   // Groups
   struct Update { }
   struct UnscaledUpdate { }

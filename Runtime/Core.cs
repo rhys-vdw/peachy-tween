@@ -267,6 +267,71 @@ namespace PeachyTween {
     }
 
 #endregion
+#region Sequence
+
+    public static EcsPackedEntity CreateSequence() {
+      var entity = _world.NewEntity();
+      _world.AddComponent(entity, new TweenState(0));
+      _world.AddComponent(entity, new Sequencer());
+      SetGroup<Update>(entity);
+      return _world.PackEntity(entity);
+    }
+
+    public static void Join(int sequenceEntity, int tweenEntity) {
+      // WARNING: Preconditions are checked inside `Insert`, so no mutations
+      // should occur before this.
+
+      // Insert the new tween.
+      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
+      Insert(sequenceEntity, tweenEntity, sequencer.JoinTime);
+    }
+
+
+    public static void Append(int sequenceEntity, int tweenEntity) {
+      // WARNING: Preconditions are checked inside `Insert`, so no mutations
+      // should occur before this.
+
+      // Insert the new tween.
+      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
+      ref var tweenState = ref _world.GetComponent<TweenState>(tweenEntity);
+      Insert(sequenceEntity, tweenEntity, sequencer.AppendTime);
+
+      // Update sequencer state.
+      sequencer.JoinTime = sequencer.AppendTime;
+      sequencer.AppendTime += tweenState.Duration;
+    }
+
+    public static void Insert(int sequenceEntity, int tweenEntity, float time) {
+      // Ensure that a sequence member is not modified. If a subsequence is
+      // extended, then tweens following it in its parent sequence would not be
+      // delayed.
+      if (_world.HasComponent<SequenceMember>(sequenceEntity)) {
+        throw new InvalidOperationException(
+          $"Cannot modify a sequence that is included in another sequence."
+        );
+      }
+      if (_world.HasComponent<SequenceMember>(tweenEntity)) {
+        throw new InvalidOperationException($"Cannot add the same tween to two sequences");
+      }
+      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
+      ref var sequencerState = ref _world.GetComponent<TweenState>(sequenceEntity);
+      ref var tweenState = ref _world.GetComponent<TweenState>(tweenEntity);
+
+      // Add the sequence member state with specified join time.
+      _world.AddComponent(
+        tweenEntity,
+        new SequenceMember(sequenceEntity, time)
+      );
+
+      // Clear the group of the tween, it will be controlled by the sequencer.
+      ClearGroup(tweenEntity);
+
+      // Update the sequencer state.
+      float endTime = time + tweenState.Duration;
+      sequencerState.Duration = Mathf.Max(sequencerState.Duration, endTime);
+    }
+
+#endregion
 #region Ecs
 
     static EcsWorld _world;
@@ -287,6 +352,7 @@ namespace PeachyTween {
       _systems = new EcsSystems(_world, _runState)
         .Add(new ActivateGroupSystem())
         .Add(new ElapsedSystem())
+        .Add(new SequenceSystem())
         .Add(new CallbackSystem<OnUpdate>(FilterActive().End()))
         .Add(new ProgressSystem())
         .Add(new ReverseSystem())
@@ -305,6 +371,7 @@ namespace PeachyTween {
         .Add(new CallbackSystem<OnComplete>(FilterActive().Inc<Complete>().Exc<Kill>().End()))
         .Add(new CompleteSystem())
         .Add(new CallbackSystem<OnKill>(FilterActive().Inc<Kill>().End()))
+        .Add(new KillSequenceSystem())
         .Add(new KillSystem())
         .Add(new DeactivateSystem());
 

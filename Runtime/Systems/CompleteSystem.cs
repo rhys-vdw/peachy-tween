@@ -13,6 +13,7 @@ namespace PeachyTween {
         .Inc<Complete>()
         .Exc<Preserve>()
         .Exc<Kill>()
+        .Exc<SequenceMember>()
         .End();
     }
 
@@ -24,4 +25,3 @@ namespace PeachyTween {
     }
   }
 }
-

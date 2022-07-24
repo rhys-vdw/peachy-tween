@@ -2,7 +2,7 @@ using Leopotam.EcsLite;
 
 namespace PeachyTween {
 
-  internal class KillSystem : IEcsSystem , IEcsPreInitSystem , IEcsRunSystem {
+  internal class KillSystem : IEcsSystem, IEcsPreInitSystem, IEcsRunSystem {
     EcsWorld _world;
     EcsFilter _filter;
 
