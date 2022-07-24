@@ -82,7 +82,26 @@ public class PeachyExample : MonoBehaviour
 
 Contributions welcome. If you wish to make a pull request, please open an issue first.
 
-See [development project](https://github.com/rhys-vdw/peachy-tween/projects/1).
+See the [GitHub project](https://github.com/rhys-vdw/peachy-tween/projects/1) for the development roadmap.
+
+### Environment setup
+
+To work on PeachyTween:
+
+1. Clone the GitHub repo.
+2. Create a new Unity project.
+3. In the package manager window, select "Add package from disk..." and select your local PeachyTween folder.
+4. Enable tests in the editor ([see below](#enabling-tests-in-the-editor)).
+
+### Enabling tests in the editor
+
+Contributions should have test coverage. To run the test suite, edit your project's `manifest.json` to include the following entry:
+
+```json
+  "testables": [
+    "computer.rhys.peachy-tween"
+  ]
+```
 
 ## License
 
