@@ -5,9 +5,12 @@ namespace PeachyTween {
     EcsWorld _world;
     EcsFilter _filter;
 
+    public EaseSystem(EcsWorld.Mask mask) {
+      _filter = mask.Inc<Eased>().End();
+    }
+
     public void Init(EcsSystems systems) {
       _world = systems.GetWorld();
-      _filter = _world.Filter<Active>().Inc<Eased>().End();
     }
 
     public void Run(EcsSystems systems) {
