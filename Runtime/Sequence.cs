@@ -25,6 +25,26 @@ namespace PeachyTween {
       return this;
     }
 
+    public Sequence Join(Tween tween) {
+      if (
+        Entity(out var sequenceEntity) &&
+        tween.Entity(out var tweenEntity)
+      ) {
+        Core.Join(sequenceEntity, tweenEntity);
+      }
+      return this;
+    }
+
+    public Sequence Insert(float time, Tween tween) {
+      if (
+        Entity(out var sequenceEntity) &&
+        tween.Entity(out var tweenEntity)
+      ) {
+        Core.Insert(sequenceEntity, tweenEntity, time);
+      }
+      return this;
+    }
+
 #endregion
 #region Control
 
