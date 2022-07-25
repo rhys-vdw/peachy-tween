@@ -19,9 +19,11 @@ namespace PeachyTween {
         if (activePool.Has(member.SequenceEntity)) {
           ref var tweenState = ref statePool.Get(entity);
           ref var sequenceState = ref statePool.Get(member.SequenceEntity);
+          ref var sequenceActive = ref activePool.Get(member.SequenceEntity);
 
           // Update tween elapsed time.
-          tweenState.Elapsed = sequenceState.Elapsed - member.StartTime;
+          var easedElapse = sequenceActive.Progress * sequenceState.Duration;
+          tweenState.Elapsed = easedElapse - member.StartTime;
 
           if (tweenState.Elapsed > tweenState.Duration) {
             if (!_world.HasComponent<Complete>(entity)) {

@@ -347,17 +347,24 @@ namespace PeachyTween {
     }
 #pragma warning restore IDE0051
 
+    static EcsSystems AddProgressSystems(
+      this EcsSystems systems,
+      Func<EcsWorld.Mask> getMask
+    ) => systems
+      .Add(new ProgressSystem(getMask()))
+      .Add(new ReverseSystem(getMask()))
+      .Add(new LoopSystem(getMask()))
+      .Add(new EaseSystem(getMask()));
+
     internal static void InitializeEcs() {
       _world = new ();
       _systems = new EcsSystems(_world, _runState)
         .Add(new ActivateGroupSystem())
         .Add(new ElapsedSystem())
+        .AddProgressSystems(() => FilterActive())
         .Add(new SequenceSystem())
+        .AddProgressSystems(() => FilterActive().Inc<SequenceMember>())
         .Add(new CallbackSystem<OnUpdate>(FilterActive().End()))
-        .Add(new ProgressSystem())
-        .Add(new ReverseSystem())
-        .Add(new LoopSystem())
-        .Add(new EaseSystem())
         .Add(ChangeSystemExc<float, ShortestAngle>(Mathf.LerpUnclamped))
         .Add(ChangeSystemInc<float, ShortestAngle>(Mathf.LerpAngle))
         .Add(ChangeSystemExc<Vector2, Slerp>(Vector2.LerpUnclamped))

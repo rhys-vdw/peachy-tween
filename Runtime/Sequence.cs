@@ -112,6 +112,48 @@ namespace PeachyTween {
     }
 
 #endregion
+#region Easing
+
+    /// <summary>
+    /// Clears the easing function, defaulting to linear interpolation.
+    /// </summary>
+    /// <seealso cref="Ease"/>
+    /// <param name="easeFunc">An easing function.</param>
+    /// <returns>This tween.</returns>
+    public Sequence ClearEase() {
+      if (Entity(out var entity)) {
+        Core.ClearEase(entity);
+      }
+      return this;
+    }
+
+    /// <summary>
+    /// Set the easing function for this tween.
+    /// </summary>
+    /// <param name="ease">A standard easing function.</param>
+    /// <returns>This tween.</returns>
+    public Sequence Ease(Ease ease) =>
+      ease == PeachyTween.Ease.Linear
+        ? ClearEase()
+        : Ease(ease.ToFunc());
+
+    /// <inheritdoc cref="Ease" />
+    /// <param name="easeFunc">An easing function.</param>
+    public Sequence Ease(EaseFunc easeFunc) {
+      if (Entity(out var entity)) {
+        Core.Ease(entity, easeFunc);
+      }
+      return this;
+    }
+
+    /// <inheritdoc cref="Ease" />
+    /// <param name="animationCurve">An animation curve from (0,0) to (1,1).</param>
+    public Sequence Ease(AnimationCurve animationCurve) {
+      _ = animationCurve ?? throw new ArgumentNullException(nameof(animationCurve));
+      return Ease(animationCurve.Evaluate);
+    }
+
+#endregion
 #region Preserve
 
     /// <summary>
