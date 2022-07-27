@@ -307,6 +307,18 @@ namespace PeachyTween {
       sequencer.AppendTime += delay;
     }
 
+    public static void AppendCallback(int sequenceEntity, Action callback) {
+      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
+      var entity = _world.NewEntity();
+      _world.AddComponent(entity, new TweenState(0));
+      AddHandler<OnComplete>(entity, callback);
+      try {
+        Insert(sequenceEntity, entity, sequencer.AppendTime);
+      } catch {
+        _world.DelEntity(entity);
+      }
+    }
+
     public static void Insert(int sequenceEntity, int tweenEntity, float time) {
       // Ensure that a sequence member is not modified. If a subsequence is
       // extended, then tweens following it in its parent sequence would not be

@@ -40,6 +40,13 @@ namespace PeachyTween {
       return this;
     }
 
+    public Sequence AppendCallback(Action callback) {
+      if (Entity(out var sequenceEntity)) {
+        Core.AppendCallback(sequenceEntity, callback);
+      }
+      return this;
+    }
+
     public Sequence Join(Tween tween) {
       if (
         Entity(out var sequenceEntity) &&

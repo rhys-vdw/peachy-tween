@@ -56,5 +56,26 @@ namespace PeachyTween.Tests {
       Assert.AreEqual(2, aChangeCount);
       Assert.AreEqual(1, bChangeCount);
     }
+
+    [Test]
+    public void AppendCallback() {
+      var callbackCount = 0;
+
+      var sequence = Peachy.Sequence()
+        .Append(Peachy.Tween(0f, 1f, 1f, _ => {}))
+        .AppendCallback(() => callbackCount++)
+        .Append(Peachy.Tween(0f, 1f, 1f, _ => {}));
+
+      var t = sequence.ToTween();
+
+      t.ManualUpdate(0.8f);
+      Assert.AreEqual(0, callbackCount);
+
+      t.ManualUpdate(0.4f);
+      Assert.AreEqual(1, callbackCount);
+
+      t.ManualUpdate(0.8f);
+      Assert.AreEqual(1, callbackCount);
+    }
   }
 }
