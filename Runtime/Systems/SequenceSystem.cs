@@ -25,7 +25,7 @@ namespace PeachyTween {
           var easedElapse = sequenceActive.Progress * sequenceState.Duration;
           tweenState.Elapsed = easedElapse - member.StartTime;
 
-          if (tweenState.Elapsed > tweenState.Duration) {
+          if (tweenState.Elapsed >= tweenState.Duration) {
             if (!_world.HasComponent<Complete>(entity)) {
               // If we've exceeded duration, but the tween is yet to be marked
               // complete, activate it so it can be completed.
