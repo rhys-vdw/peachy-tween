@@ -267,7 +267,7 @@ namespace PeachyTween {
     }
 
 #endregion
-#region Sequence
+#region Sequence factory
 
     public static EcsPackedEntity CreateSequence() {
       var entity = _world.NewEntity();
@@ -276,6 +276,9 @@ namespace PeachyTween {
       SetGroup<Update>(entity);
       return _world.PackEntity(entity);
     }
+
+#endregion
+#region Sequence tween operations
 
     public static void Join(int sequenceEntity, int tweenEntity) {
       // WARNING: Preconditions are checked inside `Insert`, so no mutations
@@ -299,24 +302,6 @@ namespace PeachyTween {
       // Update sequencer state.
       sequencer.JoinTime = sequencer.AppendTime;
       sequencer.AppendTime += tweenState.Duration;
-    }
-
-    public static void AppendInterval(int sequenceEntity, float delay) {
-      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
-      sequencer.JoinTime = sequencer.AppendTime;
-      sequencer.AppendTime += delay;
-    }
-
-    public static void AppendCallback(int sequenceEntity, Action callback) {
-      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
-      var entity = _world.NewEntity();
-      _world.AddComponent(entity, new TweenState(0));
-      AddHandler<OnComplete>(entity, callback);
-      try {
-        Insert(sequenceEntity, entity, sequencer.AppendTime);
-      } catch {
-        _world.DelEntity(entity);
-      }
     }
 
     public static void Insert(int sequenceEntity, int tweenEntity, float time) {
@@ -347,6 +332,34 @@ namespace PeachyTween {
       // Update the sequencer state.
       float endTime = time + tweenState.Duration;
       sequencerState.Duration = Mathf.Max(sequencerState.Duration, endTime);
+    }
+
+#endregion
+#region Sequence intervals
+
+    public static void AppendInterval(int sequenceEntity, float delay) {
+      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
+      sequencer.JoinTime = sequencer.AppendTime;
+      sequencer.AppendTime += delay;
+    }
+
+#endregion
+#region Sequence callbacks
+
+    public static void AppendCallback(int sequenceEntity, Action callback) {
+      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
+      InsertCallback(sequenceEntity, sequencer.AppendTime, callback);
+    }
+
+    public static void InsertCallback(int sequenceEntity, float time, Action callback) {
+      var entity = _world.NewEntity();
+      _world.AddComponent(entity, new TweenState(0));
+      AddHandler<OnComplete>(entity, callback);
+      try {
+        Insert(sequenceEntity, entity, time);
+      } catch {
+        _world.DelEntity(entity);
+      }
     }
 
 #endregion
