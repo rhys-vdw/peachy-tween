@@ -301,6 +301,12 @@ namespace PeachyTween {
       sequencer.AppendTime += tweenState.Duration;
     }
 
+    public static void AppendDelay(int sequenceEntity, float delay) {
+      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
+      sequencer.JoinTime = sequencer.AppendTime;
+      sequencer.AppendTime += delay;
+    }
+
     public static void Insert(int sequenceEntity, int tweenEntity, float time) {
       // Ensure that a sequence member is not modified. If a subsequence is
       // extended, then tweens following it in its parent sequence would not be

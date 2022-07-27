@@ -33,6 +33,13 @@ namespace PeachyTween {
       return this;
     }
 
+    public Sequence AppendDelay(float delay) {
+      if (Entity(out var sequenceEntity)) {
+        Core.AppendDelay(sequenceEntity, delay);
+      }
+      return this;
+    }
+
     public Sequence Join(Tween tween) {
       if (
         Entity(out var sequenceEntity) &&
