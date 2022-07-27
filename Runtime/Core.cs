@@ -139,9 +139,8 @@ namespace PeachyTween {
 #endregion
 #region Ping-pong
 
-    public static void PingPong(int entity) {
+    public static void PingPong(int entity) =>
       _world.EnsureComponent<PingPong>(entity);
-    }
 
     public static void ClearPingPong(int entity) =>
       _world.DelComponent<PingPong>(entity);
@@ -258,13 +257,11 @@ namespace PeachyTween {
 #endregion
 #region Callbacks
 
-    public static void AddHandler<T>(int entity, Action handler) where T : struct, ICallback {
+    public static void AddHandler<T>(int entity, Action handler) where T : struct, ICallback =>
       _world.AddHandler<T>(entity, handler);
-    }
 
-    public static void RemoveHandler<T>(int entity, Action handler) where T : struct, ICallback {
+    public static void RemoveHandler<T>(int entity, Action handler) where T : struct, ICallback =>
       _world.RemoveHandler<T>(entity, handler);
-    }
 
 #endregion
 #region Sequence factory
