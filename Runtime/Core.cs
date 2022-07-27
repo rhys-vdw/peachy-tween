@@ -301,7 +301,7 @@ namespace PeachyTween {
       sequencer.AppendTime += tweenState.Duration;
     }
 
-    public static void AppendDelay(int sequenceEntity, float delay) {
+    public static void AppendInterval(int sequenceEntity, float delay) {
       ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
       sequencer.JoinTime = sequencer.AppendTime;
       sequencer.AppendTime += delay;

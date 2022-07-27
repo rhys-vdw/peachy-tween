@@ -33,9 +33,9 @@ namespace PeachyTween {
       return this;
     }
 
-    public Sequence AppendDelay(float delay) {
+    public Sequence AppendInterval(float delay) {
       if (Entity(out var sequenceEntity)) {
-        Core.AppendDelay(sequenceEntity, delay);
+        Core.AppendInterval(sequenceEntity, delay);
       }
       return this;
     }

@@ -29,13 +29,13 @@ namespace PeachyTween.Tests {
     }
 
     [Test]
-    public void AppendDelay() {
+    public void AppendInterval() {
       var aChangeCount = 0;
       var bChangeCount = 0;
 
       var sequence = Peachy.Sequence()
         .Append(Peachy.Tween(0f, 1f, 1f, _ => aChangeCount++))
-        .AppendDelay(1f)
+        .AppendInterval(1f)
         .Append(Peachy.Tween(0f, 1f, 1f, _ => bChangeCount++));
 
       var t = sequence.ToTween();
