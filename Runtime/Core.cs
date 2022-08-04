@@ -309,9 +309,12 @@ namespace PeachyTween {
         .Add(new DeactivateSystem());
 
 #if PEACHY_DEBUG_ECS && PEACHY_DEBUG_ECS_SUPPORT && UNITY_EDITOR
-      _systems.Add(
-        new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(entityNameFormat: "D")
-      );
+      // Do not try to create debug system while testing.
+      if (Application.isPlaying) {
+        _systems.Add(
+          new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(entityNameFormat: "D")
+        );
+      }
 #endif
 
       _systems.Init();
