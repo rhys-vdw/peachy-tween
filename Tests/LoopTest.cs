@@ -42,7 +42,7 @@ namespace PeachyTween.Tests {
     }
 
     [Test]
-    public void LoopRewind() {
+    public void LoopForever() {
       var value = 0f;
       var tween = Peachy
         .Tween(0f, 1f, 1f, v => value = v)
