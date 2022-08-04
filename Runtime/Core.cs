@@ -80,9 +80,7 @@ namespace PeachyTween {
           if (_world.HasComponent<PingPong>(entity)) {
             ref var loop = ref _world.GetComponent<Loop>(entity);
             if (loop.LoopCount != -1) {
-              if (loop.LoopCount % 2 == 1) {
-                _world.ToggleComponent<Reverse>(entity);
-              }
+              _world.SetHasComponent<Reverse>(entity, loop.LoopCount % 2 == 0);
             }
           }
 
