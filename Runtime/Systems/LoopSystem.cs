@@ -23,7 +23,6 @@ namespace PeachyTween {
         // Calculate current loop.
         var prevLoop = loop.CurrentLoop;
         // NOTE: Using clamp here to ensure we don't do callback too many times.
-        // TODO: Complete this.
         var nextLoop = Mathf.Clamp(
           Mathf.FloorToInt(tweenState.Elapsed / loop.LoopDuration),
           -1,
@@ -55,12 +54,19 @@ namespace PeachyTween {
           active.Progress = (tweenState.Elapsed % loop.LoopDuration) / loop.LoopDuration;
           loop.CurrentLoop = nextLoop;
         } else {
+          // TODO: I don't think this should be necessary, but for some reason
+          // when reversed there is one final value of 0 before the tween is
+          // deactivated. Possibly an error in Reverse handling.
+          active.Progress = loop.LoopCount == -1 ? 0 : 1;
           loop.CurrentLoop = null;
         }
 
         // Flip progress for ping-pong.
         if (_world.HasComponent<PingPong>(entity)) {
-          if (Mathf.Min(nextLoop, loop.LoopCount - 1) % 2 == 1) {
+          var isReversed = _world.HasComponent<Reverse>(entity);
+          var clampedLoop = Mathf.Clamp(nextLoop, 0, loop.LoopCount - 1);
+          var isFlipped = clampedLoop % 2 == 1;
+          if (isReversed != isFlipped) {
             active.Progress = 1f - active.Progress;
           }
         }
