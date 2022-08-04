@@ -219,7 +219,9 @@ namespace PeachyTween {
           ? Mathf.Infinity
           : loop.LoopDuration * loop.LoopCount;
       }
-      if (loopCount <= 1) {
+      if (loopCount == 0) {
+        Kill(entity, false);
+      } else if (loopCount == 1) {
         _world.DelComponent<Loop>(entity);
       } else if (_world.HasComponent<Loop>(entity)) {
         ref var loop = ref _world.GetComponent<Loop>(entity);
@@ -301,7 +303,7 @@ namespace PeachyTween {
         .Add(ChangeSystemExc<Quaternion, Slerp>(Quaternion.LerpUnclamped))
         .Add(ChangeSystemInc<Quaternion, Slerp>(Quaternion.SlerpUnclamped))
         .Add(ChangeSystem<Color>(Color.LerpUnclamped))
-        .Add(new CallbackSystem<OnComplete>(FilterActive().Inc<Complete>().End()))
+        .Add(new CallbackSystem<OnComplete>(FilterActive().Inc<Complete>().Exc<Kill>().End()))
         .Add(new CompleteSystem())
         .Add(new CallbackSystem<OnKill>(FilterActive().Inc<Kill>().End()))
         .Add(new KillSystem())

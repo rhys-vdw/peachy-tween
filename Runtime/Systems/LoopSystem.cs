@@ -33,7 +33,11 @@ namespace PeachyTween {
         // Execute OnLoop callbacks.
         // TODO: This is probably wrong? Need to think about/test all different
         // permutations (including rewind GoTo etc)
-        if (nextLoop > -1 && nextLoop <= loop.LoopCount && prevLoop is int pl) {
+        if (
+          nextLoop > -1 &&
+          (loop.LoopCount == -1 || nextLoop <= loop.LoopCount) &&
+          prevLoop is int pl
+        ) {
           var deltaLoop = Mathf.Abs(pl - nextLoop);
           for (var i = 0; i < deltaLoop; i++) {
             _world.Invoke<OnLoop>(entity);
