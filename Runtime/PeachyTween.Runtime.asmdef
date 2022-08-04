@@ -2,7 +2,8 @@
     "name": "PeachyTween.Runtime",
     "rootNamespace": "",
     "references": [
-        "GUID:e59bf9fc7d5a44b18a819a92edd46163"
+        "GUID:e59bf9fc7d5a44b18a819a92edd46163",
+        "GUID:a22362b82293644e1bbe51356c008d63"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -11,6 +12,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.leoecscommunity.ecslite.unityeditor",
+            "expression": "1.0.0",
+            "define": "PEACHY_DEBUG_ECS_SUPPORT"
+        }
+    ],
     "noEngineReferences": false
 }

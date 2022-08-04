@@ -52,7 +52,9 @@ namespace PeachyTween {
   }
 
   struct Loop {
-    public int Remaining;
+    public int? CurrentLoop;
+    public float LoopDuration;
+    public int LoopCount;
   }
 
   struct Eased {

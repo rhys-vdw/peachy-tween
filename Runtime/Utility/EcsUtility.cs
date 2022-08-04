@@ -49,5 +49,13 @@ namespace PeachyTween {
         pool.Add(entity);
       }
     }
+
+    public static void SetHasComponent<T>(this EcsWorld world, int entity, bool isPresent) where T : struct {
+      if (isPresent) {
+        world.EnsureComponent<T>(entity);
+      } else {
+        world.DelComponent<T>(entity);
+      }
+    }
   }
 }

@@ -77,10 +77,10 @@ namespace PeachyTween.Tests {
     }
 
     static object[] CompletePingPongCases = new [] {
-      new object[] { 1, 0f },
-      new object[] { 2, 1f },
-      new object[] { 3, 0f },
-      new object[] { 4, 1f },
+      new object[] { 1, 1f },
+      new object[] { 2, 0f },
+      new object[] { 3, 1f },
+      new object[] { 4, 0f },
       new object[] { -1, 1f },
     };
 
@@ -104,7 +104,7 @@ namespace PeachyTween.Tests {
       Peachy.Run<TestGroup>(0);
 
       Assert.AreEqual(1, onChangeCount, "onChange was called");
-      Assert.AreEqual(end, onChangeValue, "Tween completed back to initial value");
+      Assert.AreEqual(end, onChangeValue, "Tween ended on correct value");
       Assert.AreEqual(1, onCompleteCount, "onComplete was called");
       Assert.False(tween.IsAlive(), "Tween is no longer alive");
     }

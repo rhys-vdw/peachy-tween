@@ -461,7 +461,7 @@ namespace PeachyTween {
     /// </summary>
     /// <param name="count">
     /// The number of times this tween should loop, cannot be negative.<para/>
-    /// Setting to <c>0</c> will stop the tween from looping.
+    /// Setting to <c>1</c> will stop the tween from looping, setting to <c>0</c> will kill the tween without completing it.
     /// </param>
     /// <returns>This tween.</returns>
     public Tween Loop(int count) {

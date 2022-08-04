@@ -73,23 +73,13 @@ namespace PeachyTween {
     public static void Complete(int entity) {
       if (!IsComplete(entity)) {
         ref var tweenState = ref _world.GetComponent<TweenState>(entity);
-
-        // Resolve loops.
-        if (_world.HasComponent<Loop>(entity)) {
-          // Check if we need to flip direction to get to final loop.
-          if (_world.HasComponent<PingPong>(entity)) {
-            ref var loop = ref _world.GetComponent<Loop>(entity);
-            if (loop.Remaining != -1) {
-              if (loop.Remaining % 2 == 1) {
-                _world.ToggleComponent<Reverse>(entity);
-              }
-            }
+        var loopPool = _world.GetPool<Loop>();
+        if (loopPool.Has(entity)) {
+          ref var loop = ref loopPool.Get(entity);
+          if (loop.LoopCount == -1) {
+            ClearLoops(entity);
           }
-
-          // Cancel any loops.
-          _world.DelComponent<Loop>(entity);
         }
-
         GoTo(entity, tweenState.Duration);
       }
     }
@@ -211,12 +201,35 @@ namespace PeachyTween {
 #endregion
 #region Loop
 
-    public static void SetLooping(int entity, int remaining) {
-      if (remaining == 0) {
-        _world.DelComponent<Loop>(entity);
+    public static void SetLooping(int entity, int loopCount) {
+      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
+      void Init(ref TweenState tweenState, ref Loop loop) {
+        loop.LoopCount = loopCount;
+        tweenState.Duration = loopCount == -1
+          ? Mathf.Infinity
+          : loop.LoopDuration * loop.LoopCount;
+      }
+      if (loopCount == 0) {
+        Kill(entity, false);
+      } else if (loopCount == 1) {
+        ClearLoops(entity);
+      } else if (_world.HasComponent<Loop>(entity)) {
+        ref var loop = ref _world.GetComponent<Loop>(entity);
+        Init(ref tweenState, ref loop);
       } else {
-        ref var loop = ref _world.EnsureComponent<Loop>(entity);
-        loop.Remaining = remaining;
+        ref var loop = ref _world.AddComponent<Loop>(entity);
+        loop.LoopDuration = tweenState.Duration;
+        Init(ref tweenState, ref loop);
+      }
+    }
+
+    public static void ClearLoops(int entity) {
+      var loopPool = _world.GetPool<Loop>();
+      if (loopPool.Has(entity)) {
+        ref var loop = ref loopPool.Get(entity);
+        ref var state = ref _world.GetComponent<TweenState>(entity);
+        state.Duration = loop.LoopDuration;
+        loopPool.Del(entity);
       }
     }
 
@@ -274,12 +287,10 @@ namespace PeachyTween {
       _systems = new EcsSystems(_world, _runState)
         .Add(new ActivateGroupSystem())
         .Add(new ElapsedSystem())
-        .Add(new PingPongSystem())
-        .Add(new CallbackSystem<OnLoop>(FilterActive().Inc<Complete>().Inc<Loop>().End()))
-        .Add(new LoopSystem())
         .Add(new CallbackSystem<OnUpdate>(FilterActive().End()))
         .Add(new ProgressSystem())
         .Add(new ReverseSystem())
+        .Add(new LoopSystem())
         .Add(new EaseSystem())
         .Add(ChangeSystemExc<float, ShortestAngle>(Mathf.LerpUnclamped))
         .Add(ChangeSystemInc<float, ShortestAngle>(Mathf.LerpAngle))
@@ -291,11 +302,21 @@ namespace PeachyTween {
         .Add(ChangeSystemExc<Quaternion, Slerp>(Quaternion.LerpUnclamped))
         .Add(ChangeSystemInc<Quaternion, Slerp>(Quaternion.SlerpUnclamped))
         .Add(ChangeSystem<Color>(Color.LerpUnclamped))
-        .Add(new CallbackSystem<OnComplete>(FilterActive().Inc<Complete>().End()))
+        .Add(new CallbackSystem<OnComplete>(FilterActive().Inc<Complete>().Exc<Kill>().End()))
         .Add(new CompleteSystem())
         .Add(new CallbackSystem<OnKill>(FilterActive().Inc<Kill>().End()))
         .Add(new KillSystem())
         .Add(new DeactivateSystem());
+
+#if PEACHY_DEBUG_ECS && PEACHY_DEBUG_ECS_SUPPORT && UNITY_EDITOR
+      // Do not try to create debug system while testing.
+      if (Application.isPlaying) {
+        _systems.Add(
+          new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(entityNameFormat: "D")
+        );
+      }
+#endif
+
       _systems.Init();
     }
 
