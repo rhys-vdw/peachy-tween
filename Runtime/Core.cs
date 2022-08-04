@@ -79,8 +79,8 @@ namespace PeachyTween {
           // Check if we need to flip direction to get to final loop.
           if (_world.HasComponent<PingPong>(entity)) {
             ref var loop = ref _world.GetComponent<Loop>(entity);
-            if (loop.Remaining != -1) {
-              if (loop.Remaining % 2 == 1) {
+            if (loop.LoopCount != -1) {
+              if (loop.LoopCount % 2 == 1) {
                 _world.ToggleComponent<Reverse>(entity);
               }
             }
@@ -211,12 +211,23 @@ namespace PeachyTween {
 #endregion
 #region Loop
 
-    public static void SetLooping(int entity, int remaining) {
-      if (remaining == 0) {
+    public static void SetLooping(int entity, int loopCount) {
+      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
+      void Init(ref TweenState tweenState, ref Loop loop) {
+        loop.LoopCount = loopCount;
+        tweenState.Duration = loopCount == -1
+          ? Mathf.Infinity
+          : loop.LoopDuration * loop.LoopCount;
+      }
+      if (loopCount <= 1) {
         _world.DelComponent<Loop>(entity);
+      } else if (_world.HasComponent<Loop>(entity)) {
+        ref var loop = ref _world.GetComponent<Loop>(entity);
+        Init(ref tweenState, ref loop);
       } else {
-        ref var loop = ref _world.EnsureComponent<Loop>(entity);
-        loop.Remaining = remaining;
+        ref var loop = ref _world.AddComponent<Loop>(entity);
+        loop.LoopDuration = tweenState.Duration;
+        Init(ref tweenState, ref loop);
       }
     }
 
@@ -274,11 +285,10 @@ namespace PeachyTween {
       _systems = new EcsSystems(_world, _runState)
         .Add(new ActivateGroupSystem())
         .Add(new ElapsedSystem())
-        .Add(new PingPongSystem())
-        .Add(new CallbackSystem<OnLoop>(FilterActive().Inc<Complete>().Inc<Loop>().End()))
-        .Add(new LoopSystem())
         .Add(new CallbackSystem<OnUpdate>(FilterActive().End()))
         .Add(new ProgressSystem())
+        .Add(new LoopSystem())
+        .Add(new PingPongSystem())
         .Add(new ReverseSystem())
         .Add(new EaseSystem())
         .Add(ChangeSystemExc<float, ShortestAngle>(Mathf.LerpUnclamped))
