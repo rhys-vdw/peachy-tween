@@ -44,17 +44,24 @@ namespace PeachyTween {
           }
         }
 
+        ref var active = ref _world.GetComponent<Active>(entity);
+
         // Update loop progress.
         if (
           loop.LoopCount == -1 ||
           nextLoop >= 0 &&
           nextLoop < loop.LoopCount
         ) {
-          ref var active = ref _world.GetComponent<Active>(entity);
           active.Progress = tweenState.Elapsed % loop.LoopDuration;
           loop.CurrentLoop = nextLoop;
         } else {
           loop.CurrentLoop = null;
+        }
+
+        if (_world.HasComponent<PingPong>(entity)) {
+          if (Mathf.Min(nextLoop, loop.LoopCount - 1) % 2 == 1) {
+            active.Progress = 1f - active.Progress;
+          }
         }
       }
     }

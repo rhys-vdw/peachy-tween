@@ -73,21 +73,13 @@ namespace PeachyTween {
     public static void Complete(int entity) {
       if (!IsComplete(entity)) {
         ref var tweenState = ref _world.GetComponent<TweenState>(entity);
-
-        // Resolve loops.
-        if (_world.HasComponent<Loop>(entity)) {
-          // Check if we need to flip direction to get to final loop.
-          if (_world.HasComponent<PingPong>(entity)) {
-            ref var loop = ref _world.GetComponent<Loop>(entity);
-            if (loop.LoopCount != -1) {
-              _world.SetHasComponent<Reverse>(entity, loop.LoopCount % 2 == 0);
-            }
+        var loopPool = _world.GetPool<Loop>();
+        if (loopPool.Has(entity)) {
+          ref var loop = ref loopPool.Get(entity);
+          if (loop.LoopCount == -1) {
+            ClearLoops(entity);
           }
-
-          // Cancel any loops.
-          _world.DelComponent<Loop>(entity);
         }
-
         GoTo(entity, tweenState.Duration);
       }
     }
@@ -220,7 +212,7 @@ namespace PeachyTween {
       if (loopCount == 0) {
         Kill(entity, false);
       } else if (loopCount == 1) {
-        _world.DelComponent<Loop>(entity);
+        ClearLoops(entity);
       } else if (_world.HasComponent<Loop>(entity)) {
         ref var loop = ref _world.GetComponent<Loop>(entity);
         Init(ref tweenState, ref loop);
@@ -228,6 +220,16 @@ namespace PeachyTween {
         ref var loop = ref _world.AddComponent<Loop>(entity);
         loop.LoopDuration = tweenState.Duration;
         Init(ref tweenState, ref loop);
+      }
+    }
+
+    public static void ClearLoops(int entity) {
+      var loopPool = _world.GetPool<Loop>();
+      if (loopPool.Has(entity)) {
+        ref var loop = ref loopPool.Get(entity);
+        ref var state = ref _world.GetComponent<TweenState>(entity);
+        state.Duration = loop.LoopDuration;
+        loopPool.Del(entity);
       }
     }
 
@@ -288,7 +290,6 @@ namespace PeachyTween {
         .Add(new CallbackSystem<OnUpdate>(FilterActive().End()))
         .Add(new ProgressSystem())
         .Add(new LoopSystem())
-        .Add(new PingPongSystem())
         .Add(new ReverseSystem())
         .Add(new EaseSystem())
         .Add(ChangeSystemExc<float, ShortestAngle>(Mathf.LerpUnclamped))
