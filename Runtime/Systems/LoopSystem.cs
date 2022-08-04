@@ -58,6 +58,7 @@ namespace PeachyTween {
           loop.CurrentLoop = null;
         }
 
+        // Flip progress for ping-pong.
         if (_world.HasComponent<PingPong>(entity)) {
           if (Mathf.Min(nextLoop, loop.LoopCount - 1) % 2 == 1) {
             active.Progress = 1f - active.Progress;

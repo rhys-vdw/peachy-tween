@@ -5,8 +5,16 @@ namespace PeachyTween.Tests {
   public class PingPongTest : BaseTweenTest {
     const float Imprecision = 0.00001f;
 
-    [Test]
-    public void SimplePingPong() {
+    static object[] Cases = new [] {
+      new object[] { 2, 0f },
+      new object[] { 3, 1f },
+      new object[] { 4, 0f },
+      new object[] { 5, 1f },
+      new object[] { 6, 0f }
+    };
+
+    [TestCaseSource(nameof(Cases))]
+    public void PingPong(int loopCount, float finalValue) {
       var onComplete = 0;
       var onLoop = 0;
       var value = 0f;
@@ -16,27 +24,27 @@ namespace PeachyTween.Tests {
         .OnComplete(() => onComplete++)
         .OnLoop(() => onLoop++)
         .PingPong()
-        .Loop(2);
+        .SetLooping(loopCount);
 
       tween.ManualUpdate(0.3f);
 
-      Assert.AreEqual(0, onLoop, "OnLoop not called");
-      Assert.AreEqual(0, onComplete, "OnComplete not called");
-      Assert.AreEqual(0.3f, value, Imprecision, "Value is progressed");
-      Assert.True(tween.IsAlive(), "Tween is still running");
+      for (var i = 0; i < loopCount; i++) {
+        Assert.AreEqual(i, onLoop, "OnLoop not called");
+        Assert.AreEqual(0, onComplete, "OnComplete not called");
+        Assert.AreEqual(
+          expected: i % 2 == 0 ? 0.3f : 0.7f,
+          actual: value,
+          Imprecision,
+          "Value is progressed"
+        );
+        Assert.True(tween.IsAlive(), "Tween is still running");
 
-      tween.ManualUpdate(1f);
+        tween.ManualUpdate(1f);
+      }
 
-      Assert.AreEqual(1, onLoop, "OnLoop called");
-      Assert.AreEqual(0, onComplete, "OnComplete not called");
-      Assert.AreEqual(0.7f, value, Imprecision, "Value is ping-ponged");
-      Assert.True(tween.IsAlive(), "Tween is still running");
-
-      tween.ManualUpdate(1f);
-
-      Assert.AreEqual(2, onLoop, "OnLoop called");
+      Assert.AreEqual(loopCount, onLoop, "OnLoop called");
       Assert.AreEqual(1, onComplete, "OnComplete called");
-      Assert.AreEqual(0f, value, "Value returned to start");
+      Assert.AreEqual(finalValue, value, "Value returned to start");
       Assert.False(tween.IsAlive(), "Tween is not running");
     }
   }
