@@ -6,40 +6,40 @@ namespace PeachyTween.Tests {
     const float Imprecision = 0.00001f;
 
     static object[] Cases = new [] {
-      new object[] { 2, 0f },
-      new object[] { 3, 1f },
-      new object[] { 4, 0f },
-      new object[] { 5, 1f },
-      new object[] { 6, 0f }
+      new object[] { 2, 0f, 1.4f },
+      new object[] { 3, 1f, 0.2f },
+      new object[] { 4, 0f, 0.1f },
+      new object[] { 5, 1f, 2f },
+      new object[] { 6, 0f, 69f }
     };
 
     [TestCaseSource(nameof(Cases))]
-    public void PingPong(int loopCount, float finalValue) {
+    public void PingPong(int loopCount, float finalValue, float duration) {
       var onComplete = 0;
       var onLoop = 0;
       var value = 0f;
 
       var tween = Peachy
-        .Tween(0f, 1f, 1f, v => value = v)
+        .Tween(0f, 1f, duration, v => value = v)
         .OnComplete(() => onComplete++)
         .OnLoop(() => onLoop++)
         .PingPong()
         .SetLooping(loopCount);
 
-      tween.ManualUpdate(0.3f);
+      tween.ManualUpdate(duration * 0.3f);
 
       for (var i = 0; i < loopCount; i++) {
-        Assert.AreEqual(i, onLoop, "OnLoop not called");
-        Assert.AreEqual(0, onComplete, "OnComplete not called");
+        Assert.AreEqual(i, onLoop, $"loop {i}: OnLoop not called");
+        Assert.AreEqual(0, onComplete, $"loop {i}: OnComplete not called");
         Assert.AreEqual(
           expected: i % 2 == 0 ? 0.3f : 0.7f,
           actual: value,
           Imprecision,
-          "Value is progressed"
+          $"loop {i} Value is progressed"
         );
-        Assert.True(tween.IsAlive(), "Tween is still running");
+        Assert.True(tween.IsAlive(), $"loop {i}: Tween is still running");
 
-        tween.ManualUpdate(1f);
+        tween.ManualUpdate(duration);
       }
 
       Assert.AreEqual(loopCount, onLoop, "OnLoop called");

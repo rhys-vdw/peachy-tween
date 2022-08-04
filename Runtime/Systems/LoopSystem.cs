@@ -52,7 +52,7 @@ namespace PeachyTween {
           nextLoop >= 0 &&
           nextLoop < loop.LoopCount
         ) {
-          active.Progress = tweenState.Elapsed % loop.LoopDuration;
+          active.Progress = (tweenState.Elapsed % loop.LoopDuration) / loop.LoopDuration;
           loop.CurrentLoop = nextLoop;
         } else {
           loop.CurrentLoop = null;
