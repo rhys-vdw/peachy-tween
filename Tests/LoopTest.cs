@@ -23,21 +23,21 @@ namespace PeachyTween.Tests {
 
       Assert.AreEqual(1, onLoop, "OnLoop called once");
       Assert.AreEqual(0, onComplete, "OnComplete not called");
-      Assert.AreEqual(0.5f, value, Mathf.Epsilon, "Next loop is progressed");
+      Assert.AreEqual(0.5f, value, "Next loop is progressed");
       Assert.True(tween.IsAlive(), "Tween is still running");
 
       tween.ManualUpdate(1f);
 
       Assert.AreEqual(2, onLoop, "OnLoop called twice");
       Assert.AreEqual(0, onComplete, "OnComplete not called");
-      Assert.AreEqual(0.5f, value, Mathf.Epsilon, "Next loop is progressed");
+      Assert.AreEqual(0.5f, value, "Next loop is progressed");
       Assert.True(tween.IsAlive(), "Tween is still running");
 
       tween.ManualUpdate(1f);
 
       Assert.AreEqual(3, onLoop, "OnLoop called three times");
       Assert.AreEqual(1, onComplete, "OnComplete was called");
-      Assert.AreEqual(1f, value, Mathf.Epsilon, "Final loop completed");
+      Assert.AreEqual(1f, value, "Final loop completed");
       Assert.False(tween.IsAlive(), "Tween is no longer running");
     }
 
