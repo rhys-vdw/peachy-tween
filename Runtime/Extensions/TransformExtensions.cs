@@ -16,7 +16,7 @@ namespace PeachyTween {
     /// <param name="transform">The transform.</param>
     /// <param name="to">The end world rotation.</param>
     /// <param name="duration">Length of tween in seconds.</param>
-     public static Tween TweenRotation(this Transform transform, Quaternion to, float duration) =>
+    public static Tween TweenRotation(this Transform transform, Quaternion to, float duration) =>
       Peachy
         .Tween(transform.rotation, to, duration, v => transform.rotation = v)
         .SetTarget(transform);
@@ -343,7 +343,7 @@ namespace PeachyTween {
     /// Shake the Transform's local scale with a random vector.
     /// </summary>
     /// <inheritdoc cref="ShakePosition" path="param" />
-    public static Tween ShakeLocalScale(
+    public static Tween ShakeScale(
       this Transform transform,
       float magnitude,
       float duration,
@@ -364,7 +364,7 @@ namespace PeachyTween {
     /// Shake the Transform's local scale on the XY axis with a random vector.
     /// </summary>
     /// <inheritdoc cref="ShakePosition" path="param" />
-    public static Tween ShakeLocalScale2D(
+    public static Tween ShakeScale2D(
       this Transform transform,
       float magnitude,
       float duration,
