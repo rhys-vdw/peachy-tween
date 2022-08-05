@@ -16,7 +16,7 @@ namespace PeachyTween {
     /// <param name="transform">The transform.</param>
     /// <param name="to">The end world rotation.</param>
     /// <param name="duration">Length of tween in seconds.</param>
-     public static Tween TweenRotation(this Transform transform, Quaternion to, float duration) =>
+    public static Tween TweenRotation(this Transform transform, Quaternion to, float duration) =>
       Peachy
         .Tween(transform.rotation, to, duration, v => transform.rotation = v)
         .SetTarget(transform);
