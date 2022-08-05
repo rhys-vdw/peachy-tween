@@ -29,6 +29,33 @@ namespace PeachyTween.Tests {
     }
 
     [Test]
+    public void MembersCompleteReverse() {
+      var completeCount = 0;
+      var sequnceCompleteCount = 0;
+
+      var sequence = Peachy.Sequence();
+      for (var i = 0; i < 3; i++) {
+        var sub = Peachy
+          .Tween(0f, 1f, 1f, _ => {})
+          .OnComplete(() => completeCount++);
+        sequence.Append(sub);
+      }
+
+      var st = sequence
+        .ToTween()
+        .From()
+        .OnComplete(() => sequnceCompleteCount++);
+
+      for (var i = 1; i < 4; i++) {
+        st.ManualUpdate(1f);
+        Assert.AreEqual(i, completeCount, "Tween complete called");
+      }
+
+      Assert.AreEqual(1, sequnceCompleteCount, "Sequence complete called");
+    }
+
+
+    [Test]
     public void AppendInterval() {
       var aChangeCount = 0;
       var bChangeCount = 0;

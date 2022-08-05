@@ -25,14 +25,19 @@ namespace PeachyTween {
           var easedElapse = sequenceActive.Progress * sequenceState.Duration;
           tweenState.Elapsed = easedElapse - member.StartTime;
 
-          if (tweenState.Elapsed >= tweenState.Duration) {
+          // Work out if the tween is complete.
+          var isReversed = _world.HasComponent<Reverse>(member.SequenceEntity);
+          var isComplete = isReversed
+            ? tweenState.Elapsed <= 0
+            : tweenState.Elapsed >= tweenState.Duration;
+
+          if (isComplete) {
             if (!_world.HasComponent<Complete>(entity)) {
               // If we've exceeded duration, but the tween is yet to be marked
               // complete, activate it so it can be completed.
               activePool.Add(entity);
 
-              // Have to add complete here, because the ElapsedSystem has
-              // already run to update the sequencer.
+              // Mark the tween complete.
               _world.AddComponent<Complete>(entity);
             }
           } else {
@@ -40,7 +45,7 @@ namespace PeachyTween {
             _world.DelComponent<Complete>(entity);
 
             // If the tween is active, mark it active so it will progress.
-            if (tweenState.Elapsed > 0) {
+            if (tweenState.Elapsed > 0 && tweenState.Elapsed < tweenState.Duration) {
               activePool.Add(entity);
             }
           }
