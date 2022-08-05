@@ -1,6 +1,6 @@
 {
   "name": "computer.rhys.peachy-tween",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "displayName": "PeachyTween",
   "description": "A tweening for Unity designed to be simple to use and extend.",
   "unity": "2021.3",
