@@ -16,8 +16,10 @@ namespace PeachyTween {
       foreach (var sequencerEntity in _filter) {
         foreach (var memberEntity in _memberFilter) {
           ref var member = ref _world.GetComponent<SequenceMember>(memberEntity);
-          _world.EnsureComponent<Active>(memberEntity);
-          _world.AddComponent<Kill>(memberEntity);
+          if (member.SequenceEntity == sequencerEntity) {
+            _world.EnsureComponent<Active>(memberEntity);
+            _world.AddComponent<Kill>(memberEntity);
+          }
         }
       }
     }
