@@ -78,6 +78,16 @@ namespace PeachyTween {
       new (Core.CreateTween(from, to, duration, onChange));
 
 #endregion
+#region Sequence factory
+
+    /// <summary>
+    /// Create a new <see cref="PeachyTween.Sequence">Sequence</see>.
+    /// </summary>
+    /// <returns>The newly created sequence.</returns>
+    public static Sequence Sequence() =>
+      new (Core.CreateSequence());
+
+#endregion
 #region Run
 
     /// <summary>

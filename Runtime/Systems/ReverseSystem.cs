@@ -5,9 +5,12 @@ namespace PeachyTween {
     EcsWorld _world;
     EcsFilter _filter;
 
+    public ReverseSystem(EcsWorld.Mask mask) {
+      _filter = mask.Inc<Reverse>().End();
+    }
+
     public void Init(EcsSystems systems) {
       _world = systems.GetWorld();
-      _filter = _world.Filter<Active>().Inc<Reverse>().End();
     }
 
     public void Run(EcsSystems systems) {

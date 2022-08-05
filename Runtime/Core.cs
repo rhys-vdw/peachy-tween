@@ -139,9 +139,8 @@ namespace PeachyTween {
 #endregion
 #region Ping-pong
 
-    public static void PingPong(int entity) {
+    public static void PingPong(int entity) =>
       _world.EnsureComponent<PingPong>(entity);
-    }
 
     public static void ClearPingPong(int entity) =>
       _world.DelComponent<PingPong>(entity);
@@ -258,12 +257,106 @@ namespace PeachyTween {
 #endregion
 #region Callbacks
 
-    public static void AddHandler<T>(int entity, Action handler) where T : struct, ICallback {
+    public static void AddHandler<T>(int entity, Action handler) where T : struct, ICallback =>
       _world.AddHandler<T>(entity, handler);
+
+    public static void RemoveHandler<T>(int entity, Action handler) where T : struct, ICallback =>
+      _world.RemoveHandler<T>(entity, handler);
+
+#endregion
+#region Sequence factory
+
+    public static EcsPackedEntity CreateSequence() {
+      var entity = _world.NewEntity();
+      _world.AddComponent(entity, new TweenState(0));
+      _world.AddComponent(entity, new Sequencer());
+      SetGroup<Update>(entity);
+      return _world.PackEntity(entity);
     }
 
-    public static void RemoveHandler<T>(int entity, Action handler) where T : struct, ICallback {
-      _world.RemoveHandler<T>(entity, handler);
+#endregion
+#region Sequence tween operations
+
+    public static void Join(int sequenceEntity, int tweenEntity) {
+      // WARNING: Preconditions are checked inside `Insert`, so no mutations
+      // should occur before this.
+
+      // Insert the new tween.
+      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
+      Insert(sequenceEntity, tweenEntity, sequencer.JoinTime);
+    }
+
+
+    public static void Append(int sequenceEntity, int tweenEntity) {
+      // WARNING: Preconditions are checked inside `Insert`, so no mutations
+      // should occur before this.
+
+      // Insert the new tween.
+      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
+      ref var tweenState = ref _world.GetComponent<TweenState>(tweenEntity);
+      Insert(sequenceEntity, tweenEntity, sequencer.AppendTime);
+
+      // Update sequencer state.
+      sequencer.JoinTime = sequencer.AppendTime;
+      sequencer.AppendTime += tweenState.Duration;
+    }
+
+    public static void Insert(int sequenceEntity, int tweenEntity, float time) {
+      // Ensure that a sequence member is not modified. If a subsequence is
+      // extended, then tweens following it in its parent sequence would not be
+      // delayed.
+      if (_world.HasComponent<SequenceMember>(sequenceEntity)) {
+        throw new InvalidOperationException(
+          $"Cannot modify a sequence that is included in another sequence."
+        );
+      }
+      if (_world.HasComponent<SequenceMember>(tweenEntity)) {
+        throw new InvalidOperationException($"Cannot add the same tween to two sequences");
+      }
+      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
+      ref var sequencerState = ref _world.GetComponent<TweenState>(sequenceEntity);
+      ref var tweenState = ref _world.GetComponent<TweenState>(tweenEntity);
+
+      // Add the sequence member state with specified join time.
+      _world.AddComponent(
+        tweenEntity,
+        new SequenceMember(sequenceEntity, time)
+      );
+
+      // Clear the group of the tween, it will be controlled by the sequencer.
+      ClearGroup(tweenEntity);
+
+      // Update the sequencer state.
+      float endTime = time + tweenState.Duration;
+      sequencerState.Duration = Mathf.Max(sequencerState.Duration, endTime);
+    }
+
+#endregion
+#region Sequence intervals
+
+    public static void AppendInterval(int sequenceEntity, float delay) {
+      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
+      sequencer.JoinTime = sequencer.AppendTime;
+      sequencer.AppendTime += delay;
+    }
+
+#endregion
+#region Sequence callbacks
+
+    public static void AppendCallback(int sequenceEntity, Action callback) {
+      ref var sequencer = ref _world.GetComponent<Sequencer>(sequenceEntity);
+      InsertCallback(sequenceEntity, sequencer.AppendTime, callback);
+    }
+
+    public static void InsertCallback(int sequenceEntity, float time, Action callback) {
+      var entity = _world.NewEntity();
+      _world.AddComponent(entity, new TweenState(0));
+      AddHandler<OnComplete>(entity, callback);
+      try {
+        Insert(sequenceEntity, entity, time);
+      } catch {
+        _world.DelEntity(entity);
+      }
     }
 
 #endregion
@@ -282,16 +375,24 @@ namespace PeachyTween {
     }
 #pragma warning restore IDE0051
 
+    static EcsSystems AddProgressSystems(
+      this EcsSystems systems,
+      Func<EcsWorld.Mask> getMask
+    ) => systems
+      .Add(new ProgressSystem(getMask()))
+      .Add(new ReverseSystem(getMask()))
+      .Add(new LoopSystem(getMask()))
+      .Add(new EaseSystem(getMask()));
+
     internal static void InitializeEcs() {
       _world = new ();
       _systems = new EcsSystems(_world, _runState)
         .Add(new ActivateGroupSystem())
         .Add(new ElapsedSystem())
+        .AddProgressSystems(() => FilterActive())
+        .Add(new SequenceSystem())
+        .AddProgressSystems(() => FilterActive().Inc<SequenceMember>())
         .Add(new CallbackSystem<OnUpdate>(FilterActive().End()))
-        .Add(new ProgressSystem())
-        .Add(new ReverseSystem())
-        .Add(new LoopSystem())
-        .Add(new EaseSystem())
         .Add(ChangeSystemExc<float, ShortestAngle>(Mathf.LerpUnclamped))
         .Add(ChangeSystemInc<float, ShortestAngle>(Mathf.LerpAngle))
         .Add(ChangeSystemExc<Vector2, Slerp>(Vector2.LerpUnclamped))
@@ -305,6 +406,7 @@ namespace PeachyTween {
         .Add(new CallbackSystem<OnComplete>(FilterActive().Inc<Complete>().Exc<Kill>().End()))
         .Add(new CompleteSystem())
         .Add(new CallbackSystem<OnKill>(FilterActive().Inc<Kill>().End()))
+        .Add(new KillSequenceSystem())
         .Add(new KillSystem())
         .Add(new DeactivateSystem());
 
