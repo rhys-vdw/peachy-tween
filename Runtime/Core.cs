@@ -441,14 +441,14 @@ namespace PeachyTween {
       AssertNotRunning();
       if (_groupFilters.TryGetValue(typeof(TGroup), out var filter)) {
         _runState.Set(filter, deltaTime);
-        _systems.Run();
+        Run();
       }
     }
 
     public static void ManualUpdate(int entity, float deltaTime) {
       AssertNotRunning();
       _runState.Set(entity, deltaTime);
-      _systems.Run();
+      Run();
     }
 
     public static void Sync(int entity) => ManualUpdate(entity, 0);
