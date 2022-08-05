@@ -22,6 +22,7 @@ namespace PeachyTween {
   ///     ).Append(
   ///         transform.TweenRotation(new Vector3(90, 0, 0), 0.5f)
   ///     ).Insert(
+  ///         1f,
   ///         transform.ShakeRotation(
   ///             magnitude: 3f,
   ///             duration: 1.5f,
@@ -29,7 +30,6 @@ namespace PeachyTween {
   ///             decay: 1f,
   ///             randomness: 0.5f
   ///         ),
-  ///         time: 1f
   ///     );
   ///
   /// // Get its tween to manipulate it.
