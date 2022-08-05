@@ -1,0 +1,533 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>struct Sequence
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="struct Sequence
+   ">
+    <meta name="generator" content="docfx 2.59.3.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PeachyTween.Sequence">
+  
+  
+  <h1 id="PeachyTween_Sequence" data-uid="PeachyTween.Sequence" class="text-break">struct Sequence
+  </h1>
+  <div class="markdown level0 summary"><p>Reference to a sequence.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h5 id="PeachyTween_Sequence_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct Sequence</code></pre>
+  </div>
+  <h5 id="PeachyTween_Sequence_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>You must create a sequence using <a class="xref" href="PeachyTween.Peachy.html#PeachyTween_Peachy_Sequence">Peachy.Sequence</a>.</p>
+</div>
+  <h5 id="PeachyTween_Sequence_examples"><strong>Examples</strong></h5>
+  <pre><code>// Create a new sequence.
+var sequence = Peachy.Sequence()
+    .Append(
+        transform
+          .TweenPosition(new Vector3(5, 0, 1), 2f)
+          .Ease(Ease.SineOut)
+    ).AppendCallback(
+        () => Debug.Log(&quot;Done moving!&quot;)
+    ).Append(
+        transform.TweenRotation(new Vector3(90, 0, 0), 0.5f)
+    ).Insert(
+        transform.ShakeRotation(
+            magnitude: 3f,
+            duration: 1.5f,
+            oscillationCount: 10,
+            decay: 1f,
+            randomness: 0.5f
+        ),
+        time: 1f
+    );
+
+// Get its tween to manipulate it.
+var tween = sequence.ToTween();
+tween.LoopForever();</code></pre>
+
+  <h3 id="methods">Methods
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/40-sequences/Runtime/Sequence.cs/#L73">View Source</a>
+  </span>
+  <a id="PeachyTween_Sequence_Append_" data-uid="PeachyTween.Sequence.Append*"></a>
+  <h4 class="class-header" id="PeachyTween_Sequence_Append_PeachyTween_Tween_" data-uid="PeachyTween.Sequence.Append(PeachyTween.Tween)">Append(Tween)</h4>
+  <div class="markdown level1 summary"><p>Add a tween to the sequence that starts when the last appended tween ends.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly Sequence Append(Tween tween)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td><span class="parametername">tween</span></td>
+        <td><p>The tween to append.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Sequence.html">Sequence</a></td>
+        <td><p>This sequence.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/40-sequences/Runtime/Sequence.cs/#L140">View Source</a>
+  </span>
+  <a id="PeachyTween_Sequence_AppendCallback_" data-uid="PeachyTween.Sequence.AppendCallback*"></a>
+  <h4 class="class-header" id="PeachyTween_Sequence_AppendCallback_System_Action_" data-uid="PeachyTween.Sequence.AppendCallback(System.Action)">AppendCallback(Action)</h4>
+  <div class="markdown level1 summary"><p>Add a callback that will be invoked after the appended tween completes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly Sequence AppendCallback(Action callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Action</span></td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>The callback.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Sequence.html">Sequence</a></td>
+        <td><p>This sequence.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/40-sequences/Runtime/Sequence.cs/#L125">View Source</a>
+  </span>
+  <a id="PeachyTween_Sequence_AppendInterval_" data-uid="PeachyTween.Sequence.AppendInterval*"></a>
+  <h4 class="class-header" id="PeachyTween_Sequence_AppendInterval_System_Single_" data-uid="PeachyTween.Sequence.AppendInterval(System.Single)">AppendInterval(Single)</h4>
+  <div class="markdown level1 summary"><p>Add a time delay to the sequence after the last appended tween.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly Sequence AppendInterval(float delay)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">delay</span></td>
+        <td><p>The duration of the interval in seconds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Sequence.html">Sequence</a></td>
+        <td><p>This sequence.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/40-sequences/Runtime/Sequence.cs/#L104">View Source</a>
+  </span>
+  <a id="PeachyTween_Sequence_Insert_" data-uid="PeachyTween.Sequence.Insert*"></a>
+  <h4 class="class-header" id="PeachyTween_Sequence_Insert_System_Single_PeachyTween_Tween_" data-uid="PeachyTween.Sequence.Insert(System.Single,PeachyTween.Tween)">Insert(Single, Tween)</h4>
+  <div class="markdown level1 summary"><p>Add a tween to the sequence that starts at the specified time.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly Sequence Insert(float time, Tween tween)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">time</span></td>
+        <td><p>The start time of the tween in seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td><span class="parametername">tween</span></td>
+        <td><p>The tween to insert.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Sequence.html">Sequence</a></td>
+        <td><p>This sequence.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/40-sequences/Runtime/Sequence.cs/#L153">View Source</a>
+  </span>
+  <a id="PeachyTween_Sequence_InsertCallback_" data-uid="PeachyTween.Sequence.InsertCallback*"></a>
+  <h4 class="class-header" id="PeachyTween_Sequence_InsertCallback_System_Single_System_Action_" data-uid="PeachyTween.Sequence.InsertCallback(System.Single,System.Action)">InsertCallback(Single, Action)</h4>
+  <div class="markdown level1 summary"><p>Add a callback to the sequence that will be invoked at the specified time.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly Sequence InsertCallback(float time, Action callback)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">time</span></td>
+        <td><p>The time to invoke the callback in seconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span></td>
+        <td><span class="parametername">callback</span></td>
+        <td><p>The callback.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Sequence.html">Sequence</a></td>
+        <td><p>This sequence.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/40-sequences/Runtime/Sequence.cs/#L88">View Source</a>
+  </span>
+  <a id="PeachyTween_Sequence_Join_" data-uid="PeachyTween.Sequence.Join*"></a>
+  <h4 class="class-header" id="PeachyTween_Sequence_Join_PeachyTween_Tween_" data-uid="PeachyTween.Sequence.Join(PeachyTween.Tween)">Join(Tween)</h4>
+  <div class="markdown level1 summary"><p>Add a tween to the sequence that starts at the same time as the last appended tween.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly Sequence Join(Tween tween)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td><span class="parametername">tween</span></td>
+        <td><p>The tween to join.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Sequence.html">Sequence</a></td>
+        <td><p>This sequence.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/40-sequences/Runtime/Sequence.cs/#L63">View Source</a>
+  </span>
+  <a id="PeachyTween_Sequence_ToTween_" data-uid="PeachyTween.Sequence.ToTween*"></a>
+  <h4 class="class-header" id="PeachyTween_Sequence_ToTween" data-uid="PeachyTween.Sequence.ToTween">ToTween()</h4>
+  <div class="markdown level1 summary"><p>Get the underlying tween that can be used to control this sequence.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly Tween ToTween()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td><p>The sequence's tween</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/rhys-vdw/peachy-tween/blob/40-sequences/Runtime/Sequence.cs/#L56">View Source</a>
+  </span>
+  <a id="PeachyTween_Sequence_op_Explicit_" data-uid="PeachyTween.Sequence.op_Explicit*"></a>
+  <h4 class="class-header" id="PeachyTween_Sequence_op_Explicit_PeachyTween_Sequence__PeachyTween_Tween" data-uid="PeachyTween.Sequence.op_Explicit(PeachyTween.Sequence)~PeachyTween.Tween">Explicit(Sequence to Tween)</h4>
+  <div class="markdown level1 summary"><p>Cast this sequence into its underlying tween.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator Tween(Sequence sequence)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Sequence.html">Sequence</a></td>
+        <td><span class="parametername">sequence</span></td>
+        <td><p>The sequnce to cast.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PeachyTween.Tween.html">Tween</a></td>
+        <td><p>The sequence's tween</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PeachyTween_Sequence_op_Explicit_PeachyTween_Sequence__PeachyTween_Tween_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Sequence.html#PeachyTween_Sequence_ToTween">ToTween()</a></div>
+  </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="PeachyTween.Peachy.html#PeachyTween_Peachy_Sequence">Sequence()</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/rhys-vdw/peachy-tween/blob/40-sequences/Runtime/Sequence.cs/#L41" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>On this page</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

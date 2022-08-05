@@ -722,6 +722,19 @@ references:
   fullName.vb: PeachyTween.Peachy.Run(Of TGroup)(System.Single)
   nameWithType: Peachy.Run<TGroup>(Single)
   nameWithType.vb: Peachy.Run(Of TGroup)(Single)
+- uid: PeachyTween.Peachy.Sequence
+  name: Sequence()
+  href: api/PeachyTween.Peachy.html#PeachyTween_Peachy_Sequence
+  commentId: M:PeachyTween.Peachy.Sequence
+  fullName: PeachyTween.Peachy.Sequence()
+  nameWithType: Peachy.Sequence()
+- uid: PeachyTween.Peachy.Sequence*
+  name: Sequence
+  href: api/PeachyTween.Peachy.html#PeachyTween_Peachy_Sequence_
+  commentId: Overload:PeachyTween.Peachy.Sequence
+  isSpec: "True"
+  fullName: PeachyTween.Peachy.Sequence
+  nameWithType: Peachy.Sequence
 - uid: PeachyTween.Peachy.Tween(System.Single,System.Single,System.Single,System.Action{System.Single})
   name: Tween(Single, Single, Single, Action<Single>)
   href: api/PeachyTween.Peachy.html#PeachyTween_Peachy_Tween_System_Single_System_Single_System_Single_System_Action_System_Single__
@@ -783,6 +796,122 @@ references:
   isSpec: "True"
   fullName: PeachyTween.Peachy.Tween
   nameWithType: Peachy.Tween
+- uid: PeachyTween.Sequence
+  name: Sequence
+  href: api/PeachyTween.Sequence.html
+  commentId: T:PeachyTween.Sequence
+  fullName: PeachyTween.Sequence
+  nameWithType: Sequence
+- uid: PeachyTween.Sequence.Append(PeachyTween.Tween)
+  name: Append(Tween)
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_Append_PeachyTween_Tween_
+  commentId: M:PeachyTween.Sequence.Append(PeachyTween.Tween)
+  fullName: PeachyTween.Sequence.Append(PeachyTween.Tween)
+  nameWithType: Sequence.Append(Tween)
+- uid: PeachyTween.Sequence.Append*
+  name: Append
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_Append_
+  commentId: Overload:PeachyTween.Sequence.Append
+  isSpec: "True"
+  fullName: PeachyTween.Sequence.Append
+  nameWithType: Sequence.Append
+- uid: PeachyTween.Sequence.AppendCallback(System.Action)
+  name: AppendCallback(Action)
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_AppendCallback_System_Action_
+  commentId: M:PeachyTween.Sequence.AppendCallback(System.Action)
+  fullName: PeachyTween.Sequence.AppendCallback(System.Action)
+  nameWithType: Sequence.AppendCallback(Action)
+- uid: PeachyTween.Sequence.AppendCallback*
+  name: AppendCallback
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_AppendCallback_
+  commentId: Overload:PeachyTween.Sequence.AppendCallback
+  isSpec: "True"
+  fullName: PeachyTween.Sequence.AppendCallback
+  nameWithType: Sequence.AppendCallback
+- uid: PeachyTween.Sequence.AppendInterval(System.Single)
+  name: AppendInterval(Single)
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_AppendInterval_System_Single_
+  commentId: M:PeachyTween.Sequence.AppendInterval(System.Single)
+  fullName: PeachyTween.Sequence.AppendInterval(System.Single)
+  nameWithType: Sequence.AppendInterval(Single)
+- uid: PeachyTween.Sequence.AppendInterval*
+  name: AppendInterval
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_AppendInterval_
+  commentId: Overload:PeachyTween.Sequence.AppendInterval
+  isSpec: "True"
+  fullName: PeachyTween.Sequence.AppendInterval
+  nameWithType: Sequence.AppendInterval
+- uid: PeachyTween.Sequence.Insert(System.Single,PeachyTween.Tween)
+  name: Insert(Single, Tween)
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_Insert_System_Single_PeachyTween_Tween_
+  commentId: M:PeachyTween.Sequence.Insert(System.Single,PeachyTween.Tween)
+  fullName: PeachyTween.Sequence.Insert(System.Single, PeachyTween.Tween)
+  nameWithType: Sequence.Insert(Single, Tween)
+- uid: PeachyTween.Sequence.Insert*
+  name: Insert
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_Insert_
+  commentId: Overload:PeachyTween.Sequence.Insert
+  isSpec: "True"
+  fullName: PeachyTween.Sequence.Insert
+  nameWithType: Sequence.Insert
+- uid: PeachyTween.Sequence.InsertCallback(System.Single,System.Action)
+  name: InsertCallback(Single, Action)
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_InsertCallback_System_Single_System_Action_
+  commentId: M:PeachyTween.Sequence.InsertCallback(System.Single,System.Action)
+  fullName: PeachyTween.Sequence.InsertCallback(System.Single, System.Action)
+  nameWithType: Sequence.InsertCallback(Single, Action)
+- uid: PeachyTween.Sequence.InsertCallback*
+  name: InsertCallback
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_InsertCallback_
+  commentId: Overload:PeachyTween.Sequence.InsertCallback
+  isSpec: "True"
+  fullName: PeachyTween.Sequence.InsertCallback
+  nameWithType: Sequence.InsertCallback
+- uid: PeachyTween.Sequence.Join(PeachyTween.Tween)
+  name: Join(Tween)
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_Join_PeachyTween_Tween_
+  commentId: M:PeachyTween.Sequence.Join(PeachyTween.Tween)
+  fullName: PeachyTween.Sequence.Join(PeachyTween.Tween)
+  nameWithType: Sequence.Join(Tween)
+- uid: PeachyTween.Sequence.Join*
+  name: Join
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_Join_
+  commentId: Overload:PeachyTween.Sequence.Join
+  isSpec: "True"
+  fullName: PeachyTween.Sequence.Join
+  nameWithType: Sequence.Join
+- uid: PeachyTween.Sequence.op_Explicit(PeachyTween.Sequence)~PeachyTween.Tween
+  name: Explicit(Sequence to Tween)
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_op_Explicit_PeachyTween_Sequence__PeachyTween_Tween
+  commentId: M:PeachyTween.Sequence.op_Explicit(PeachyTween.Sequence)~PeachyTween.Tween
+  name.vb: Narrowing(Sequence to Tween)
+  fullName: PeachyTween.Sequence.Explicit(PeachyTween.Sequence to PeachyTween.Tween)
+  fullName.vb: PeachyTween.Sequence.Narrowing(PeachyTween.Sequence to PeachyTween.Tween)
+  nameWithType: Sequence.Explicit(Sequence to Tween)
+  nameWithType.vb: Sequence.Narrowing(Sequence to Tween)
+- uid: PeachyTween.Sequence.op_Explicit*
+  name: Explicit
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_op_Explicit_
+  commentId: Overload:PeachyTween.Sequence.op_Explicit
+  isSpec: "True"
+  name.vb: Narrowing
+  fullName: PeachyTween.Sequence.Explicit
+  fullName.vb: PeachyTween.Sequence.Narrowing
+  nameWithType: Sequence.Explicit
+  nameWithType.vb: Sequence.Narrowing
+- uid: PeachyTween.Sequence.ToTween
+  name: ToTween()
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_ToTween
+  commentId: M:PeachyTween.Sequence.ToTween
+  fullName: PeachyTween.Sequence.ToTween()
+  nameWithType: Sequence.ToTween()
+- uid: PeachyTween.Sequence.ToTween*
+  name: ToTween
+  href: api/PeachyTween.Sequence.html#PeachyTween_Sequence_ToTween_
+  commentId: Overload:PeachyTween.Sequence.ToTween
+  isSpec: "True"
+  fullName: PeachyTween.Sequence.ToTween
+  nameWithType: Sequence.ToTween
 - uid: PeachyTween.TransformExtensions
   name: TransformExtensions
   href: api/PeachyTween.TransformExtensions.html

@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PeachyTween.Ease.html",
-          "hash": "XT51ZOoCfaHsfOOBv+iCq6TG/TZBn3swBhYO75/VzOQ="
+          "hash": "Yfw8wYWcpmmhMf3uuXD5nQcqkK2FhcRw0pD/eGEDMaA="
         }
       },
       "is_incremental": true,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PeachyTween.EaseFunc.html",
-          "hash": "syGaW+rrdQZQPmN4Vtk+1j9/3ShRLZ/ZJPcGaFhO0Ck="
+          "hash": "0smQJ9CoqNHzclG1cUMwkQzrECxWSpUJ43JxEX8epBk="
         }
       },
       "is_incremental": true,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PeachyTween.EaseFuncFactory.html",
-          "hash": "RDrqlNItlTsQs4EK8W1KfJh/WoBBTiddxODibP+Oa9E="
+          "hash": "Pmhy2Lt1lIlCvd3Ev9yn9THoFUhcM2apnGVlSXxjgEM="
         }
       },
       "is_incremental": true,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PeachyTween.EaseFuncs.html",
-          "hash": "svWkq42frnlIsviyf1ifLnqMpYbgRgvY3kQRI4G3B3k="
+          "hash": "Uufh5mvtjgFUKXrDWgbnLmwuFAlwiwm5J8XvRVaOyRk="
         }
       },
       "is_incremental": true,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PeachyTween.LerpFunc-1.html",
-          "hash": "WTdk7qPl1BSoFIvIWkAWO2O7XhyW+rT/pmbdpWo122A="
+          "hash": "EBx5mr0uDys4e6WvllwTYtr7n+5jTjHP4I6GmVXZFB8="
         }
       },
       "is_incremental": true,
@@ -69,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PeachyTween.LerpFuncFactory.html",
-          "hash": "v01A5WD+ZJvDsfqBNUS7Om/R5LDKKoE7njlg/G0Dlyo="
+          "hash": "R6PYFTgQBLr1K9hCCdWnWXh4Wd+0mLXgoem8tkR4zvE="
         }
       },
       "is_incremental": true,
@@ -81,7 +81,19 @@
       "output": {
         ".html": {
           "relative_path": "api/PeachyTween.Peachy.html",
-          "hash": "D+L4ZNqnEs9AVoAHDRRuFRZ4T00lc6T8mmY4VHC4AaA="
+          "hash": "5V2ZGTp/k0DYuqWOvRiSv0kMaou9u3uAFZ6158Kz6RI="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PeachyTween.Sequence.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PeachyTween.Sequence.html",
+          "hash": "dSMxt90pbJ7zd8+jeArtHEEsJjEN1/+/B6VLcBRFaWo="
         }
       },
       "is_incremental": true,
@@ -93,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PeachyTween.TransformExtensions.html",
-          "hash": "fl4+2oksm8EgoEZEZBTX3CNxuwCnTOFx20z7YGDMDsA="
+          "hash": "6npAttUI3ddT/2TkF0tK4Qa1ypYGEsml513Rjc9HvGM="
         }
       },
       "is_incremental": true,
@@ -105,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PeachyTween.Tween.html",
-          "hash": "cHA4kP7KCuLhABDps+7e8RKXNipyWK3dZ0VlV5STQO0="
+          "hash": "0DWx9ICZJpq2QsC2nHCHn0zdzqcTY3MGyNlXC2qXEXg="
         }
       },
       "is_incremental": true,
@@ -117,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PeachyTween.html",
-          "hash": "KqagZxfco1PqWwbZWqp/hqeIEX0B/JTLL+Kr5OEJE4c="
+          "hash": "eYbHuQb9njYD5PuR1N7HwUr5qr+105EA0q9NpTgZ7FQ="
         }
       },
       "is_incremental": true,
@@ -129,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "6Lc8MEHjZOrV4i5CHTIayuRk2JdiFxMZBBm6q+jEXxY="
+          "hash": "Q6u6eHhjuhQSwJSv7dih1X7ekeOJhgtOpDUTJqafASY="
         }
       },
       "is_incremental": true,
@@ -141,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "QwQBbHlbH8GM43Xk8O27Mob9pYuy1aPhNtKSlWYactg="
+          "hash": "WBtgyxAF4HQqR5M2j2X+cuj67d+oYW/KvzYRBB701ZM="
         }
       },
       "is_incremental": false,
@@ -156,7 +168,7 @@
           "hash": "XXprK0JtYr2datbbHpmGieTXd7lYgPEWEgapvzqcoXo="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -185,13 +197,13 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 2,
-          "skipped_file_count": 1
+          "skipped_file_count": 2
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 10,
-          "skipped_file_count": 10
+          "total_file_count": 11,
+          "skipped_file_count": 11
         },
         "TocDocumentProcessor": {
           "can_incremental": false,
