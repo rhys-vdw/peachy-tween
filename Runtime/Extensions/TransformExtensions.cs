@@ -343,7 +343,7 @@ namespace PeachyTween {
     /// Shake the Transform's local scale with a random vector.
     /// </summary>
     /// <inheritdoc cref="ShakePosition" path="param" />
-    public static Tween ShakeLocalScale(
+    public static Tween ShakeScale(
       this Transform transform,
       float magnitude,
       float duration,
@@ -364,7 +364,7 @@ namespace PeachyTween {
     /// Shake the Transform's local scale on the XY axis with a random vector.
     /// </summary>
     /// <inheritdoc cref="ShakePosition" path="param" />
-    public static Tween ShakeLocalScale2D(
+    public static Tween ShakeScale2D(
       this Transform transform,
       float magnitude,
       float duration,
