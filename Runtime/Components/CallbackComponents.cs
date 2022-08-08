@@ -26,7 +26,12 @@ namespace PeachyTween {
     internal static void Invoke<T>(this EcsWorld world, int entity) where T : struct, ICallback {
       var callbackPool = world.GetPool<T>();
       if (callbackPool.Has(entity)) {
-        callbackPool.Get(entity).Callback();
+        try {
+          callbackPool.Get(entity).Callback();
+        } catch (Exception e) {
+          var error = new Exception($"Error in {typeof(T)} callback", e);
+          UnityEngine.Debug.LogError(error);
+        }
       }
     }
 
