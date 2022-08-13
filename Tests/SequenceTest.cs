@@ -96,13 +96,13 @@ namespace PeachyTween.Tests {
       var t = sequence.ToTween();
 
       t.ManualUpdate(0.8f);
-      Assert.AreEqual(0, callbackCount);
+      Assert.AreEqual(0, callbackCount, "Callback not yet called");
 
       t.ManualUpdate(0.4f);
-      Assert.AreEqual(1, callbackCount);
+      Assert.AreEqual(1, callbackCount, "Callback called once");
 
       t.ManualUpdate(0.8f);
-      Assert.AreEqual(1, callbackCount);
+      Assert.AreEqual(1, callbackCount, "Callback not called again");
     }
 
     [Test]
@@ -128,5 +128,79 @@ namespace PeachyTween.Tests {
       t.ManualUpdate(0.2f);
       Assert.AreEqual(1, callbackCount);
     }
+
+    [Test]
+    public void TwoTweens() {
+      var a = 0f;
+      var b = 0f;
+
+      var sequence = Peachy.Sequence()
+        .Append(Peachy.Tween(a, 1f, 1f, v => a = v))
+        .Append(Peachy.Tween(b, 1f, 1f, v => b = v));
+
+      var t = sequence.ToTween();
+
+      t.ManualUpdate(0.5f);
+      Assert.AreEqual(a, 0.5f);
+      Assert.AreEqual(b, 0f);
+
+      t.ManualUpdate(1f);
+      Assert.AreEqual(a, 1f);
+      Assert.AreEqual(b, 0.5f);
+
+      t.ManualUpdate(0.5f);
+      Assert.AreEqual(a, 1f);
+      Assert.AreEqual(b, 1f);
+    }
+
+    [Test]
+    public void Rewind() {
+      var a = 0f;
+      var b = 0f;
+
+      var sequence = Peachy.Sequence()
+        .Append(Peachy.Tween(a, 1f, 1f, v => a = v))
+        .Append(Peachy.Tween(b, 1f, 1f, v => b = v));
+
+      var t = sequence.ToTween();
+
+      t.ManualUpdate(1.5f);
+      Assert.AreEqual(a, 1f);
+      Assert.AreEqual(b, 0.5f);
+
+      t.Rewind().Sync();
+      Assert.AreEqual(a, 0f);
+      Assert.AreEqual(b, 0f);
+    }
+
+    [Test]
+    public void SkipAWholeTween() {
+      var a = 0f;
+      var b = 0f;
+      var c = 0f;
+
+      var sequence = Peachy.Sequence()
+        .Append(Peachy.Tween(a, 1f, 1f, v => a = v))
+        .Append(Peachy.Tween(b, 1f, 1f, v => b = v))
+        .Append(Peachy.Tween(c, 1f, 1f, v => c = v));
+
+      var t = sequence.ToTween();
+
+      t.ManualUpdate(0.5f);
+      Assert.AreEqual(a, 0.5f);
+      Assert.AreEqual(b, 0f);
+      Assert.AreEqual(c, 0f);
+
+      t.ManualUpdate(2f);
+      Assert.AreEqual(a, 1f);
+      Assert.AreEqual(b, 1f);
+      Assert.AreEqual(c, 0.5f);
+
+      t.ManualUpdate(0.5f);
+      Assert.AreEqual(a, 1f);
+      Assert.AreEqual(b, 1f);
+      Assert.AreEqual(c, 1f);
+    }
+
   }
 }
