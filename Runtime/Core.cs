@@ -391,7 +391,7 @@ namespace PeachyTween {
     internal static void InitializeEcs() {
       _world = new ();
       _systems = new EcsSystems(_world, _runState)
-        .Add(new ActivateGroupSystem())
+        .Add(new ActivateSystem())
         .Add(new ElapsedSystem())
         .AddProgressSystems(() => FilterActive())
         .Add(new SequenceSystem())
