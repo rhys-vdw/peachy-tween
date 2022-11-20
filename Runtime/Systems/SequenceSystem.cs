@@ -1,12 +1,13 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.ExtendedFilters;
 using UnityEngine;
 
 namespace PeachyTween {
-  internal class SequenceSystem : IEcsSystem, IEcsInitSystem, IEcsRunSystem {
+  internal class SequenceSystem : IEcsSystem, IEcsPreInitSystem, IEcsRunSystem {
     EcsWorld _world;
     EcsFilter _filter;
 
-    public void Init(EcsSystems systems) {
+    public void PreInit(EcsSystems systems) {
       _world = systems.GetWorld();
       _filter = _world.Filter<SequenceMember>().End();
     }
@@ -21,34 +22,40 @@ namespace PeachyTween {
       var statePool = _world.GetPool<TweenState>();
       var activePool = _world.GetPool<Active>();
       var completePool = _world.GetPool<Complete>();
+      var memberPool = _world.GetPool<SequenceMember>();
+
+      // TODO: Reorder here.
+
       foreach (var entity in _filter) {
-        ref var member = ref _world.GetComponent<SequenceMember>(entity);
+        ref var member = ref memberPool.Get(entity);
         if (activePool.Has(member.SequenceEntity)) {
-          ref var tweenState = ref statePool.Get(entity);
+          ref var state = ref statePool.Get(entity);
           ref var sequenceState = ref statePool.Get(member.SequenceEntity);
           ref var sequenceActive = ref activePool.Get(member.SequenceEntity);
 
           // Calculate previous state.
-          var prevState = tweenState.Elapsed switch {
+          var prevState = state.Elapsed switch {
             var e when e < 0 => State.Before,
-            var e when e > tweenState.Duration => State.After,
+            var e when e > state.Duration => State.After,
             _ => State.Active,
           };
 
           // Update tween elapsed time.
           var easedElapse = sequenceActive.Progress * sequenceState.Duration;
-          tweenState.Elapsed = easedElapse - member.StartTime;
+          state.Elapsed = easedElapse;
 
           // Calculate next state.
-          var nextState = tweenState.Elapsed switch {
+          var nextState = state.Elapsed switch {
             var e when e < 0 => State.Before,
-            var e when e > tweenState.Duration => State.After,
+            var e when e > state.Duration => State.After,
             _ => State.Active,
           };
 
+          Debug.Log($"id={entity}, nextState={nextState}");
+
           if (nextState == State.Active) {
             // Mark tween incomplete.
-            _world.DelComponent<Complete>(entity);
+            completePool.Del(entity);
 
             // Mark tween active.
             activePool.Add(entity);
@@ -70,6 +77,9 @@ namespace PeachyTween {
               }
             }
           }
+
+          // Update tween values.
+          ProgressSystem.ProgressTween(_world, entity);
         }
       }
     }

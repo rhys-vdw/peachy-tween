@@ -24,6 +24,8 @@ namespace PeachyTween {
           ? lerpPool.Get(entity).Func
           : _defaultLerp;
 
+        UnityEngine.Debug.Log($"{entity} on change!");
+
         ref var config = ref configPool.Get(entity);
         ref var active = ref activePool.Get(entity);
         var value = lerp(config.From, config.To, active.Progress);

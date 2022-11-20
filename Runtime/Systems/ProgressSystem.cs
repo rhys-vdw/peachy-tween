@@ -18,25 +18,23 @@ namespace PeachyTween {
       var deltaTime = _runState.DeltaTime;
       foreach (var entity in _filter) {
         ref var state = ref statePool.Get(entity);
-        ProgressTween(_world, entity, state.Elapsed + deltaTime);
+        state.Elapsed += deltaTime;
+        if (state.Elapsed >= state.Duration) {
+          _world.AddComponent<Complete>(entity);
+        }
+        ProgressTween(_world, entity);
       }
     }
 
-    public static void ProgressTween(EcsWorld world, int entity, float elapsed) {
+    public static void ProgressTween(EcsWorld world, int entity) {
       var activePool = world.GetPool<Active>();
       var easePool = world.GetPool<Ease>();
       var loopPool = world.GetPool<Loop>();
       var reversePool = world.GetPool<Reverse>();
       var statePool = world.GetPool<TweenState>();
 
-      // Mark complete.
-      ref var state = ref statePool.Get(entity);
-      state.Elapsed = elapsed;
-      if (state.Elapsed >= state.Duration) {
-        world.AddComponent<Complete>(entity);
-      }
-
       // Normalize progress.
+      ref var state = ref statePool.Get(entity);
       ref var active = ref activePool.Get(entity);
       active.Progress = Mathf.Clamp01(state.Elapsed / state.Duration);
 
@@ -55,7 +53,7 @@ namespace PeachyTween {
         ref var ease = ref world.GetComponent<Eased>(entity);
         active.Progress = ease.Func(active.Progress);
       }
-     }
+    }
 
     static void Loop(EcsWorld world, int entity) {
       ref var loop = ref world.GetComponent<Loop>(entity);

@@ -384,7 +384,7 @@ namespace PeachyTween {
       _systems = new EcsSystems(_world, _runState)
         .Add(new ActivateSystem())
         .Add(new ProgressSystem())
-        // .Add(new SequenceSystem())
+        .Add(new SequenceSystem())
         .Add(new CallbackSystem<OnUpdate>(FilterActive().End()))
         .Add(ChangeSystemExc<float, ShortestAngle>(Mathf.LerpUnclamped))
         .Add(ChangeSystemInc<float, ShortestAngle>(Mathf.LerpAngle))
