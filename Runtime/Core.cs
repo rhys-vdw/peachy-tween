@@ -317,6 +317,10 @@ namespace PeachyTween {
       ref var sequencerState = ref _world.GetComponent<TweenState>(sequenceEntity);
       ref var tweenState = ref _world.GetComponent<TweenState>(tweenEntity);
 
+      // Initialize tween to correct state.
+      // NOTE: Is this actually needed... If so, is it correct if the tween is reversed?
+      tweenState.Elapsed = sequencerState.Elapsed - time;
+
       // Add the sequence member state with specified join time.
       _world.AddComponent(
         tweenEntity,
