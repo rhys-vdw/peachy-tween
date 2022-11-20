@@ -2,7 +2,7 @@ using Leopotam.EcsLite;
 
 namespace PeachyTween {
 
-  internal class ActivateSystem : IEcsSystem , IEcsPreInitSystem , IEcsRunSystem {
+  internal class ActivateSystem : IEcsSystem, IEcsPreInitSystem, IEcsRunSystem {
     EcsWorld _world;
     RunState _runState;
 
