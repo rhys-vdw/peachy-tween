@@ -30,11 +30,12 @@ namespace PeachyTween.Tests {
 
     [Test]
     public void MembersCompleteReverse() {
+      const int tweenCount = 3;
       var completeCount = 0;
       var sequnceCompleteCount = 0;
 
       var sequence = Peachy.Sequence();
-      for (var i = 0; i < 3; i++) {
+      for (var i = 0; i < tweenCount; i++) {
         var sub = Peachy
           .Tween(0f, 1f, 1f, _ => {})
           .OnComplete(() => completeCount++);
@@ -46,9 +47,9 @@ namespace PeachyTween.Tests {
         .From()
         .OnComplete(() => sequnceCompleteCount++);
 
-      for (var i = 1; i < 4; i++) {
+      for (var i = 0; i < tweenCount; i++) {
         st.ManualUpdate(1f);
-        Assert.AreEqual(i, completeCount, "Tween complete called");
+        Assert.AreEqual(i + 1, completeCount, "Tween complete called {i} times");
       }
 
       Assert.AreEqual(1, sequnceCompleteCount, "Sequence complete called");
