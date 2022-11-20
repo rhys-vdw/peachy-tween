@@ -14,52 +14,56 @@ namespace PeachyTween {
     }
 
     public void Run(EcsSystems systems) {
-      var activePool = _world.GetPool<Active>();
-      var easePool = _world.GetPool<Ease>();
-      var loopPool = _world.GetPool<Loop>();
-      var reversePool = _world.GetPool<Reverse>();
       var statePool = _world.GetPool<TweenState>();
-
       var deltaTime = _runState.DeltaTime;
       foreach (var entity in _filter) {
-        // Progress elapsed time.
         ref var state = ref statePool.Get(entity);
-        state.Elapsed += deltaTime;
-
-        // Mark complete.
-        if (state.Elapsed >= state.Duration) {
-          _world.AddComponent<Complete>(entity);
-        }
-
-        // Normalize progress.
-        ref var active = ref activePool.Get(entity);
-        active.Progress = Mathf.Clamp01(state.Elapsed / state.Duration);
-
-        // Reverse progress.
-        if (reversePool.Has(entity)) {
-          active.Progress = 1 - active.Progress;
-        }
-
-        // Loop progress.
-        if (loopPool.Has(entity)) {
-          Loop(entity);
-        }
-
-        // Ease progress.
-        if (easePool.Has(entity)) {
-          ref var ease = ref _world.GetComponent<Eased>(entity);
-          active.Progress = ease.Func(active.Progress);
-        }
+        ProgressTween(_world, entity, state.Elapsed + deltaTime);
       }
     }
 
-    void Loop(int entity) {
-      ref var loop = ref _world.GetComponent<Loop>(entity);
+    public static void ProgressTween(EcsWorld world, int entity, float elapsed) {
+      var activePool = world.GetPool<Active>();
+      var easePool = world.GetPool<Ease>();
+      var loopPool = world.GetPool<Loop>();
+      var reversePool = world.GetPool<Reverse>();
+      var statePool = world.GetPool<TweenState>();
+
+      // Mark complete.
+      ref var state = ref statePool.Get(entity);
+      state.Elapsed = elapsed;
+      if (state.Elapsed >= state.Duration) {
+        world.AddComponent<Complete>(entity);
+      }
+
+      // Normalize progress.
+      ref var active = ref activePool.Get(entity);
+      active.Progress = Mathf.Clamp01(state.Elapsed / state.Duration);
+
+      // Reverse progress.
+      if (reversePool.Has(entity)) {
+        active.Progress = 1 - active.Progress;
+      }
+
+      // Loop progress.
+      if (loopPool.Has(entity)) {
+        Loop(world, entity);
+      }
+
+      // Ease progress.
+      if (easePool.Has(entity)) {
+        ref var ease = ref world.GetComponent<Eased>(entity);
+        active.Progress = ease.Func(active.Progress);
+      }
+     }
+
+    static void Loop(EcsWorld world, int entity) {
+      ref var loop = ref world.GetComponent<Loop>(entity);
       if (loop.LoopCount == 0) {
         Debug.LogWarning($"Invalid Loop component found with 0 remaining loops");
       }
 
-      ref var tweenState = ref _world.GetComponent<TweenState>(entity);
+      ref var tweenState = ref world.GetComponent<TweenState>(entity);
 
       // Calculate current loop.
       var prevLoop = loop.CurrentLoop;
@@ -80,11 +84,11 @@ namespace PeachyTween {
       ) {
         var deltaLoop = Mathf.Abs(pl - nextLoop);
         for (var i = 0; i < deltaLoop; i++) {
-          _world.Invoke<OnLoop>(entity);
+          world.Invoke<OnLoop>(entity);
         }
       }
 
-      ref var active = ref _world.GetComponent<Active>(entity);
+      ref var active = ref world.GetComponent<Active>(entity);
 
       // Update loop progress.
       if (
@@ -103,8 +107,8 @@ namespace PeachyTween {
       }
 
       // Flip progress for ping-pong.
-      if (_world.HasComponent<PingPong>(entity)) {
-        var isReversed = _world.HasComponent<Reverse>(entity);
+      if (world.HasComponent<PingPong>(entity)) {
+        var isReversed = world.HasComponent<Reverse>(entity);
         var clampedLoop = Mathf.Clamp(nextLoop, 0, loop.LoopCount - 1);
         var isFlipped = clampedLoop % 2 == 1;
         if (isReversed != isFlipped) {
